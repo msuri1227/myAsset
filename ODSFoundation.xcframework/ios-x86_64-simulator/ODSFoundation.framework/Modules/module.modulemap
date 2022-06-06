@@ -1,0 +1,11 @@
+framework module ODSFoundation {
+  umbrella header "ODSFoundation.h"
+
+  export *
+  module * { export * }
+}
+
+module ODSFoundation.Swift {
+    header "ODSFoundation-Swift.h"
+    requires objc
+}

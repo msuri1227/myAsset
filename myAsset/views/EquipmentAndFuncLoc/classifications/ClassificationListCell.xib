@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="OperationsTableCell_iPhone" selectionStyle="none" indentationWidth="10" reuseIdentifier="ClassificationListCell" rowHeight="155" id="KGk-i7-Jjw" customClass="ClassificationListCell" customModule="myJobCard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="280" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldk-Es-mVE">
+                        <rect key="frame" x="3" y="3" width="274" height="84"/>
+                        <subviews>
+                            <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIp-hg-vRD">
+                                <rect key="frame" x="1" y="1" width="272" height="82"/>
+                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classfication Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvS-0e-MjF">
+                                <rect key="frame" x="10" y="5" width="226" height="19.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classfication Type" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3T-G8-sfz">
+                                <rect key="frame" x="10" y="29.5" width="226" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGS-o1-Cj8">
+                                <rect key="frame" x="10" y="51.5" width="226" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cho-XW-iV7">
+                                <rect key="frame" x="252" y="32" width="10" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="CnV-lJ-30K"/>
+                                    <constraint firstAttribute="width" constant="10" id="ye9-bA-JIH"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pGS-o1-Cj8" secondAttribute="bottom" constant="5" id="2nd-mi-XvF"/>
+                            <constraint firstItem="d3T-G8-sfz" firstAttribute="leading" secondItem="Ldk-Es-mVE" secondAttribute="leading" constant="10" id="5dO-bi-W2P"/>
+                            <constraint firstItem="kIp-hg-vRD" firstAttribute="top" secondItem="Ldk-Es-mVE" secondAttribute="top" constant="1" id="5mP-vt-Rg1"/>
+                            <constraint firstItem="d3T-G8-sfz" firstAttribute="top" secondItem="lvS-0e-MjF" secondAttribute="bottom" constant="5" id="9d6-25-mju"/>
+                            <constraint firstItem="pGS-o1-Cj8" firstAttribute="top" secondItem="d3T-G8-sfz" secondAttribute="bottom" constant="5" id="AIf-Bl-dcg"/>
+                            <constraint firstAttribute="trailing" secondItem="kIp-hg-vRD" secondAttribute="trailing" constant="1" id="Ad3-ad-Zi8"/>
+                            <constraint firstItem="kIp-hg-vRD" firstAttribute="leading" secondItem="Ldk-Es-mVE" secondAttribute="leading" constant="1" id="BTv-PG-6PT"/>
+                            <constraint firstAttribute="trailing" secondItem="lvS-0e-MjF" secondAttribute="trailing" constant="38" id="MXE-rD-u2g"/>
+                            <constraint firstAttribute="trailing" secondItem="pGS-o1-Cj8" secondAttribute="trailing" constant="38" id="Mb8-lk-5kh"/>
+                            <constraint firstItem="pGS-o1-Cj8" firstAttribute="leading" secondItem="Ldk-Es-mVE" secondAttribute="leading" constant="10" id="SZv-Co-gwu"/>
+                            <constraint firstItem="lvS-0e-MjF" firstAttribute="top" secondItem="Ldk-Es-mVE" secondAttribute="top" constant="5" id="Un7-FI-Ibi"/>
+                            <constraint firstAttribute="bottom" secondItem="kIp-hg-vRD" secondAttribute="bottom" constant="1" id="aPZ-uu-Hwy"/>
+                            <constraint firstAttribute="trailing" secondItem="cho-XW-iV7" secondAttribute="trailing" constant="12" id="cTA-oK-cvH"/>
+                            <constraint firstItem="cho-XW-iV7" firstAttribute="leading" secondItem="d3T-G8-sfz" secondAttribute="trailing" constant="16" id="i6d-51-u8U"/>
+                            <constraint firstItem="cho-XW-iV7" firstAttribute="centerY" secondItem="Ldk-Es-mVE" secondAttribute="centerY" id="uLj-5W-k8w"/>
+                            <constraint firstItem="lvS-0e-MjF" firstAttribute="leading" secondItem="Ldk-Es-mVE" secondAttribute="leading" constant="10" id="y5u-cp-vh1"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Ldk-Es-mVE" secondAttribute="trailing" constant="3" id="6cG-xc-Dcg"/>
+                    <constraint firstItem="Ldk-Es-mVE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="POP-ue-13V"/>
+                    <constraint firstItem="Ldk-Es-mVE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="S3J-KT-2Ua"/>
+                    <constraint firstAttribute="bottom" secondItem="Ldk-Es-mVE" secondAttribute="bottom" constant="3" id="VZH-zc-K2p"/>
+                    <constraint firstAttribute="trailing" secondItem="Ldk-Es-mVE" secondAttribute="trailing" constant="3" id="ctq-70-8Ac"/>
+                    <constraint firstItem="Ldk-Es-mVE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="kHh-Jz-JwE"/>
+                    <constraint firstItem="Ldk-Es-mVE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="zfq-tg-BdV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="BgView" destination="Ldk-Es-mVE" id="ZHh-nS-CDv"/>
+                <outlet property="lbl_classificationName" destination="lvS-0e-MjF" id="2JI-rR-bXq"/>
+                <outlet property="lbl_classificationType" destination="d3T-G8-sfz" id="fKU-lz-cp9"/>
+                <outlet property="lbl_description" destination="pGS-o1-Cj8" id="wve-F3-j3v"/>
+                <outlet property="transparentView" destination="kIp-hg-vRD" id="POJ-T3-ngT"/>
+            </connections>
+            <point key="canvasLocation" x="24" y="110.64467766116942"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="mjcViewUIBorderColor">
+            <color red="0.3843137254901961" green="0.53725490196078429" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

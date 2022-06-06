@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckSheetFilledCell_iPad" rowHeight="643" id="mQW-3g-F9o" customClass="CheckSheetFilledCell" customModule="myJobCard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mQW-3g-F9o" id="bwp-O0-FhR">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MjR-w7-Pa4" customClass="TileView" customModule="ODSFoundation">
+                        <rect key="frame" x="5" y="5" width="590" height="130"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form Title Form TitleForm TitleForm TitleForm TitleForm Form Title Form TitleForm " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xh-6U-sHi">
+                                <rect key="frame" x="5" y="5" width="580" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" name="mjcViewUIBorderColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0g6-Bi-euk">
+                                <rect key="frame" x="5" y="51" width="515" height="73"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0g-zQ-Oz6">
+                                        <rect key="frame" x="0.0" y="0.0" width="515" height="14.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTN-au-5Y5">
+                                                <rect key="frame" x="0.0" y="0.0" width="257.5" height="14.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version :" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bH6-oW-DGE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="Version"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kg-wb-QqO">
+                                                        <rect key="frame" x="129" y="0.0" width="128.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6su-XE-ujA">
+                                                <rect key="frame" x="257.5" y="0.0" width="257.5" height="14.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filled On:" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhU-lo-suh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="1FZ-2y-WOF"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5r-qV-11E">
+                                                        <rect key="frame" x="129" y="0.0" width="128.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WbH-f4-unc">
+                                        <rect key="frame" x="0.0" y="19.5" width="515" height="14.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0s-Ti-F8M">
+                                                <rect key="frame" x="0.0" y="0.0" width="257.5" height="14.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instance Id:" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jg-Ec-sFL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="OlC-Pp-5j0"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jg1-Tt-tgb">
+                                                        <rect key="frame" x="129" y="0.0" width="128.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CmY-q0-vgB">
+                                                <rect key="frame" x="257.5" y="0.0" width="257.5" height="14.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filled By:" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nli-98-UwW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="ayh-of-Dp7"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlk-mW-Y5D">
+                                                        <rect key="frame" x="129" y="0.0" width="128.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-YX-2YH">
+                                        <rect key="frame" x="0.0" y="39" width="515" height="14.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Dti-tT-UAq">
+                                                <rect key="frame" x="0.0" y="0.0" width="257.5" height="14.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8W-D5-ZBW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5np-jq-tdE">
+                                                        <rect key="frame" x="130" y="0.0" width="127.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQh-zK-2IA">
+                                                <rect key="frame" x="257.5" y="0.0" width="257.5" height="14.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Iteration" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgh-rE-ov3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="2Nb-pw-fnE"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMK-H2-XkI">
+                                                        <rect key="frame" x="129" y="0.0" width="128.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                        <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xS5-yJ-NjK">
+                                        <rect key="frame" x="0.0" y="58.5" width="515" height="14.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remarks" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zdp-1n-QR4">
+                                                <rect key="frame" x="0.0" y="0.0" width="257.5" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="wwT-ck-pnD"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVk-Ll-yHB">
+                                                <rect key="frame" x="257.5" y="0.0" width="257.5" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                <color key="textColor" name="mjcLabelHeaderTxtColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiX-hR-qm4">
+                                <rect key="frame" x="525" y="51.5" width="60" height="72.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R68-WJ-xhd">
+                                        <rect key="frame" x="0.0" y="0.0" width="2" height="72.5"/>
+                                        <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="2" id="mqE-PJ-er2"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-Xv-Kid">
+                                        <rect key="frame" x="15" y="6.5" width="30" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMK-dj-Tsj">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <color key="backgroundColor" name="mjcSubViewColorNormal"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="TmW-gf-v9f"/>
+                                                    <constraint firstAttribute="width" constant="30" id="kBa-Wl-uhC"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                <state key="normal" image="pointEdit"/>
+                                                <state key="selected" image="Next_icon_White"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ffh-o4-FQb">
+                                                <rect key="frame" x="0.0" y="30" width="30" height="30"/>
+                                                <color key="backgroundColor" name="mjcSubViewColorNormal"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="II2-Y0-bNP"/>
+                                                    <constraint firstAttribute="height" constant="30" id="avT-RG-2nm"/>
+                                                </constraints>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="info.circle" catalog="system" symbolScale="large"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" name="mjcSubViewColorNormal"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="Bzk-fa-pLJ"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="mjcSubViewColorNormal"/>
+                                <constraints>
+                                    <constraint firstItem="R68-WJ-xhd" firstAttribute="top" secondItem="aiX-hR-qm4" secondAttribute="top" id="GVU-69-KBc"/>
+                                    <constraint firstAttribute="width" constant="60" id="Q95-kU-v5a"/>
+                                    <constraint firstAttribute="bottom" secondItem="R68-WJ-xhd" secondAttribute="bottom" id="Zvp-gl-N32"/>
+                                    <constraint firstItem="3kg-Xv-Kid" firstAttribute="centerY" secondItem="aiX-hR-qm4" secondAttribute="centerY" id="uFD-1m-Utd"/>
+                                    <constraint firstItem="3kg-Xv-Kid" firstAttribute="centerX" secondItem="aiX-hR-qm4" secondAttribute="centerX" id="uag-Px-ey2"/>
+                                    <constraint firstItem="R68-WJ-xhd" firstAttribute="leading" secondItem="aiX-hR-qm4" secondAttribute="leading" id="zsg-NP-1FU"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DX7-gN-D7v" userLabel="separatorView">
+                                <rect key="frame" x="3" y="129" width="584" height="1"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Mga-PB-3VJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="mjcViewBgColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aiX-hR-qm4" secondAttribute="trailing" constant="5" id="Edt-1z-TQs"/>
+                            <constraint firstAttribute="bottom" secondItem="DX7-gN-D7v" secondAttribute="bottom" id="ErI-dY-bTg"/>
+                            <constraint firstItem="aiX-hR-qm4" firstAttribute="leading" secondItem="0g6-Bi-euk" secondAttribute="trailing" constant="5" id="HS7-IC-r2K"/>
+                            <constraint firstAttribute="trailing" secondItem="7xh-6U-sHi" secondAttribute="trailing" constant="5" id="Sho-hC-Qcr"/>
+                            <constraint firstAttribute="trailing" secondItem="DX7-gN-D7v" secondAttribute="trailing" constant="3" id="UAE-Vc-2KL"/>
+                            <constraint firstItem="DX7-gN-D7v" firstAttribute="top" secondItem="0g6-Bi-euk" secondAttribute="bottom" constant="5" id="UgA-HZ-dDT"/>
+                            <constraint firstItem="0g6-Bi-euk" firstAttribute="leading" secondItem="MjR-w7-Pa4" secondAttribute="leading" constant="5" id="WcF-Q8-jn0"/>
+                            <constraint firstItem="0g6-Bi-euk" firstAttribute="top" secondItem="7xh-6U-sHi" secondAttribute="bottom" constant="5" id="Yvt-7m-nEO"/>
+                            <constraint firstItem="DX7-gN-D7v" firstAttribute="top" secondItem="aiX-hR-qm4" secondAttribute="bottom" constant="5" id="a7L-8N-g0K"/>
+                            <constraint firstItem="7xh-6U-sHi" firstAttribute="top" secondItem="MjR-w7-Pa4" secondAttribute="top" constant="5" id="fr9-JP-KXI"/>
+                            <constraint firstItem="DX7-gN-D7v" firstAttribute="leading" secondItem="MjR-w7-Pa4" secondAttribute="leading" constant="3" id="jKP-cY-wtH"/>
+                            <constraint firstItem="aiX-hR-qm4" firstAttribute="top" secondItem="7xh-6U-sHi" secondAttribute="bottom" constant="5.5" id="sS8-qi-Jh8"/>
+                            <constraint firstItem="7xh-6U-sHi" firstAttribute="leading" secondItem="MjR-w7-Pa4" secondAttribute="leading" constant="5" id="uDb-Y8-JSA"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="MjR-w7-Pa4" firstAttribute="leading" secondItem="bwp-O0-FhR" secondAttribute="leading" constant="5" id="Aj8-hm-2mI"/>
+                    <constraint firstAttribute="trailing" secondItem="MjR-w7-Pa4" secondAttribute="trailing" constant="5" id="F7F-K7-DVE"/>
+                    <constraint firstItem="MjR-w7-Pa4" firstAttribute="top" secondItem="bwp-O0-FhR" secondAttribute="top" constant="5" id="KPD-UE-NQ7"/>
+                    <constraint firstAttribute="bottom" secondItem="MjR-w7-Pa4" secondAttribute="bottom" constant="5" id="Rqf-R1-cdP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="pwd-hf-qeo"/>
+            <connections>
+                <outlet property="RemarksLabel" destination="DVk-Ll-yHB" id="7Es-5Z-qfN"/>
+                <outlet property="approvalStatusButton" destination="Ffh-o4-FQb" id="XJz-Fy-Eg4"/>
+                <outlet property="backGroundView" destination="MjR-w7-Pa4" id="hGL-4p-9bi"/>
+                <outlet property="filledByLabel" destination="nlk-mW-Y5D" id="weW-Kg-rm3"/>
+                <outlet property="filledOnLabel" destination="r5r-qV-11E" id="XEq-3C-eMz"/>
+                <outlet property="formEditButton" destination="AMK-dj-Tsj" id="agC-kd-lGE"/>
+                <outlet property="formID" destination="7xh-6U-sHi" id="Wmx-bk-j3n"/>
+                <outlet property="formInstantIDLabel" destination="jg1-Tt-tgb" id="CBp-Gm-7td"/>
+                <outlet property="formStatusLabel" destination="5np-jq-tdE" id="Lkc-Rr-6I6"/>
+                <outlet property="formVersionLabel" destination="9kg-wb-QqO" id="xd1-PW-HoA"/>
+                <outlet property="iterationLabelSV" destination="aQh-zK-2IA" id="cqd-Ld-6Ib"/>
+                <outlet property="iterationsLabel" destination="LMK-H2-XkI" id="Goq-nv-sVw"/>
+                <outlet property="statusLabelSV" destination="kKw-YX-2YH" id="Ios-TK-X4S"/>
+            </connections>
+            <point key="canvasLocation" x="460.80000000000001" y="453.82308845577217"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Next_icon_White" width="25" height="25"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="pointEdit" width="33" height="33"/>
+        <namedColor name="mjcLabelHeaderTxtColor">
+            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.28200000524520874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="mjcSubViewColorNormal">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mjcViewBgColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mjcViewUIBorderColor">
+            <color red="0.3843137254901961" green="0.53725490196078429" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

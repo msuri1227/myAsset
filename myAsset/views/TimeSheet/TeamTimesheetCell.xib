@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamTimesheetCell" rowHeight="93" id="8EC-ya-Nsl" customClass="TeamTimesheetCell" customModule="myJobCard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="457" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8EC-ya-Nsl" id="Qqg-nx-mJq">
+                <rect key="frame" x="0.0" y="0.0" width="457" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrb-FJ-GHd">
+                        <rect key="frame" x="8" y="8" width="441" height="64"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ucw-rI-e8u">
+                                <rect key="frame" x="406" y="5" width="30" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="z4H-FD-LM8"/>
+                                </constraints>
+                                <state key="normal" image="delete"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Technician Technician - " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cs0-v7-ziZ">
+                                <rect key="frame" x="10" y="8" width="183" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7C-df-2AA">
+                                <rect key="frame" x="198" y="8" width="19" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" name="mjcViewUIBorderColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration 1hr 20 min" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="izp-GV-gWG">
+                                <rect key="frame" x="10" y="38.5" width="386" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A7C-df-2AA" firstAttribute="top" secondItem="Cs0-v7-ziZ" secondAttribute="top" id="2X1-Tk-Irn"/>
+                            <constraint firstItem="Cs0-v7-ziZ" firstAttribute="top" secondItem="yrb-FJ-GHd" secondAttribute="top" constant="8" id="IIA-vn-ij9"/>
+                            <constraint firstItem="A7C-df-2AA" firstAttribute="leading" secondItem="Cs0-v7-ziZ" secondAttribute="trailing" constant="5" id="KTr-0p-Mt4"/>
+                            <constraint firstAttribute="trailing" secondItem="Ucw-rI-e8u" secondAttribute="trailing" constant="5" id="KUt-Vu-six"/>
+                            <constraint firstItem="A7C-df-2AA" firstAttribute="centerY" secondItem="Cs0-v7-ziZ" secondAttribute="centerY" id="SOM-sF-U6w"/>
+                            <constraint firstAttribute="bottom" secondItem="Ucw-rI-e8u" secondAttribute="bottom" constant="5" id="Vl2-gc-5Bq"/>
+                            <constraint firstItem="Ucw-rI-e8u" firstAttribute="top" secondItem="yrb-FJ-GHd" secondAttribute="top" constant="5" id="ZXw-II-gCt"/>
+                            <constraint firstItem="Cs0-v7-ziZ" firstAttribute="leading" secondItem="yrb-FJ-GHd" secondAttribute="leading" constant="10" id="bBN-EC-15Q"/>
+                            <constraint firstItem="Ucw-rI-e8u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="A7C-df-2AA" secondAttribute="trailing" constant="10" id="dYe-zE-y1o"/>
+                            <constraint firstItem="izp-GV-gWG" firstAttribute="top" secondItem="Cs0-v7-ziZ" secondAttribute="bottom" constant="10" id="ee5-Yp-Nbr"/>
+                            <constraint firstItem="izp-GV-gWG" firstAttribute="leading" secondItem="Cs0-v7-ziZ" secondAttribute="leading" id="gVR-ge-Fxz"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="izp-GV-gWG" secondAttribute="bottom" constant="5" id="pnN-Le-fNa"/>
+                            <constraint firstItem="Ucw-rI-e8u" firstAttribute="leading" secondItem="izp-GV-gWG" secondAttribute="trailing" constant="10" id="z9p-nw-dtG"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="mjcViewBgColor"/>
+                <constraints>
+                    <constraint firstItem="yrb-FJ-GHd" firstAttribute="leading" secondItem="Qqg-nx-mJq" secondAttribute="leading" constant="8" id="2d9-Y8-L3Q"/>
+                    <constraint firstAttribute="trailing" secondItem="yrb-FJ-GHd" secondAttribute="trailing" constant="8" id="7WS-cy-qpR"/>
+                    <constraint firstAttribute="bottom" secondItem="yrb-FJ-GHd" secondAttribute="bottom" constant="8" id="SUY-sv-EKN"/>
+                    <constraint firstItem="yrb-FJ-GHd" firstAttribute="top" secondItem="Qqg-nx-mJq" secondAttribute="top" constant="8" id="Tnq-1t-tAu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="LaM-Jf-b8Q"/>
+            <connections>
+                <outlet property="bgView" destination="yrb-FJ-GHd" id="UjC-9e-t0d"/>
+                <outlet property="deleteButton" destination="Ucw-rI-e8u" id="Q2O-cS-YRQ"/>
+                <outlet property="durationLabel" destination="izp-GV-gWG" id="kQ8-u8-t4b"/>
+                <outlet property="nameLabel" destination="Cs0-v7-ziZ" id="AT3-or-Ryp"/>
+                <outlet property="numberLabel" destination="A7C-df-2AA" id="LHS-HN-7yP"/>
+            </connections>
+            <point key="canvasLocation" x="177.24609375" y="91.40625"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="delete" width="13.5" height="17"/>
+        <namedColor name="mjcViewBgColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mjcViewUIBorderColor">
+            <color red="0.3843137254901961" green="0.53725490196078429" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

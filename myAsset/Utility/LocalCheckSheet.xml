@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:odk="http://www.opendatakit.org/xforms" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Prüfaufzeichnung wiederkehrende Prüfung_1</h:title>
+    <model odk:xforms-version="1.0.0">
+      <itext>
+        <translation default="true()" lang="default">
+          <text id="/data/_version_:label">
+            <value form="image">jr://images/__version__</value>
+          </text>
+          <text id="/data/_version__001:label">
+            <value form="image">jr://images/__version__</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <data id="snapshot_xml">
+          <group_rm2ae68>
+            <work_order_number>mjc_$vSCO$tWorkOrder$fWorkOrderNum</work_order_number>
+            <Description>mjc_$vSCO$tWorkOrder$fShortText</Description>
+            <Equipment_number>mjc_$vSCO$tWorkOrder$fEquipment</Equipment_number>
+            <Functional_location>mjc_$vSCO$tWorkOrder$fFuncLocation</Functional_location>
+            <BetrSichV/>
+            <AwSV/>
+            <Sonstige/>
+            <Kunde_Werk>Clariant GmbH Gendorf</Kunde_Werk>
+            <Org_Einheit_Gebaeude_Kostenstelle>DE71 BB34061102</Org_Einheit_Gebaeude_Kostenstelle>
+            <Faelligkeit/>
+            <Grundlegendes_Startdatum>mjc_$vSCO$tWorkOrder$fBasicStrtDate</Grundlegendes_Startdatum>
+          </group_rm2ae68>
+          <group_bp3ij36>
+            <enter_a_value>mjc_$vC$eWOOperationCollection$fcount$qpWorkOrderNum</enter_a_value>
+            <group_vg69e69 jr:template="">
+              <_01_Innere_Pr_fung_01>mjc_$vM$eWOOperationCollection$fOperationNum,ShortText$qpWorkOrderNum</_01_Innere_Pr_fung_01>
+              <Pruefmedium/>
+              <Pruefdauer/>
+              <Prueftermin/>
+              <PD_Bar/>
+              <SV_bef_Person/>
+            </group_vg69e69>
+            <group_vg69e69>
+              <_01_Innere_Pr_fung_01>mjc_$vM$eWOOperationCollection$fOperationNum,ShortText$qpWorkOrderNum</_01_Innere_Pr_fung_01>
+              <Pruefmedium/>
+              <Pruefdauer/>
+              <Prueftermin/>
+              <PD_Bar/>
+              <SV_bef_Person/>
+            </group_vg69e69>
+            <Add_another_Question/>
+            <aenderungen_an_Siche_Berstsicherung_BS/>
+            <group_vg69e69_001 jr:template="">
+              <_01_Innere_Pr_fung_01_001>mjc_$vM$eLTCatalogCodeSet$fCode,CodeText$qpcustomCodeGroup</_01_Innere_Pr_fung_01_001>
+              <Pruefmedium_001/>
+              <Pruefdauer_001/>
+              <Prueftermin_001/>
+              <PD_Bar_001/>
+              <SV_bef_Person_001/>
+            </group_vg69e69_001>
+            <group_vg69e69_001>
+              <_01_Innere_Pr_fung_01_001>mjc_$vM$eLTCatalogCodeSet$fCode,CodeText$qpcustomCodeGroup</_01_Innere_Pr_fung_01_001>
+              <Pruefmedium_001/>
+              <Pruefdauer_001/>
+              <Prueftermin_001/>
+              <PD_Bar_001/>
+              <SV_bef_Person_001/>
+            </group_vg69e69_001>
+            <Folgende_Sicherheits_ngen_waren_eingebaut/>
+          </group_bp3ij36>
+          <Weiterbetrieb_unbedenklich/>
+          <Maengelkennziffer_0_3/>
+          <Geringfuegige_Korrosion/>
+          <Sicherheitseinr_geprueft/>
+          <Die_Pruefung_ergab_folgende_Massgaben_/>
+          <group_Aenderungen>
+            <Ueberwachungsgruppe/>
+            <Pruefarten/>
+            <Pr_fer/>
+            <Bezugs_Datum/>
+            <Naechste_Pruefung/>
+            <Datum/>
+            <Signature/>
+          </group_Aenderungen>
+          <__version__/>
+          <_version_/>
+          <_version__001/>
+          <_version__002/>
+          <_version__003/>
+          <_version__004/>
+          <_version__005/>
+          <_version__006/>
+          <_version__007/>
+          <_version__008/>
+          <_version__009/>
+          <_version__010/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <bind nodeset="/data/group_rm2ae68" required="false()"/>
+      <bind nodeset="/data/group_rm2ae68/work_order_number" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/Description" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/Equipment_number" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/Functional_location" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/BetrSichV" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/AwSV" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/Sonstige" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/Kunde_Werk" required="false()" type="string"/>
+      <bind nodeset="/data/group_rm2ae68/Org_Einheit_Gebaeude_Kostenstelle" required="false()" type="string"/>
+      <bind calculate="today()" nodeset="/data/group_rm2ae68/Faelligkeit" required="false()" type="date"/>
+      <bind nodeset="/data/group_rm2ae68/Grundlegendes_Startdatum" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36" required="false()"/>
+      <bind nodeset="/data/group_bp3ij36/enter_a_value" readonly="true()" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69" required="false()"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69/_01_Innere_Pr_fung_01" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69/Pruefmedium" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69/Pruefdauer" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69/Prueftermin" required="false()" type="date"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69/PD_Bar" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69/SV_bef_Person" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/Add_another_Question" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/aenderungen_an_Siche_Berstsicherung_BS" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69_001" relevant=" /data/group_bp3ij36/Add_another_Question = 'Ja'" required="false()"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69_001/_01_Innere_Pr_fung_01_001" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69_001/Pruefmedium_001" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69_001/Pruefdauer_001" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69_001/Prueftermin_001" required="false()" type="date"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69_001/PD_Bar_001" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/group_vg69e69_001/SV_bef_Person_001" required="false()" type="string"/>
+      <bind nodeset="/data/group_bp3ij36/Folgende_Sicherheits_ngen_waren_eingebaut" required="false()" type="string"/>
+      <bind nodeset="/data/Weiterbetrieb_unbedenklich" required="false()" type="string"/>
+      <bind nodeset="/data/Maengelkennziffer_0_3" required="false()" type="string"/>
+      <bind nodeset="/data/Geringfuegige_Korrosion" required="false()" type="string"/>
+      <bind nodeset="/data/Sicherheitseinr_geprueft" required="false()" type="string"/>
+      <bind nodeset="/data/Die_Pruefung_ergab_folgende_Massgaben_" required="false()" type="string"/>
+      <bind nodeset="/data/group_Aenderungen" required="false()"/>
+      <bind nodeset="/data/group_Aenderungen/Ueberwachungsgruppe" required="false()" type="string"/>
+      <bind nodeset="/data/group_Aenderungen/Pruefarten" required="false()" type="string"/>
+      <bind nodeset="/data/group_Aenderungen/Pr_fer" required="false()" type="string"/>
+      <bind nodeset="/data/group_Aenderungen/Bezugs_Datum" required="false()" type="date"/>
+      <bind nodeset="/data/group_Aenderungen/Naechste_Pruefung" required="false()" type="date"/>
+      <bind nodeset="/data/group_Aenderungen/Datum" required="false()" type="date"/>
+      <bind nodeset="/data/group_Aenderungen/Signature" orx:max-pixels="1024" required="true()" type="binary"/>
+      <bind calculate="'vXjDJLCVtkrXjKKgpZUXmF'" nodeset="/data/__version__" required="false()" type="string"/>
+      <bind calculate="'vbjtmL8Kfs7TtQ8pirXbfk'" nodeset="/data/_version_" required="false()" type="string"/>
+      <bind calculate="'vPx6b3viTxLFfJFWW2fgxk'" nodeset="/data/_version__001" required="false()" type="string"/>
+      <bind calculate="'vttxE6yrYHqNK66gzT29zk'" nodeset="/data/_version__002" required="false()" type="string"/>
+      <bind calculate="'vc5fhGmvk9Hdf8KNHavCYT'" nodeset="/data/_version__003" required="false()" type="string"/>
+      <bind calculate="'vgZbACggduDJHCFxfuxswZ'" nodeset="/data/_version__004" required="false()" type="string"/>
+      <bind calculate="'vjEZC8GGYqP9HDYMcciVbD'" nodeset="/data/_version__005" required="false()" type="string"/>
+      <bind calculate="'vrbFCZWtjEsaMd9hHxoAdR'" nodeset="/data/_version__006" required="false()" type="string"/>
+      <bind calculate="'vCUfpkWdkYDSDVsgWxReh7'" nodeset="/data/_version__007" required="false()" type="string"/>
+      <bind calculate="'vDcH7eayszREMugswibZY5'" nodeset="/data/_version__008" required="false()" type="string"/>
+      <bind calculate="'vZ2TRBnZqvbnf6Uip9JXa8'" nodeset="/data/_version__009" required="false()" type="string"/>
+      <bind calculate="'vGwSbD5ixprg6BsD9CtB9b'" nodeset="/data/_version__010" type="string"/>
+      <bind jr:preload="uid" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body class="theme-grid no-text-transform">
+    <group appearance="w6" ref="/data/group_rm2ae68">
+      <label>Gruppe</label>
+      <input appearance="w3" ref="/data/group_rm2ae68/work_order_number">
+        <label>Arbeitsauftragsnummer</label>
+      </input>
+      <input appearance="w3" ref="/data/group_rm2ae68/Description">
+        <label>Beschreibung</label>
+      </input>
+      <input appearance="w3" ref="/data/group_rm2ae68/Equipment_number">
+        <label>Equipment</label>
+      </input>
+      <input appearance="w3" ref="/data/group_rm2ae68/Functional_location">
+        <label>Technischer Platz</label>
+      </input>
+      <trigger appearance="w2" ref="/data/group_rm2ae68/BetrSichV">
+        <label>BetrSichV</label>
+      </trigger>
+      <trigger appearance="w2" ref="/data/group_rm2ae68/AwSV">
+        <label>AwSV</label>
+      </trigger>
+      <trigger appearance="w2" ref="/data/group_rm2ae68/Sonstige">
+        <label>Sonstige</label>
+      </trigger>
+      <input appearance="w2" ref="/data/group_rm2ae68/Kunde_Werk">
+        <label>Kunde Werk</label>
+      </input>
+      <input appearance="w2" ref="/data/group_rm2ae68/Org_Einheit_Gebaeude_Kostenstelle">
+        <label>Org. Einheit Gebaeude
+Kostenstelle</label>
+      </input>
+      <input appearance="w2" ref="/data/group_rm2ae68/Faelligkeit">
+        <label>Faelligkeit</label>
+      </input>
+      <input ref="/data/group_rm2ae68/Grundlegendes_Startdatum">
+        <label>Grundlegendes Startdatum</label>
+      </input>
+    </group>
+    <group appearance="w7" ref="/data/group_bp3ij36">
+      <label>Gruppe</label>
+      <input ref="/data/group_bp3ij36/enter_a_value">
+        <label>Anzahl Prüfarten</label>
+      </input>
+      <group ref="/data/group_bp3ij36/group_vg69e69">
+        <label></label>
+        <repeat appearance="w7" nodeset="/data/group_bp3ij36/group_vg69e69" jr:count="/data/group_bp3ij36/enter_a_value" jr:noAddRemove="true()">
+          <select1 appearance="minimal" ref="/data/group_bp3ij36/group_vg69e69/_01_Innere_Pr_fung_01">
+            <label>Prüfart</label>
+            <item>
+              <label>mjc_$vM$eWOOperationCollection$fOperationNum,ShortText$qpWorkOrderNum</label>
+              <value>-999</value>
+            </item>
+          </select1>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69/Pruefmedium">
+            <label>Pruefmedium</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69/Pruefdauer">
+            <label>Pruefdauer</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69/Prueftermin">
+            <label>Prueftermin</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69/PD_Bar">
+            <label>PD Bar</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69/SV_bef_Person">
+            <label>SV/bef.Person</label>
+          </input>
+        </repeat>
+      </group>
+      <select1 appearance="w2 horizontal" ref="/data/group_bp3ij36/Add_another_Question">
+        <label>Weitere Prüfarten hinzufügen</label>
+        <item>
+          <label>Ja</label>
+          <value>Ja</value>
+        </item>
+        <item>
+          <label>Nein</label>
+          <value>Nein</value>
+        </item>
+      </select1>
+      <select appearance="w2 horizontal" ref="/data/group_bp3ij36/aenderungen_an_Siche_Berstsicherung_BS">
+        <label>Aenderungen an Sicherheitsventil (SV) / Berstsicherung (BS)?</label>
+        <item>
+          <label>Ja</label>
+          <value>Ja</value>
+        </item>
+        <item>
+          <label>Nein</label>
+          <value>Nein</value>
+        </item>
+      </select>
+      <group ref="/data/group_bp3ij36/group_vg69e69_001">
+        <label></label>
+        <repeat appearance="w7" nodeset="/data/group_bp3ij36/group_vg69e69_001">
+          <select1 appearance="minimal" ref="/data/group_bp3ij36/group_vg69e69_001/_01_Innere_Pr_fung_01_001">
+            <label>Prüfart</label>
+            <item>
+              <label>mjc_$vM$eLTCatalogCodeSet$fCode,CodeText$qpcustomCodeGroup</label>
+              <value>-999</value>
+            </item>
+          </select1>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69_001/Pruefmedium_001">
+            <label>Pruefmedium</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69_001/Pruefdauer_001">
+            <label>Pruefdauer</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69_001/Prueftermin_001">
+            <label>Prueftermin</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69_001/PD_Bar_001">
+            <label>PD Bar</label>
+          </input>
+          <input appearance="w1" ref="/data/group_bp3ij36/group_vg69e69_001/SV_bef_Person_001">
+            <label>SV/bef.Person</label>
+          </input>
+        </repeat>
+      </group>
+      <input ref="/data/group_bp3ij36/Folgende_Sicherheits_ngen_waren_eingebaut">
+        <label>Folgende Sicherheitsventile / Berstsicherungen waren eingebaut:</label>
+      </input>
+    </group>
+    <input appearance="w2" ref="/data/Weiterbetrieb_unbedenklich">
+      <label>Weiterbetrieb unbedenklich</label>
+    </input>
+    <input appearance="w2" ref="/data/Maengelkennziffer_0_3">
+      <label>Maengelkennziffer (0-3)</label>
+    </input>
+    <input appearance="w2" ref="/data/Geringfuegige_Korrosion">
+      <label>Geringfuegige Korrosion</label>
+    </input>
+    <input appearance="w2" ref="/data/Sicherheitseinr_geprueft">
+      <label>Sicherheitseinr. geprueft?</label>
+    </input>
+    <input appearance="multiline" ref="/data/Die_Pruefung_ergab_folgende_Massgaben_">
+      <label>Eintragung von Bemerkungen sowie der Mangelbeschreibung:</label>
+    </input>
+    <group appearance="w6" ref="/data/group_Aenderungen">
+      <label>Aenderungen:</label>
+      <input appearance="w2 multiline" ref="/data/group_Aenderungen/Ueberwachungsgruppe">
+        <label>Ueberwachungsgruppe</label>
+      </input>
+      <input appearance="w2 multiline" ref="/data/group_Aenderungen/Pruefarten">
+        <label>Pruefarten</label>
+      </input>
+      <input appearance="w2 multiline" ref="/data/group_Aenderungen/Pr_fer">
+        <label>Prüfer</label>
+      </input>
+      <input appearance="w2" ref="/data/group_Aenderungen/Bezugs_Datum">
+        <label>Bezugs-Datum</label>
+      </input>
+      <input appearance="w2" ref="/data/group_Aenderungen/Naechste_Pruefung">
+        <label>Naechste Pruefung</label>
+      </input>
+      <input appearance="w2" ref="/data/group_Aenderungen/Datum">
+        <label>Datum</label>
+      </input>
+      <upload appearance="signature" mediatype="image/*" ref="/data/group_Aenderungen/Signature">
+        <label>Unterschrift</label>
+      </upload>
+    </group>
+  </h:body>
+</h:html>
+

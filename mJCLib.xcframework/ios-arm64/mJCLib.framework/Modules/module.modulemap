@@ -1,0 +1,11 @@
+framework module mJCLib {
+  umbrella header "mJCLib.h"
+
+  export *
+  module * { export * }
+}
+
+module mJCLib.Swift {
+    header "mJCLib-Swift.h"
+    requires objc
+}
