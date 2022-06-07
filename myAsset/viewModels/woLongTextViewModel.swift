@@ -56,12 +56,12 @@ class woLongTextViewModel {
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "Item")
-        let itemCount = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.woLongTextArray.count) + 1)")
+        let itemCount = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.woLongTextArray.count) + 1)")
         prop!.value = itemCount as NSObject
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "TextName")
-        let combString = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: woObj.WorkOrderNum)
+        let combString = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: woObj.WorkOrderNum)
         prop!.value = combString as NSObject
         property.add(prop!)
         
@@ -123,12 +123,12 @@ class woLongTextViewModel {
             property.add(prop!)
             
             prop = SODataPropertyDefault(name: "Item")
-            let itemCount = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\(longTxtCount)")
+            let itemCount = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\(longTxtCount)")
             prop!.value = itemCount as NSObject
             property.add(prop!)
             
             prop = SODataPropertyDefault(name: "TextName")
-            let combString = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: woObj.WorkOrderNum)
+            let combString = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: woObj.WorkOrderNum)
             prop!.value = combString as NSObject
             property.add(prop!)
             
@@ -202,12 +202,12 @@ class woLongTextViewModel {
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "Item")
-        let itemCount = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.oprLongTextArray.count) + 1)")
+        let itemCount = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.oprLongTextArray.count) + 1)")
         prop!.value = itemCount as NSObject
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "TextName")
-        let combString = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
+        let combString = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
         prop!.value = "\(combString)\(oprObj.OperationNum)" as NSObject
         property.add(prop!)
         
@@ -278,12 +278,12 @@ class woLongTextViewModel {
             property.add(prop!)
             
             prop = SODataPropertyDefault(name: "Item")
-            let itemCount = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\(longTxtCount)")
+            let itemCount = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\(longTxtCount)")
             prop!.value = itemCount as NSObject
             property.add(prop!)
             
             prop = SODataPropertyDefault(name: "TextName")
-            let combString = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
+            let combString = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
             prop!.value = "\(combString)\(oprObj.OperationNum)" as NSObject
             property.add(prop!)
             
@@ -366,12 +366,12 @@ class woLongTextViewModel {
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "Item")
-        let itemCount = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.subOprLongTextArray.count) + 1)")
+        let itemCount = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.subOprLongTextArray.count) + 1)")
         prop!.value = itemCount as NSObject
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "TextName")
-        let combString = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
+        let combString = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
         prop!.value = "\(combString)\(oprObj.OperationNum)\(oprObj.SubOperation)" as NSObject
         property.add(prop!)
         
@@ -439,12 +439,12 @@ class woLongTextViewModel {
             property.add(prop!)
             
             prop = SODataPropertyDefault(name: "Item")
-            let itemCount = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\(longTxtCount)")
+            let itemCount = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\(longTxtCount)")
             prop!.value = itemCount as NSObject
             property.add(prop!)
             
             prop = SODataPropertyDefault(name: "TextName")
-            let combString = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
+            let combString = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: oprObj.WorkOrderNum)
             prop!.value = "\(combString)\(oprObj.OperationNum)\(oprObj.SubOperation)" as NSObject
             property.add(prop!)
             
@@ -520,12 +520,12 @@ class woLongTextViewModel {
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "Item")
-        let itemCount = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.compLongTextArray.count) + 1)")
+        let itemCount = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 4, Num: "\((self.compLongTextArray.count) + 1)")
         prop!.value = itemCount as NSObject
         property.add(prop!)
         
         prop = SODataPropertyDefault(name: "TextName")
-        let combString = myJobCardDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: woObj.WorkOrderNum)
+        let combString = myAssetDataManager.uniqueInstance.getObjectByAppendingZero(Max: 12, Num: woObj.WorkOrderNum)
         prop!.value = "\(combString)\(compObj.Item)" as NSObject
         property.add(prop!)
         
