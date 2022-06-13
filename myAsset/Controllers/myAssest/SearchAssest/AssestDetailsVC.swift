@@ -10,7 +10,7 @@ import UIKit
 import ODSFoundation
 import mJCLib
 
-class AssestDetailsVC: UIViewController,viewModelDelegate {
+class AssestDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
     
     @IBOutlet weak var segmentBgView: UIView!
     @IBOutlet weak var assestSegment: UISegmentedControl!
@@ -19,6 +19,9 @@ class AssestDetailsVC: UIViewController,viewModelDelegate {
     @IBOutlet weak var totalLbl: UILabel!
     @IBOutlet weak var selectedLbl: UILabel!
     @IBOutlet weak var selectedStackView: UIStackView!
+    @IBOutlet weak var tblViewBottomConst: NSLayoutConstraint!
+    @IBOutlet weak var scanBtnWidthConst: NSLayoutConstraint!
+    @IBOutlet weak var barCodeScanBtn: UIButton!
     
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var selectedArr:[Int] = []
@@ -31,11 +34,13 @@ class AssestDetailsVC: UIViewController,viewModelDelegate {
         objmodel.getObjectlist()
         
         assetTableView.register(UINib(nibName: "SearchAssetCell_iPhone", bundle: nil), forCellReuseIdentifier: "SearchAssetCell_iPhone")
-        assetTableView.rowHeight = 170
+        assetTableView.rowHeight = 150
         assetTableView.estimatedRowHeight = UITableView.automaticDimension
         
         ODSUIHelper.setBorderToView(view:self.searchView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         self.assetTableView.allowsMultipleSelection = true
+        
+        self.tblViewBottomConst.constant = IS_IPHONE_XS_MAX ? 64 : 0 //default 54
     }
     
     func dataFetchCompleted(type: String, object: [Any]) {
@@ -49,25 +54,48 @@ class AssestDetailsVC: UIViewController,viewModelDelegate {
         }
     }
     
+    //MARK: - Button Action Methods
     @IBAction func assestSegmentAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
             self.selectedStackView.isHidden = false
             self.inspectedArr.removeAll()
             self.inspectedArr = self.objmodel.objectListArray.filter{$0.ProcessIndic == ""}
+            self.totalLbl.text = "\(self.inspectedArr.count)"
+            selectedCountLabelUpdate(count: self.selectedArr.count)
+            self.scanBtnWidthConst.constant = 57.5
             self.assetTableView.reloadData()
         }
         else{
             self.selectedStackView.isHidden = true
             self.inspectedArr.removeAll()
             self.inspectedArr = self.objmodel.objectListArray.filter{$0.ProcessIndic != ""}
+            self.totalLbl.text = "\(self.inspectedArr.count)"
+            self.scanBtnWidthConst.constant = 0
             self.assetTableView.reloadData()
         }
     }
     @IBAction func closeBtnTapped(_ sender: UIButton) {
         self.selectedArr.removeAll()
+        selectedCountLabelUpdate(count: selectedArr.count)
         assetTableView.reloadData()
         self.selectedLbl.text = ""
     }
+    @IBAction func barCodeScanBtnAction(_ sender: UIButton) {
+        mJCLogger.log("Starting", Type: "info")
+        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "asset", delegate: self, controller: self)
+        mJCLogger.log("Ended", Type: "info")
+    }
+    
+    //MARK: - Barcode Delegate
+    func scanCompleted(type: String, barCode: String, object: Any){
+        if type == "success"{
+            print("Asset scan code: \(barCode)")
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
 }
 
 extension AssestDetailsVC:UITableViewDelegate,UITableViewDataSource{
@@ -76,12 +104,17 @@ extension AssestDetailsVC:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ScreenManager.getInspectedCell(tableView: tableView)
-        cell.assetLbl.text = self.inspectedArr[indexPath.row].Equipment
         cell.assetIdLbl.text = self.inspectedArr[indexPath.row].Equipment
         cell.descLbl.text = self.inspectedArr[indexPath.row].EquipmentDescription
         cell.funcLocLbl.text = self.inspectedArr[indexPath.row].FunctionalLoc
         cell.serialNumLbl.text = self.inspectedArr[indexPath.row].SerialNumber
+        cell.cameraBtn.tag = indexPath.row
+        cell.rightArrowbtn.tag = indexPath.row
+        cell.cameraBtn.addTarget(self, action: #selector(assetCameraButtonAction), for: .touchUpInside)
+        cell.rightArrowbtn.addTarget(self, action: #selector(moveToOverViewButtonAction), for: .touchUpInside)
+        
         if assestSegment.selectedSegmentIndex == 0{
+            cell.isUserInteractionEnabled = true
             cell.cameraBtn.isHidden = false
             cell.rightArrowbtn.isHidden = false
             if selectedArr.contains(indexPath.row){
@@ -91,6 +124,7 @@ extension AssestDetailsVC:UITableViewDelegate,UITableViewDataSource{
             }
         }
         else{
+            cell.isUserInteractionEnabled = false
             cell.cameraBtn.isHidden = true
             cell.rightArrowbtn.isHidden = true
             cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
@@ -98,17 +132,60 @@ extension AssestDetailsVC:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130//UITableView.automaticDimension
+        return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectedArr.contains(indexPath.row){
             let myInd = self.selectedArr.firstIndex(of: indexPath.row)
             self.selectedArr.remove(at: myInd!)
-            self.selectedLbl.text = "\(selectedArr.count)"
+            selectedCountLabelUpdate(count: selectedArr.count)
         }else{
             selectedArr.append(indexPath.row)
-            self.selectedLbl.text = "\(selectedArr.count)"
+            selectedCountLabelUpdate(count: selectedArr.count)
         }
         self.assetTableView.reloadData()
+    }
+    
+    @objc func assetCameraButtonAction(sender: UIButton){
+        mJCLogger.log("Starting", Type: "info")
+        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "asset", delegate: self, controller: self)
+        mJCLogger.log("Ended", Type: "info")
+    }
+    @objc func moveToOverViewButtonAction(sender: UIButton){
+        mJCLogger.log("Starting", Type: "info")
+        if DeviceType == iPad{
+            let flocEquipDetails = ScreenManager.getFlocEquipDetialsScreen()
+            flocEquipDetails.flocEquipObjType = "floc"
+            flocEquipDetails.flocEquipObjText = self.inspectedArr[sender.tag].Equipment
+            flocEquipDetails.classificationType = "Workorder"
+            flocEquipDetails.modalPresentationStyle = .fullScreen
+            self.present(flocEquipDetails, animated: false) {}
+        }else{
+            let flocEquipDetails = ScreenManager.getFlocEquipDetialsScreen()
+            flocEquipDetails.flocEquipObjType = "floc"
+            flocEquipDetails.flocEquipObjText = self.inspectedArr[sender.tag].Equipment
+            flocEquipDetails.classificationType = "Workorder"
+            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
+            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
+            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
+            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = flocEquipDetails as UIViewController as? SlideMenuControllerSelectDelegate
+            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
+            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
+            self.appDeli.window?.makeKeyAndVisible()
+            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(flocEquipDetails, animated: true)
+        }
+        mJCLogger.log("Ended", Type: "info")
+    }
+    
+    func selectedCountLabelUpdate(count: Int){
+        if assestSegment.selectedSegmentIndex == 0{
+            if selectedArr.count > 0{
+                self.selectedStackView.isHidden = false
+                self.selectedLbl.text = "\(selectedArr.count)"
+            }
+            else{
+                self.selectedStackView.isHidden = true
+            }
+        }
     }
 }

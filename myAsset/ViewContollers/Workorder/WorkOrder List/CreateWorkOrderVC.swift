@@ -921,13 +921,13 @@ class CreateWorkOrderVC: UIViewController,UITextFieldDelegate,UITextViewDelegate
             self.equipmentTextField.text = singleWorkOrder.EquipNum
             self.functionalLocationTextField.text = singleWorkOrder.FuncLocation
             self.createWorkOrderHeaderLAbel.text = "Edit_Work_Order".localized() +  "- \(singleWorkOrder.WorkOrderNum)"
-            self.plantButton.isEnabled = false
-            self.typeButton.isEnabled = false
-            self.ActivityTypeButton.isEnabled = false
-            self.basicDateButton.isEnabled = false
-            self.basicTimeButton.isEnabled = false
-            self.dueDateButton.isEnabled = false
-            self.dueDateTimeButton.isEnabled = false
+//            self.plantButton.isEnabled = false
+//            self.typeButton.isEnabled = false
+//            self.ActivityTypeButton.isEnabled = false
+//            self.basicDateButton.isEnabled = false
+//            self.basicTimeButton.isEnabled = false
+//            self.dueDateButton.isEnabled = false
+//            self.dueDateTimeButton.isEnabled = false
         }
         mJCLogger.log("Ended", Type: "info")
     }

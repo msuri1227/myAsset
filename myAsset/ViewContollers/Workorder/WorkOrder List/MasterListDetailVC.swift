@@ -186,9 +186,9 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
 //            }else{
 //                self.statusViewBottomConstant.constant = -34
 //            }
-        }
-        if IS_IPHONE_XS_MAX{
-            self.statusViewTopConstant.constant = -34
+            if IS_IPHONE_XS_MAX{
+                self.statusViewTopConstant.constant = -34
+            }
         }
         pageViewController.setTabItem(tabItems())
         defer { initialized = true }
