@@ -76,6 +76,7 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
         self.locationTxtFld.didSelect { selectedText, index, id in
             self.locationTxtFld.text = selectedText
         }
+        self.funcLocTxtFld.text = "BLDG-LED-AA-02"
     }
     //MARK: - Data fetch methods
     func dataFetchCompleted(type: String, object: [Any]) {
@@ -121,7 +122,43 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
             funcLocTxtFld.text == "" && costCenterTxtFld.text == "" && locationTxtFld.text == "" && roomTxtFld.text == ""{
             mJCAlertHelper.showAlert(self, title: alerttitle, message: "please select at least one param", button: okay)
         }else{
+            var searchParams = Dictionary<String,Any>()
+            searchParams["assetID"] = self.assestIdTxtFld.text ?? ""
+            searchParams["assetDesc"] = self.descTxtFld.text
+            if self.assestClassTxtFld.text != ""{
+                let arr = self.assestClassTxtFld.text?.components(separatedBy: " - ")
+                if arr?.count ?? 0 > 0{
+                    searchParams["assetCls"] = arr![0]
+                }else{
+                    searchParams["assetCls"] = ""
+                }
+            }else{
+                searchParams["assetCls"] = ""
+            }
+            searchParams["assetFloc"] = self.funcLocTxtFld.text
+            if self.costCenterTxtFld.text != ""{
+                let arr = self.costCenterTxtFld.text?.components(separatedBy: " - ")
+                if arr?.count ?? 0 > 0{
+                    searchParams["assetCostCtr"] = arr![0]
+                }else{
+                    searchParams["assetCostCtr"] = ""
+                }
+            }else{
+                searchParams["assetCostCtr"] = ""
+            }
+            if self.locationTxtFld.text != ""{
+                let arr = self.locationTxtFld.text?.components(separatedBy: " - ")
+                if arr?.count ?? 0 > 0{
+                    searchParams["assetLocation"] = arr![0]
+                }else{
+                    searchParams["assetLocation"] = ""
+                }
+            }else{
+                searchParams["assetLocation"] = ""
+            }
+            searchParams["assetRoom"] = self.roomTxtFld.text
             let searchAssetVc = ScreenManager.getAssetListVCScreen()
+            searchAssetVc.searchParam = searchParams
             self.present(searchAssetVc, animated: false)
         }
     }

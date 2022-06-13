@@ -55,7 +55,14 @@ class CustomNavHeader_iPhone: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(CustomNavHeader_iPhone.storeFlushAndRefreshDone(notification:)), name: NSNotification.Name(rawValue:"storeFlushAndRefreshDone"), object: nil)
 
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let height: CGFloat = 60
+        var height: CGFloat = 60
+        if backButton == true {
+            backBtn.setImage(UIImage(named: "backButton"), for: .normal)
+            backBtn.addTarget(self, action: #selector(self.backButtonAction), for: .touchUpInside)
+            backBtn.isHidden = false
+        }else{
+            height = 40
+        }
         if UIScreen.main.nativeBounds.height == 2436 {
             self.frame = CGRect(x: 0, y: statusBarHeight , width: screenWidth, height: height)
         }else {
@@ -67,12 +74,6 @@ class CustomNavHeader_iPhone: UIView {
         }
         self.backgroundColor = appColor
         viewcontroller.navigationController?.navigationBar.barTintColor = appColor
-        if backButton == true {
-            backBtn.setImage(UIImage(named: "backButton"), for: .normal)
-            backBtn.addTarget(self, action: #selector(self.backButtonAction), for: .touchUpInside)
-            backBtn.isHidden = false
-        }
-        
         if leftMenu == true{
             
             if leftMenuType == "Back"{
