@@ -1,5 +1,5 @@
 //
-//  AssestDetailsVC.swift
+//  AssetDetailsVC.swift
 //  myAsset
 //
 //  Created by Mangi Reddy on 08/06/22.
@@ -10,7 +10,7 @@ import UIKit
 import ODSFoundation
 import mJCLib
 
-class AssestDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
+class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
     
     @IBOutlet weak var segmentBgView: UIView!
     @IBOutlet weak var assestSegment: UISegmentedControl!
@@ -32,17 +32,13 @@ class AssestDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
         super.viewDidLoad()
         objmodel.delegate = self
         objmodel.getObjectlist()
-        
         assetTableView.register(UINib(nibName: "SearchAssetCell_iPhone", bundle: nil), forCellReuseIdentifier: "SearchAssetCell_iPhone")
-        assetTableView.rowHeight = 150
+        assetTableView.rowHeight = 140
         assetTableView.estimatedRowHeight = UITableView.automaticDimension
-        
         ODSUIHelper.setBorderToView(view:self.searchView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         self.assetTableView.allowsMultipleSelection = true
-        
         self.tblViewBottomConst.constant = IS_IPHONE_XS_MAX ? 64 : 0 //default 54
     }
-    
     func dataFetchCompleted(type: String, object: [Any]) {
         if type == "assetList"{
             self.inspectedArr = self.objmodel.objectListArray
@@ -53,7 +49,6 @@ class AssestDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
             }
         }
     }
-    
     //MARK: - Button Action Methods
     @IBAction func assestSegmentAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
@@ -64,8 +59,7 @@ class AssestDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
             selectedCountLabelUpdate(count: self.selectedArr.count)
             self.scanBtnWidthConst.constant = 57.5
             self.assetTableView.reloadData()
-        }
-        else{
+        }else{
             self.selectedStackView.isHidden = true
             self.inspectedArr.removeAll()
             self.inspectedArr = self.objmodel.objectListArray.filter{$0.ProcessIndic != ""}
@@ -85,7 +79,6 @@ class AssestDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
         WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "asset", delegate: self, controller: self)
         mJCLogger.log("Ended", Type: "info")
     }
-    
     //MARK: - Barcode Delegate
     func scanCompleted(type: String, barCode: String, object: Any){
         if type == "success"{
@@ -98,41 +91,31 @@ class AssestDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
     
 }
 
-extension AssestDetailsVC:UITableViewDelegate,UITableViewDataSource{
+extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.inspectedArr.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ScreenManager.getInspectedCell(tableView: tableView)
-        cell.assetIdLbl.text = self.inspectedArr[indexPath.row].Equipment
-        cell.descLbl.text = self.inspectedArr[indexPath.row].EquipmentDescription
-        cell.funcLocLbl.text = self.inspectedArr[indexPath.row].FunctionalLoc
-        cell.serialNumLbl.text = self.inspectedArr[indexPath.row].SerialNumber
-        cell.cameraBtn.tag = indexPath.row
-        cell.rightArrowbtn.tag = indexPath.row
-        cell.cameraBtn.addTarget(self, action: #selector(assetCameraButtonAction), for: .touchUpInside)
-        cell.rightArrowbtn.addTarget(self, action: #selector(moveToOverViewButtonAction), for: .touchUpInside)
-        
-        if assestSegment.selectedSegmentIndex == 0{
-            cell.isUserInteractionEnabled = true
-            cell.cameraBtn.isHidden = false
-            cell.rightArrowbtn.isHidden = false
-            if selectedArr.contains(indexPath.row){
-                cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
+        if self.inspectedArr.indices.contains(indexPath.row){
+            let assetDetail = self.inspectedArr[indexPath.row]
+            if assestSegment.selectedSegmentIndex == 0{
+                cell.unInspCellModel = assetDetail
+                if selectedArr.contains(indexPath.row){
+                    cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
+                }else{
+                    cell.checkBoxImgView.image = UIImage(named: "ic_check_nil")
+                }
             }else{
-                cell.checkBoxImgView.image = UIImage(named: "ic_check_nil")
+                cell.inspCellModel = assetDetail
             }
-        }
-        else{
-            cell.isUserInteractionEnabled = false
-            cell.cameraBtn.isHidden = true
-            cell.rightArrowbtn.isHidden = true
-            cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
+            cell.cameraBtn.tag = indexPath.row
+            cell.rightArrowbtn.tag = indexPath.row
         }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 135
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectedArr.contains(indexPath.row){

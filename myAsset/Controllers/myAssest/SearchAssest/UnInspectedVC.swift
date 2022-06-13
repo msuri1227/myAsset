@@ -84,10 +84,10 @@ extension UnInspectedVC:UITableViewDelegate,UITableViewDataSource{
         }
         //cell.assetIdLbl.text = assetIdArr[indexPath.row]
         //cell.assetClassLbl.text = assetClsArr[indexPath.row]
-        cell.assetLbl.text = assetArr[indexPath.row]
-        cell.descLbl.text = descArr[indexPath.row]
-        cell.funcLocLbl.text = funcLocArr[indexPath.row]
-        cell.serialNumLbl.text = serialNumArr[indexPath.row]
+//        cell.assetLbl.text = assetArr[indexPath.row]
+//        cell.descLbl.text = descArr[indexPath.row]
+//        cell.funcLocLbl.text = funcLocArr[indexPath.row]
+//        cell.serialNumLbl.text = serialNumArr[indexPath.row]
         if selectedArr.contains(indexPath.row){
             cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
         }else{

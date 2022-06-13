@@ -65,11 +65,11 @@ extension InspectedVC:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ScreenManager.getInspectedCell(tableView: tableView)
-        cell.assetLbl.text = assetArr[indexPath.row]
-        cell.descLbl.text = descArr[indexPath.row]
-        cell.funcLocLbl.text = funcLocArr[indexPath.row]
-        cell.serialNumLbl.text = serialNumArr[indexPath.row]
-        
+//        cell.assetLbl.text = assetArr[indexPath.row]
+//        cell.descLbl.text = descArr[indexPath.row]
+//        cell.funcLocLbl.text = funcLocArr[indexPath.row]
+//        cell.serialNumLbl.text = serialNumArr[indexPath.row]
+//        
         cell.rightArrowbtn.isHidden = false
         return cell
     }

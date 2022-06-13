@@ -1,5 +1,5 @@
 //
-//  AssestDetailsVC.swift
+//  AssetListVC.swift
 //  myAsset
 //
 //  Created by Mangi Reddy on 08/06/22.
@@ -17,6 +17,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     @IBOutlet weak var totalLbl: UILabel!
     @IBOutlet weak var selectedLbl: UILabel!
     @IBOutlet weak var selectedStackView: UIStackView!
+    @IBOutlet var printTagButton: UIButton!
     
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var navHeaderView = CustomNavHeader_iPhone()
@@ -56,6 +57,10 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         self.navHeaderView.delegate = self
         self.viewWillAppear(true)
     }
+    
+    @IBAction func printTagButtonAction(_ sender: Any) {
+        print("mk")
+    }
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.assetSearchVM.assetList.count
@@ -64,13 +69,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         let cell = ScreenManager.getInspectedCell(tableView: tableView)
         if self.assetSearchVM.assetList.indices.contains(indexPath.row){
             let equipment = self.assetSearchVM.assetList[indexPath.row]
-            cell.assetLbl.text = equipment.Equipment
-            cell.assetIdLbl.text = equipment.Equipment
-            cell.descLbl.text = equipment.EquipDescription
-            cell.funcLocLbl.text = equipment.FuncLocation
-            cell.serialNumLbl.text = equipment.EnteredBy
-            cell.cameraBtn.isHidden = true
-            cell.rightArrowbtn.isHidden = false
+            cell.assetListCellModel = equipment
             if self.selectedArr.contains(equipment){
                 cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
             }else{
@@ -94,6 +93,11 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         DispatchQueue.main.async {
             self.selectedLbl.text = "\(self.selectedArr.count)"
             self.assetTableView.reloadData()
+            if self.selectedArr.count > 0{
+                self.printTagButton.isHidden = false
+            }else{
+                self.printTagButton.isHidden = true
+            }
         }
     }
     func dataFetchCompleted(type: String, object: [Any]) {

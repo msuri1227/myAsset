@@ -470,11 +470,11 @@ class ScreenManager: NSObject {
             return AssetListVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
         }
     }
-    static func searchAssestDetailsScreen() -> AssestDetailsVC{
+    static func searchAssestDetailsScreen() -> AssetDetailsVC{
         if DeviceType == iPad{
-            return AssestDetailsVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
+            return AssetDetailsVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
         }else{
-            return AssestDetailsVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
+            return AssetDetailsVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
         }
     }
 
