@@ -125,6 +125,9 @@ class CustomerInfoOverViewCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.customerNotificationButton.isHidden = true
+        self.customerInfoNotesButton.isHidden = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -222,8 +225,8 @@ class CustomerInfoOverViewCell: UITableViewCell {
             }
             self.customerInfoNotificationButton.addTarget(self, action:#selector(self.customerInfoNotificationButtonAction(sender:)), for: .touchUpInside)
             if (WORKORDER_ASSIGNMENT_TYPE == "2" || WORKORDER_ASSIGNMENT_TYPE == "4" || WORKORDER_ASSIGNMENT_TYPE == "5") && woOverviewModel.vcOverview?.isfromsup != "Supervisor" && onlineSearch == false {
-                self.customerInfoNotesButton.isHidden = false
-                self.customerNotificationButton.isHidden = false
+                self.customerInfoNotesButton.isHidden = true
+                self.customerNotificationButton.isHidden = true
                 ODSUIHelper.setButtonLayout(button: self.customerInfoNotesButton, cornerRadius: self.customerInfoNotesButton.frame.width/2, bgColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
                 ODSUIHelper.setButtonLayout(button: self.customerNotificationButton, cornerRadius: self.customerNotificationButton.frame.width/2, bgColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
                 self.customerInfoNotesButton.addTarget(self, action:#selector(self.customerInfoNotesButtonAction(sender:)), for: .touchUpInside)

@@ -453,6 +453,19 @@ class WorkOrderOverViewVC: UIViewController,UITableViewDelegate,UITableViewDataS
             equipmentVC.classificationType = "Workorder"
             equipmentVC.modalPresentationStyle = .fullScreen
             self.present(equipmentVC, animated: false) {}
+        }else{
+            let equipmentVC = ScreenManager.getFlocEquipDetialsScreen()
+            equipmentVC.flocEquipObjType = "equip"
+            equipmentVC.flocEquipObjText = equipNo
+            equipmentVC.classificationType = "Workorder"
+            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
+            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
+            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
+            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = equipmentVC as UIViewController as? SlideMenuControllerSelectDelegate
+            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
+            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
+            self.appDeli.window?.makeKeyAndVisible()
+            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(equipmentVC, animated: true)
         }
     }
     // MARK:- Update UI - Function Location Button Action..
@@ -465,6 +478,19 @@ class WorkOrderOverViewVC: UIViewController,UITableViewDelegate,UITableViewDataS
             flocEquipDetails.classificationType = "Workorder"
             flocEquipDetails.modalPresentationStyle = .fullScreen
             self.present(flocEquipDetails, animated: false) {}
+        }else{
+            let flocEquipDetails = ScreenManager.getFlocEquipDetialsScreen()
+            flocEquipDetails.flocEquipObjType = "floc"
+            flocEquipDetails.flocEquipObjText = funcLocNo
+            flocEquipDetails.classificationType = "Workorder"
+            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
+            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
+            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
+            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = flocEquipDetails as UIViewController as? SlideMenuControllerSelectDelegate
+            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
+            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
+            self.appDeli.window?.makeKeyAndVisible()
+            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(flocEquipDetails, animated: true)
         }
         mJCLogger.log("Ended", Type: "info")
     }

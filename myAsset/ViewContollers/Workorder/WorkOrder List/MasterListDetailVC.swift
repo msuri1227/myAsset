@@ -9,6 +9,7 @@
 import UIKit
 import ODSFoundation
 import mJCLib
+import AVFoundation
 class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,CustomNavigationBarDelegate,SlideMenuControllerSelectDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,TabCellDelegate,PageViewParent,CLLocationManagerDelegate,formSaveDelegate,timeSheetDelegate,CreateUpdateDelegate, operationCreationDelegate,listSelectionDelegate,viewModelDelegate{
     
     //MARK:- Headerview Outlets..
@@ -158,6 +159,9 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             self.listObjectSelected()
             self.viewWillAppear(true)
         }
+        if DeviceType == iPhone{
+            self.statusViewBottomConstant.constant = IS_IPHONE_XS_MAX ? 34 : 0
+        }
         mJCLogger.log("Ended", Type: "info")
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -177,11 +181,14 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             }else {
                 self.statusViewHeightConstant.constant = 50.0
             }
-            if screenHeight > 667{
-                self.statusViewBottomConstant.constant = 34
-            }else{
-                self.statusViewBottomConstant.constant = -34
-            }
+//            if screenHeight > 667{
+//                self.statusViewBottomConstant.constant = 34
+//            }else{
+//                self.statusViewBottomConstant.constant = -34
+//            }
+        }
+        if IS_IPHONE_XS_MAX{
+            self.statusViewTopConstant.constant = -34
         }
         pageViewController.setTabItem(tabItems())
         defer { initialized = true }
@@ -875,7 +882,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         }
         if selectedIndex == 0 {
             if sideMenuArrray.count > 0{
-                self.SlideMenuSelected(index: 0, title: sideMenuArrray[1], menuType: "")
+                self.SlideMenuSelected(index: 0, title: "Overview".localized(), menuType: "")
             }
         }
         mJCLogger.log("Ended", Type: "info")
@@ -966,6 +973,15 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             myAssetDataManager.uniqueInstance.updateSlidemenuDelegates(delegateVC: mainViewController, menu: "Main")
         }else if title == "Error_Logs".localized() {
             myAssetDataManager.uniqueInstance.getFlushErrors(isFromBtn: true, count: 0)
+        }
+        else if title == "Assests"{
+            if DeviceType == iPad{
+                
+            }
+            else{
+                let index = tabItemArray.firstIndex{$0.title == "Assets".localized()}
+                self.moveTo(index: index ?? 0)
+            }
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -2006,13 +2022,13 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                         if WORKORDER_ASSIGNMENT_TYPE == "2" || WORKORDER_ASSIGNMENT_TYPE == "4" || WORKORDER_ASSIGNMENT_TYPE == "5"{
                             menuarr = ["Add_Operation".localized(),"Edit_Operation".localized(),"Create_FollowUp_WO".localized(),"Capacity_Data".localized(),"Manage_CheckSheet_Assignment".localized(),"Forms_Approval".localized()]
                             imgArray = [#imageLiteral(resourceName: "addoperBlack"),#imageLiteral(resourceName: "editIcon"),#imageLiteral(resourceName: "followOnBlack"),#imageLiteral(resourceName: "Capacity_Data_Black"),#imageLiteral(resourceName: "ic_manualAssign_black"),#imageLiteral(resourceName: "ic_FormApproval_black")]
-                            if !applicationFeatureArrayKeys.contains("MANAGE_OPR_CHECKSHEET_APPROVER"){
+                            if applicationFeatureArrayKeys.contains("MANAGE_OPR_CHECKSHEET_APPROVER"){
                                 if let index =  menuarr.firstIndex(of: "Forms_Approval".localized()){
                                     menuarr.remove(at: index)
                                     imgArray.remove(at: index)
                                 }
                             }
-                            if !applicationFeatureArrayKeys.contains("MANAGE_OPR_MANUAL_CHECKSHEET"){
+                            if applicationFeatureArrayKeys.contains("MANAGE_OPR_MANUAL_CHECKSHEET"){
                                 if let index =  menuarr.firstIndex(of: "Manage_CheckSheet_Assignment".localized()){
                                     menuarr.remove(at: index)
                                     imgArray.remove(at: index)
@@ -2034,7 +2050,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                                 }
                             }
                         }
-                        if !applicationFeatureArrayKeys.contains("OPR_ADD_OPR_OPTION"){
+                        if applicationFeatureArrayKeys.contains("OPR_ADD_OPR_OPTION"){
                             if let index =  menuarr.firstIndex(of: "Add_Operation".localized()){
                                 menuarr.remove(at: index)
                                 imgArray.remove(at: index)
@@ -2107,6 +2123,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         let NoActivityTab  =  TabItem(title: "Activities".localized(), image: UIImage(named: "activities"), cellWidth: 130.0)
         let NoTaskTab      =  TabItem(title: "Tasks".localized(), image: UIImage(named: "tasks"), cellWidth: 130.0)
         let NoAttchmentTab =  TabItem(title: "Attachments".localized(), image: UIImage(named: "attachment"), cellWidth: 130.0)
+        let assetTab =  TabItem(title: "Assets".localized(), image: UIImage(named: "Inspection_Lot"), cellWidth: 130.0)
         if onlineSearch == false {
             if currentMasterView == "WorkOrder"{
                 if WORKORDER_ASSIGNMENT_TYPE == "2" || WORKORDER_ASSIGNMENT_TYPE == "4" || WORKORDER_ASSIGNMENT_TYPE == "5"{
@@ -2117,6 +2134,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                         tabItemArray.append(OperationTab)
                     }
                 }
+                tabItemArray.append(assetTab)
                 if applicationFeatureArrayKeys.contains("WoAttachments"){
                     tabItemArray.append(AttachementTab)
                 }
@@ -2124,7 +2142,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     tabItemArray.append(FormTab)
                 }
                 if applicationFeatureArrayKeys.contains("WoObjects"){
-                    tabItemArray.append(ObjectsTab)
+                    //tabItemArray.append(ObjectsTab)
                 }
             }else if currentMasterView == "Notification"{
                 tabItemArray.append(OverviewTab)
@@ -2154,6 +2172,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         self.attachmentsVC = ScreenManager.getWorkOrderAttachmentScreen()
         let checkSheetListVC = ScreenManager.getCheckSheetListScreen()
         let objectsVC = ScreenManager.getObjectScreen()
+        let assetVc = ScreenManager.searchAssestDetailsScreen()
 
         var itemVC = UIViewController()
         var activitiesVC = UIViewController()
@@ -2180,6 +2199,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     tabVCArray.append(operationsVC)
                 }
             }
+            tabVCArray.append(assetVc)
             if applicationFeatureArrayKeys.contains("WoAttachments"){
                 tabVCArray.append(self.attachmentsVC!)
                 self.attachmentsVC?.objectNum = selectedworkOrderNumber
@@ -2189,7 +2209,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                 tabVCArray.append(checkSheetListVC)
             }
             if applicationFeatureArrayKeys.contains("WoObjects"){
-                tabVCArray.append(objectsVC)
+               // tabVCArray.append(objectsVC)
             }
         }else{
             tabVCArray.append(self.notificationOverViewVC!)

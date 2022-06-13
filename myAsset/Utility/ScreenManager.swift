@@ -321,18 +321,11 @@ class ScreenManager: NSObject {
             return PersonResponsibleListVC.instantiate(fromAppStoryboard: .iPhone_CreateSB)
         }
     }
-    static func getAssetHierarchyScreen() -> AssetHierarchyVC{
-        if DeviceType == iPad{
-            return AssetHierarchyVC.instantiate(fromAppStoryboard: .iPad_CreateSB)
-        }else{
-            return AssetHierarchyVC.instantiate(fromAppStoryboard: .iPhone_CreateSB)
-        }
-    }
     static func getFlocEquipHierarchyScreen() -> FlocEquipHierarchyVC{
         if DeviceType == iPad{
-            return FlocEquipHierarchyVC.instantiate(fromAppStoryboard: .iPad_CreateSB)
+            return FlocEquipHierarchyVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
         }else{
-            return FlocEquipHierarchyVC.instantiate(fromAppStoryboard: .iPhone_CreateSB)
+            return FlocEquipHierarchyVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
         }
     }
     static func getBreakDownReportScreen() -> BreakDownReportVC{
@@ -433,13 +426,13 @@ class ScreenManager: NSObject {
             return MapDeatilsVC.instantiate(fromAppStoryboard: .iPhone_GMapSB)
         }
     }
-    static func getAssetHierarchyOverViewScreen() -> AssetHierarchyOverViewVC{
-        if DeviceType == iPad{
-            return AssetHierarchyOverViewVC.instantiate(fromAppStoryboard: .iPad_MainListSB)
-        }else{
-            return AssetHierarchyOverViewVC.instantiate(fromAppStoryboard: .iPhone_CreateSB)
-        }
-    }
+//    static func getAssetHierarchyOverViewScreen() -> AssetHierarchyOverViewVC{
+//        if DeviceType == iPad{
+//            return AssetHierarchyOverViewVC.instantiate(fromAppStoryboard: .iPad_MainListSB)
+//        }else{
+//            return AssetHierarchyOverViewVC.instantiate(fromAppStoryboard: .iPhone_CreateSB)
+//        }
+//    }
     static func getOperationListScreen() -> OperationListVC{
         if DeviceType == iPad{
             return OperationListVC.instantiate(fromAppStoryboard: .iPad_MainListSB)
@@ -460,6 +453,28 @@ class ScreenManager: NSObject {
             return UploadAttachmentVC.instantiate(fromAppStoryboard: .iPad_MainListSB)
         }else{
             return UploadAttachmentVC.instantiate(fromAppStoryboard: .iPhone_MainListSB)
+        }
+    }
+    
+    static func searchAssestTagScreen() -> SearchAssestVC{
+        if DeviceType == iPad{
+            return SearchAssestVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
+        }else{
+            return SearchAssestVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
+        }
+    }
+    static func getAssetListVCScreen() -> AssetListVC{
+        if DeviceType == iPad{
+            return AssetListVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
+        }else{
+            return AssetListVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
+        }
+    }
+    static func searchAssestDetailsScreen() -> AssestDetailsVC{
+        if DeviceType == iPad{
+            return AssestDetailsVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
+        }else{
+            return AssestDetailsVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
         }
     }
 
@@ -656,10 +671,6 @@ class ScreenManager: NSObject {
     }
     static func registerTreeViewCell(tableView:UITableView){
         tableView.register(UINib(nibName: customCell.treeViewCell, bundle: nil), forCellReuseIdentifier: customCell.treeViewCell)
-    }
-    static func getTreeViewCell(tableView:UITableView) -> TreeViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: customCell.treeViewCell) as! TreeViewCell
-        return cell
     }
     static func registerAssetHierarchyOverViewCell(tableView:UITableView){
         tableView.register(UINib(nibName: customCell.assetHierarchyOverViewCell, bundle: nil), forCellReuseIdentifier: customCell.assetHierarchyOverViewCell)
@@ -1077,6 +1088,10 @@ class ScreenManager: NSObject {
     }
     static func getAdditionalOperationCountCell(tableView:UITableView) -> TotalOperationCountCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(customCell.totalOperationCountCell)_iPhone") as! TotalOperationCountCell
+        return cell
+    }
+    static func getInspectedCell(tableView:UITableView) -> SearchAssetCell_iPhone{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(customCell.inspectedCell)_iPhone") as! SearchAssetCell_iPhone
         return cell
     }
 }

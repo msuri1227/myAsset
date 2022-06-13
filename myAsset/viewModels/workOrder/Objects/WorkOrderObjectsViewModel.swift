@@ -11,7 +11,8 @@ import mJCLib
 import ODSFoundation
 
 class WorkOrderObjectsViewModel {
-    weak var vc: ObjectsVC?
+    
+    weak var delegate:viewModelDelegate?
     var objectListArray = [WorkorderObjectModel]()
 
     
@@ -23,7 +24,7 @@ class WorkOrderObjectsViewModel {
                     mJCLogger.log("Response :\(responseArr.count)", Type: "Debug")
                     objectCount = "\(responseArr.count)"
                     self.objectListArray = responseArr
-                    self.vc?.updateObjectUIData()
+                    self.delegate?.dataFetchCompleted?(type: "assetList", object: [])
                 }
                 else {
                     mJCLogger.log("Data not found", Type: "Debug")

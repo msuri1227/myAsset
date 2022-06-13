@@ -96,13 +96,13 @@ class AssetAndDatesCell: UITableViewCell {
     
     func woAssetsDatesConfiguration() {
         mJCLogger.log("Starting", Type: "info")
-        assetEquipmentButton.setTitle(woOverViewAssetDatesModel?.EquipNum, for: .normal)
+        assetEquipmentButton.setTitle("", for: .normal)
         assetEquipmentLabel.text = woOverViewAssetDatesModel?.EquipNum
         assetDescriptionLabel.text = woOverViewAssetDatesModel?.TechObjDescription
         assetLocationLabel.text = woOverViewAssetDatesModel?.TechObjLocAndAssgnmnt
         assetsystemConditionLabel.text = woOverViewAssetDatesModel!.SysCondition + " - " + woOverViewAssetDatesModel!.SysContitionText
         assetFunctionLocationLabel.text = woOverViewAssetDatesModel?.FuncLocation
-        assetFunctionLocationButton.setTitle(woOverViewAssetDatesModel?.FuncLocation, for: .normal)
+        assetFunctionLocationButton.setTitle("", for: .normal)
         
         if woOverViewAssetDatesModel?.BasicStrtDate != nil{
             assetBasicStartLabel.text = woOverViewAssetDatesModel?.BasicStrtDate?.toString(format: .custom(localDateFormate), timeZone: .utc, locale: .current)
@@ -214,7 +214,7 @@ class AssetAndDatesCell: UITableViewCell {
         mJCLogger.log("Starting", Type: "info")
         if isCellFrom == "OperationDetails" {
             var titleStr = ""
-            if let title = sender.titleLabel?.text {
+            if let title = self.assetEquipmentLabel.text {
                 titleStr = title
             }
             operaionViewModel.assetEquipmentAction(title:titleStr)
@@ -222,8 +222,8 @@ class AssetAndDatesCell: UITableViewCell {
             let workFlowResp = myAssetDataManager.uniqueInstance.getWorkFlowForAction(event: "VIEW_WO_ORVW_EQPMNT", orderType: "X",from:"WorkOrder")
             if let workFlowObj = workFlowResp as? LtWorkFlowModel {
                 if workFlowObj.ActionType == "Screen" {
-                    if sender.titleLabel?.text != "" && sender.titleLabel?.text != nil {
-                        woAssetDateModel.overviewAssetEquipmentServiceCall(equipmentNo: (sender.titleLabel?.text)!)
+                    if self.assetEquipmentLabel.text != "" && self.assetEquipmentLabel.text != nil {
+                        woAssetDateModel.overviewAssetEquipmentServiceCall(equipmentNo: (self.assetEquipmentLabel.text)!)
                     }else{
                         mJCLogger.log("Equipment_Not_Found".localized(), Type: "Error")
                         mJCAlertHelper.showAlert(woAssetDateModel.vcOverview!, title: MessageTitle, message: "Equipment_Not_Found".localized(), button: okay)
@@ -243,7 +243,7 @@ class AssetAndDatesCell: UITableViewCell {
         mJCLogger.log("Starting", Type: "info")
         if isCellFrom == "OperationDetails" {
             var titleStr = ""
-            if let title = sender.titleLabel?.text {
+            if let title = self.assetFunctionLocationLabel.text {
                 titleStr = title
             }
             operaionViewModel.assetFunctionLocationAction(title:titleStr)
@@ -252,8 +252,8 @@ class AssetAndDatesCell: UITableViewCell {
             if let workFlowObj = workFlowResp as? LtWorkFlowModel {
                 if workFlowObj.ActionType == "Screen" {
                     mJCLogger.log("assetFunctionLocationButtonAction".localized(), Type: "")
-                    if sender.titleLabel?.text != "" && sender.titleLabel?.text != nil {
-                        woAssetDateModel.overviewAssetFunctionLocationServiceCall(title: (sender.titleLabel?.text)!)
+                    if self.assetFunctionLocationLabel.text != "" && self.assetFunctionLocationLabel.text != nil {
+                        woAssetDateModel.overviewAssetFunctionLocationServiceCall(title: (self.assetFunctionLocationLabel.text)!)
                     }else{
                         mJCLogger.log("Functional_Location_Not_Found".localized(), Type: "Error")
                         mJCAlertHelper.showAlert(woAssetDateModel.vcOverview!, title: MessageTitle, message: "Functional_Location_Not_Found".localized(), button: okay)

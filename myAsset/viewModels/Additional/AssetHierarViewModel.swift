@@ -13,7 +13,7 @@ import ODSFoundation
 
 class AssetHierarViewModel {
     
-    var vc : AssetHierarchyVC!
+    /*var vc : AssetHierarchyVC!
     var nodes: [TreeViewNode] = []
     var data: [TreeViewData] = []
     var AssetHierarchyArray = [AssetHierarchyModel]()
@@ -213,5 +213,5 @@ class AssetHierarViewModel {
                 }
             }
         }
-    }
+    }*/
 }

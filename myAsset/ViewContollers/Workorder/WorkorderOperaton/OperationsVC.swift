@@ -423,40 +423,34 @@ class OperationsVC: UIViewController,UITableViewDataSource,UITableViewDelegate,C
             return totalOperationCountCell
         }
         if tableView == operationTableView {
-            
             if self.operationVCModel.singleOperationArray.count > 0 {
                 let singleOperalClass = self.operationVCModel.singleOperationArray[0]
                 if(indexPath.row == 0) {
-                    let operationOverViewCell = ScreenManager.getOperationOverViewCell(tableView: tableView)
-                    operationOverViewCell.indexPath = indexPath as NSIndexPath
-                    operationOverViewCell.operationClass = singleOperalClass
-                    operationOverViewCell.operationVCModel = operationVCModel
+                    let customerInfoOverViewCell = ScreenManager.getCustomerInfoOverViewCell(tableView: tableView)
+                    customerInfoOverViewCell.indexpath = indexPath as IndexPath
+                    customerInfoOverViewCell.isCellFrom = "OperationDetails"
+                    customerInfoOverViewCell.operationVCModel = operationVCModel
+                    customerInfoOverViewCell.woOverViewCustomerInfoModel = self.oprWorkOrderDetails
                     mJCLogger.log("Ended", Type: "info")
-                    return operationOverViewCell
+                    return customerInfoOverViewCell
                 }else if(indexPath.row == 1) {
-                    let operationDatesCell = ScreenManager.getOperationDatesCell(tableView: tableView)
-                    operationDatesCell.indexPath = indexPath as NSIndexPath
-                    operationDatesCell.operationClass = singleOperalClass
-                    operationDatesCell.operationVCModel = operationVCModel
+                    let assetAndDatesCell = ScreenManager.getAssetAndDatesCell(tableView: tableView)
+                    assetAndDatesCell.indexpath = indexPath
+                    assetAndDatesCell.isCellFrom = "OperationDetails"
+                    assetAndDatesCell.operaionViewModel = operationVCModel
+                    assetAndDatesCell.woOverViewAssetDatesModel = self.oprWorkOrderDetails
                     mJCLogger.log("Ended", Type: "info")
-                    return operationDatesCell
+                    return assetAndDatesCell
                 }else if(indexPath.row == 2) {
-                    let operationAdditionalDataCell = ScreenManager.getOperationAdditionalDataCell(tableView: tableView)
-                    operationAdditionalDataCell.indexPath = indexPath as NSIndexPath
-                    operationAdditionalDataCell.operationClass = singleOperalClass
-                    operationAdditionalDataCell.operationVCModel = operationVCModel
+                    let additionalDataOverViewCell = ScreenManager.getAdditionalDataOverViewCell(tableView: tableView)
+                    additionalDataOverViewCell.personRespArray = operationVCModel.personResponsibleArray as! [PersonResponseModel]
+                    additionalDataOverViewCell.woAdditionalDataModel = self.oprWorkOrderDetails
                     mJCLogger.log("Ended", Type: "info")
-                    return operationAdditionalDataCell
+                    return additionalDataOverViewCell
                 }else if (WORKORDER_ASSIGNMENT_TYPE == "2" || WORKORDER_ASSIGNMENT_TYPE == "4" || WORKORDER_ASSIGNMENT_TYPE == "5") && isfromsup != "Supervisor"{
                     if singleOperalClass.WorkOrderDetailsInfo == true{
                         if(indexPath.row == 3){
-                            let customerInfoOverViewCell = ScreenManager.getCustomerInfoOverViewCell(tableView: tableView)
-                            customerInfoOverViewCell.indexpath = indexPath as IndexPath
-                            customerInfoOverViewCell.isCellFrom = "OperationDetails"
-                            customerInfoOverViewCell.operationVCModel = operationVCModel
-                            customerInfoOverViewCell.woOverViewCustomerInfoModel = self.oprWorkOrderDetails
-                            mJCLogger.log("Ended", Type: "info")
-                            return customerInfoOverViewCell
+                            
                         }else if (indexPath.row == 4){
                             let assetAndDatesCell = ScreenManager.getAssetAndDatesCell(tableView: tableView)
                             assetAndDatesCell.indexpath = indexPath

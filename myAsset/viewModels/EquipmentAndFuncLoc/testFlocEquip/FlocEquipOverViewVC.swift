@@ -93,14 +93,12 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
                 if indexPath.row == 0 {
                     let equipmentCell = ScreenManager.getEquipmentOverViewCell(tableView: tableView)
                     equipmentCell.indexpath = indexPath
-                    //equipmentCell.equipOverviewViewModel = equipmentModel
                     equipmentCell.equipOverviewModelClass = selectedEquip
                     return equipmentCell
                 }else if indexPath.row == 1 {
                     let equipmentAdditionalCell = ScreenManager.getEquipmentAdditionalCell(tableView: tableView)
                     equipmentAdditionalCell.equipAdditionalModelClass = selectedEquip
                     return equipmentAdditionalCell
-                    
                 }else if indexPath.row == 2 {
                     let equipmentWarrantyCell = ScreenManager.getEquipmentWarrantyInfoCell(tableView: tableView)
                     equipmentWarrantyCell.equipWarrantyInfoModelClass = selectedEquip
@@ -111,7 +109,16 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
         return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        if indexPath.row == 0{
+            return 1900
+        }
+        else if indexPath.row == 1{
+            return 1515
+        }
+        else{
+            return 800
+        }
+//        return UITableView.automaticDimension
     }
     //MARK: - Button actions
     @IBAction func installEquipmentButtonAction(_ sender: Any) {

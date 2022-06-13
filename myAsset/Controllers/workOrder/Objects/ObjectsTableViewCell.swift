@@ -77,7 +77,7 @@ class ObjectsTableViewCell: UITableViewCell {
     
     @objc func objectNotificationButtonAction(sender: UIButton!) {
         mJCLogger.log("Starting", Type: "info")
-        woObjectViewModel.vc?.updateUIObjectNotificationButton(tagValue: sender.tag)
+       // woObjectViewModel.vc?.updateUIObjectNotificationButton(tagValue: sender.tag)
         mJCLogger.log("Ended", Type: "info")
     }
 }

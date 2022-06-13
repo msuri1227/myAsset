@@ -44,7 +44,7 @@ class ObjectsVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
         self.objectTableView.estimatedRowHeight = 100.0
         self.objectTableView.separatorStyle = .none
         ScreenManager.registerObjectsTableViewCell(tableView: self.objectTableView)
-        woObjectViewModel.vc = self
+       // woObjectViewModel.vc = self
         self.objectSelected()
         mJCLogger.log("Ended", Type: "info")
     }

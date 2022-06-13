@@ -7,6 +7,9 @@ import ODSFoundation
 import FormsEngine
 import mJCLib
 
+public let SCREEN_MAX_LENGTH   = Int( max(screenWidth, screenHeight) )
+public let SCREEN_MIN_LENGTH   = Int( min(screenWidth, screenHeight) )
+public let IS_IPHONE_XS_MAX    = ((DeviceType == iPhone) && SCREEN_MAX_LENGTH == 812) || ((DeviceType == iPhone) && SCREEN_MAX_LENGTH == 896)
 // app constants
 
 var serverIP = String()
@@ -439,17 +442,17 @@ var supervisorWoSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLi
 var supervisorNoSideMenuArr = ["Home".localized(),"Job_Location".localized(), "Work_Orders".localized(), "Time_Sheet".localized,"Supervisor_View".localized(),"Team".localized(),"Master_Data_Refresh".localized(), "Asset_Map".localized(), "Settings".localized(),"Error_Logs".localized(),"Log_Out".localized()]
 var supervisorNoSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "Joblocation"),#imageLiteral(resourceName: "Notifi"),#imageLiteral(resourceName: "TimeSheetSM"),#imageLiteral(resourceName: "SupervisorView"),#imageLiteral(resourceName: "TeamSupView"),#imageLiteral(resourceName: "MasterDataRefreshSM"),#imageLiteral(resourceName: "AssetMapSM"),#imageLiteral(resourceName: "SettingsSupView"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "LogOutWithDarkTheme")]
 
-var workorderSideMenuArr = ["Home".localized(),"Job_Location".localized(), "Notifications".localized(), "Time_Sheet".localized(), "Master_Data_Refresh".localized(), "Asset_Map".localized(),"Settings".localized(),"Error_Logs".localized(),"Log_Out".localized()]
-var workorderSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "Joblocation"),#imageLiteral(resourceName: "Notifi"),#imageLiteral(resourceName: "TimeSheetSM"),#imageLiteral(resourceName: "MasterDataRefreshSM"),#imageLiteral(resourceName: "AssetMapSM"),#imageLiteral(resourceName: "SettingsSupView"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "LogOutWithDarkTheme")]
+var workorderSideMenuArr = ["Job_Location".localized(),"Master_Data_Refresh".localized(), "Settings".localized(),"Error_Logs".localized(),"Log_Out".localized()]
+var workorderSideMenuImgArr = [#imageLiteral(resourceName: "Joblocation"),#imageLiteral(resourceName: "MasterDataRefreshSM"),#imageLiteral(resourceName: "SettingsSupView"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "LogOutWithDarkTheme")]
 
 var notificationSideMenuArr = ["Home".localized(),"Job_Location".localized(), "Work_Orders".localized(), "Time_Sheet".localized, "Master_Data_Refresh".localized(), "Asset_Map".localized(), "Settings".localized(),"Error_Logs".localized(),"Log_Out".localized()]
 var notificationSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "Joblocation"),#imageLiteral(resourceName: "Notifi"),#imageLiteral(resourceName: "TimeSheetSM"),#imageLiteral(resourceName: "MasterDataRefreshSM"),#imageLiteral(resourceName: "AssetMapSM"),#imageLiteral(resourceName: "SettingsSupView"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "LogOutWithDarkTheme")]
 
-var workorderChildSideMenuArr = ["Home".localized(),"Work_Orders".localized(),"Overview".localized(), "Operations".localized(), "Inspection_Lot".localized(),"Components".localized(), "Attachments".localized(),"Checklists".localized(), "Record_Points".localized(), "Objects".localized(), "History".localized(), "Pending".localized(),"Job_Location".localized()]
-var workorderChildSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "WorkNotSM"),#imageLiteral(resourceName: "OverView"),#imageLiteral(resourceName: "Operations"),#imageLiteral(resourceName: "ic_history_pending"),#imageLiteral(resourceName: "Components"),#imageLiteral(resourceName: "Attachments"),#imageLiteral(resourceName: "Forms"),#imageLiteral(resourceName: "RecordPonits"),#imageLiteral(resourceName: "Objects"),#imageLiteral(resourceName: "History"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "Joblocation")]
+var workorderChildSideMenuArr = ["Overview".localized(), "Assests".localized(), "Attachments".localized(),"Checklists".localized()]
+var workorderChildSideMenuImgArr = [#imageLiteral(resourceName: "OverView"),#imageLiteral(resourceName: "Operations"),#imageLiteral(resourceName: "Attachments"),#imageLiteral(resourceName: "Forms")]
 
-var operationChildSideMenuArr = ["Home".localized(),"Overview".localized(),"Inspection_Lot".localized(),"Components".localized(), "Attachments".localized(), "Checklists".localized(), "Record_Points".localized(), "Objects".localized(), "History".localized(), "Pending".localized(),"Job_Location".localized()]
-var operationChildSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "OverView"),#imageLiteral(resourceName: "ic_history_pending"),#imageLiteral(resourceName: "Components"),#imageLiteral(resourceName: "Attachments"),#imageLiteral(resourceName: "Forms"),#imageLiteral(resourceName: "RecordPonits"),#imageLiteral(resourceName: "Objects"),#imageLiteral(resourceName: "History"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "Joblocation")]
+var operationChildSideMenuArr = ["Overview".localized(),"Attachments".localized(), "Checklists".localized()]
+var operationChildSideMenuImgArr = [#imageLiteral(resourceName: "OverView"),#imageLiteral(resourceName: "Attachments"),#imageLiteral(resourceName: "Forms")]
 
 var notificationChildSideMenuArr = ["Home".localized(),"Overview".localized(), "Items".localized(), "Activities".localized(), "Tasks".localized(), "Attachments".localized(), "History".localized(), "Pending".localized()]
 var notificationChildSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "OverView"), #imageLiteral(resourceName: "ItemsNF"),#imageLiteral(resourceName: "RecordPonits"),#imageLiteral(resourceName: "TasksNF"),#imageLiteral(resourceName: "AttachementsNF"),#imageLiteral(resourceName: "History"),#imageLiteral(resourceName: "PendingNF")]

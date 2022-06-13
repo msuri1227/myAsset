@@ -227,7 +227,7 @@ class MasterViewModel{
                                         for j in 0..<filterArray.count{
                                             let opr = filterArray[j]
                                             opr.OperationNum = operation.OperationNum
-                                            finalReadingpointsArray.append(opr)
+//                                            finalReadingpointsArray.append(opr)
                                         }
                                     }
                                 }

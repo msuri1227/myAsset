@@ -58,7 +58,8 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet var filterTypeButton: UIButton!
     @IBOutlet var filterTypeStackView: UIStackView!
 
-
+    @IBOutlet weak var seachAssestTagBtn: UIButton!
+    
     let menudropDown = DropDown()
     let multiDropDown = DropDown()
     var menuarr = [String]()
@@ -126,12 +127,12 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                 dashBoardArray.remove(at: index)
             }
         }
-        if !applicationFeatureArrayKeys.contains("ASSET_HIERARCHY"){
+        if applicationFeatureArrayKeys.contains("ASSET_HIERARCHY"){
             if let index =  dashBoardArray.firstIndex(of: "ASSET_HIERARCHY"){
                 dashBoardArray.remove(at: index)
             }
         }
-        if !applicationFeatureArrayKeys.contains("DASH_TIMESHEET_TILE"){
+        if applicationFeatureArrayKeys.contains("DASH_TIMESHEET_TILE"){
             if let index =  dashBoardArray.firstIndex(of: "DASH_TIMESHEET_TILE"){
                 dashBoardArray.remove(at: index)
             }
@@ -141,7 +142,7 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                 dashBoardArray.remove(at: index)
             }
         }
-        if !applicationFeatureArrayKeys.contains("DASH_ONLINE_SEARCH_TILE"){
+        if applicationFeatureArrayKeys.contains("DASH_ONLINE_SEARCH_TILE"){
             if let index =  dashBoardArray.firstIndex(of: "DASH_ONLINE_SEARCH_TILE"){
                 dashBoardArray.remove(at: index)
             }
@@ -1755,7 +1756,7 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                 mJCLogger.log("Data not found", Type: "Debug")
             }
         }else if dashBoardArray[indexPath.row] == "ASSET_HIERARCHY"{
-            let assetHierarchyVC = ScreenManager.getAssetHierarchyScreen()
+            let assetHierarchyVC = ScreenManager.getFlocEquipHierarchyScreen()
             assetHierarchyVC.modalPresentationStyle = .fullScreen
             self.present(assetHierarchyVC, animated: false, completion: nil)
         }else if dashBoardArray[indexPath.row] == "DASH_GENERAL_FORM_TILE"{
@@ -1819,6 +1820,10 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     //MARK: - Button Actions..
     
+    @IBAction func seachAssestTagButtonAction(_ sender: Any) {
+        let searchAssetVc = ScreenManager.searchAssestTagScreen()
+        self.present(searchAssetVc, animated: false)
+    }
     @IBAction func refreshButtonAction(_ sender: AnyObject) {
         mJCLogger.log("Starting", Type: "info")
         mJCLoader.startAnimating(status: "Uploading".localized())

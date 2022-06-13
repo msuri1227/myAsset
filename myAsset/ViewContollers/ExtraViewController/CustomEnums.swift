@@ -304,5 +304,5 @@ enum customCell {
     static let functionalLocationOverViewCell = "FunctionalLocationOverViewCell"
     static let functionalLocationAdditionalInfoCell = "FunctionalLocationAdditionalInfoCell"
     static let checkSheetListCell = "CheckSheetListCell"
-
+    static let inspectedCell = "SearchAssetCell"
 }

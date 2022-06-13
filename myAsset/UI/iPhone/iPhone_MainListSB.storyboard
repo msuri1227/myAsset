@@ -19,7 +19,7 @@
         <!--Work Order Over ViewVC-->
         <scene sceneID="Q0K-0X-yzX">
             <objects>
-                <viewController storyboardIdentifier="WorkOrderOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZoW-hA-5Ql" customClass="WorkOrderOverViewVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkOrderOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZoW-hA-5Ql" customClass="WorkOrderOverViewVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="by5-UM-Kx1"/>
                         <viewControllerLayoutGuide type="bottom" id="K4a-Kg-Faa"/>
@@ -72,7 +72,7 @@
         <!--Master List DetailVC-->
         <scene sceneID="8b1-Q0-tGV">
             <objects>
-                <viewController storyboardIdentifier="MasterListDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="p9n-gJ-hbV" customClass="MasterListDetailVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MasterListDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="p9n-gJ-hbV" customClass="MasterListDetailVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vSL-WX-Ovf"/>
                         <viewControllerLayoutGuide type="bottom" id="4Zw-cx-oHS"/>
@@ -81,6 +81,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0E6-gW-XyI">
+                                <rect key="frame" x="0.0" y="862" width="414" height="34"/>
+                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="xqc-UY-qan"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIn-1D-UTT">
                                 <rect key="frame" x="10" y="480" width="394" height="330"/>
                                 <subviews>
@@ -116,7 +123,7 @@
                                             <constraint firstAttribute="height" constant="282" id="ooo-5c-Nrn"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CompleteWorkorderStatusCell" rowHeight="54" id="r68-JL-Rml" customClass="CompleteWorkorderStatusCell" customModule="myJobCard" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CompleteWorkorderStatusCell" rowHeight="54" id="r68-JL-Rml" customClass="CompleteWorkorderStatusCell" customModule="myAsset" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="44.5" width="394" height="54"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r68-JL-Rml" id="7nv-re-nrc">
@@ -247,9 +254,6 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F4s-uy-hgO">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                         <color key="backgroundColor" name="mjcViewUIBorderColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="2ne-XE-z5k"/>
-                                        </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5Ly-c2-KoL">
                                             <size key="itemSize" width="50" height="49"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -257,7 +261,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatusCollectionCell" id="f4V-cj-OBI" customClass="StatusCollectionCell" customModule="myJobCard" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatusCollectionCell" id="f4V-cj-OBI" customClass="StatusCollectionCell" customModule="myAsset" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nEG-QD-D1k">
@@ -319,11 +323,11 @@
                                 </subviews>
                                 <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                                 <constraints>
-                                    <constraint firstItem="F4s-uy-hgO" firstAttribute="top" secondItem="zNj-db-MCZ" secondAttribute="top" id="Jr5-dS-jmg"/>
-                                    <constraint firstAttribute="bottom" secondItem="F4s-uy-hgO" secondAttribute="bottom" id="Jxq-Wk-3Fa"/>
-                                    <constraint firstItem="F4s-uy-hgO" firstAttribute="leading" secondItem="zNj-db-MCZ" secondAttribute="leading" id="mv7-q5-87A"/>
-                                    <constraint firstAttribute="trailing" secondItem="F4s-uy-hgO" secondAttribute="trailing" id="riz-XY-wnt"/>
+                                    <constraint firstAttribute="bottom" secondItem="F4s-uy-hgO" secondAttribute="bottom" id="eMg-aW-HKl"/>
+                                    <constraint firstItem="F4s-uy-hgO" firstAttribute="leading" secondItem="zNj-db-MCZ" secondAttribute="leading" id="fOi-e2-IkC"/>
+                                    <constraint firstAttribute="trailing" secondItem="F4s-uy-hgO" secondAttribute="trailing" id="hh1-k6-sel"/>
                                     <constraint firstAttribute="height" constant="50" id="uQb-Wp-Z1o"/>
+                                    <constraint firstItem="F4s-uy-hgO" firstAttribute="top" secondItem="zNj-db-MCZ" secondAttribute="top" id="y11-Ye-5B0"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -332,9 +336,12 @@
                             <constraint firstAttribute="trailing" secondItem="uIn-1D-UTT" secondAttribute="trailing" constant="10" id="7ck-N0-l7b"/>
                             <constraint firstItem="zNj-db-MCZ" firstAttribute="trailing" secondItem="OyT-VD-pWY" secondAttribute="trailing" id="Ng2-Xz-hqR"/>
                             <constraint firstItem="VGd-lr-YE3" firstAttribute="top" secondItem="vSL-WX-Ovf" secondAttribute="bottom" constant="16" id="PZh-Co-EdI"/>
+                            <constraint firstAttribute="trailing" secondItem="0E6-gW-XyI" secondAttribute="trailing" id="RoN-VK-8Ih"/>
+                            <constraint firstItem="0E6-gW-XyI" firstAttribute="leading" secondItem="OyT-VD-pWY" secondAttribute="leading" id="YMX-Hk-ms9"/>
                             <constraint firstItem="VGd-lr-YE3" firstAttribute="leading" secondItem="OyT-VD-pWY" secondAttribute="leading" id="Z58-hc-taQ"/>
                             <constraint firstItem="VGd-lr-YE3" firstAttribute="trailing" secondItem="OyT-VD-pWY" secondAttribute="trailing" id="Zxq-eQ-1mh"/>
                             <constraint firstItem="uIn-1D-UTT" firstAttribute="leading" secondItem="OyT-VD-pWY" secondAttribute="leading" constant="10" id="Zzq-2m-a8S"/>
+                            <constraint firstAttribute="bottom" secondItem="0E6-gW-XyI" secondAttribute="bottom" id="dI7-TF-1he"/>
                             <constraint firstAttribute="bottom" secondItem="zNj-db-MCZ" secondAttribute="bottom" constant="34" id="gJr-3Z-qkT"/>
                             <constraint firstItem="zNj-db-MCZ" firstAttribute="top" secondItem="VGd-lr-YE3" secondAttribute="bottom" id="mEf-FY-vsK"/>
                             <constraint firstItem="zNj-db-MCZ" firstAttribute="top" secondItem="uIn-1D-UTT" secondAttribute="bottom" constant="2" id="st2-79-swj"/>
@@ -351,19 +358,19 @@
                         <outlet property="pendingTaskView" destination="uIn-1D-UTT" id="aux-bw-TSg"/>
                         <outlet property="selectedBar" destination="uHe-fs-0UT" id="rkt-CP-icW"/>
                         <outlet property="statusView" destination="zNj-db-MCZ" id="tSg-ym-ILI"/>
-                        <outlet property="statusViewBottomConstant" destination="Jxq-Wk-3Fa" id="Nxg-fU-yn8"/>
+                        <outlet property="statusViewBottomConstant" destination="gJr-3Z-qkT" id="J85-s9-C2d"/>
                         <outlet property="statusViewHeightConstant" destination="uQb-Wp-Z1o" id="tdG-Cb-7wU"/>
-                        <outlet property="statusViewTopConstant" destination="Jr5-dS-jmg" id="c3H-qB-exj"/>
+                        <outlet property="statusViewTopConstant" destination="mEf-FY-vsK" id="0bl-r2-bdG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YxP-vn-KGM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8013.6000000000004" y="14851.477832512315"/>
+            <point key="canvasLocation" x="-8014.4927536231889" y="14851.339285714284"/>
         </scene>
         <!--Operation ListVC-->
         <scene sceneID="tr8-11-tZ8">
             <objects>
-                <viewController storyboardIdentifier="OperationListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CLG-je-rBq" customClass="OperationListVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OperationListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CLG-je-rBq" customClass="OperationListVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CpK-FE-fyP"/>
                         <viewControllerLayoutGuide type="bottom" id="JMw-Se-XBy"/>
@@ -478,7 +485,7 @@
         <!--OperationsVC-->
         <scene sceneID="gJh-aj-MCY">
             <objects>
-                <viewController storyboardIdentifier="OperationsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oaz-l2-DFN" customClass="OperationsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OperationsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oaz-l2-DFN" customClass="OperationsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Haf-2J-P9V"/>
                         <viewControllerLayoutGuide type="bottom" id="rqd-bp-l0e"/>
@@ -532,7 +539,7 @@
         <!--Component ListVC-->
         <scene sceneID="s2J-UV-Ruk">
             <objects>
-                <viewController storyboardIdentifier="ComponentListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LlL-MI-UV9" customClass="ComponentListVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComponentListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LlL-MI-UV9" customClass="ComponentListVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eCU-Ik-AYA"/>
                         <viewControllerLayoutGuide type="bottom" id="mRB-EI-hWT"/>
@@ -699,7 +706,7 @@
         <!--Work Order AttachmentVC-->
         <scene sceneID="elK-8h-rda">
             <objects>
-                <viewController storyboardIdentifier="WorkOrderAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KbI-Q4-43W" customClass="WorkOrderAttachmentVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkOrderAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KbI-Q4-43W" customClass="WorkOrderAttachmentVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g8N-NB-vg3"/>
                         <viewControllerLayoutGuide type="bottom" id="D9p-pa-vD3"/>
@@ -1041,7 +1048,7 @@
         <!--Notification AttachmentVC-->
         <scene sceneID="EFi-CC-VNt">
             <objects>
-                <viewController storyboardIdentifier="NotificationAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a3p-44-TQD" customClass="NotificationAttachmentVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a3p-44-TQD" customClass="NotificationAttachmentVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dBg-3K-YcU"/>
                         <viewControllerLayoutGuide type="bottom" id="DOG-tm-e4t"/>
@@ -1389,7 +1396,7 @@
         <!--Check Sheet AssignmentVC-->
         <scene sceneID="Tcy-g5-QIE">
             <objects>
-                <viewController storyboardIdentifier="CheckSheetAssignmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2dY-Fs-f36" customClass="CheckSheetAssignmentVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckSheetAssignmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2dY-Fs-f36" customClass="CheckSheetAssignmentVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oTs-A6-ILi"/>
                         <viewControllerLayoutGuide type="bottom" id="hKe-UL-vB9"/>
@@ -1626,7 +1633,7 @@
         <!--Manage Check SheetVC-->
         <scene sceneID="8kD-4q-OZd">
             <objects>
-                <viewController storyboardIdentifier="ManageCheckSheetVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YIW-6m-vce" customClass="ManageCheckSheetVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ManageCheckSheetVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YIW-6m-vce" customClass="ManageCheckSheetVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Flv-9O-EjN"/>
                         <viewControllerLayoutGuide type="bottom" id="LbQ-b1-pXm"/>
@@ -1789,7 +1796,7 @@
         <!--Filled Check Sheet ListVC-->
         <scene sceneID="xfr-1t-M3H">
             <objects>
-                <viewController storyboardIdentifier="FilledCheckSheetListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3CN-k4-fHu" customClass="FilledCheckSheetListVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilledCheckSheetListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3CN-k4-fHu" customClass="FilledCheckSheetListVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zKn-eF-ptC"/>
                         <viewControllerLayoutGuide type="bottom" id="3iS-OJ-m5g"/>
@@ -1852,7 +1859,7 @@
         <!--Notification Over ViewVC-->
         <scene sceneID="DUb-yn-Cb8">
             <objects>
-                <viewController storyboardIdentifier="NotificationOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="djQ-Kz-fq5" customClass="NotificationOverViewVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="djQ-Kz-fq5" customClass="NotificationOverViewVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3xF-oF-oFl"/>
                         <viewControllerLayoutGuide type="bottom" id="h08-l8-yu0"/>
@@ -1904,7 +1911,7 @@
         <!--Record PointsVC-->
         <scene sceneID="47G-gO-T6d">
             <objects>
-                <viewController storyboardIdentifier="RecordPointsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FOe-gv-HHe" customClass="RecordPointsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordPointsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FOe-gv-HHe" customClass="RecordPointsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UMQ-Oe-UTb"/>
                         <viewControllerLayoutGuide type="bottom" id="9af-oQ-SR1"/>
@@ -2002,7 +2009,7 @@
         <!--ObjectsVC-->
         <scene sceneID="9y5-xC-KnP">
             <objects>
-                <viewController storyboardIdentifier="ObjectsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LID-Gs-miS" customClass="ObjectsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ObjectsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LID-Gs-miS" customClass="ObjectsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="giD-U6-aah"/>
                         <viewControllerLayoutGuide type="bottom" id="aKQ-Bu-RQZ"/>
@@ -2088,7 +2095,7 @@
         <!--History And PendingVC-->
         <scene sceneID="m5F-as-bY5">
             <objects>
-                <viewController storyboardIdentifier="HistoryAndPendingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wqu-0K-dgC" customClass="HistoryAndPendingVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryAndPendingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wqu-0K-dgC" customClass="HistoryAndPendingVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bcu-1C-Cme"/>
                         <viewControllerLayoutGuide type="bottom" id="0i7-1S-XC1"/>
@@ -2171,7 +2178,7 @@
         <!--Check Sheet ViewerVC-->
         <scene sceneID="LTv-oc-enP">
             <objects>
-                <viewController storyboardIdentifier="CheckSheetViewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hZy-S6-cYX" customClass="CheckSheetViewerVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckSheetViewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hZy-S6-cYX" customClass="CheckSheetViewerVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BsU-H9-8LV"/>
                         <viewControllerLayoutGuide type="bottom" id="fRl-8Y-nCC"/>
@@ -2243,7 +2250,7 @@
         <!--Notification ItemVC-->
         <scene sceneID="Rxg-Jb-cml">
             <objects>
-                <viewController storyboardIdentifier="NotificationItemVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bYx-cZ-MLa" customClass="NotificationItemVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationItemVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bYx-cZ-MLa" customClass="NotificationItemVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="P0I-qB-eaX"/>
                         <viewControllerLayoutGuide type="bottom" id="glM-f1-puc"/>
@@ -2310,7 +2317,7 @@
         <!--Notification ActivityVC-->
         <scene sceneID="vmV-d0-fcN">
             <objects>
-                <viewController storyboardIdentifier="NotificationActivityVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Igh-au-KFV" customClass="NotificationActivityVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationActivityVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Igh-au-KFV" customClass="NotificationActivityVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kbb-TU-7I3"/>
                         <viewControllerLayoutGuide type="bottom" id="Hyz-h6-tYk"/>
@@ -2410,7 +2417,7 @@
         <!--Notification TaskVC-->
         <scene sceneID="OCX-3Y-zMk">
             <objects>
-                <viewController storyboardIdentifier="NotificationTaskVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zJH-YB-oOg" customClass="NotificationTaskVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationTaskVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zJH-YB-oOg" customClass="NotificationTaskVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sku-xe-LFF"/>
                         <viewControllerLayoutGuide type="bottom" id="5DS-kz-0Jq"/>
@@ -2469,7 +2476,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatusCollectionCell" id="oGb-0B-vST" customClass="StatusCollectionCell" customModule="myJobCard" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatusCollectionCell" id="oGb-0B-vST" customClass="StatusCollectionCell" customModule="myAsset" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="K4e-2a-DmZ">
@@ -2600,7 +2607,7 @@
         <!--Upload Attachment LowVC-->
         <scene sceneID="HEy-Pv-Rqg">
             <objects>
-                <viewController storyboardIdentifier="UploadAttachmentLowVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Fg-pk-bKa" customClass="UploadAttachmentLowVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UploadAttachmentLowVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Fg-pk-bKa" customClass="UploadAttachmentLowVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qwn-Jw-s8G"/>
                         <viewControllerLayoutGuide type="bottom" id="AYR-zF-5zo"/>
@@ -2898,7 +2905,7 @@
         <!--ComponentsVC-->
         <scene sceneID="dzC-kB-UTy">
             <objects>
-                <viewController storyboardIdentifier="ComponentsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hvm-Op-Deg" customClass="ComponentsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComponentsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hvm-Op-Deg" customClass="ComponentsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Djj-zv-SBM"/>
                         <viewControllerLayoutGuide type="bottom" id="EYD-34-12E"/>
@@ -2951,7 +2958,7 @@
         <!--Online Work Order Over ViewVC-->
         <scene sceneID="6TU-TP-DaD">
             <objects>
-                <viewController storyboardIdentifier="OnlineWorkOrderOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Lph-7e-UES" customClass="OnlineWorkOrderOverViewVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnlineWorkOrderOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Lph-7e-UES" customClass="OnlineWorkOrderOverViewVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="izG-R4-nAu"/>
                         <viewControllerLayoutGuide type="bottom" id="25Q-En-wCG"/>
@@ -3038,7 +3045,7 @@
         <!--Online Notification Over ViewVC-->
         <scene sceneID="GRK-rJ-qoG">
             <objects>
-                <viewController storyboardIdentifier="OnlineNotificationOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kj4-P1-hIq" customClass="OnlineNotificationOverViewVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnlineNotificationOverViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kj4-P1-hIq" customClass="OnlineNotificationOverViewVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QJg-PS-1Ej"/>
                         <viewControllerLayoutGuide type="bottom" id="xvf-ZH-9bJ"/>
@@ -3113,7 +3120,7 @@
         <!--Online Item OprVC-->
         <scene sceneID="xue-Gt-KXC">
             <objects>
-                <viewController storyboardIdentifier="OnlineItemOprVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y5w-kT-In5" customClass="OnlineItemOprVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnlineItemOprVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y5w-kT-In5" customClass="OnlineItemOprVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kUg-UA-ryg"/>
                         <viewControllerLayoutGuide type="bottom" id="1Y7-JW-2zM"/>
@@ -3211,7 +3218,7 @@
         <!--Notification MainVC-->
         <scene sceneID="qCY-lS-b3T">
             <objects>
-                <viewController storyboardIdentifier="NotificationMainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xRd-27-RDu" customClass="NotificationMainVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationMainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xRd-27-RDu" customClass="NotificationMainVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rDW-jN-nET"/>
                         <viewControllerLayoutGuide type="bottom" id="Psj-fX-uhF"/>
@@ -3244,7 +3251,7 @@
         <!--Notification Item List-->
         <scene sceneID="0oR-TY-8fK">
             <objects>
-                <viewController storyboardIdentifier="NotificationItemList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lcz-6L-YSQ" customClass="NotificationItemList" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationItemList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lcz-6L-YSQ" customClass="NotificationItemList" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B3n-6F-dYY"/>
                         <viewControllerLayoutGuide type="bottom" id="Fao-yn-zeA"/>
@@ -3286,7 +3293,7 @@
                                 <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" name="mjcViewBgColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationActivityCell" rowHeight="71" id="r7B-pl-t5g" customClass="NotificationActivityCell" customModule="myJobCard" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationActivityCell" rowHeight="71" id="r7B-pl-t5g" customClass="NotificationActivityCell" customModule="myAsset" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r7B-pl-t5g" id="f0Y-a1-Fwz">
@@ -3398,7 +3405,7 @@
         <!--Work Order HoldVC-->
         <scene sceneID="9qd-ZG-Isr">
             <objects>
-                <viewController storyboardIdentifier="WorkOrderHoldVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wDn-dm-Jyy" customClass="WorkOrderHoldVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkOrderHoldVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wDn-dm-Jyy" customClass="WorkOrderHoldVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XQz-W7-Jg0"/>
                         <viewControllerLayoutGuide type="bottom" id="Kmy-rn-gss"/>
@@ -3667,7 +3674,7 @@
         <!--Work Order SuspendVC-->
         <scene sceneID="GdR-iK-D6t">
             <objects>
-                <viewController storyboardIdentifier="WorkOrderSuspendVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AJ9-DR-z8t" customClass="WorkOrderSuspendVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkOrderSuspendVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AJ9-DR-z8t" customClass="WorkOrderSuspendVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="86L-8w-hxV"/>
                         <viewControllerLayoutGuide type="bottom" id="XZi-5h-OdJ"/>
@@ -3766,7 +3773,7 @@
         <!--Notes CaptureVC-->
         <scene sceneID="274-Il-WS8">
             <objects>
-                <viewController storyboardIdentifier="NotesCaptureVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DO8-GK-Ou3" customClass="NotesCaptureVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotesCaptureVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DO8-GK-Ou3" customClass="NotesCaptureVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YFD-6q-2Sd"/>
                         <viewControllerLayoutGuide type="bottom" id="dV9-Dl-Orh"/>
@@ -3797,7 +3804,7 @@
                                                 <rect key="frame" x="0.0" y="30" width="394" height="215"/>
                                                 <color key="backgroundColor" name="mjcViewBgColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoteListTableViewCell" id="XJL-l6-dZl" customClass="NoteListTableViewCell" customModule="myJobCard" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoteListTableViewCell" id="XJL-l6-dZl" customClass="NoteListTableViewCell" customModule="myAsset" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="44.5" width="394" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XJL-l6-dZl" id="300-8K-Ef1">
@@ -4057,7 +4064,7 @@
         <!--Signature CaptureVC-->
         <scene sceneID="6ho-Xf-21f">
             <objects>
-                <viewController storyboardIdentifier="SignatureCaptureVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="26A-Kt-XYa" customClass="SignatureCaptureVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignatureCaptureVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="26A-Kt-XYa" customClass="SignatureCaptureVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wa2-9i-W9C"/>
                         <viewControllerLayoutGuide type="bottom" id="sOS-qe-m2A"/>
@@ -4290,7 +4297,7 @@
         <!--Attachment ViewerVC-->
         <scene sceneID="guJ-aw-Zqv">
             <objects>
-                <viewController storyboardIdentifier="AttachmentViewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KNB-4t-hC3" customClass="AttachmentViewerVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AttachmentViewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KNB-4t-hC3" customClass="AttachmentViewerVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9uj-oE-p3B"/>
                         <viewControllerLayoutGuide type="bottom" id="MXc-er-VTN"/>
@@ -4376,7 +4383,7 @@
         <!--Notification Item MainVC-->
         <scene sceneID="JX9-gX-Tcs">
             <objects>
-                <viewController storyboardIdentifier="NotificationItemMainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FEj-oQ-NW9" customClass="NotificationItemMainVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationItemMainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FEj-oQ-NW9" customClass="NotificationItemMainVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wz4-61-wGd"/>
                         <viewControllerLayoutGuide type="bottom" id="CXq-tj-WT7"/>
@@ -4409,7 +4416,7 @@
         <!--Time SheetVC-->
         <scene sceneID="adR-Eq-YAA">
             <objects>
-                <viewController storyboardIdentifier="TimeSheetVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4SC-OZ-9Li" customClass="TimeSheetVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimeSheetVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4SC-OZ-9Li" customClass="TimeSheetVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wtf-kh-Qp6"/>
                         <viewControllerLayoutGuide type="bottom" id="s4F-KX-eIP"/>
@@ -4616,7 +4623,7 @@
         <!--Notification History And PendingVC-->
         <scene sceneID="dzy-FK-XxN">
             <objects>
-                <viewController storyboardIdentifier="NotificationHistoryAndPendingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j6Z-Ba-3As" customClass="NotificationHistoryAndPendingVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationHistoryAndPendingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j6Z-Ba-3As" customClass="NotificationHistoryAndPendingVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IHb-3M-JSM"/>
                         <viewControllerLayoutGuide type="bottom" id="3Ne-RM-w4l"/>
@@ -4692,7 +4699,7 @@
         <!--Notification Item CausesVC-->
         <scene sceneID="Q3o-R1-4fi">
             <objects>
-                <viewController storyboardIdentifier="NotificationItemCausesVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LIg-Fe-50R" customClass="NotificationItemCausesVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationItemCausesVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LIg-Fe-50R" customClass="NotificationItemCausesVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hiY-Cz-EVc"/>
                         <viewControllerLayoutGuide type="bottom" id="GSm-No-UlH"/>
@@ -4793,7 +4800,7 @@
         <!--General Check Sheet ListVC-->
         <scene sceneID="jB9-VO-ofn">
             <objects>
-                <viewController storyboardIdentifier="GeneralCheckSheetListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ovq-qQ-mIt" customClass="GeneralCheckSheetListVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GeneralCheckSheetListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ovq-qQ-mIt" customClass="GeneralCheckSheetListVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BzD-Cs-JDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="8zn-jZ-l9d"/>
@@ -5067,7 +5074,7 @@
         <!--ViewerVC-->
         <scene sceneID="Jdw-9H-WQf">
             <objects>
-                <viewController storyboardIdentifier="PDFViewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UOU-Wq-bC4" customClass="PDFViewerVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PDFViewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UOU-Wq-bC4" customClass="PDFViewerVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ks6-71-7FR"/>
                         <viewControllerLayoutGuide type="bottom" id="V3q-Jp-jIX"/>
@@ -5146,7 +5153,7 @@
         <!--History And Pending Opr ListVC-->
         <scene sceneID="OfO-9Z-4qe">
             <objects>
-                <viewController storyboardIdentifier="HistoryAndPendingOprListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tTu-T3-Q36" customClass="HistoryAndPendingOprListVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryAndPendingOprListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tTu-T3-Q36" customClass="HistoryAndPendingOprListVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a3x-M5-U4p"/>
                         <viewControllerLayoutGuide type="bottom" id="dqd-w5-NpF"/>
@@ -5188,7 +5195,7 @@
                                 <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryAndPendingOperationCell_iPhone" rowHeight="80" id="KhL-ct-fDe" userLabel="HistoryAndPendingOperationCell" customClass="HistoryAndPendingOperationCell" customModule="myJobCard" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryAndPendingOperationCell_iPhone" rowHeight="80" id="KhL-ct-fDe" userLabel="HistoryAndPendingOperationCell" customClass="HistoryAndPendingOperationCell" customModule="myAsset" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KhL-ct-fDe" id="Emr-fI-8CQ">
@@ -5317,7 +5324,7 @@
         <!--History And Pending Opr DetailsVC-->
         <scene sceneID="LkR-3z-AVy">
             <objects>
-                <viewController storyboardIdentifier="HistoryAndPendingOprDetailsVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zhz-9u-BxT" customClass="HistoryAndPendingOprDetailsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryAndPendingOprDetailsVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zhz-9u-BxT" customClass="HistoryAndPendingOprDetailsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="01g-Dt-qxg"/>
                         <viewControllerLayoutGuide type="bottom" id="xQO-Da-XEi"/>
@@ -5381,7 +5388,7 @@
                                 <rect key="frame" x="0.0" y="364" width="414" height="498"/>
                                 <color key="backgroundColor" name="mjcViewBgColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryAndPendingLongTextCell" rowHeight="50" id="r1f-Ag-BOv" userLabel="HistoryAndPendingLongTextCell" customClass="NoteListTableViewCell" customModule="myJobCard" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryAndPendingLongTextCell" rowHeight="50" id="r1f-Ag-BOv" userLabel="HistoryAndPendingLongTextCell" customClass="NoteListTableViewCell" customModule="myAsset" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r1f-Ag-BOv" id="bEY-fk-qhw">
@@ -5457,7 +5464,7 @@
         <!--Upload AttachmentVC-->
         <scene sceneID="VeN-Ll-cfR">
             <objects>
-                <viewController storyboardIdentifier="UploadAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Jt-mi-50W" customClass="UploadAttachmentVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UploadAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Jt-mi-50W" customClass="UploadAttachmentVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8bN-th-pUc"/>
                         <viewControllerLayoutGuide type="bottom" id="29K-lN-2rG"/>
@@ -5843,7 +5850,7 @@
         <!--Flush ErrorsVC-->
         <scene sceneID="cAo-1d-9DT">
             <objects>
-                <viewController storyboardIdentifier="FlushErrorsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dve-AY-LOJ" customClass="FlushErrorsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FlushErrorsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dve-AY-LOJ" customClass="FlushErrorsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r2K-Nl-gfP"/>
                         <viewControllerLayoutGuide type="bottom" id="J8F-hT-9SI"/>
@@ -5927,7 +5934,7 @@
                                 <rect key="frame" x="0.0" y="94" width="414" height="718"/>
                                 <color key="backgroundColor" name="mjcSubViewColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FlushErrorTableViewCell" rowHeight="122" id="8Ji-JK-hR3" customClass="FlushErrorTableViewCell" customModule="myJobCard" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FlushErrorTableViewCell" rowHeight="122" id="8Ji-JK-hR3" customClass="FlushErrorTableViewCell" customModule="myAsset" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="122"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Ji-JK-hR3" id="UHw-3V-h7L">
@@ -6181,7 +6188,7 @@
         <!--Inspection OperationsVC-->
         <scene sceneID="45l-aJ-squ">
             <objects>
-                <viewController storyboardIdentifier="InspectionOperationsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VaI-HL-lWs" customClass="InspectionOperationsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InspectionOperationsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VaI-HL-lWs" customClass="InspectionOperationsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r0u-Rx-z8F"/>
                         <viewControllerLayoutGuide type="bottom" id="r3m-f2-KJQ"/>
@@ -6287,7 +6294,7 @@
         <!--InspectionsVC-->
         <scene sceneID="TTJ-WV-PXe">
             <objects>
-                <viewController storyboardIdentifier="InspectionsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nCo-mc-AmN" customClass="InspectionsVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InspectionsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nCo-mc-AmN" customClass="InspectionsVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eD8-6S-zOr"/>
                         <viewControllerLayoutGuide type="bottom" id="opY-QC-fw1"/>
@@ -6556,7 +6563,7 @@
         <!--MasterListVC-->
         <scene sceneID="A3D-rb-l9o">
             <objects>
-                <viewController storyboardIdentifier="MasterListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vcl-l3-zQi" userLabel="MasterListVC" customClass="MasterListVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MasterListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vcl-l3-zQi" userLabel="MasterListVC" customClass="MasterListVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tjM-Fj-yKk"/>
                         <viewControllerLayoutGuide type="bottom" id="ha6-Jw-8HS"/>
@@ -6834,7 +6841,7 @@
         <!--Chat View Controller-->
         <scene sceneID="zJH-5H-RvN">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HSG-ZH-lci" customClass="ChatViewController" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HSG-ZH-lci" customClass="ChatViewController" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uFe-FZ-1Jw"/>
                         <viewControllerLayoutGuide type="bottom" id="dB1-OR-YAE"/>
@@ -6923,7 +6930,7 @@
         <!--Notification Main TaskVC-->
         <scene sceneID="0Ev-3L-Upc">
             <objects>
-                <viewController storyboardIdentifier="NotificationMainTaskVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qSi-Ii-KwJ" customClass="NotificationMainTaskVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationMainTaskVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qSi-Ii-KwJ" customClass="NotificationMainTaskVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dph-x8-hZm"/>
                         <viewControllerLayoutGuide type="bottom" id="yeP-7w-e7R"/>
@@ -6956,7 +6963,7 @@
         <!--Capacity AssignmentVC-->
         <scene sceneID="kdF-sm-adf">
             <objects>
-                <viewController storyboardIdentifier="CapacityAssignmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9tp-nh-maX" customClass="CapacityAssignmentVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CapacityAssignmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9tp-nh-maX" customClass="CapacityAssignmentVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="H8Z-Xo-f9f"/>
                         <viewControllerLayoutGuide type="bottom" id="7T3-9d-jUI"/>
@@ -7061,7 +7068,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3J-nh-xPl">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiq-94-CQx" customClass="TileView" customModule="myJobCard" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiq-94-CQx" customClass="TileView" customModule="myAsset" customModuleProvider="target">
                                         <rect key="frame" x="20" y="224" width="374" height="370"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVi-4z-j3m">
@@ -7472,7 +7479,7 @@
         <!--Form ApprovalVC-->
         <scene sceneID="qad-hv-GVi">
             <objects>
-                <viewController storyboardIdentifier="FormApprovalVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Aj-k2-k5n" customClass="FormApprovalVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FormApprovalVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Aj-k2-k5n" customClass="FormApprovalVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U3e-7y-rMT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7578,7 +7585,7 @@
                                                 </connections>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfn-pK-28L">
-                                                <rect key="frame" x="186.5" y="312" width="41.5" height="50"/>
+                                                <rect key="frame" x="186.5" y="312" width="41" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="W34-dm-9FU"/>
                                                 </constraints>
@@ -7644,7 +7651,7 @@
         <!--Form Approval StatusVC-->
         <scene sceneID="SYI-gc-IaZ">
             <objects>
-                <viewController storyboardIdentifier="FormApprovalStatusVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DcC-lq-uNa" customClass="FormApprovalStatusVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FormApprovalStatusVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DcC-lq-uNa" customClass="FormApprovalStatusVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l23-0H-8sl"/>
                         <viewControllerLayoutGuide type="bottom" id="Xc8-R8-P5p"/>
@@ -7780,7 +7787,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMK-Au-qxV" userLabel="auditlogdataLabel">
-                                                <rect key="frame" x="176.5" y="349" width="41.5" height="50"/>
+                                                <rect key="frame" x="176.5" y="349" width="41" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="bVJ-fD-S9w"/>
                                                 </constraints>
@@ -7849,7 +7856,7 @@
         <!--Multiple Inspection Result CaptureVC-->
         <scene sceneID="qdX-LV-ivf">
             <objects>
-                <viewController storyboardIdentifier="MultipleInspectionResultCaptureVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NvV-T1-UeI" customClass="MultipleInspectionResultCaptureVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MultipleInspectionResultCaptureVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NvV-T1-UeI" customClass="MultipleInspectionResultCaptureVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mNc-DK-1KR"/>
                         <viewControllerLayoutGuide type="bottom" id="nOc-AE-nUH"/>
@@ -7870,7 +7877,7 @@
                                         </connections>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBc-Te-FyL">
-                                        <rect key="frame" x="186.5" y="359" width="41.5" height="50"/>
+                                        <rect key="frame" x="186.5" y="359" width="41" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Zkn-OX-5QB"/>
                                         </constraints>
@@ -7997,7 +8004,7 @@
         <!--ReviewerVC-->
         <scene sceneID="7ks-pv-gxn">
             <objects>
-                <viewController storyboardIdentifier="ReviewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m9H-tb-QeS" customClass="ReviewerVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m9H-tb-QeS" customClass="ReviewerVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rSb-KL-gb2"/>
                         <viewControllerLayoutGuide type="bottom" id="AKg-17-Ook"/>
@@ -8446,7 +8453,7 @@
         <!--Check Sheet ListVC-->
         <scene sceneID="E7D-FB-upe">
             <objects>
-                <viewController storyboardIdentifier="CheckSheetListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tOm-iu-UqV" customClass="CheckSheetListVC" customModule="myJobCard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckSheetListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tOm-iu-UqV" customClass="CheckSheetListVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u4G-Cd-8WW"/>
                         <viewControllerLayoutGuide type="bottom" id="onR-kc-oBk"/>
