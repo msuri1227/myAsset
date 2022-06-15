@@ -9,6 +9,7 @@
 import UIKit
 import ODSFoundation
 import mJCLib
+import PDFKit
 
 class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate {
     
@@ -65,7 +66,31 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     }
     
     @IBAction func printTagButtonAction(_ sender: Any) {
-        print("mk")
+        if selectedArr.count == 1{
+            let selecetedObj = selectedArr[0]
+            let img = PrintHelper.createQRCodeView(asseID: "\(selecetedObj.Asset)", assetDesc: "\(selecetedObj.EquipDescription)")
+            PrintHelper.printQrCode(document: img, assetId: "\(selecetedObj.Asset)")
+        }else if selectedArr.count > 1{
+            var imgArr = [UIImage]()
+            for item in selectedArr{
+                let img = PrintHelper.createQRCodeView(asseID: "\(item.Asset)", assetDesc: "\(item.EquipDescription)")
+                imgArr.append(img)
+            }
+            let pdfDocument = PDFDocument()
+            for i in 0 ..< imgArr.count {
+                let pdfPage = PDFPage(image: imgArr[i])
+                pdfDocument.insert(pdfPage!, at: i)
+            }
+            let data = pdfDocument.dataRepresentation()
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let docURL = documentDirectory.appendingPathComponent("assetDetails.pdf")
+            do{
+                try data?.write(to: docURL)
+            }catch(let error){
+                print("error is \(error.localizedDescription)")
+            }
+            PrintHelper.printQrCode(document: docURL, assetId: "assetDetails")
+        }
     }
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
