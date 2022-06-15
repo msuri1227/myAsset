@@ -4542,6 +4542,82 @@
             </objects>
             <point key="canvasLocation" x="-10842.028985507248" y="14112.723214285714"/>
         </scene>
+        <!--Asset LocationVC-->
+        <scene sceneID="IXK-N1-DXb">
+            <objects>
+                <viewController storyboardIdentifier="AssetLocationVC" modalPresentationStyle="fullScreen" id="XCD-m2-Hqf" customClass="AssetLocationVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jEi-97-7PC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bri-bn-Lbr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asset Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOb-ge-TId">
+                                        <rect key="frame" x="55" y="0.0" width="127" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="YGe-Y1-cEx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="BzA-wA-cBB"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evi-PE-YAE">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="55" id="35s-1X-rSM"/>
+                                            <constraint firstAttribute="height" constant="50" id="uXy-sx-Win"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <state key="normal" image="backButton">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backBtnAction:" destination="uTM-fW-axT" eventType="touchUpInside" id="Lr6-1g-gtT"/>
+                                            <action selector="backButtonAction:" destination="XCD-m2-Hqf" eventType="touchUpInside" id="uLS-FX-H7C"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                                <constraints>
+                                    <constraint firstItem="evi-PE-YAE" firstAttribute="top" secondItem="Bri-bn-Lbr" secondAttribute="top" id="0A4-N4-eya"/>
+                                    <constraint firstItem="kOb-ge-TId" firstAttribute="leading" secondItem="evi-PE-YAE" secondAttribute="trailing" id="LnE-JO-UTB"/>
+                                    <constraint firstItem="kOb-ge-TId" firstAttribute="leading" secondItem="evi-PE-YAE" secondAttribute="trailing" id="Pph-8V-rhw"/>
+                                    <constraint firstAttribute="height" constant="50" id="Qic-TR-zfj"/>
+                                    <constraint firstItem="kOb-ge-TId" firstAttribute="top" secondItem="Bri-bn-Lbr" secondAttribute="top" id="Wn8-wQ-JgZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="kOb-ge-TId" secondAttribute="bottom" id="Y76-EM-5yL"/>
+                                    <constraint firstItem="evi-PE-YAE" firstAttribute="leading" secondItem="Bri-bn-Lbr" secondAttribute="leading" id="sYc-Po-EYG"/>
+                                    <constraint firstAttribute="bottom" secondItem="evi-PE-YAE" secondAttribute="bottom" id="xjE-Uj-GDg"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hd-vl-VNj" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <color key="backgroundColor" name="mjcViewBgColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pE6-08-5qP"/>
+                        <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                        <constraints>
+                            <constraint firstItem="Bri-bn-Lbr" firstAttribute="trailing" secondItem="pE6-08-5qP" secondAttribute="trailing" id="2jC-m3-uIy"/>
+                            <constraint firstItem="2hd-vl-VNj" firstAttribute="leading" secondItem="pE6-08-5qP" secondAttribute="leading" id="9Hc-eW-lYl"/>
+                            <constraint firstItem="Bri-bn-Lbr" firstAttribute="leading" secondItem="pE6-08-5qP" secondAttribute="leading" id="WIV-ZM-Sl6"/>
+                            <constraint firstItem="2hd-vl-VNj" firstAttribute="top" secondItem="Bri-bn-Lbr" secondAttribute="bottom" id="eo2-XO-he8"/>
+                            <constraint firstItem="pE6-08-5qP" firstAttribute="bottom" secondItem="2hd-vl-VNj" secondAttribute="bottom" id="qPi-CI-25V"/>
+                            <constraint firstItem="2hd-vl-VNj" firstAttribute="trailing" secondItem="pE6-08-5qP" secondAttribute="trailing" id="qfM-uB-nAh"/>
+                            <constraint firstItem="Bri-bn-Lbr" firstAttribute="top" secondItem="pE6-08-5qP" secondAttribute="top" id="x72-R0-4e2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="googleMapsView" destination="2hd-vl-VNj" id="5ca-FT-egy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CYc-0T-smm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10142" y="14802"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ActiveOrder" width="30" height="30"/>

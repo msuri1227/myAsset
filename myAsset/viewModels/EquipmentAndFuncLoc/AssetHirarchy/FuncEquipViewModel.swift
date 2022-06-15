@@ -434,4 +434,42 @@ class FuncEquipViewModel {
         }
         mJCLogger.log("Ended", Type: "info")
     }
+    func getFunctionLocationList(){
+        FunctionalLocationModel.getFuncLocationList(){ (responseDict, error)  in
+            if error == nil{
+                self.FuncEquipArray.removeAll()
+                if let arr = responseDict["data"] as? [FunctionalLocationModel]{
+                    if arr.count > 0{
+                        mJCLoader.stopAnimating()
+                        self.FuncEquipArray = arr
+                        DispatchQueue.main.async {
+                            self.funcEquipVc.HierarchyTable.isHidden = true
+                            self.funcEquipVc.listItemTableview.isHidden = false
+                            self.funcEquipVc.detaisTitleView.isHidden = false
+                            self.funcEquipVc.detailsTitleViewHightConstant.constant = 50.0
+                            self.funcEquipVc.listItemTableview.reloadData()
+                        }
+                    }else{
+                        mJCLoader.stopAnimating()
+                        DispatchQueue.main.async{
+                            mJCAlertHelper.showAlert(self.funcEquipVc, title: MessageTitle, message: "Functional_location_not_found".localized(), button: okay)
+                        }
+                    }
+                }else{
+                    mJCLoader.stopAnimating()
+                    DispatchQueue.main.async{
+                        mJCAlertHelper.showAlert(self.funcEquipVc, title: MessageTitle, message: "Functional_location_not_found".localized(), button: okay)
+                    }
+                }
+            }else{
+                DispatchQueue.main.async{
+                    mJCLoader.stopAnimating()
+                    if error?.code == 10{
+                        mJCAlertHelper.showAlert(self.funcEquipVc, title: alerttitle, message: "Store_not_found_to_fetch_the_data".localized(), button: okay)
+                    }
+                }
+                mJCLogger.log(" Reason : \(String(describing: error?.localizedDescription))", Type: "Error")
+            }
+        }
+    }
 }

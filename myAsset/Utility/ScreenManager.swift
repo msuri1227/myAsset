@@ -455,7 +455,6 @@ class ScreenManager: NSObject {
             return UploadAttachmentVC.instantiate(fromAppStoryboard: .iPhone_MainListSB)
         }
     }
-    
     static func searchAssestTagScreen() -> SearchAssestVC{
         if DeviceType == iPad{
             return SearchAssestVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
@@ -475,6 +474,13 @@ class ScreenManager: NSObject {
             return AssetDetailsVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
         }else{
             return AssetDetailsVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
+        }
+    }
+    static func getAssetLocationScreen() -> AssetLocationVC{
+        if DeviceType == iPad{
+            return AssetLocationVC.instantiate(fromAppStoryboard: .iPad_LoginSB)
+        }else{
+            return AssetLocationVC.instantiate(fromAppStoryboard: .iPhone_LoginSB)
         }
     }
 

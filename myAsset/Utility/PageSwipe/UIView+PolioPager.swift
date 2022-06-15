@@ -12,4 +12,11 @@ internal extension UIView {
     var allSubviews: [UIView] {
         return subviews + subviews.flatMap { $0.allSubviews }
     }
+    func toImage() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
 }

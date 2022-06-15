@@ -641,14 +641,35 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     }
                     else if item == "Assets Location".localized(){
                         ASSETMAP_TYPE = "ESRIMAP"
-                        assetmapVC.openmappage(id: "")
-//                        currentMasterView = "MapDetailsViewController"
-//                        selectedworkOrderNumber = ""
-//                        selectedNotificationNumber = ""
-//                        ASSETMAP_TYPE = ""
-//                        let mapSplitVC = ScreenManager.getMapDeatilsScreen()
-//                        self.appDeli.window?.rootViewController = mapSplitVC
-//                        self.appDeli.window?.makeKeyAndVisible()
+                        let assetLocVc = ScreenManager.getAssetLocationScreen()
+                        if assetDetailsVC!.selectedAssetListArr.count > 0{
+                            var locArr = [Dictionary<String,Any>]()
+//                            for item in assetDetailsVC!.selectedAssetListArr{
+//                                locString =  "x:17.429623,y:78.446297"
+//                            }
+                            var dict = Dictionary<String,Any>()
+                            dict["AssetID"] = "10000"
+                            dict["AssetDesc"] = "10000 Description"
+                            dict["AssetLat"] = "17.429623"
+                            dict["AssetLong"] = "78.446297"
+                            
+                            locArr.append(dict)
+                            dict["AssetID"] = "10001"
+                            dict["AssetDesc"] = "10001 Description"
+                            dict["AssetLat"] = "17.429766"
+                            dict["AssetLong"] = "78.445256"
+                            locArr.append(dict)
+                            dict["AssetID"] = "10002"
+                            dict["AssetDesc"] = "10002 Description"
+                            dict["AssetLat"] = "17.431097"
+                            dict["AssetLong"] = "78.444870"
+                            locArr.append(dict)
+                            assetLocVc.locations = locArr
+                            assetDetailsVC?.present(assetLocVc, animated: false)
+                        }else{
+                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                        }
+
                     }
                 }else if currentMasterView == "Notification"{
                     if item == "Create_Work_Order".localized(){

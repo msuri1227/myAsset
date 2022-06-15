@@ -55,7 +55,7 @@ class FlocEquipHierarchyVC: UIViewController , UITableViewDelegate,UITableViewDa
     let treeViewCellIdentifier = "HierarchyTreeViewCell"
     let treeViewCellNibName = "HierarchyTreeViewCell"
     //MARK:- LifeCycle.
-
+    var hirechy = false
     override func viewDidLoad() {
         super.viewDidLoad()
         mJCLogger.log("Starting", Type: "info")
@@ -73,7 +73,11 @@ class FlocEquipHierarchyVC: UIViewController , UITableViewDelegate,UITableViewDa
         }else if self.isSelect == "Equipement" {
             self.searchTextfield.placeholder = "Search_Equipment".localized()
         }
-        funcEquipViewModel.getRootLevelNodesForAssetHierarchy()
+        if hirechy == true{
+            funcEquipViewModel.getRootLevelNodesForAssetHierarchy()
+        }else{
+            funcEquipViewModel.getFunctionLocationList()
+        }
         HierarchyTable.collapseNoneSelectedRows = false
         HierarchyTable.treeViewDelegate = self
         HierarchyTable.register(UINib(nibName: treeViewCellNibName, bundle: nil), forCellReuseIdentifier: treeViewCellIdentifier)

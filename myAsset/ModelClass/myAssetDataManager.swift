@@ -2630,6 +2630,17 @@ extension UIImage {
         }
         self.init(ciImage: ciImage)
     }
+    convenience init?(qrCode: String) {
+        let data = qrCode.data(using: .ascii)
+        guard let filter = CIFilter(name: "CIQRCodeGenerator") else {
+            return nil
+        }
+        filter.setValue(data, forKey: "inputMessage")
+        guard let ciImage = filter.outputImage else {
+            return nil
+        }
+        self.init(ciImage: ciImage)
+    }
 }
 extension UIPrintPageRenderer {
     func generatePdfData() -> NSMutableData {
