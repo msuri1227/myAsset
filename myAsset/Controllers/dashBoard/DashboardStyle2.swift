@@ -1536,7 +1536,7 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mJCLogger.log("Starting", Type: "info")
-        if let  selectedclass = selectedChartArr[indexPath.row] as? WoHeaderModel{
+        /*if let  selectedclass = selectedChartArr[indexPath.row] as? WoHeaderModel{
             self.style2ViewModel.createBatchRequestForTransactionCount(ObjectClass: selectedclass)
         }else if let  selectedclass = selectedChartArr[indexPath.row] as? WoOperationModel{
             self.style2ViewModel.createBatchRequestForTransactionCount(ObjectClass: selectedclass)
@@ -1545,7 +1545,7 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
         }
         cellTapped = !cellTapped
         currentRow = indexPath.row
-        self.detailsTableView.reloadData()
+        self.detailsTableView.reloadData()*/
         mJCLogger.log("Ended", Type: "info")
     }
     

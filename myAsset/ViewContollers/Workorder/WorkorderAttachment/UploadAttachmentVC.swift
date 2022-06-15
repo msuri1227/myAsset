@@ -268,7 +268,7 @@ class UploadAttachmentVC: UIViewController,UITextFieldDelegate,UIGestureRecogniz
         }else {
             mJCLoader.startAnimating(status: "Saving")
             sender.isUserInteractionEnabled = false
-            if (isFromScreen == "WORKORDER" || isFromScreen == "EQUIPMENT" || isFromScreen == "FUNCTIONALLOCATION") && currentMasterView == "WorkOrder" {
+            if (isFromScreen == "WORKORDER" || isFromScreen == "EQUIPMENT" || isFromScreen == "FUNCTIONALLOCATION" || isFromScreen == "ASSET") && currentMasterView == "WorkOrder" {
                 uploadWorkOrderAttachment()
             }else if isFromScreen == "NotificationCreate"{
                 mJCLoader.stopAnimating()
@@ -406,6 +406,12 @@ class UploadAttachmentVC: UIViewController,UITextFieldDelegate,UIGestureRecogniz
             self.property.add(prop!)
         }else if isFromScreen == "FUNCTIONALLOCATION"{
             prop = SODataPropertyDefault(name: "FuncLocation")
+            prop!.value = objectNum as NSObject
+            self.property.add(prop!)
+        }
+        else if isFromScreen == "ASSET"{
+            print("isFrom Asset")
+            prop = SODataPropertyDefault(name: "Equipment")
             prop!.value = objectNum as NSObject
             self.property.add(prop!)
         }

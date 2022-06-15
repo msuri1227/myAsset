@@ -71,10 +71,9 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             let equipment = self.assetSearchVM.assetList[indexPath.row]
             cell.assetListCellModel = equipment
             if self.selectedArr.contains(equipment){
-                cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
+                cell.checkBoxBtn.setImage(UIImage(named: "ic_check_fill"), for: .normal)
             }else{
-                cell.checkBoxImgView.image = UIImage(named: "ic_check_nil")
-            }
+                cell.checkBoxBtn.setImage(UIImage(named: "ic_check_nil"), for: .normal)            }
         }
         return cell
     }
