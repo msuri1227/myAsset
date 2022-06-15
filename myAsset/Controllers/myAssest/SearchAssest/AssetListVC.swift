@@ -10,7 +10,7 @@ import UIKit
 import ODSFoundation
 import mJCLib
 
-class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate {
+class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate {
     
     @IBOutlet weak var assetTableView: UITableView!
     @IBOutlet weak var searchView: UIView!
@@ -18,6 +18,9 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     @IBOutlet weak var selectedLbl: UILabel!
     @IBOutlet weak var selectedStackView: UIStackView!
     @IBOutlet var printTagButton: UIButton!
+    @IBOutlet weak var searchField: UISearchBar!
+    @IBOutlet weak var noDataLblView: UIView!
+    @IBOutlet weak var printBtn: UIButton!
     
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var navHeaderView = CustomNavHeader_iPhone()
@@ -25,6 +28,8 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     var searchParam = Dictionary<String,Any>()
     var assetSearchVM = AssetSearchViewModel()
     var selectedArr = [EquipmentModel]()
+    var assetArry = [EquipmentModel]()
+    var assetListArry = [EquipmentModel]()
     var locationManager: CLLocationManager = CLLocationManager()
     var currentlat : Double = 0.0
     var currentLong : Double = 0.0
@@ -33,6 +38,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         super.viewDidLoad()
         self.assetTableView.delegate = self
         self.assetTableView.dataSource = self
+        searchField.delegate = self
         assetSearchVM.delegate = self
         assetSearchVM.searchParams = self.searchParam
         assetSearchVM.getAssetList()
@@ -63,12 +69,12 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     }
     //MARK: - Table view delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.assetSearchVM.assetList.count
+        return self.assetArry.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ScreenManager.getInspectedCell(tableView: tableView)
-        if self.assetSearchVM.assetList.indices.contains(indexPath.row){
-            let equipment = self.assetSearchVM.assetList[indexPath.row]
+        if self.assetArry.indices.contains(indexPath.row){
+            let equipment = self.assetArry[indexPath.row]
             cell.assetListCellModel = equipment
             if self.selectedArr.contains(equipment){
                 cell.checkBoxBtn.setImage(UIImage(named: "ic_check_fill"), for: .normal)
@@ -81,7 +87,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         return 130
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = self.assetSearchVM.assetList[indexPath.row]
+        let item = self.assetArry[indexPath.row]
         if !selectedArr.contains(item){
             selectedArr.append(item)
         }else{
@@ -102,7 +108,14 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     func dataFetchCompleted(type: String, object: [Any]) {
         if type == "assetList"{
             DispatchQueue.main.async {
-                self.totalLbl.text = "\(self.assetSearchVM.assetList.count)"
+                self.assetArry = self.assetSearchVM.assetList
+                self.assetListArry = self.assetSearchVM.assetList
+                self.totalLbl.text = "\(self.assetArry.count)"
+                if self.assetArry.count > 0{
+                    self.noDataLblView.isHidden = true
+                }else{
+                    self.noDataLblView.isHidden = false
+                }
                 self.assetTableView.reloadData()
             }
         }
@@ -207,5 +220,31 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         currentLong = lastLocation.coordinate.longitude
         self.locationManager.stopUpdatingLocation()
         mJCLogger.log("Ended", Type: "info")
+    }
+    
+    //MARK: -  Search Bar delegate..
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        self.searchField.endEditing(true)
+    }
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        mJCLogger.log("Starting", Type: "info")
+        if searchBar == searchField{
+            if(searchText == "") {
+                self.searchField.becomeFirstResponder()
+                self.assetArry.removeAll()
+                self.assetArry = self.assetListArry
+                self.assetTableView.reloadData()
+            }else{
+                self.assetArry = self.assetListArry.filter{$0.Equipment.containsIgnoringCase(find: "\(searchText)") || $0.EquipDescription.containsIgnoringCase(find: "\(searchText)")
+                }
+                if self.assetArry.count > 0 {
+                    self.noDataLblView.isHidden = true
+                }else{
+                    self.noDataLblView.isHidden = false
+                }
+                self.assetTableView.reloadData()
+            }
+            mJCLogger.log("Ended", Type: "info")
+        }
     }
 }

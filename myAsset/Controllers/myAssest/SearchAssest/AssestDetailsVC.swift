@@ -10,12 +10,19 @@ import UIKit
 import ODSFoundation
 import mJCLib
 
-class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UISearchBarDelegate {
     
     @IBOutlet weak var segmentBgView: UIView!
     @IBOutlet weak var assestSegment: UISegmentedControl!
     @IBOutlet weak var assetTableView: UITableView!
+    
+    @IBOutlet weak var searchField: UISearchBar!
     @IBOutlet weak var searchView: UIView!
+    
+    @IBOutlet weak var searchButton: UIButton!
+    
+    @IBOutlet weak var noDataLblView: UIView!
+    
     @IBOutlet weak var totalLbl: UILabel!
     @IBOutlet weak var selectedLbl: UILabel!
     @IBOutlet weak var selectedStackView: UIStackView!
@@ -32,14 +39,17 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var objmodel = WorkOrderObjectsViewModel()
     var inspectedArr = [WorkorderObjectModel]()
+    var inspectedListArr = [WorkorderObjectModel]()
     var selectedAssetListArr = [WorkorderObjectModel]()
     var attachmentsViewModel = AttachmentsViewModel()
     var selectedEquipNumber: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        noDataLblView.isHidden = true
         objmodel.delegate = self
         objmodel.getObjectlist()
+        searchField.delegate = self
         assetTableView.register(UINib(nibName: "SearchAssetCell_iPhone", bundle: nil), forCellReuseIdentifier: "SearchAssetCell_iPhone")
         assetTableView.rowHeight = 140
         assetTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -51,6 +61,7 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     func dataFetchCompleted(type: String, object: [Any]) {
         if type == "assetList"{
             self.inspectedArr = self.objmodel.objectListArray
+            self.inspectedListArr = self.objmodel.objectListArray
             DispatchQueue.main.async {
                 self.selectedAssetListArr.removeAll()
                 self.totalLbl.text = "\(self.inspectedArr.count)"
@@ -68,19 +79,37 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     //MARK: - Button Action Methods
     @IBAction func assestSegmentAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "ShowDotMenu"), object: nil)
             self.selectedStackView.isHidden = false
             self.inspectedArr.removeAll()
             self.inspectedArr = self.objmodel.objectListArray.filter{$0.ProcessIndic == ""}
+            self.inspectedListArr = self.inspectedArr
             self.totalLbl.text = "\(self.inspectedArr.count)"
+            self.searchField.text = ""
             selectedCountLabelUpdate(count: self.selectedAssetListArr.count)
             self.scanBtnWidthConst.constant = 57.5
+            if self.inspectedArr.count == 0{
+                self.noDataLblView.isHidden = false
+            }
+            else{
+                self.noDataLblView.isHidden = true
+            }
             self.assetTableView.reloadData()
         }else{
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "HideDotMenu"), object: nil)
             self.selectedStackView.isHidden = true
             self.inspectedArr.removeAll()
             self.inspectedArr = self.objmodel.objectListArray.filter{$0.ProcessIndic != ""}
+            self.inspectedListArr = self.inspectedArr
             self.totalLbl.text = "\(self.inspectedArr.count)"
+            self.searchField.text = ""
             self.scanBtnWidthConst.constant = 0
+            if self.inspectedArr.count == 0{
+                self.noDataLblView.isHidden = false
+            }
+            else{
+                self.noDataLblView.isHidden = true
+            }
             self.assetTableView.reloadData()
         }
     }
@@ -106,7 +135,6 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     @IBAction func notesCancelBtnActio(_ sender: UIButton) {
         self.writeOffBgView.isHidden = true
     }
-    
     //MARK: - Barcode Delegate
     func scanCompleted(type: String, barCode: String, object: Any){
         if type == "success"{
@@ -116,8 +144,31 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
             }
         }
     }
+    //MARK: -  Search Bar delegate..
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        self.searchField.endEditing(true)
+    }
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        mJCLogger.log("Starting", Type: "info")
+        if searchBar == searchField{
+            if(searchText == "") {
+                self.searchField.becomeFirstResponder()
+                inspectedArr = self.inspectedListArr
+                self.assetTableView.reloadData()
+            }else{
+                self.inspectedArr = inspectedListArr.filter{$0.Equipment.containsIgnoringCase(find: "\(searchText)") || $0.EquipmentDescription.containsIgnoringCase(find: "\(searchText)")}
+                if inspectedArr.count > 0{
+                    DispatchQueue.main.async{
+                        self.noDataLblView.isHidden = true
+                    }
+                }else{
+                    self.noDataLblView.isHidden = false
+                }
+                self.assetTableView.reloadData()
+            }
+        }
+    }
 }
-
 extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.inspectedArr.count
