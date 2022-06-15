@@ -18,12 +18,16 @@ class WorkOrderObjectsViewModel {
     
     func getObjectlist() {
         mJCLogger.log("Starting", Type: "info")
-        WorkorderObjectModel.getWorkOrderObjects(workOrderNum: selectedworkOrderNumber){(response, error)  in
+        let query = "$filter=(WorkOrderNum eq '\(selectedworkOrderNumber)' and Equipment ne '')"
+        WorkorderObjectModel.getWorkOrderObjects(filterQuery: query){(response, error)  in
             if error == nil{
                 if let responseArr = response["data"] as? [WorkorderObjectModel]{
                     mJCLogger.log("Response :\(responseArr.count)", Type: "Debug")
                     objectCount = "\(responseArr.count)"
                     self.objectListArray = responseArr
+                    for item in responseArr{
+                        print("Equp No: \(item.Equipment) and ProceesIndic: \(item.ProcessIndic)")
+                    }
                     self.delegate?.dataFetchCompleted?(type: "assetList", object: [])
                 }
                 else {
@@ -34,5 +38,39 @@ class WorkOrderObjectsViewModel {
             }
         }
         mJCLogger.log("Ended", Type: "info")
+    }
+    
+    func updateVerifyWorkOrder(list:[WorkorderObjectModel], status:String, count:Int){
+        if count == list.count{
+            self.delegate?.dataFetchCompleted?(type: "VerifyWriteOffCompleted", object: [])
+        }else{
+            let equipment = list[count]
+            (equipment.entity.properties["ProcessIndic"] as! SODataProperty).value = "\(status)" as NSObject
+            WoHeaderModel.updateWorkorderEntity(entity: equipment.entity,  flushRequired: false, options: nil){(response, error) in
+                if(error == nil) {
+                    self.updateVerifyWorkOrder(list: list, status: status, count: count + 1)
+                }else {
+                    self.updateVerifyWorkOrder(list: list, status: status, count: count + 1)
+                    mJCLogger.log("Reason : \(String(describing: error?.localizedDescription))", Type: "Error")
+                }
+            }
+        }
+    }
+    func updateWriteOffWorkOder(list:[WorkorderObjectModel], status:String, notes:String, count:Int){
+        if count == list.count{
+            self.delegate?.dataFetchCompleted?(type: "VerifyWriteOffCompleted", object: [])
+        }else{
+            let equipment = list[count]
+            (equipment.entity.properties["ProcessIndic"] as! SODataProperty).value = "\(status)" as NSObject
+//            (equipment.entity.properties["InspectionNotes"] as! SODataProperty).value = "\(notes)" as NSObject
+            WoHeaderModel.updateWorkorderEntity(entity: equipment.entity,  flushRequired: false, options: nil){(response, error) in
+                if(error == nil) {
+                    self.updateVerifyWorkOrder(list: list, status: status, count: count + 1)
+                }else {
+                    self.updateVerifyWorkOrder(list: list, status: status, count: count + 1)
+                    mJCLogger.log("Reason : \(String(describing: error?.localizedDescription))", Type: "Error")
+                }
+            }
+        }
     }
 }

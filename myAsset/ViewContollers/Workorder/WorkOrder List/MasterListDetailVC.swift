@@ -67,6 +67,8 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
     var notificationOverViewVC :  NotificationOverViewVC?
     var operationsVC_OverView : OperationsVC?
     var workorderNotification = Bool()
+    var assetDetailsVC : AssetDetailsVC?
+//    var workOrderObjVM : WorkOrderObjectsViewModel?
     
     // MARK: Page Swipe Inputs
     public var initialIndex: Int = 0
@@ -84,7 +86,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
     var checkSheetVM = checkSheetViewModel()
     var noDetailVM = NotificationDetailModel()
     var woDetailVM = WorkorderDetailModel()
-    
+
     //MARK: - LifiCycle..
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -612,6 +614,42 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                         noteListVC.modalPresentationStyle = .fullScreen
                         self.present(noteListVC, animated: false)
                     }
+                    else if item == "Verify".localized(){
+                        if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
+                            assetDetailsVC?.objmodel.updateVerifyWorkOrder(list: assetDetailsVC!.selectedAssetListArr, status: "I", count: 0)
+                        }
+                        else{
+                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                        }
+                    }
+                    else if item == "Write Off".localized(){
+                        if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
+                            assetDetailsVC?.notesTextView.text = ""
+                            assetDetailsVC?.writeOffBgView.isHidden = false
+                        }
+                        else{
+                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                        }
+                    }
+                    else if item == "Update Geo Location".localized(){
+                        if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
+                            
+                        }
+                        else{
+                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                        }
+                    }
+                    else if item == "Assets Location".localized(){
+                        ASSETMAP_TYPE = "ESRIMAP"
+                        assetmapVC.openmappage(id: "")
+//                        currentMasterView = "MapDetailsViewController"
+//                        selectedworkOrderNumber = ""
+//                        selectedNotificationNumber = ""
+//                        ASSETMAP_TYPE = ""
+//                        let mapSplitVC = ScreenManager.getMapDeatilsScreen()
+//                        self.appDeli.window?.rootViewController = mapSplitVC
+//                        self.appDeli.window?.makeKeyAndVisible()
+                    }
                 }else if currentMasterView == "Notification"{
                     if item == "Create_Work_Order".localized(){
                         if onlineSearch == true{
@@ -975,6 +1013,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             myAssetDataManager.uniqueInstance.getFlushErrors(isFromBtn: true, count: 0)
         }
         else if title == "Assests"{
+            currentsubView = "Asset"
             if DeviceType == iPad{
                 
             }
@@ -2043,6 +2082,12 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                                     imgArray.remove(at: index)
                                 }
                             }
+                            if applicationFeatureArrayKeys.contains("NO_ADD_NOTI_OPTION"){
+                                if let index =  menuarr.firstIndex(of: "Create_Notification".localized()){
+                                    menuarr.remove(at: index)
+                                    imgArray.remove(at: index)
+                                }
+                            }
                             if !applicationFeatureArrayKeys.contains("MANAGE_WO_MANUAL_CHECKSHEET"){
                                 if let index =  menuarr.firstIndex(of: "Manage_CheckSheet_Assignment".localized()){
                                     menuarr.remove(at: index)
@@ -2082,6 +2127,10 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                         }
                     }
                 }
+            }
+            else if currentsubView == "Asset"{
+                menuarr = ["Verify".localized(), "Write Off".localized(), "Update Geo Location".localized(), "Assets Location".localized()]
+                imgArray = [#imageLiteral(resourceName: "addnotificaBlack"),#imageLiteral(resourceName: "editIcon"),#imageLiteral(resourceName: "followOnBlack"),#imageLiteral(resourceName: "Capacity_Data_Black")]
             }
         }
         if menuarr.count == 0{
@@ -2172,7 +2221,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         self.attachmentsVC = ScreenManager.getWorkOrderAttachmentScreen()
         let checkSheetListVC = ScreenManager.getCheckSheetListScreen()
         let objectsVC = ScreenManager.getObjectScreen()
-        let assetVc = ScreenManager.searchAssestDetailsScreen()
+        self.assetDetailsVC = ScreenManager.searchAssestDetailsScreen()
 
         var itemVC = UIViewController()
         var activitiesVC = UIViewController()
@@ -2199,7 +2248,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     tabVCArray.append(operationsVC)
                 }
             }
-            tabVCArray.append(assetVc)
+            tabVCArray.append(self.assetDetailsVC!)
             if applicationFeatureArrayKeys.contains("WoAttachments"){
                 tabVCArray.append(self.attachmentsVC!)
                 self.attachmentsVC?.objectNum = selectedworkOrderNumber

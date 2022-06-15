@@ -10,7 +10,7 @@ import UIKit
 import ODSFoundation
 import mJCLib
 
-class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
+class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var segmentBgView: UIView!
     @IBOutlet weak var assestSegment: UISegmentedControl!
@@ -23,10 +23,17 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
     @IBOutlet weak var scanBtnWidthConst: NSLayoutConstraint!
     @IBOutlet weak var barCodeScanBtn: UIButton!
     
+    @IBOutlet weak var writeOffBgView: UIView!
+    @IBOutlet weak var notesDoneBtn: UIButton!
+    @IBOutlet weak var noteTextViewBgView: UIView!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var notesCancelBtn: UIButton!
+    
     let appDeli = UIApplication.shared.delegate as! AppDelegate
-    var selectedArr:[Int] = []
     var objmodel = WorkOrderObjectsViewModel()
     var inspectedArr = [WorkorderObjectModel]()
+    var selectedAssetListArr = [WorkorderObjectModel]()
+    var attachmentsViewModel = AttachmentsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +42,7 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
         assetTableView.register(UINib(nibName: "SearchAssetCell_iPhone", bundle: nil), forCellReuseIdentifier: "SearchAssetCell_iPhone")
         assetTableView.rowHeight = 140
         assetTableView.estimatedRowHeight = UITableView.automaticDimension
+        ODSUIHelper.setBorderToView(view:self.noteTextViewBgView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         ODSUIHelper.setBorderToView(view:self.searchView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         self.assetTableView.allowsMultipleSelection = true
         self.tblViewBottomConst.constant = IS_IPHONE_XS_MAX ? 64 : 0 //default 54
@@ -43,10 +51,17 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
         if type == "assetList"{
             self.inspectedArr = self.objmodel.objectListArray
             DispatchQueue.main.async {
+                self.selectedAssetListArr.removeAll()
                 self.totalLbl.text = "\(self.inspectedArr.count)"
                 self.assestSegment.selectedSegmentIndex = 0
                 self.assestSegmentAction(self.assestSegment)
             }
+        }
+        else if type == "VerifyWriteOffCompleted"{
+            DispatchQueue.main.async {
+                self.writeOffBgView.isHidden = true
+            }
+            objmodel.getObjectlist()
         }
     }
     //MARK: - Button Action Methods
@@ -56,7 +71,7 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
             self.inspectedArr.removeAll()
             self.inspectedArr = self.objmodel.objectListArray.filter{$0.ProcessIndic == ""}
             self.totalLbl.text = "\(self.inspectedArr.count)"
-            selectedCountLabelUpdate(count: self.selectedArr.count)
+            selectedCountLabelUpdate(count: self.selectedAssetListArr.count)
             self.scanBtnWidthConst.constant = 57.5
             self.assetTableView.reloadData()
         }else{
@@ -69,8 +84,8 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
         }
     }
     @IBAction func closeBtnTapped(_ sender: UIButton) {
-        self.selectedArr.removeAll()
-        selectedCountLabelUpdate(count: selectedArr.count)
+        self.selectedAssetListArr.removeAll()
+        selectedCountLabelUpdate(count: selectedAssetListArr.count)
         assetTableView.reloadData()
         self.selectedLbl.text = ""
     }
@@ -79,6 +94,18 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
         WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "asset", delegate: self, controller: self)
         mJCLogger.log("Ended", Type: "info")
     }
+    @IBAction func notesDoneBtnAction(_ sender: UIButton) {
+        if notesTextView.text == ""{
+            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Please_enter_notes".localized(), button: okay)
+        }
+        else{
+            self.objmodel.updateWriteOffWorkOder(list: selectedAssetListArr, status: "W", notes: self.notesTextView.text, count: 0)
+        }
+    }
+    @IBAction func notesCancelBtnActio(_ sender: UIButton) {
+        self.writeOffBgView.isHidden = true
+    }
+    
     //MARK: - Barcode Delegate
     func scanCompleted(type: String, barCode: String, object: Any){
         if type == "success"{
@@ -88,7 +115,6 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate {
             }
         }
     }
-    
 }
 
 extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
@@ -101,7 +127,7 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
             let assetDetail = self.inspectedArr[indexPath.row]
             if assestSegment.selectedSegmentIndex == 0{
                 cell.unInspCellModel = assetDetail
-                if selectedArr.contains(indexPath.row){
+                if selectedAssetListArr.contains(assetDetail){
                     cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
                 }else{
                     cell.checkBoxImgView.image = UIImage(named: "ic_check_nil")
@@ -111,6 +137,9 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
             }
             cell.cameraBtn.tag = indexPath.row
             cell.rightArrowbtn.tag = indexPath.row
+            
+            cell.cameraBtn.addTarget(self, action: #selector(assetCameraButtonAction(sender:)), for: .touchUpInside)
+            cell.rightArrowbtn.addTarget(self, action: #selector(moveToOverViewButtonAction(sender:)), for: .touchUpInside)
         }
         return cell
     }
@@ -118,20 +147,22 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
         return 135
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if selectedArr.contains(indexPath.row){
-            let myInd = self.selectedArr.firstIndex(of: indexPath.row)
-            self.selectedArr.remove(at: myInd!)
-            selectedCountLabelUpdate(count: selectedArr.count)
+        let item = self.inspectedArr[indexPath.row]
+        if !selectedAssetListArr.contains(item){
+            selectedAssetListArr.append(item)
+            selectedCountLabelUpdate(count: selectedAssetListArr.count)
         }else{
-            selectedArr.append(indexPath.row)
-            selectedCountLabelUpdate(count: selectedArr.count)
+            if let index = self.selectedAssetListArr.index(of: item){
+                selectedAssetListArr.remove(at: index)
+                selectedCountLabelUpdate(count: selectedAssetListArr.count)
+            }
         }
         self.assetTableView.reloadData()
     }
     
     @objc func assetCameraButtonAction(sender: UIButton){
         mJCLogger.log("Starting", Type: "info")
-        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "asset", delegate: self, controller: self)
+        self.openCamera()
         mJCLogger.log("Ended", Type: "info")
     }
     @objc func moveToOverViewButtonAction(sender: UIButton){
@@ -162,13 +193,75 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
     
     func selectedCountLabelUpdate(count: Int){
         if assestSegment.selectedSegmentIndex == 0{
-            if selectedArr.count > 0{
+            if selectedAssetListArr.count > 0{
                 self.selectedStackView.isHidden = false
-                self.selectedLbl.text = "\(selectedArr.count)"
+                self.selectedLbl.text = "\(selectedAssetListArr.count)"
             }
             else{
                 self.selectedStackView.isHidden = true
             }
         }
+    }
+    //MARK: - Camera & UIImagePickerController Delegate..
+    func openCamera() {
+        mJCLogger.log("Starting", Type: "info")
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            isSupportPortait = true
+            DispatchQueue.main.async {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerController.SourceType.camera;
+                imagePicker.allowsEditing = true
+                imagePicker.cameraCaptureMode = .photo
+                self.present(imagePicker, animated: false, completion: nil)
+            }
+        }else {
+            mJCLogger.log("There_is_no_camera_available_on_this_device".localized(), Type: "Warn")
+            mJCAlertHelper.showAlert(self, title:sorrytitle, message: "There_is_no_camera_available_on_this_device".localized(), button: okay)
+        }
+        mJCLogger.log("Ended", Type: "info")
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        mJCLogger.log("Starting", Type: "info")
+        isSupportPortait = false
+        self.dismiss(animated: false) {}
+        mJCLogger.log("Ended", Type: "info")
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        mJCLogger.log("Starting", Type: "info")
+        isSupportPortait = false
+        if #available(iOS 13.0, *){
+//            print("img Data:\(info[UIImagePickerController.InfoKey.originalImage] as! UIImage)")
+            let uploadAttachmentVC = ScreenManager.getUploadAttachmentScreen()
+            var arr = NSArray()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "ddMMyyyy_HHmmss"
+            let dateString = dateFormatter.string(from: NSDate() as Date)
+//            if attachmentsViewModel.selectedbutton == "takePhoto" || attachmentsViewModel.selectedbutton == "choosePhoto" {
+            attachmentsViewModel.selectedbutton = "takePhoto"
+                if attachmentsViewModel.selectedbutton == "takePhoto" {
+                    uploadAttachmentVC.fileType = defaultImageType
+                }else {
+                    let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as! NSURL
+                    attachmentsViewModel.newFileName = imageURL.lastPathComponent!
+                    arr = (attachmentsViewModel.newFileName.components(separatedBy: ".")) as NSArray
+                    uploadAttachmentVC.fileType = (arr[1] as! String).lowercased()
+                }
+                attachmentsViewModel.selectedbutton = ""
+                let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+                attachmentsViewModel.imagePicked.image = chosenImage
+                attachmentsViewModel.imageData = chosenImage.pngData()! as NSData
+                uploadAttachmentVC.fileName  = "IMAGE_\(dateString)"
+                uploadAttachmentVC.image = chosenImage
+                uploadAttachmentVC.attachmentType = "Image"
+                uploadAttachmentVC.modalPresentationStyle = .fullScreen
+                self.dismiss(animated: false, completion: {
+//                    self.view.window?.rootViewController?.present(uploadAttachmentVC, animated: false)
+                    self.present(uploadAttachmentVC, animated: false) {}
+                })
+//            }
+        }
+        mJCLogger.log("Ended", Type: "info")
     }
 }

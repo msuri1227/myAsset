@@ -58,6 +58,7 @@ class SearchAssetCell_iPhone: UITableViewCell {
         self.assetClassValueLbl.text = unInspCellModel?.EquipmentDescription
         self.serialNumValueLbl.text = unInspCellModel?.SerialNumber
         self.flocValueLbl.text = unInspCellModel?.FunctionalLoc
+        self.indicatorView.backgroundColor = appColor
     }
     func inspectedCellConfiguration(){
         self.assetTitleLbl.text = "Asset".localized()

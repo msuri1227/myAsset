@@ -109,16 +109,26 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
         return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0{
-            return 1900
-        }
-        else if indexPath.row == 1{
-            return 1515
+        if flocEquipObjType == "floc" {
+            if indexPath.row == 0{
+                return 950
+            }
+            else{
+                return 1525
+            }
         }
         else{
-            return 800
+            if indexPath.row == 0{
+                return 1900
+            }
+            else if indexPath.row == 1{
+                return 1515
+            }
+            else{
+                return 800
+            }
         }
-//        return UITableView.automaticDimension
+        //        return UITableView.automaticDimension
     }
     //MARK: - Button actions
     @IBAction func installEquipmentButtonAction(_ sender: Any) {

@@ -583,12 +583,8 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
                         }
                     }
                 }
-               
-                applicationFeatureArrayKeys.append("NO_ADD_ITEM_CAUSE_OPTION")
-                applicationFeatureArrayKeys.append("NO_EDIT_ITEM_CAUSE_OPTION")
-                applicationFeatureArrayKeys.append("ATTACH_CHECKSHEET_TO_WO")
-                applicationFeatureArrayKeys.append("POST_WO_NOTES_IN_OPR_STATUS_CHANGE")
-
+                applicationFeatureArrayKeys.append("WoAttachments")
+                applicationFeatureArrayKeys.append("WoForms")
                 self.setWOcompleteFields()
                 self.getNotificationType()
                 self.getErrorArchiveSet()
