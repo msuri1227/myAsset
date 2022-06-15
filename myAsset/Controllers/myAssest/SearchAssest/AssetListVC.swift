@@ -29,7 +29,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     var searchParam = Dictionary<String,Any>()
     var assetSearchVM = AssetSearchViewModel()
     var selectedArr = [EquipmentModel]()
-    var assetArry = [EquipmentModel]()
+    var assetArry = [ZEquipmentModel]()
     var assetListArry = [EquipmentModel]()
     var locationManager: CLLocationManager = CLLocationManager()
     var currentlat : Double = 0.0
@@ -37,6 +37,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     var selectedFloc = String()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.printBtn.setTitle("", for: .normal)
         self.assetTableView.delegate = self
         self.assetTableView.dataSource = self
         searchField.delegate = self
