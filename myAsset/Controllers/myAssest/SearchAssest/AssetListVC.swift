@@ -28,9 +28,9 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     let menudropDown = DropDown()
     var searchParam = Dictionary<String,Any>()
     var assetSearchVM = AssetSearchViewModel()
-    var selectedArr = [EquipmentModel]()
+    var selectedArr = [ZEquipmentModel]()
     var assetArry = [ZEquipmentModel]()
-    var assetListArry = [EquipmentModel]()
+    var assetListArry = [ZEquipmentModel]()
     var locationManager: CLLocationManager = CLLocationManager()
     var currentlat : Double = 0.0
     var currentLong : Double = 0.0
