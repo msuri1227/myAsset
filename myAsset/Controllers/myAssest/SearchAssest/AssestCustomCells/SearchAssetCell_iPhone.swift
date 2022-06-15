@@ -11,7 +11,6 @@ import mJCLib
 
 class SearchAssetCell_iPhone: UITableViewCell {
 
-    @IBOutlet weak var checkBoxImgView: UIImageView!
     @IBOutlet weak var assetTitleLbl: UILabel!
     @IBOutlet weak var assetValueLbl: UILabel!
     @IBOutlet weak var assetClassTitleLbl: UILabel!
@@ -23,6 +22,7 @@ class SearchAssetCell_iPhone: UITableViewCell {
     @IBOutlet var indicatorView: UIView!
     @IBOutlet weak var cameraBtn: UIButton!
     @IBOutlet weak var rightArrowbtn: UIButton!
+    @IBOutlet weak var checkBoxBtn: UIButton!
     
     var assetDetailsVC : AssetDetailsVC?
     var unInspCellModel: WorkorderObjectModel? {
@@ -70,10 +70,10 @@ class SearchAssetCell_iPhone: UITableViewCell {
         self.serialNumValueLbl.text = inspCellModel?.SerialNumber
         self.flocValueLbl.text = inspCellModel?.FunctionalLoc
         if self.inspCellModel?.ProcessIndic == "I"{
-            self.checkBoxImgView.image = UIImage(named: "ic_check_Green")
+            self.checkBoxBtn.setImage(UIImage(named: "ic_check_Green"), for: .normal)
             self.indicatorView.backgroundColor = UIColor.green
         }else{
-            self.checkBoxImgView.image = UIImage(named: "ic_check_Red")
+            self.checkBoxBtn.setImage(UIImage(named: "ic_check_Red"), for: .normal)
             self.indicatorView.backgroundColor = UIColor.red
         }
     }

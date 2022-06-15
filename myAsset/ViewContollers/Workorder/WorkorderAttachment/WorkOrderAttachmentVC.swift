@@ -156,7 +156,6 @@ class WorkOrderAttachmentVC: UIViewController,UITableViewDelegate,UITableViewDat
         mJCLogger.log("Ended", Type: "info")
     }
     @objc func objectSelected(){
-        objectNum = singleWorkOrder.WorkOrderNum
         if objectNum != ""{
             attachmentsViewModel.getAttachment()
         }else {

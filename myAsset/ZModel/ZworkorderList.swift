@@ -16,3 +16,13 @@ class ZworkorderList : WoHeaderModel {
 class ZNotifitem : NotificationItemsModel{
     @objc public var Version = String()
 }
+class ZEquipmentModel: EquipmentModel{
+    @objc public var AssetClass = String()
+    @objc public var AssetOwner = String()
+    @objc public var LastInventoryDate = Date()
+    @objc public var InventoryNote = String()
+    @objc public var InventoryNumber = String()
+    @objc public var CapitalizedOn = Date()
+    @objc public var DeactivatedOn = Date()
+    @objc public var SerialNumber = String()
+}

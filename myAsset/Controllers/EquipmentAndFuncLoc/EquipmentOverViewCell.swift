@@ -83,8 +83,21 @@ class EquipmentOverViewCell: UITableViewCell {
     @IBOutlet var overViewModelNumberLabel: UILabel!
     @IBOutlet var EquipmentassetmapButton: UIButton!
     
+    @IBOutlet weak var equipmentValLbl: UILabel!
+    @IBOutlet weak var assetValLbl: UILabel!
+    @IBOutlet weak var assetClassValLbl: UILabel!
+    @IBOutlet weak var assetOwnerValLbl: UILabel!
+    @IBOutlet weak var subNumberValLbl: UILabel!
+    @IBOutlet weak var lastInventoryDateValLbl: UILabel!
+    @IBOutlet weak var inventoryNoteValLbl: UILabel!
+    @IBOutlet weak var inventoryNumValLbl: UILabel!
+    @IBOutlet weak var captilizedOnValLbl: UILabel!
+    @IBOutlet weak var deactivatedOnValLbl: UILabel!
+    @IBOutlet weak var firstAcquisitionDateValLbl: UILabel!
+    @IBOutlet weak var geoLocationValLbl: UILabel!
+    
     var indexpath = IndexPath()
-    var equipOverviewModelClass: EquipmentModel? {
+    var equipOverviewModelClass: ZEquipmentModel? {
         didSet{
             equipmentOverviewConfiguration()
         }
@@ -117,6 +130,27 @@ class EquipmentOverViewCell: UITableViewCell {
          overViewModelNumberLabel.text = equipOverviewModelClass?.ModelNumber
 //         EquipmentassetmapButton.tag = indexpath.row
 //         EquipmentassetmapButton.addTarget(self, action: #selector(equipmentAssetMapAction(sender:)), for: .touchUpInside)
+        
+        equipmentValLbl.text = equipOverviewModelClass?.Equipment
+        assetValLbl.text = equipOverviewModelClass?.Asset
+        assetClassValLbl.text = equipOverviewModelClass?.AssetClass
+        assetOwnerValLbl.text = equipOverviewModelClass?.AssetOwner
+        subNumberValLbl.text = equipOverviewModelClass?.SubNumber
+        inventoryNoteValLbl.text =  equipOverviewModelClass?.InventoryNote
+        inventoryNumValLbl.text = equipOverviewModelClass?.InventoryNo
+
+        if equipOverviewModelClass?.LastInventoryDate != nil{
+            lastInventoryDateValLbl.text =  ODSDateHelper.convertDateToString(date: (equipOverviewModelClass?.LastInventoryDate)!)
+        }
+        if equipOverviewModelClass?.AcquistionDate != nil{
+            firstAcquisitionDateValLbl.text = ODSDateHelper.convertDateToString(date: (equipOverviewModelClass?.AcquistionDate)!)
+        }
+        if equipOverviewModelClass?.CapitalizedOn != nil{
+            captilizedOnValLbl.text =  ODSDateHelper.convertDateToString(date: (equipOverviewModelClass?.CapitalizedOn)!)
+        }
+        if equipOverviewModelClass?.DeactivatedOn != nil{
+            deactivatedOnValLbl.text =  ODSDateHelper.convertDateToString(date: (equipOverviewModelClass?.DeactivatedOn)!)
+        }
         mJCLogger.log("Ended", Type: "info")
     }
     

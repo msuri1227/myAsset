@@ -23,7 +23,7 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
     var flocEquipObjType = String()
     var flocEquipObjText = String()
     var selectedFloc = FunctionalLocationModel()
-    var selectedEquip = EquipmentModel()
+    var selectedEquip = ZEquipmentModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
             ScreenManager.registerEquipmentOverViewCell(tableView: self.functionalLocationTableView)
             ScreenManager.registerEquipmentAdditionalCell(tableView: self.functionalLocationTableView)
             ScreenManager.registerEquipmentWarrantyInfoCell(tableView: self.functionalLocationTableView)
-            flocOverViewModel.getEquipmentDetails()
+            flocOverViewModel.ZgetEquipmentDetails()
         }
         self.functionalLocationTableView.separatorStyle = .none
         self.functionalLocationTableView.estimatedRowHeight = 1000
@@ -59,10 +59,10 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
                 selectedFloc = FunctionalLocationModel()
             }
         }else{
-            if let objDict = object[0] as? EquipmentModel{
+            if let objDict = object[0] as? ZEquipmentModel{
                 selectedEquip = objDict
             }else{
-                selectedEquip = EquipmentModel()
+                selectedEquip = ZEquipmentModel()
             }
         }
         DispatchQueue.main.async {

@@ -58,6 +58,25 @@ class FlocEquipOverViewModel {
             }
         }
     }
+    func ZgetEquipmentDetails(){
+        EquipmentModel.getEquipmentDetails(equipNum: flocEquipObjText, modelClass: ZEquipmentModel.self){(response, error) in
+            if error == nil{
+                if let responseArr = response["data"] as? [ZEquipmentModel]{
+                    if responseArr.count > 0 {
+                        self.delegate?.dataFetchCompleted?(type: "equip", object: [responseArr[0]])
+                    }else {
+                        self.delegate?.dataFetchCompleted?(type: "equip", object: [ZEquipmentModel()])
+                    }
+                }else {
+                    mJCLoader.stopAnimating()
+                    self.delegate?.dataFetchCompleted?(type: "equip", object: [ZEquipmentModel()])
+                }
+            }else{
+                mJCLoader.stopAnimating()
+                self.delegate?.dataFetchCompleted?(type: "equip", object: [ZEquipmentModel()])
+            }
+        }
+    }
     func getFunctionalLocationList(from:String){
         if from == "installEquipment"{
             var str = String()

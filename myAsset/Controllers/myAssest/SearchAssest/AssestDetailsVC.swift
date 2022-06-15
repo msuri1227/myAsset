@@ -34,6 +34,7 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     var inspectedArr = [WorkorderObjectModel]()
     var selectedAssetListArr = [WorkorderObjectModel]()
     var attachmentsViewModel = AttachmentsViewModel()
+    var selectedEquipNumber: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,21 +124,24 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ScreenManager.getInspectedCell(tableView: tableView)
+        cell.selectionStyle = .none
         if self.inspectedArr.indices.contains(indexPath.row){
             let assetDetail = self.inspectedArr[indexPath.row]
             if assestSegment.selectedSegmentIndex == 0{
                 cell.unInspCellModel = assetDetail
                 if selectedAssetListArr.contains(assetDetail){
-                    cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
+                    cell.checkBoxBtn.setImage(UIImage(named: "ic_check_fill"), for: .normal)
                 }else{
-                    cell.checkBoxImgView.image = UIImage(named: "ic_check_nil")
+                    cell.checkBoxBtn.setImage(UIImage(named: "ic_check_nil"), for: .normal)
                 }
             }else{
                 cell.inspCellModel = assetDetail
             }
+            cell.checkBoxBtn.tag = indexPath.row
             cell.cameraBtn.tag = indexPath.row
             cell.rightArrowbtn.tag = indexPath.row
             
+            cell.checkBoxBtn.addTarget(self, action: #selector(checkBoxClicked(sender:)), for: .touchUpInside)
             cell.cameraBtn.addTarget(self, action: #selector(assetCameraButtonAction(sender:)), for: .touchUpInside)
             cell.rightArrowbtn.addTarget(self, action: #selector(moveToOverViewButtonAction(sender:)), for: .touchUpInside)
         }
@@ -147,7 +151,21 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
         return 135
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = self.inspectedArr[indexPath.row]
+        /*let item = self.inspectedArr[indexPath.row]
+        if !selectedAssetListArr.contains(item){
+            selectedAssetListArr.append(item)
+            selectedCountLabelUpdate(count: selectedAssetListArr.count)
+        }else{
+            if let index = self.selectedAssetListArr.index(of: item){
+                selectedAssetListArr.remove(at: index)
+                selectedCountLabelUpdate(count: selectedAssetListArr.count)
+            }
+        }
+        self.assetTableView.reloadData()*/
+    }
+    
+    @objc func checkBoxClicked(sender: UIButton){
+        let item = self.inspectedArr[sender.tag]
         if !selectedAssetListArr.contains(item){
             selectedAssetListArr.append(item)
             selectedCountLabelUpdate(count: selectedAssetListArr.count)
@@ -159,9 +177,9 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
         }
         self.assetTableView.reloadData()
     }
-    
     @objc func assetCameraButtonAction(sender: UIButton){
         mJCLogger.log("Starting", Type: "info")
+        self.selectedEquipNumber = self.inspectedArr[sender.tag].Equipment
         self.openCamera()
         mJCLogger.log("Ended", Type: "info")
     }
@@ -169,14 +187,14 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
         mJCLogger.log("Starting", Type: "info")
         if DeviceType == iPad{
             let flocEquipDetails = ScreenManager.getFlocEquipDetialsScreen()
-            flocEquipDetails.flocEquipObjType = "floc"
+            flocEquipDetails.flocEquipObjType = ""
             flocEquipDetails.flocEquipObjText = self.inspectedArr[sender.tag].Equipment
             flocEquipDetails.classificationType = "Workorder"
             flocEquipDetails.modalPresentationStyle = .fullScreen
             self.present(flocEquipDetails, animated: false) {}
         }else{
             let flocEquipDetails = ScreenManager.getFlocEquipDetialsScreen()
-            flocEquipDetails.flocEquipObjType = "floc"
+            flocEquipDetails.flocEquipObjType = ""
             flocEquipDetails.flocEquipObjText = self.inspectedArr[sender.tag].Equipment
             flocEquipDetails.classificationType = "Workorder"
             myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
@@ -232,35 +250,24 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
         mJCLogger.log("Starting", Type: "info")
         isSupportPortait = false
         if #available(iOS 13.0, *){
-//            print("img Data:\(info[UIImagePickerController.InfoKey.originalImage] as! UIImage)")
             let uploadAttachmentVC = ScreenManager.getUploadAttachmentScreen()
-            var arr = NSArray()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "ddMMyyyy_HHmmss"
             let dateString = dateFormatter.string(from: NSDate() as Date)
-//            if attachmentsViewModel.selectedbutton == "takePhoto" || attachmentsViewModel.selectedbutton == "choosePhoto" {
-            attachmentsViewModel.selectedbutton = "takePhoto"
-                if attachmentsViewModel.selectedbutton == "takePhoto" {
-                    uploadAttachmentVC.fileType = defaultImageType
-                }else {
-                    let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as! NSURL
-                    attachmentsViewModel.newFileName = imageURL.lastPathComponent!
-                    arr = (attachmentsViewModel.newFileName.components(separatedBy: ".")) as NSArray
-                    uploadAttachmentVC.fileType = (arr[1] as! String).lowercased()
-                }
-                attachmentsViewModel.selectedbutton = ""
-                let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-                attachmentsViewModel.imagePicked.image = chosenImage
-                attachmentsViewModel.imageData = chosenImage.pngData()! as NSData
-                uploadAttachmentVC.fileName  = "IMAGE_\(dateString)"
-                uploadAttachmentVC.image = chosenImage
-                uploadAttachmentVC.attachmentType = "Image"
-                uploadAttachmentVC.modalPresentationStyle = .fullScreen
-                self.dismiss(animated: false, completion: {
-//                    self.view.window?.rootViewController?.present(uploadAttachmentVC, animated: false)
-                    self.present(uploadAttachmentVC, animated: false) {}
-                })
-//            }
+            uploadAttachmentVC.fileType = defaultImageType
+            attachmentsViewModel.selectedbutton = ""
+            let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+            attachmentsViewModel.imagePicked.image = chosenImage
+            attachmentsViewModel.imageData = chosenImage.pngData()! as NSData
+            uploadAttachmentVC.fileName  = "IMAGE_\(dateString)"
+            uploadAttachmentVC.image = chosenImage
+            uploadAttachmentVC.attachmentType = "Image"
+            uploadAttachmentVC.isFromScreen = "ASSET"
+            uploadAttachmentVC.objectNum = self.selectedEquipNumber!
+            uploadAttachmentVC.modalPresentationStyle = .fullScreen
+            self.dismiss(animated: false, completion: {
+                self.present(uploadAttachmentVC, animated: false) {}
+            })
         }
         mJCLogger.log("Ended", Type: "info")
     }

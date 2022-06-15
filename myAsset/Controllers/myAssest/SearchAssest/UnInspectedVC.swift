@@ -89,9 +89,9 @@ extension UnInspectedVC:UITableViewDelegate,UITableViewDataSource{
 //        cell.funcLocLbl.text = funcLocArr[indexPath.row]
 //        cell.serialNumLbl.text = serialNumArr[indexPath.row]
         if selectedArr.contains(indexPath.row){
-            cell.checkBoxImgView.image = UIImage(named: "ic_check_fill")
+            cell.checkBoxBtn.setImage(UIImage(named: "ic_check_fill"), for: .normal)
         }else{
-            cell.checkBoxImgView.image = UIImage(named: "ic_check_nil")
+            cell.checkBoxBtn.setImage(UIImage(named: "ic_check_nil"), for: .normal)
         }
         cell.rightArrowbtn.isHidden = false
         return cell
