@@ -13,14 +13,14 @@ import mJCLib
 
 class AssetSearchViewModel: NSObject {
     weak var delegate: viewModelDelegate?
-    var assetList = [EquipmentModel]()
+    var assetList = [ZEquipmentModel]()
     var searchParams = Dictionary<String,Any>()
     
     func getAssetList(){
         let query = self.getAssetListQuery()
-        EquipmentModel.getEquipmentList(filterQuery: query){(response,error) in
+        EquipmentModel.getEquipmentList(filterQuery: query,modelClass: ZEquipmentModel.self){(response,error) in
             if error == nil{
-                if let respArr = response["data"] as? [EquipmentModel]{
+                if let respArr = response["data"] as? [ZEquipmentModel]{
                     self.assetList = respArr
                 }else{
                     mJCLoader.stopAnimating()

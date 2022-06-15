@@ -35,7 +35,7 @@ class SearchAssetCell_iPhone: UITableViewCell {
             inspectedCellConfiguration()
         }
     }
-    var assetListCellModel: EquipmentModel? {
+    var assetListCellModel: ZEquipmentModel? {
         didSet{
             assetListCellConfiguration()
         }
@@ -62,9 +62,7 @@ class SearchAssetCell_iPhone: UITableViewCell {
     }
     func inspectedCellConfiguration(){
         self.assetTitleLbl.text = "Asset".localized()
-        self.assetClassTitleLbl.text = "Description".localized()
         self.serialNumTitleLbl.text = "XlX-OA-4G1".localized()
-        self.flocTitleLbl.text = "Functional_Location".localized()
         self.assetValueLbl.text = inspCellModel?.Equipment
         self.assetClassValueLbl.text = inspCellModel?.EquipmentDescription
         self.serialNumValueLbl.text = inspCellModel?.SerialNumber
@@ -79,12 +77,10 @@ class SearchAssetCell_iPhone: UITableViewCell {
     }
     func assetListCellConfiguration(){
         self.assetTitleLbl.text = "Asset_ID".localized()
-        self.assetClassTitleLbl.text = "Description".localized()
         self.serialNumTitleLbl.text = "Asset_Class".localized()
-        self.flocTitleLbl.text = "Functional_Location".localized()
-        self.assetValueLbl.text = assetListCellModel?.Equipment
+        self.assetValueLbl.text = assetListCellModel?.Asset
         self.assetClassValueLbl.text = assetListCellModel?.EquipDescription
-        self.serialNumValueLbl.text = assetListCellModel?.Equipment
+        self.serialNumValueLbl.text = "\(assetListCellModel?.AssetClass ?? "" ) - \(assetListCellModel?.AssetDesc ?? "")"
         self.flocValueLbl.text = assetListCellModel?.FuncLocation
         self.cameraBtn.isHidden = true
     }

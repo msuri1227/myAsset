@@ -95,6 +95,7 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
         let assetHierarchyVC = ScreenManager.getFlocEquipHierarchyScreen()
         assetHierarchyVC.modalPresentationStyle = .fullScreen
         assetHierarchyVC.isSelect = "FunctionalLocation"
+        assetHierarchyVC.delegate = self
         self.present(assetHierarchyVC, animated: false, completion: nil)
     }
     @IBAction func assestIdScanButtonAction(_ sender: Any) {
