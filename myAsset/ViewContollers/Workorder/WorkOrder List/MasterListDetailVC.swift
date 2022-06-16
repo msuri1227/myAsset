@@ -631,7 +631,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                             mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                         }
                     }
-                    else if item == "Update Geo Location".localized(){
+                    else if item == "Update_Geo_Location".localized(){
                         if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
                             
                         }
@@ -639,7 +639,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                             mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                         }
                     }
-                    else if item == "Assets Location".localized(){
+                    else if item == "Assets_Location".localized(){
                         ASSETMAP_TYPE = "ESRIMAP"
                         let assetLocVc = ScreenManager.getAssetLocationScreen()
                         if assetDetailsVC!.selectedAssetListArr.count > 0{
@@ -2150,7 +2150,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                 }
             }
             else if currentsubView == "Asset"{
-                menuarr = ["Verify".localized(), "Write Off".localized(), "Update Geo Location".localized(), "Assets Location".localized()]
+                menuarr = ["Verify".localized(), "Write Off".localized(), "Update_Geo_Location".localized(), "Assets_Location".localized()]
                 imgArray = [#imageLiteral(resourceName: "addnotificaBlack"),#imageLiteral(resourceName: "editIcon"),#imageLiteral(resourceName: "followOnBlack"),#imageLiteral(resourceName: "Capacity_Data_Black")]
             }
         }
