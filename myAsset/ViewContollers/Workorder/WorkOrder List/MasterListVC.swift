@@ -992,18 +992,12 @@ class MasterListVC: UIViewController, NSFetchedResultsControllerDelegate,UITable
     }
     func NewJobButtonClicked(_ sender: UIButton?){
         mJCLogger.log("Starting", Type: "info")
-        let workFlowResp = myAssetDataManager.uniqueInstance.getWorkFlowForAction(event: "CRTD_NEW_JOB", orderType: "X",from:"WorkOrder")
-        if let workFlowObj = workFlowResp as? LtWorkFlowModel {
-            mJCLogger.log("Response :\(workFlowObj)", Type: "Debug")
-            if workFlowObj.ActionType == "Screen" {
-                let createNewJobVC = ScreenManager.getCreateJobScreen()
-                createNewJobVC.isFromEdit = false
-                createNewJobVC.isScreen = "WorkOrder"
-                createNewJobVC.createUpdateDelegate = self
-                createNewJobVC.modalPresentationStyle = .fullScreen
-                self.present(createNewJobVC, animated: false) {}
-            }
-        }
+        let createNewJobVC = ScreenManager.getCreateJobScreen()
+        createNewJobVC.isFromEdit = false
+        createNewJobVC.isScreen = "WorkOrder"
+        createNewJobVC.createUpdateDelegate = self
+        createNewJobVC.modalPresentationStyle = .fullScreen
+        self.present(createNewJobVC, animated: false) {}
         mJCLogger.log("Ended", Type: "info")
     }
     func refreshButtonClicked(_ sender: UIButton?){

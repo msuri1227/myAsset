@@ -45,6 +45,7 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
     var flocEquipObjText = String()
     var classificationType = String()
     var navHeaderView = CustomNavHeader_iPhone()
+    var flocEquipOverviewVC : FlocEquipOverviewVC?
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -432,9 +433,9 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
     func viewControllers() -> [UIViewController] {
         mJCLogger.log("Starting", Type: "info")
 
-        let overViewVC = ScreenManager.getFlocEquipOverViewScreen()
-        overViewVC.flocEquipObjType = self.flocEquipObjType
-        overViewVC.flocEquipObjText = self.flocEquipObjText
+        flocEquipOverviewVC = ScreenManager.getFlocEquipOverViewScreen()
+        flocEquipOverviewVC?.flocEquipObjType = self.flocEquipObjType
+        flocEquipOverviewVC?.flocEquipObjText = self.flocEquipObjText
         //installed equipmengt
         let installedEquipVC = ScreenManager.getInstalledEquipmentScreen()
         installedEquipVC.flocEquipObjType = self.flocEquipObjType
@@ -466,7 +467,7 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
         }else{
             breakDownReportVC.isFromScreen = "EQUIPMENT"
         }
-        tabVCArray = [overViewVC,installedEquipVC, classificationVC,attachmentVc,breakDownReportVC]
+        tabVCArray = [flocEquipOverviewVC!,installedEquipVC, classificationVC,attachmentVc,breakDownReportVC]
         return tabVCArray
     }
     private func setPages(_ viewControllers: [UIViewController]) {
@@ -543,5 +544,26 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
         self.refreshButtonAction(UIButton())
     }
     func threedotmenuButtonClicked(_ sender: UIButton?){
+        var menuarr = [String]()
+        menuarr = ["Print_Asset_Tag".localized()]
+        if menuarr.count == 0{
+            mJCAlertHelper.showAlert(self, title: alerttitle, message: "No_Options_Available".localized(), button: okay)
+        }
+        menudropDown.dataSource = menuarr
+        menudropDown.anchorView = sender
+        menudropDown.cellHeight = 40.0
+        menudropDown.width = 200.0
+        menudropDown.backgroundColor = UIColor.white
+        menudropDown.textColor = appColor
+        menudropDown.show()
+        menudropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            if item == "Print_Asset_Tag".localized(){
+                let selectedEquip = flocEquipOverviewVC?.selectedEquip
+                if selectedEquip?.Asset != ""{
+                    let img = PrintHelper.createQRCodeView(asseID: selectedEquip!.Asset, assetDesc: selectedEquip?.EquipDescription ?? "")
+                    PrintHelper.printQrCode(document: img, assetId: "\(selectedEquip!.Asset)")
+                }
+            }
+        }
     }
 }

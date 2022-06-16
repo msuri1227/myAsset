@@ -14,7 +14,8 @@ class WorkOrderObjectsViewModel {
     
     weak var delegate:viewModelDelegate?
     var objectListArray = [WorkorderObjectModel]()
-
+    var equipmentArr = [ZEquipmentModel]()
+    
     
     func getObjectlist() {
         mJCLogger.log("Starting", Type: "info")
@@ -72,8 +73,9 @@ class WorkOrderObjectsViewModel {
             }
         }
     }
-    func getEquipmentListForAssets(list:[WorkorderObjectModel],currentLoc:String){
+    func getEquipmentListForAssets(list:[WorkorderObjectModel],currentLoc:String,from:String){
         var str = String()
+        self.equipmentArr.removeAll()
         for item in list{
             if str.count == 0{
                 str = str + "Equipment eq" + " '\(item.Equipment)'"
@@ -85,9 +87,18 @@ class WorkOrderObjectsViewModel {
         EquipmentModel.getEquipmentList(filterQuery: query,modelClass: ZEquipmentModel.self){(response, error)  in
             if error == nil{
                 if let respArr = response["data"] as? [ZEquipmentModel]{
-                    self.updateGeoLocation(list: respArr, currentLoc: currentLoc, count: 0)
+                    if from == "AssetMap"{
+                        self.equipmentArr = respArr
+                        self.delegate?.dataFetchCompleted?(type: "AssetMap", object: [])
+                    }else{
+                        self.updateGeoLocation(list: respArr, currentLoc: currentLoc, count: 0)
+                    }
                 }else{
-                    self.updateGeoLocation(list: [], currentLoc: currentLoc, count: 0)
+                    if from == "AssetMap"{
+                        self.delegate?.dataFetchCompleted?(type: "AssetMap", object: [])
+                    }else{
+                        self.updateGeoLocation(list: [], currentLoc: currentLoc, count: 0)
+                    }
                 }
             }
         }
@@ -100,6 +111,7 @@ class WorkOrderObjectsViewModel {
             (equipment.entity.properties["GEOLocation"] as! SODataProperty).value = "\(currentLoc)" as NSObject
             EquipmentModel.updateWorkorderEntity(entity: equipment.entity,  flushRequired: false, options: nil){(response, error) in
                 if(error == nil) {
+                    equipment.GEOLocation = currentLoc
                     self.updateGeoLocation(list: list, currentLoc: currentLoc, count: count + 1)
                     mJCLogger.log("Equipment Header Updated successfully", Type: "Debug")
                 }else {

@@ -247,13 +247,13 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         menudropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             if item == "Update_Geo_Location".localized(){
                 if selectedArr.count == 0{
-                    mJCAlertHelper.showAlert(title: alerttitle, message: "", button: okay)
+                    mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                 }else{
                     self.assetSearchVM.updateGeoLocation(list: selectedArr, currentLoc: "x:\(self.currentlat),y:\(self.currentLong)", count: 0)
                 }
             }else if item == "Update_Functional_Location".localized(){
                 if selectedArr.count == 0{
-                    mJCAlertHelper.showAlert(title: alerttitle, message: "", button: okay)
+                    mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                 }else{
                     mJCLogger.log("Starting", Type: "info")
                     let functionaLocationListVC = ScreenManager.getFlocEquipHierarchyScreen()
@@ -321,7 +321,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                 self.assetArry = self.assetListArry
                 self.assetTableView.reloadData()
             }else{
-                self.assetArry = self.assetListArry.filter{$0.Equipment.containsIgnoringCase(find: "\(searchText)") || $0.EquipDescription.containsIgnoringCase(find: "\(searchText)")
+                self.assetArry = self.assetListArry.filter{$0.Asset.containsIgnoringCase(find: "\(searchText)") || $0.EquipDescription.containsIgnoringCase(find: "\(searchText)")
                 }
                 if self.assetArry.count > 0 {
                     self.noDataLblView.isHidden = true

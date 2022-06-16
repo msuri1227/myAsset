@@ -114,7 +114,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         self.StatusCollectionView.delegate = self
         self.StatusCollectionView.dataSource = self
         StatusCollectionView.reloadData()
-        if ENABLE_POST_DEVICE_LOCATION_NOTES == true{
+        if ENABLE_POST_DEVICE_LOCATION_NOTES == false{
             if CLLocationManager.locationServicesEnabled() {
                 locationManager.delegate = self
                 locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -631,41 +631,18 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                             mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                         }
                     }
-                    else if item == "Update Geo Location".localized(){
+                    else if item == "Update_Geo_Location".localized(){
                         if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
-                            
-                        }
-                        else{
+                            assetDetailsVC?.objmodel.getEquipmentListForAssets(list: assetDetailsVC!.selectedAssetListArr, currentLoc: "x:\(self.detailViewModel.Latitude),y:\(self.detailViewModel.Longitude)", from: "")
+                        }else{
                             mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                         }
                     }
-                    else if item == "Assets Location".localized(){
+                    else if item == "Assets_Location".localized(){
                         ASSETMAP_TYPE = "ESRIMAP"
                         let assetLocVc = ScreenManager.getAssetLocationScreen()
                         if assetDetailsVC!.selectedAssetListArr.count > 0{
-                            var locArr = [Dictionary<String,Any>]()
-//                            for item in assetDetailsVC!.selectedAssetListArr{
-//                                locString =  "x:17.429623,y:78.446297"
-//                            }
-                            var dict = Dictionary<String,Any>()
-                            dict["AssetID"] = "10000"
-                            dict["AssetDesc"] = "10000 Description"
-                            dict["AssetLat"] = "17.429623"
-                            dict["AssetLong"] = "78.446297"
-                            
-                            locArr.append(dict)
-                            dict["AssetID"] = "10001"
-                            dict["AssetDesc"] = "10001 Description"
-                            dict["AssetLat"] = "17.429766"
-                            dict["AssetLong"] = "78.445256"
-                            locArr.append(dict)
-                            dict["AssetID"] = "10002"
-                            dict["AssetDesc"] = "10002 Description"
-                            dict["AssetLat"] = "17.431097"
-                            dict["AssetLong"] = "78.444870"
-                            locArr.append(dict)
-                            assetLocVc.locations = locArr
-                            assetDetailsVC?.present(assetLocVc, animated: false)
+                            assetDetailsVC!.objmodel.getEquipmentListForAssets(list: assetDetailsVC!.selectedAssetListArr, currentLoc: "x:\(self.detailViewModel.Latitude),y:\(self.detailViewModel.Longitude)", from: "AssetMap")
                         }else{
                             mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                         }
@@ -2150,7 +2127,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                 }
             }
             else if currentsubView == "Asset"{
-                menuarr = ["Verify".localized(), "Write Off".localized(), "Update Geo Location".localized(), "Assets Location".localized()]
+                menuarr = ["Verify".localized(), "Write Off".localized(), "Update_Geo_Location".localized(), "Assets_Location".localized()]
                 imgArray = [#imageLiteral(resourceName: "addnotificaBlack"),#imageLiteral(resourceName: "editIcon"),#imageLiteral(resourceName: "followOnBlack"),#imageLiteral(resourceName: "Capacity_Data_Black")]
             }
         }

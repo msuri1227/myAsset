@@ -68,12 +68,34 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
                 self.assestSegment.selectedSegmentIndex = 0
                 self.assestSegmentAction(self.assestSegment)
             }
-        }
-        else if type == "VerifyWriteOffCompleted"{
+        }else if type == "VerifyWriteOffCompleted"{
             DispatchQueue.main.async {
                 self.writeOffBgView.isHidden = true
             }
             objmodel.getObjectlist()
+        }else if type == "geoLocationUpdated"{
+            print("\(self.selectedAssetListArr.count) Geo location's updated")
+        }else if type == "AssetMap"{
+            DispatchQueue.main.async {
+                let assetLocVc = ScreenManager.getAssetLocationScreen()
+                var locListArr = [Dictionary<String,Any>]()
+                for item in self.objmodel.equipmentArr{
+                    var dict = Dictionary<String,Any>()
+                    dict["AssetID"] = "\(item.Asset)"
+                    dict["AssetDesc"] = "\(item.EquipDescription)"
+                    var location = item.GEOLocation
+                    location = location.replacingOccurrences(of: "x:", with: "")
+                    location = location.replacingOccurrences(of: "y:", with: "")
+                    let locArr = location.components(separatedBy: ",")
+                    if locArr.count == 2{
+                        dict["AssetLat"] = "\(locArr[0])"
+                        dict["AssetLong"] = "\(locArr[1])"
+                        locListArr.append(dict)
+                    }
+                }
+                assetLocVc.locations = locListArr
+                self.present(assetLocVc, animated: false)
+            }
         }
     }
     //MARK: - Button Action Methods

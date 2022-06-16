@@ -73,22 +73,23 @@ class AssetLocationVC: UIViewController,CLLocationManagerDelegate,GMSMapViewDele
 //        }
     }
     func createMarkers() {
-        
-        for item in self.locations{
-            let assetID = "\(item["AssetID"] ?? "")"
-            let assetDesc = "\(item["AssetDesc"] ?? "")"
-            let assetLat = "\(item["AssetLat"] ?? "")"
-            let assetLong = "\(item["AssetLong"] ?? "")"
-            if assetLat != "" && assetLong != "" {
-                let latitude = Double(assetLat) ?? 0.0
-                let longitude =  Double(assetLong) ?? 0.0
-                let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-                marker?.title = assetID
-                marker?.snippet = assetDesc
-                marker?.map = self.googleMapsView
+        DispatchQueue.main.async {
+            for item in self.locations{
+                let assetID = "\(item["AssetID"] ?? "")"
+                let assetDesc = "\(item["AssetDesc"] ?? "")"
+                let assetLat = "\(item["AssetLat"] ?? "")"
+                let assetLong = "\(item["AssetLong"] ?? "")"
+                if assetLat != "" && assetLong != "" {
+                    let latitude = Double(assetLat) ?? 0.0
+                    let longitude =  Double(assetLong) ?? 0.0
+                    let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                    marker?.title = assetID
+                    marker?.snippet = assetDesc
+                    marker?.map = self.googleMapsView
+                }
             }
+            self.googleMapsView.camera = GMSCameraPosition.camera(withLatitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude, zoom: 0.0)
         }
-        self.googleMapsView.camera = GMSCameraPosition.camera(withLatitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude, zoom: 0.0)
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func backButtonAction(_ sender: Any) {
