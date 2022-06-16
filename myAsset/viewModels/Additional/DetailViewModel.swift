@@ -115,7 +115,10 @@ class DetailViewModel {
             }else if self.assignment == "2" || self.assignment == "4" || self.assignment == "5"{
                 statusCategory = "OPERATIONLEVEL"
             }
-            filteredArray = self.statusArray.filter{$0.CurrentStatusCode == "\(currentStatus)" && $0.StatusCategory == "\(statusCategory)" && $0.ObjectType == "X"}
+            filteredArray = self.statusArray.filter{$0.CurrentStatusCode == "\(currentStatus)" && $0.StatusCategory == "\(statusCategory)" && $0.ObjectType == "\(singleWorkOrder.OrderType)"}
+            if filteredArray.count == 0{
+                filteredArray = self.statusArray.filter{$0.CurrentStatusCode == "\(currentStatus)" && $0.StatusCategory == "\(statusCategory)" && $0.ObjectType == "X"}
+            }
         }
         for obj in filteredArray {
             let statclass = obj
