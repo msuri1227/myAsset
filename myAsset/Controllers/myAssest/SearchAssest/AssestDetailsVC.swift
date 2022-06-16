@@ -139,6 +139,8 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     func scanCompleted(type: String, barCode: String, object: Any){
         if type == "success"{
             print("Asset scan code: \(barCode)")
+            self.searchField.text = barCode
+            self.searchBar(searchField, textDidChange: self.searchField.text!)
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
             }

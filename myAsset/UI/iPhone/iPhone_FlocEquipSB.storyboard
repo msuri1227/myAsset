@@ -3108,26 +3108,31 @@
                                             <constraint firstAttribute="bottom" secondItem="AVB-Un-nXa" secondAttribute="bottom" id="zhB-Tb-dpG"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barcode_scanner_icon" translatesAutoresizingMaskIntoConstraints="NO" id="WQZ-yv-Hie">
-                                        <rect key="frame" x="374" y="42.5" width="35" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oqh-VA-xH6">
+                                        <rect key="frame" x="376" y="42.5" width="30" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="LgS-Zz-5r7"/>
-                                            <constraint firstAttribute="width" constant="35" id="md9-m0-Huv"/>
+                                            <constraint firstAttribute="width" constant="30" id="GgQ-3y-k4K"/>
+                                            <constraint firstAttribute="height" constant="30" id="k9d-Im-afg"/>
                                         </constraints>
-                                    </imageView>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="barcode_scanner_icon"/>
+                                        <connections>
+                                            <action selector="scanBtnAction:" destination="1j1-0Y-6pT" eventType="touchUpInside" id="trx-7l-Dn0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="mjcSubViewColor"/>
                                 <constraints>
                                     <constraint firstItem="qq5-OA-BPD" firstAttribute="top" secondItem="UZF-K3-piq" secondAttribute="bottom" id="2lc-Vs-cXz"/>
-                                    <constraint firstItem="WQZ-yv-Hie" firstAttribute="centerY" secondItem="qq5-OA-BPD" secondAttribute="centerY" id="32A-oH-D7P"/>
-                                    <constraint firstAttribute="trailing" secondItem="WQZ-yv-Hie" secondAttribute="trailing" constant="5" id="6DT-1l-LWq"/>
                                     <constraint firstAttribute="trailing" secondItem="UZF-K3-piq" secondAttribute="trailing" constant="8" id="7xK-q0-ZsH"/>
                                     <constraint firstAttribute="trailing" secondItem="qq5-OA-BPD" secondAttribute="trailing" constant="45" id="9dR-jQ-gIC"/>
                                     <constraint firstItem="UZF-K3-piq" firstAttribute="top" secondItem="aVB-I6-6b0" secondAttribute="top" id="Bof-Qk-odY"/>
                                     <constraint firstItem="UZF-K3-piq" firstAttribute="leading" secondItem="aVB-I6-6b0" secondAttribute="leading" constant="8" id="Wmu-9R-dlY"/>
                                     <constraint firstItem="qq5-OA-BPD" firstAttribute="leading" secondItem="aVB-I6-6b0" secondAttribute="leading" constant="8" id="XqC-Vl-smQ"/>
                                     <constraint firstAttribute="bottom" secondItem="qq5-OA-BPD" secondAttribute="bottom" constant="5" id="YF7-mO-6RK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Oqh-VA-xH6" secondAttribute="trailing" constant="8" id="p4I-cC-3UV"/>
                                     <constraint firstAttribute="height" constant="80" id="uLv-cU-1zf"/>
+                                    <constraint firstItem="Oqh-VA-xH6" firstAttribute="centerY" secondItem="qq5-OA-BPD" secondAttribute="centerY" id="zUH-2E-ObG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8YK-Li-EnJ">
@@ -3191,6 +3196,7 @@
                         <outlet property="noDataLblView" destination="u2T-Zl-g5v" id="IvU-zR-uWT"/>
                         <outlet property="printBtn" destination="adW-vR-P7p" id="rhT-yc-Uwf"/>
                         <outlet property="printTagButton" destination="adW-vR-P7p" id="5m4-QF-wW5"/>
+                        <outlet property="scanButton" destination="Oqh-VA-xH6" id="nI7-Qt-XLd"/>
                         <outlet property="searchField" destination="0Dl-tb-XUM" id="Xh5-bc-5Pl"/>
                         <outlet property="searchView" destination="qq5-OA-BPD" id="znW-98-0Z6"/>
                         <outlet property="selectedLbl" destination="YeP-v8-2Ju" id="eSP-eT-QVz"/>

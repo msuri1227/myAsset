@@ -358,6 +358,7 @@ class MasterListVC: UIViewController, NSFetchedResultsControllerDelegate,UITable
                 return cell
             }else{
                 let cell = ScreenManager.getWorkOrderCell(tableView: tableView)
+                cell.selectionStyle = .none
                 cell.indexpath = indexPath
                 cell.masterViewModel = masterViewModel
                 var isSelected = Bool()
