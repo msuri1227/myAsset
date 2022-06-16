@@ -959,8 +959,8 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                                 dict.setValue(userName, forKey: "userName")
                             }
                         }else{
-                            dict.setValue(self.userNameTextField.text!, forKey: "userName")
-                            dict.setValue(self.passWordTextField.text!, forKey: "password")
+                            dict.setValue(self.userNameTextField.text ?? "", forKey: "userName")
+                            dict.setValue(self.passWordTextField.text ?? "", forKey: "password")
                         }
 
                         dict.setValue(false, forKey: "DemoMode")

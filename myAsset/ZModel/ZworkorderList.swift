@@ -26,5 +26,7 @@ class ZEquipmentModel: EquipmentModel{
     @objc public var CapitalizedOn : Date? = nil
     @objc public var DeactivatedOn : Date? = nil
     @objc public var SerialNumber = String()
+    @objc public var GEOLocation = String()
+    
     
 }

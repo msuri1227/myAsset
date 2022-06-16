@@ -144,6 +144,10 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                 }
                 self.assetTableView.reloadData()
             }
+        }else if type == "FlocUpdated"{
+            
+        }else if type == "geoLocationUpdated"{
+            
         }
     }
     @IBAction func closeBtnTapped(_ sender: UIButton) {
@@ -219,7 +223,9 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         }
     }
     func FuncLocOrEquipSelected(selectedObj:String,EquipObj:EquipmentModel,FuncObj:FunctionalLocationModel){
-        print("mj")
+        if selectedObj == "FunctionalLocation"{
+            self.assetSearchVM.updateFunctionalLocation(list: selectedArr, FuncLocation: FuncObj.FunctionalLoc, count: 0)
+        }
     }
     @objc func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         mJCLogger.log("Starting", Type: "info")

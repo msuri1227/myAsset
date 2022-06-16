@@ -76,13 +76,12 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
         self.locationTxtFld.didSelect { selectedText, index, id in
             self.locationTxtFld.text = selectedText
         }
-        self.funcLocTxtFld.text = "BLDG-LED-AA-02"
     }
     //MARK: - Data fetch methods
     func dataFetchCompleted(type: String, object: [Any]) {
         if type == "assetList"{
             assetListArr.removeAll()
-            assetListArr.append("--Select--")
+            assetListArr.append(selectStr)
             for list in assetVM.assetClassList{
                 assetListArr.append("\(list.AssetC) - \(list.AssetDes)")
             }
