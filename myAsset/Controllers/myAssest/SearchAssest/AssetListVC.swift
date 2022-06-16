@@ -319,7 +319,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                 self.assetArry = self.assetListArry
                 self.assetTableView.reloadData()
             }else{
-                self.assetArry = self.assetListArry.filter{$0.Equipment.containsIgnoringCase(find: "\(searchText)") || $0.EquipDescription.containsIgnoringCase(find: "\(searchText)")
+                self.assetArry = self.assetListArry.filter{$0.Asset.containsIgnoringCase(find: "\(searchText)") || $0.EquipDescription.containsIgnoringCase(find: "\(searchText)")
                 }
                 if self.assetArry.count > 0 {
                     self.noDataLblView.isHidden = true

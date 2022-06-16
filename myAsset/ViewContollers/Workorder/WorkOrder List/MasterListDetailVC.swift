@@ -114,7 +114,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         self.StatusCollectionView.delegate = self
         self.StatusCollectionView.dataSource = self
         StatusCollectionView.reloadData()
-        if ENABLE_POST_DEVICE_LOCATION_NOTES == true{
+        if ENABLE_POST_DEVICE_LOCATION_NOTES == false{
             if CLLocationManager.locationServicesEnabled() {
                 locationManager.delegate = self
                 locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -633,7 +633,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     }
                     else if item == "Update_Geo_Location".localized(){
                         if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
-                            
+                            assetDetailsVC?.objmodel.getEquipmentListForAssets(list: assetDetailsVC!.selectedAssetListArr, currentLoc: "x:\(self.detailViewModel.Latitude),y:\(self.detailViewModel.Longitude)", from: "")
                         }
                         else{
                             mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)

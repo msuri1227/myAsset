@@ -75,6 +75,9 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
             }
             objmodel.getObjectlist()
         }
+        else if type == "geoLocationUpdated"{
+            print("\(self.selectedAssetListArr.count) Geo location's updated")
+        }
     }
     //MARK: - Button Action Methods
     @IBAction func assestSegmentAction(_ sender: UISegmentedControl) {
