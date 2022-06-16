@@ -478,9 +478,9 @@ class ScreenManager: NSObject {
     }
     static func getAssetLocationScreen() -> AssetLocationVC{
         if DeviceType == iPad{
-            return AssetLocationVC.instantiate(fromAppStoryboard: .iPad_LoginSB)
+            return AssetLocationVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
         }else{
-            return AssetLocationVC.instantiate(fromAppStoryboard: .iPhone_LoginSB)
+            return AssetLocationVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
         }
     }
 

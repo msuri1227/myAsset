@@ -26,9 +26,6 @@ class WorkOrderObjectsViewModel {
                     mJCLogger.log("Response :\(responseArr.count)", Type: "Debug")
                     objectCount = "\(responseArr.count)"
                     self.objectListArray = responseArr
-                    for item in responseArr{
-                        print("Equp No: \(item.Equipment) and ProceesIndic: \(item.ProcessIndic)")
-                    }
                     self.delegate?.dataFetchCompleted?(type: "assetList", object: [])
                 }
                 else {

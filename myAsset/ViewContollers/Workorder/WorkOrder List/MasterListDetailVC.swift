@@ -624,10 +624,12 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     }
                     else if item == "Write Off".localized(){
                         if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
-                            assetDetailsVC?.notesTextView.text = ""
-                            assetDetailsVC?.writeOffBgView.isHidden = false
-                        }
-                        else{
+                            DispatchQueue.main.async {
+                                self.assetDetailsVC!.notesTextView.text = ""
+                                self.assetDetailsVC!.writeOffBgView.isHidden = false
+                                self.view.bringSubviewToFront(self.assetDetailsVC!.writeOffBgView)
+                            }
+                        }else{
                             mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                         }
                     }

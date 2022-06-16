@@ -10,6 +10,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Installed EquipmentVC-->
         <scene sceneID="gjy-pD-6zp">
@@ -2842,7 +2847,7 @@
                                     <constraint firstAttribute="bottom" secondItem="3pZ-Fw-T1u" secondAttribute="bottom" id="TgD-99-94b"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-1e-u8n">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-1e-u8n">
                                 <rect key="frame" x="0.0" y="179" width="414" height="683"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhG-GP-9F2">
@@ -2986,11 +2991,6 @@
                             <constraint firstItem="H2a-4l-3fB" firstAttribute="trailing" secondItem="cUh-Kk-Zjn" secondAttribute="trailing" id="yKT-bb-OdJ"/>
                             <constraint firstItem="hSV-1e-u8n" firstAttribute="leading" secondItem="H2a-4l-3fB" secondAttribute="leading" id="zDg-PR-yTh"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="BbU-Ig-RsK"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="assestSegment" destination="GfB-1Y-PSe" id="y3G-EV-RV1"/>
@@ -3220,6 +3220,81 @@
             </objects>
             <point key="canvasLocation" x="-7271.0144927536239" y="14857.366071428571"/>
         </scene>
+        <!--Asset LocationVC-->
+        <scene sceneID="U3y-U5-HX1">
+            <objects>
+                <viewController storyboardIdentifier="AssetLocationVC" modalPresentationStyle="fullScreen" id="2g0-ND-HmM" customClass="AssetLocationVC" customModule="myAsset" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Dx-mp-fnY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D03-8H-9w5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asset Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZzE-F2-mXM">
+                                        <rect key="frame" x="55" y="0.0" width="127" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Yi8-7L-2nQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="BzA-wA-cBB"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6x-Al-GUX">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Rz9-I8-PPs"/>
+                                            <constraint firstAttribute="width" constant="55" id="jg9-Zt-0iF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <state key="normal" image="backButton">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="2g0-ND-HmM" eventType="touchUpInside" id="zFd-XF-t0j"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ZzE-F2-mXM" secondAttribute="bottom" id="9RG-rn-b48"/>
+                                    <constraint firstItem="y6x-Al-GUX" firstAttribute="top" secondItem="D03-8H-9w5" secondAttribute="top" id="NQc-yx-ffY"/>
+                                    <constraint firstItem="ZzE-F2-mXM" firstAttribute="leading" secondItem="y6x-Al-GUX" secondAttribute="trailing" id="V6F-Cc-a5L"/>
+                                    <constraint firstAttribute="height" constant="50" id="VCX-Ls-NhB"/>
+                                    <constraint firstItem="ZzE-F2-mXM" firstAttribute="top" secondItem="D03-8H-9w5" secondAttribute="top" id="aK6-5p-198"/>
+                                    <constraint firstItem="ZzE-F2-mXM" firstAttribute="leading" secondItem="y6x-Al-GUX" secondAttribute="trailing" id="e5a-jK-bT9"/>
+                                    <constraint firstItem="y6x-Al-GUX" firstAttribute="leading" secondItem="D03-8H-9w5" secondAttribute="leading" id="kl5-wt-9jX"/>
+                                    <constraint firstAttribute="bottom" secondItem="y6x-Al-GUX" secondAttribute="bottom" id="uZ6-aE-Kry"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2P-mU-ziz" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <color key="backgroundColor" name="mjcViewBgColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="thE-dX-ZLK"/>
+                        <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                        <constraints>
+                            <constraint firstItem="thE-dX-ZLK" firstAttribute="bottom" secondItem="a2P-mU-ziz" secondAttribute="bottom" id="3Ux-cc-6gs"/>
+                            <constraint firstItem="D03-8H-9w5" firstAttribute="top" secondItem="thE-dX-ZLK" secondAttribute="top" id="AqA-bS-WhC"/>
+                            <constraint firstItem="D03-8H-9w5" firstAttribute="trailing" secondItem="thE-dX-ZLK" secondAttribute="trailing" id="QQu-eL-U2b"/>
+                            <constraint firstItem="a2P-mU-ziz" firstAttribute="top" secondItem="D03-8H-9w5" secondAttribute="bottom" id="SBg-gt-rgY"/>
+                            <constraint firstItem="a2P-mU-ziz" firstAttribute="leading" secondItem="thE-dX-ZLK" secondAttribute="leading" id="XGK-9l-zBD"/>
+                            <constraint firstItem="D03-8H-9w5" firstAttribute="leading" secondItem="thE-dX-ZLK" secondAttribute="leading" id="j0H-LD-hhj"/>
+                            <constraint firstItem="a2P-mU-ziz" firstAttribute="trailing" secondItem="thE-dX-ZLK" secondAttribute="trailing" id="t34-gw-kP7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="googleMapsView" destination="a2P-mU-ziz" id="G0M-uU-jFO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tyJ-18-pJR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10142" y="14802"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Ic_Install_equip" width="20" height="20"/>
@@ -3250,7 +3325,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mjcViewUIBorderColor">
-            <color red="0.74901960784313726" green="0.25098039215686274" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.3843137254901961" green="0.53725490196078429" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
