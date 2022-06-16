@@ -11,7 +11,7 @@ import ODSFoundation
 import mJCLib
 import PDFKit
 
-class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate {
+class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,barcodeDelegate {
     
     @IBOutlet weak var assetTableView: UITableView!
     @IBOutlet weak var searchView: UIView!
@@ -22,6 +22,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     @IBOutlet weak var searchField: UISearchBar!
     @IBOutlet weak var noDataLblView: UIView!
     @IBOutlet weak var printBtn: UIButton!
+    @IBOutlet weak var scanButton: UIButton!
     
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var navHeaderView = CustomNavHeader_iPhone()
@@ -105,8 +106,11 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             if self.selectedArr.contains(equipment){
                 cell.checkBoxBtn.setImage(UIImage(named: "ic_check_fill"), for: .normal)
             }else{
-                cell.checkBoxBtn.setImage(UIImage(named: "ic_check_nil"), for: .normal)            }
+                cell.checkBoxBtn.setImage(UIImage(named: "ic_check_nil"), for: .normal)
+            }
         }
+        cell.rightArrowbtn.tag = indexPath.row
+        cell.rightArrowbtn.addTarget(self, action: #selector(moveToOverViewButtonAction(sender:)), for: .touchUpInside)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -116,20 +120,39 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         let item = self.assetArry[indexPath.row]
         if !selectedArr.contains(item){
             selectedArr.append(item)
+            self.selectedCountLabelUpdate(count: self.selectedArr.count)
         }else{
             if let index = self.selectedArr.index(of: item){
                 selectedArr.remove(at: index)
+                self.selectedCountLabelUpdate(count: self.selectedArr.count)
             }
         }
-        DispatchQueue.main.async {
-            self.selectedLbl.text = "\(self.selectedArr.count)"
-            self.assetTableView.reloadData()
-            if self.selectedArr.count > 0{
-                self.printTagButton.isHidden = false
-            }else{
-                self.printTagButton.isHidden = true
-            }
+        self.assetTableView.reloadData()
+    }
+    @objc func moveToOverViewButtonAction(sender: UIButton){
+        mJCLogger.log("Starting", Type: "info")
+        if DeviceType == iPad{
+            let flocEquipDetails = ScreenManager.getFlocEquipDetialsScreen()
+            flocEquipDetails.flocEquipObjType = ""
+            flocEquipDetails.flocEquipObjText = self.assetArry[sender.tag].Equipment
+            flocEquipDetails.classificationType = "Workorder"
+            flocEquipDetails.modalPresentationStyle = .fullScreen
+            self.present(flocEquipDetails, animated: false) {}
+        }else{
+            let flocEquipDetails = ScreenManager.getFlocEquipDetialsScreen()
+            flocEquipDetails.flocEquipObjType = ""
+            flocEquipDetails.flocEquipObjText = self.assetArry[sender.tag].Equipment
+            flocEquipDetails.classificationType = "Workorder"
+            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
+            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
+            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
+            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = flocEquipDetails as UIViewController as? SlideMenuControllerSelectDelegate
+            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
+            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
+            self.appDeli.window?.makeKeyAndVisible()
+            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(flocEquipDetails, animated: true)
         }
+        mJCLogger.log("Ended", Type: "info")
     }
     func dataFetchCompleted(type: String, object: [Any]) {
         if type == "assetList"{
@@ -137,6 +160,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                 self.assetArry = self.assetSearchVM.assetList
                 self.assetListArry = self.assetSearchVM.assetList
                 self.totalLbl.text = "\(self.assetArry.count)"
+                self.selectedCountLabelUpdate(count: self.selectedArr.count)
                 if self.assetArry.count > 0{
                     self.noDataLblView.isHidden = true
                 }else{
@@ -150,8 +174,26 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             
         }
     }
+    @IBAction func scanBtnAction(_ sender: UIButton) {
+        mJCLogger.log("Starting", Type: "info")
+        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "asset", delegate: self, controller: self)
+        mJCLogger.log("Ended", Type: "info")
+    }
+    func selectedCountLabelUpdate(count: Int){
+        if self.selectedArr.count > 0{
+            self.selectedStackView.isHidden = false
+            self.printTagButton.isHidden = false
+            self.selectedLbl.text = "\(self.selectedArr.count)"
+        }
+        else{
+            self.selectedStackView.isHidden = true
+            self.printTagButton.isHidden = true
+        }
+    }
+    
     @IBAction func closeBtnTapped(_ sender: UIButton) {
         self.selectedArr.removeAll()
+        self.selectedCountLabelUpdate(count:self.selectedArr.count)
         assetTableView.reloadData()
         self.selectedLbl.text = ""
     }
@@ -253,7 +295,17 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         self.locationManager.stopUpdatingLocation()
         mJCLogger.log("Ended", Type: "info")
     }
-    
+    //MARK: - Barcode Delegate
+    func scanCompleted(type: String, barCode: String, object: Any){
+        if type == "success"{
+            print("Asset scan code: \(barCode)")
+            self.searchField.text = barCode
+            self.searchBar(searchField, textDidChange: self.searchField.text!)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
     //MARK: -  Search Bar delegate..
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         self.searchField.endEditing(true)
