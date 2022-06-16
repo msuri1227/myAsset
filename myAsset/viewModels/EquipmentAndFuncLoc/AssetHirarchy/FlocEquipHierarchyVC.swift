@@ -93,10 +93,10 @@ class FlocEquipHierarchyVC: UIViewController , UITableViewDelegate,UITableViewDa
         self.filterBy = "Id"
         self.searchTextfield.clearButtonMode = .whileEditing
         self.lastSyncLabel.isHidden = false
-
         ODSUIHelper.setBorderToView(view: self.searchTextfieldHolderView)
         ODSUIHelper.setBorderToView(view: self.searchFilterView)
-        self.setLayoutToView(view: self.searchTextfieldHolderView, borderColor: UIColor.lightGray, borderWidth: 1.0)
+        
+        self.setLayoutToView(view: self.searchTextfieldHolderView, borderColor: UIColor(named: "mjcViewUIBorderColor")!, borderWidth: 1.0)
         self.setLayoutToView(view: self.searchFilterView, borderColor: appColor, borderWidth: 1.0)
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             let text = "  \(item)"

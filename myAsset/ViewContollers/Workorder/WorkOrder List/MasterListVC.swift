@@ -67,6 +67,9 @@ class MasterListVC: UIViewController, NSFetchedResultsControllerDelegate,UITable
         self.registerTableViewNibs()
         self.setBasicView()
         self.setListDetails()
+        searchTextField.compatibleSearchTextField.backgroundColor = UIColor.white
+        searchTextField.setImage(UIImage(), for: .search, state: .normal)
+        ODSUIHelper.setBorderToView(view:self.searchInView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         mJCLogger.log("Ended", Type: "info")
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +135,7 @@ class MasterListVC: UIViewController, NSFetchedResultsControllerDelegate,UITable
             self.profileView.layer.masksToBounds = true
         }else{
             self.searchInView.layer.borderWidth = 1.0
-            self.searchInView.layer.borderColor = UIColor.lightGray.cgColor
+            //self.searchInView.layer.borderColor = UIColor.lightGray.cgColor
             self.searchInView.layer.masksToBounds = true
         }
         self.filterCountLabel.layer.cornerRadius = self.filterCountLabel.frame.size.width / 2

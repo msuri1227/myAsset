@@ -45,6 +45,8 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         assetSearchVM.delegate = self
         assetSearchVM.searchParams = self.searchParam
         assetSearchVM.getAssetList()
+        searchField.compatibleSearchTextField.backgroundColor = UIColor.white
+        searchField.setImage(UIImage(), for: .search, state: .normal)
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters

@@ -1651,7 +1651,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.33725490200000002" green="0.54117647059999996" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3Ox-mE-8xz"/>
                                     <constraint firstAttribute="bottom" secondItem="qg5-D4-Zod" secondAttribute="bottom" id="4pa-hj-dMp"/>
@@ -1680,7 +1680,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="xibPlaceholderLocKey" value="bL2-Ws-acm"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="xibPlaceholderLocKey" value="Search"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="5Id-lV-fDH" id="gcP-v5-v1M"/>
@@ -1688,7 +1688,7 @@
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5C-n3-2l3">
                                                 <rect key="frame" x="229" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" red="0.33725490200000002" green="0.54117647059999996" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="5gD-41-J8T"/>
                                                     <constraint firstAttribute="height" constant="40" id="rN2-ay-0fM"/>
@@ -1810,7 +1810,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.33725490200000002" green="0.54117647059999996" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                                 <constraints>
                                     <constraint firstItem="dX3-Jq-IkJ" firstAttribute="leading" secondItem="m4M-aa-kvU" secondAttribute="leading" constant="10" id="1qw-GO-E1t"/>
                                     <constraint firstAttribute="height" constant="50" id="N3B-fC-P3c"/>
@@ -2046,7 +2046,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WRf-sw-SAX"/>
-                        <color key="backgroundColor" name="mjcSubViewColor"/>
+                        <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                         <constraints>
                             <constraint firstItem="m4M-aa-kvU" firstAttribute="trailing" secondItem="WRf-sw-SAX" secondAttribute="trailing" id="05M-8j-Ill"/>
                             <constraint firstItem="kwq-Jc-1Ti" firstAttribute="trailing" secondItem="WRf-sw-SAX" secondAttribute="trailing" id="2e4-W8-5Bm"/>
@@ -2677,7 +2677,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8v-yj-3Ls">
-                                        <rect key="frame" x="5" y="42" width="404" height="1"/>
+                                        <rect key="frame" x="5" y="43" width="404" height="1"/>
                                         <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="aKB-Jo-Wlv"/>
@@ -2689,7 +2689,7 @@
                                     <constraint firstItem="X8v-yj-3Ls" firstAttribute="leading" secondItem="GfB-1Y-PSe" secondAttribute="leading" id="99P-VM-Qtb"/>
                                     <constraint firstAttribute="height" constant="45" id="Ers-8c-BPF"/>
                                     <constraint firstItem="X8v-yj-3Ls" firstAttribute="trailing" secondItem="GfB-1Y-PSe" secondAttribute="trailing" id="EtU-9K-TIp"/>
-                                    <constraint firstItem="X8v-yj-3Ls" firstAttribute="top" secondItem="GfB-1Y-PSe" secondAttribute="bottom" constant="2" id="KVf-O9-RxJ"/>
+                                    <constraint firstItem="X8v-yj-3Ls" firstAttribute="top" secondItem="GfB-1Y-PSe" secondAttribute="bottom" constant="3" id="KVf-O9-RxJ"/>
                                     <constraint firstItem="GfB-1Y-PSe" firstAttribute="leading" secondItem="Rwp-sl-yRw" secondAttribute="leading" constant="5" id="Sej-nQ-2Ft"/>
                                     <constraint firstAttribute="bottom" secondItem="GfB-1Y-PSe" secondAttribute="bottom" constant="5" id="amN-JQ-ubE"/>
                                     <constraint firstAttribute="trailing" secondItem="GfB-1Y-PSe" secondAttribute="trailing" constant="5" id="hnE-62-ELP"/>
@@ -2776,8 +2776,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYM-BS-cgz">
                                         <rect key="frame" x="8" y="40" width="292.5" height="40"/>
                                         <subviews>
-                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="w60-f8-gfe">
-                                                <rect key="frame" x="0.0" y="0.0" width="292.5" height="40"/>
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="w60-f8-gfe">
+                                                <rect key="frame" x="-10" y="0.0" width="302.5" height="40"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iq2-Qi-a4I">
@@ -2796,9 +2798,9 @@
                                             <constraint firstAttribute="bottom" secondItem="w60-f8-gfe" secondAttribute="bottom" id="2VT-BE-oM2"/>
                                             <constraint firstAttribute="trailing" secondItem="iq2-Qi-a4I" secondAttribute="trailing" id="K78-BF-oR9"/>
                                             <constraint firstItem="w60-f8-gfe" firstAttribute="top" secondItem="nYM-BS-cgz" secondAttribute="top" id="KSn-Wc-fOr"/>
-                                            <constraint firstItem="w60-f8-gfe" firstAttribute="leading" secondItem="nYM-BS-cgz" secondAttribute="leading" id="Ml5-eL-PsH"/>
+                                            <constraint firstItem="w60-f8-gfe" firstAttribute="leading" secondItem="nYM-BS-cgz" secondAttribute="leading" constant="-10" id="LHE-8p-Ctw"/>
                                             <constraint firstItem="iq2-Qi-a4I" firstAttribute="top" secondItem="nYM-BS-cgz" secondAttribute="top" id="VDE-M3-RNT"/>
-                                            <constraint firstAttribute="trailing" secondItem="w60-f8-gfe" secondAttribute="trailing" id="hKe-B4-etn"/>
+                                            <constraint firstAttribute="trailing" secondItem="w60-f8-gfe" secondAttribute="trailing" id="cMu-Jx-YOz"/>
                                             <constraint firstAttribute="height" constant="40" id="pCf-jC-li2"/>
                                             <constraint firstAttribute="bottom" secondItem="iq2-Qi-a4I" secondAttribute="bottom" id="uxv-Tn-SSX"/>
                                         </constraints>
@@ -2984,6 +2986,11 @@
                             <constraint firstItem="H2a-4l-3fB" firstAttribute="trailing" secondItem="cUh-Kk-Zjn" secondAttribute="trailing" id="yKT-bb-OdJ"/>
                             <constraint firstItem="hSV-1e-u8n" firstAttribute="leading" secondItem="H2a-4l-3fB" secondAttribute="leading" id="zDg-PR-yTh"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="BbU-Ig-RsK"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="assestSegment" destination="GfB-1Y-PSe" id="y3G-EV-RV1"/>
@@ -3078,12 +3085,17 @@
                                             <constraint firstAttribute="height" constant="40" id="RhG-Qs-5s1"/>
                                         </constraints>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qq5-OA-BPD">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qq5-OA-BPD">
                                         <rect key="frame" x="8" y="40" width="361" height="35"/>
                                         <subviews>
-                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="0Dl-tb-XUM">
-                                                <rect key="frame" x="0.0" y="0.0" width="361" height="35"/>
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="0Dl-tb-XUM">
+                                                <rect key="frame" x="-10" y="0.0" width="371" height="35"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="Search" value="Search"/>
+                                                </userDefinedRuntimeAttributes>
                                             </searchBar>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVB-Un-nXa">
                                                 <rect key="frame" x="326" y="0.0" width="35" height="35"/>
@@ -3096,12 +3108,12 @@
                                                 <state key="normal" image="search_icon"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" name="mjcViewBgColor"/>
+                                        <color key="backgroundColor" red="0.84705882352941175" green="0.85098039215686272" blue="0.85490196078431369" alpha="0.80467739484168044" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="0Dl-tb-XUM" secondAttribute="trailing" id="LCU-tx-cTC"/>
                                             <constraint firstItem="0Dl-tb-XUM" firstAttribute="top" secondItem="qq5-OA-BPD" secondAttribute="top" id="P7N-78-wlg"/>
-                                            <constraint firstItem="0Dl-tb-XUM" firstAttribute="leading" secondItem="qq5-OA-BPD" secondAttribute="leading" id="cLp-z1-Sep"/>
+                                            <constraint firstItem="0Dl-tb-XUM" firstAttribute="leading" secondItem="qq5-OA-BPD" secondAttribute="leading" constant="-10" id="gWu-n6-KLV"/>
                                             <constraint firstAttribute="height" constant="35" id="lCB-in-5X0"/>
-                                            <constraint firstAttribute="trailing" secondItem="0Dl-tb-XUM" secondAttribute="trailing" id="nSt-lW-698"/>
                                             <constraint firstAttribute="bottom" secondItem="0Dl-tb-XUM" secondAttribute="bottom" id="oRl-qd-IBX"/>
                                             <constraint firstItem="AVB-Un-nXa" firstAttribute="top" secondItem="qq5-OA-BPD" secondAttribute="top" id="otR-vC-dJo"/>
                                             <constraint firstAttribute="trailing" secondItem="AVB-Un-nXa" secondAttribute="trailing" id="wZX-VS-2Sf"/>
@@ -3165,7 +3177,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="mjcSubViewColor"/>
                                 <constraints>
                                     <constraint firstItem="kNx-QU-ioY" firstAttribute="centerX" secondItem="u2T-Zl-g5v" secondAttribute="centerX" id="551-wI-6wf"/>
                                     <constraint firstItem="kNx-QU-ioY" firstAttribute="centerY" secondItem="u2T-Zl-g5v" secondAttribute="centerY" id="QSv-a6-9q3"/>
@@ -3238,7 +3250,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mjcViewUIBorderColor">
-            <color red="0.3843137254901961" green="0.53725490196078429" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.74901960784313726" green="0.25098039215686274" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

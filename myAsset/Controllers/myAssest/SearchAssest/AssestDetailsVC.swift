@@ -1,7 +1,6 @@
 //
 //  AssetDetailsVC.swift
 //  myAsset
-//
 //  Created by Mangi Reddy on 08/06/22.
 //  Copyright © 2022 Ondevice Solutions. All rights reserved.
 //
@@ -46,10 +45,11 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        noDataLblView.isHidden = true
         objmodel.delegate = self
         objmodel.getObjectlist()
         searchField.delegate = self
+        searchField.setImage(UIImage(), for: .search, state: .normal)
+        searchField.compatibleSearchTextField.backgroundColor = UIColor.white
         assetTableView.register(UINib(nibName: "SearchAssetCell_iPhone", bundle: nil), forCellReuseIdentifier: "SearchAssetCell_iPhone")
         assetTableView.rowHeight = 140
         assetTableView.estimatedRowHeight = UITableView.automaticDimension

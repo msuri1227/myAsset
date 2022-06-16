@@ -395,7 +395,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Operations:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7T-bN-BVC">
                                                 <rect key="frame" x="40" y="0.0" width="364" height="50"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                <color key="textColor" red="0.32244807479999998" green="0.53813958169999998" blue="0.65099734070000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="textColor" name="mjcViewUIBorderColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="K7T-bN-BVC"/>
@@ -6644,18 +6644,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3cZ-Kg-inv" userLabel="SearchView">
                                 <rect key="frame" x="0.0" y="159" width="424" height="56"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="wE4-Ba-U6I">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="56"/>
-                                        <color key="backgroundColor" name="mjcSubViewColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="Wnx-7w-CkQ"/>
-                                        </constraints>
-                                        <color key="barTintColor" name="mjcViewBgColor"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="xibPlaceholderLocKey" value="Search"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWF-Qy-6Cd">
                                         <rect key="frame" x="365" y="8" width="40" height="40"/>
                                         <constraints>
@@ -6664,17 +6652,54 @@
                                         </constraints>
                                         <state key="normal" image="barcode_scanner_icon"/>
                                         <connections>
-                                            <action selector="scanButtonAction:" destination="Vcl-l3-zQi" eventType="touchUpInside" id="HVF-my-ke4"/>
+                                            <action selector="scanButtonAction:" destination="Vcl-l3-zQi" eventType="touchUpInside" id="hKA-g5-eev"/>
                                         </connections>
                                     </button>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugo-q3-wab">
+                                        <rect key="frame" x="5" y="11" width="356" height="35"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="7Ul-L3-8Yy">
+                                                <rect key="frame" x="-15" y="0.0" width="371" height="35"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="Search" value="Search"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </searchBar>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcA-RN-075">
+                                                <rect key="frame" x="321" y="0.0" width="35" height="35"/>
+                                                <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="cBR-A8-7Bd"/>
+                                                    <constraint firstAttribute="width" constant="35" id="naP-og-Hxl"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" image="search_icon"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.85098039219999999" blue="0.85490196080000003" alpha="0.8046773948" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="HcA-RN-075" secondAttribute="bottom" id="6Qg-lq-gW5"/>
+                                            <constraint firstAttribute="trailing" secondItem="7Ul-L3-8Yy" secondAttribute="trailing" id="E4C-CM-BVc"/>
+                                            <constraint firstItem="HcA-RN-075" firstAttribute="top" secondItem="Ugo-q3-wab" secondAttribute="top" id="Y0e-9J-PJQ"/>
+                                            <constraint firstAttribute="height" constant="35" id="aUr-rK-1kD"/>
+                                            <constraint firstItem="7Ul-L3-8Yy" firstAttribute="top" secondItem="Ugo-q3-wab" secondAttribute="top" id="ew0-SR-NmR"/>
+                                            <constraint firstAttribute="bottom" secondItem="7Ul-L3-8Yy" secondAttribute="bottom" id="kPZ-9k-s4u"/>
+                                            <constraint firstAttribute="trailing" secondItem="HcA-RN-075" secondAttribute="trailing" id="rSJ-tu-KjN"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" name="mjcSubViewColorNormal"/>
                                 <constraints>
-                                    <constraint firstItem="wE4-Ba-U6I" firstAttribute="leading" secondItem="3cZ-Kg-inv" secondAttribute="leading" id="7Rd-hm-FYF"/>
-                                    <constraint firstItem="wE4-Ba-U6I" firstAttribute="top" secondItem="3cZ-Kg-inv" secondAttribute="top" id="RTf-21-F4o"/>
+                                    <constraint firstItem="Ugo-q3-wab" firstAttribute="leading" secondItem="3cZ-Kg-inv" secondAttribute="leading" constant="5" id="IRx-j3-nq4"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Ul-L3-8Yy" secondAttribute="bottom" constant="10" id="M1z-aQ-7OG"/>
+                                    <constraint firstItem="7Ul-L3-8Yy" firstAttribute="top" secondItem="3cZ-Kg-inv" secondAttribute="top" constant="11" id="MzY-WG-cFu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ugo-q3-wab" secondAttribute="trailing" constant="63" id="RQv-hf-fYm"/>
                                     <constraint firstAttribute="height" constant="56" id="Xgd-Lt-OB6"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Ul-L3-8Yy" secondAttribute="trailing" constant="63" id="ZUq-BL-QQv"/>
+                                    <constraint firstItem="7Ul-L3-8Yy" firstAttribute="leading" secondItem="3cZ-Kg-inv" secondAttribute="leading" constant="-10" id="hfe-nJ-tRI"/>
                                     <constraint firstAttribute="trailing" secondItem="VWF-Qy-6Cd" secondAttribute="trailing" constant="19" id="k0Q-5K-bdP"/>
-                                    <constraint firstItem="VWF-Qy-6Cd" firstAttribute="leading" secondItem="wE4-Ba-U6I" secondAttribute="trailing" constant="20" id="o54-6W-m0w"/>
                                     <constraint firstAttribute="bottom" secondItem="VWF-Qy-6Cd" secondAttribute="bottom" constant="8" id="sai-iq-tAd"/>
                                 </constraints>
                             </view>
@@ -6826,9 +6851,10 @@
                         <outlet property="noDataLabel" destination="vMi-Nt-L9d" id="IOc-Oz-VLW"/>
                         <outlet property="noDataView" destination="0Xj-m6-cb8" id="KoQ-5L-sHz"/>
                         <outlet property="priorityButton" destination="zYv-7o-jN8" id="HT2-4V-aA2"/>
-                        <outlet property="scanButton" destination="VWF-Qy-6Cd" id="5xl-fJ-U2k"/>
-                        <outlet property="searchInView" destination="3cZ-Kg-inv" id="H4G-lc-915"/>
-                        <outlet property="searchTextField" destination="wE4-Ba-U6I" id="kbV-4z-kja"/>
+                        <outlet property="scanButton" destination="VWF-Qy-6Cd" id="MI3-J0-poA"/>
+                        <outlet property="searchButton" destination="HcA-RN-075" id="GJz-nt-rOs"/>
+                        <outlet property="searchInView" destination="Ugo-q3-wab" id="YAK-UQ-4xL"/>
+                        <outlet property="searchTextField" destination="7Ul-L3-8Yy" id="Yr9-Go-vp6"/>
                         <outlet property="searchViewHeightConstraint" destination="Xgd-Lt-OB6" id="Qwx-53-595"/>
                         <outlet property="totalWorkOrderLabel" destination="KMO-vs-Dd7" id="5v3-MI-91b"/>
                         <outlet property="workOrderTableView" destination="ZE5-Wb-yQk" id="JV2-t4-6mo"/>
