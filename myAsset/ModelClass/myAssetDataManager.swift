@@ -66,12 +66,11 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
     func showtoastmsg(actionTitle:String,msg:String){
         if actionTitle == ""{
             DispatchQueue.main.async{
-                
-                self.appDeli.window?.showSnackbar(message: msg, duration: SnackbarDuration.SHORT, actionButtonText: "Ok", actionButtonClickHandler: nil)
+                self.appDeli.window?.showSnackbar(message: msg, duration: .SHORT, actionButtonText: "Ok", bgColor: appColor, actionButtonClickHandler: nil)
             }
         }else{
             DispatchQueue.main.async{
-                self.appDeli.window?.showSnackbar(message: msg, duration: SnackbarDuration.SHORT, actionButtonText: actionTitle, actionButtonClickHandler: { () -> () in
+                self.appDeli.window?.showSnackbar(message: msg, duration: .SHORT, actionButtonText: "Ok", bgColor: appColor, actionButtonClickHandler: { () -> () in
                     if actionTitle == "FlushError".localized(){
                         if flushErrorsArray.count > 0{
                             DispatchQueue.main.async{

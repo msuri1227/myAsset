@@ -67,14 +67,14 @@ public enum SnackbarDuration : Swift.Int {
   }
 }
 extension UIKit.UIWindow {
-  @_Concurrency.MainActor(unsafe) public func showSnackbar(message: Swift.String, duration: ODSFoundation.SnackbarDuration, actionButtonText: Swift.String?, actionButtonClickHandler: (() -> ())?)
+  @_Concurrency.MainActor(unsafe) public func showSnackbar(message: Swift.String, duration: ODSFoundation.SnackbarDuration? = .SHORT, actionButtonText: Swift.String?, bgColor: UIKit.UIColor? = .red, actionButtonClickHandler: (() -> ())?)
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class OdsSnackBarView : UIKit.UIView {
   @objc @_Concurrency.MainActor(unsafe) dynamic public var snackBarBgColor: UIKit.UIColor?
   @objc @_Concurrency.MainActor(unsafe) dynamic public var descLabelTextColor: UIKit.UIColor?
   @objc @_Concurrency.MainActor(unsafe) dynamic public var actionButtonBackgroundColor: UIKit.UIColor?
   @objc @_Concurrency.MainActor(unsafe) dynamic public var actionButtonTextColor: UIKit.UIColor?
-  @_Concurrency.MainActor(unsafe) public class func show(message: Swift.String, duration: ODSFoundation.SnackbarDuration, actionButtonText: Swift.String?, superView: UIKit.UIView!, buttonClicked: (() -> ())?)
+  @_Concurrency.MainActor(unsafe) public class func show(message: Swift.String, duration: ODSFoundation.SnackbarDuration, actionButtonText: Swift.String?, bgColor: UIKit.UIColor? = .red, superView: UIKit.UIView!, buttonClicked: (() -> ())?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit

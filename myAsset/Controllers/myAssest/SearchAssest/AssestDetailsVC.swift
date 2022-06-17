@@ -74,7 +74,7 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
             }
             objmodel.getObjectlist()
         }else if type == "geoLocationUpdated"{
-            print("\(self.selectedAssetListArr.count) Geo location's updated")
+            self.appDeli.window?.showSnackbar(message: "\(self.selectedAssetListArr.count) Geo location's updated", duration: .SHORT, actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
         }else if type == "AssetMap"{
             DispatchQueue.main.async {
                 let assetLocVc = ScreenManager.getAssetLocationScreen()
