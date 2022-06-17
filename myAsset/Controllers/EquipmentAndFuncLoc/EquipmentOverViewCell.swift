@@ -85,6 +85,7 @@ class EquipmentOverViewCell: UITableViewCell {
     
     @IBOutlet weak var equipmentValLbl: UILabel!
     @IBOutlet weak var assetValLbl: UILabel!
+    @IBOutlet weak var rfIDValLbl: UILabel!
     @IBOutlet weak var assetClassValLbl: UILabel!
     @IBOutlet weak var assetOwnerValLbl: UILabel!
     @IBOutlet weak var subNumberValLbl: UILabel!
@@ -133,11 +134,13 @@ class EquipmentOverViewCell: UITableViewCell {
         
         equipmentValLbl.text = equipOverviewModelClass?.Equipment
         assetValLbl.text = equipOverviewModelClass?.Asset
+        rfIDValLbl.text = equipOverviewModelClass?.RFIDTagValue
         assetClassValLbl.text = equipOverviewModelClass?.AssetClass
         assetOwnerValLbl.text = equipOverviewModelClass?.AssetOwner
         subNumberValLbl.text = equipOverviewModelClass?.SubNumber
         inventoryNoteValLbl.text =  equipOverviewModelClass?.InventoryNote
         inventoryNumValLbl.text = equipOverviewModelClass?.InventoryNo
+        geoLocationValLbl.text = equipOverviewModelClass?.GEOLocation
 
         if equipOverviewModelClass?.LastInventoryDate != nil{
             lastInventoryDateValLbl.text =  ODSDateHelper.convertDateToString(date: (equipOverviewModelClass?.LastInventoryDate)!)

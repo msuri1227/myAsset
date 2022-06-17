@@ -525,12 +525,11 @@ class MasterListVC: UIViewController, NSFetchedResultsControllerDelegate,UITable
             UIView.animate(withDuration: 2.5, delay: 0, options: UIView.AnimationOptions(), animations: {
                 self.searchViewHeightConstraint.constant = 0
                 self.searchTextField.isUserInteractionEnabled = false
-//                self.searchView.isHidden = true
+                self.scanButton.isHidden = true
             }, completion: nil)
-
         } else {
             UIView.animate(withDuration: 2.5, delay: 0, options: UIView.AnimationOptions(), animations: {
-//                self.searchView.isHidden = false
+                self.scanButton.isHidden = false
                 self.searchViewHeightConstraint.constant = 50
                 self.searchTextField.isUserInteractionEnabled = true
             }, completion: nil)

@@ -27,6 +27,5 @@ class ZEquipmentModel: EquipmentModel{
     @objc public var DeactivatedOn : Date? = nil
     @objc public var SerialNumber = String()
     @objc public var GEOLocation = String()
-    
-    
+    @objc public var RFIDTagValue = String()
 }

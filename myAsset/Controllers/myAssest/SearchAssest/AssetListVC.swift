@@ -146,6 +146,11 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             flocEquipDetails.flocEquipObjText = self.assetArry[sender.tag].Equipment
             flocEquipDetails.classificationType = "Workorder"
             myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
+            let assetVC = ScreenManager.getAssetListVCScreen()
+            let navVC: UINavigationController = UINavigationController(rootViewController: assetVC)
+            navVC.isNavigationBarHidden = true
+            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = navVC
+            myAssetDataManager.uniqueInstance.navigationController = navVC
             myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
             myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
             myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = flocEquipDetails as UIViewController as? SlideMenuControllerSelectDelegate
@@ -174,6 +179,11 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             
         }else if type == "geoLocationUpdated"{
             
+        }
+        else if type == "RFIDUpdated"{
+            DispatchQueue.main.async {
+                self.assetTableView.reloadData()
+            }
         }
     }
     @IBAction func scanBtnAction(_ sender: UIButton) {
@@ -233,7 +243,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     }
     func threedotmenuButtonClicked(_ sender: UIButton?){
         var menuarr = [String]()
-        menuarr = ["Update_Geo_Location".localized(),"Update_Functional_Location".localized()]
+        menuarr = ["Update_Geo_Location".localized(),"Update_Functional_Location".localized(), "Update_RF_Id".localized()]
         if menuarr.count == 0{
             mJCAlertHelper.showAlert(self, title: alerttitle, message: "No_Options_Available".localized(), button: okay)
         }
@@ -262,6 +272,33 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                     functionaLocationListVC.delegate = self
                     self.present(functionaLocationListVC, animated: false) {}
                     mJCLogger.log("Ended", Type: "info")
+                }
+            }
+            else if item == "Update_RF_Id".localized(){
+                if self.selectedArr.count > 0{
+                    if self.selectedArr.count == 1{
+                        let selectedVal = self.selectedArr[0].Asset
+                        let params = Parameters(
+                            title: "Update_RF_Id".localized(),
+                            message: "Asset: \(selectedVal) \n\n RF Id: RF1298\(selectedVal)",
+                            cancelButton: "Update".localized(),
+                            otherButtons: [cancelButtonTitle]
+                        )
+                        mJCAlertHelper.showAlertWithHandler(self, parameters: params) { buttonIndex in
+                            switch buttonIndex {
+                            case 0:
+                                self.assetSearchVM.updateRFIdTagValue(list: self.selectedArr, RFId: "RF1298\(self.selectedArr[0].Asset)", count: 0)
+                            case 1:
+                                self.dismiss(animated: true)
+                            default: break
+                            }
+                        }
+                    }
+                    else{
+                        mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select only one object", button: okay)
+                    }
+                }else{
+                    mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
                 }
             }
         }

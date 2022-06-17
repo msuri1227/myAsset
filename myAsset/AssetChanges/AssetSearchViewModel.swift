@@ -108,4 +108,22 @@ class AssetSearchViewModel: NSObject {
             }
         }
     }
+    
+    func updateRFIdTagValue(list:[ZEquipmentModel], RFId:String, count:Int){
+        if count == list.count{
+            self.delegate?.dataFetchCompleted?(type: "RFIDUpdated", object: [])
+        }else{
+            let equipment = list[count]
+            (equipment.entity.properties["RFIDTagValue"] as! SODataProperty).value = "\(RFId)" as NSObject
+            EquipmentModel.updateWorkorderEntity(entity: equipment.entity,  flushRequired: false, options: nil){(response, error) in
+                if(error == nil) {
+                    self.updateRFIdTagValue(list: list, RFId: RFId, count: count + 1)
+                    mJCLogger.log("RF Id Updated successfully", Type: "Debug")
+                }else {
+                    self.updateRFIdTagValue(list: list, RFId: RFId, count: count + 1)
+                    mJCLogger.log("Reason : \(String(describing: error?.localizedDescription))", Type: "Error")
+                }
+            }
+        }
+    }
 }
