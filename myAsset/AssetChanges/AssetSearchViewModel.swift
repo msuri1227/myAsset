@@ -111,7 +111,7 @@ class AssetSearchViewModel: NSObject {
     
     func updateRFIdTagValue(list:[ZEquipmentModel], RFId:String, count:Int){
         if count == list.count{
-            self.delegate?.dataFetchCompleted?(type: "RFIDUpdated", object: [])
+            self.delegate?.dataFetchCompleted?(type: "RFIDUpdated", object: [RFId])
         }else{
             let equipment = list[count]
             (equipment.entity.properties["RFIDTagValue"] as! SODataProperty).value = "\(RFId)" as NSObject

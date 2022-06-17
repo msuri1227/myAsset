@@ -67,14 +67,14 @@ public enum SnackbarDuration : Swift.Int {
   }
 }
 extension UIKit.UIWindow {
-  @_Concurrency.MainActor(unsafe) public func showSnackbar(message: Swift.String, duration: ODSFoundation.SnackbarDuration? = .SHORT, actionButtonText: Swift.String?, bgColor: UIKit.UIColor? = .red, actionButtonClickHandler: (() -> ())?)
+  @_Concurrency.MainActor(unsafe) public func showSnackbar(message: Swift.String, duration: ODSFoundation.SnackbarDuration? = .SHORT, actionButtonText: Swift.String?, bgColor: UIKit.UIColor? = appColor, actionButtonClickHandler: (() -> ())?)
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class OdsSnackBarView : UIKit.UIView {
   @objc @_Concurrency.MainActor(unsafe) dynamic public var snackBarBgColor: UIKit.UIColor?
   @objc @_Concurrency.MainActor(unsafe) dynamic public var descLabelTextColor: UIKit.UIColor?
   @objc @_Concurrency.MainActor(unsafe) dynamic public var actionButtonBackgroundColor: UIKit.UIColor?
   @objc @_Concurrency.MainActor(unsafe) dynamic public var actionButtonTextColor: UIKit.UIColor?
-  @_Concurrency.MainActor(unsafe) public class func show(message: Swift.String, duration: ODSFoundation.SnackbarDuration, actionButtonText: Swift.String?, bgColor: UIKit.UIColor? = .red, superView: UIKit.UIView!, buttonClicked: (() -> ())?)
+  @_Concurrency.MainActor(unsafe) public class func show(message: Swift.String, duration: ODSFoundation.SnackbarDuration, actionButtonText: Swift.String? = "", bgColor: UIKit.UIColor? = appColor, superView: UIKit.UIView!, buttonClicked: (() -> ())?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
@@ -291,6 +291,23 @@ public protocol ODSDatePickerViewControllerDelegate : AnyObject {
   @objc @_Concurrency.MainActor(unsafe) dynamic public func addPreviousNextRightOnKeyboardWithTarget(_ target: Swift.AnyObject?, rightButtonImage: UIKit.UIImage, previousAction: ObjectiveC.Selector, nextAction: ObjectiveC.Selector, rightButtonAction: ObjectiveC.Selector, titleText: Swift.String?)
   @objc @_Concurrency.MainActor(unsafe) dynamic public func addPreviousNextRightOnKeyboardWithTarget(_ target: Swift.AnyObject?, rightButtonTitle: Swift.String, previousAction: ObjectiveC.Selector, nextAction: ObjectiveC.Selector, rightButtonAction: ObjectiveC.Selector, titleText: Swift.String?)
 }
+@objc @_Concurrency.MainActor(unsafe) open class ExpandingMenuItem : UIKit.UIView {
+  @objc @_Concurrency.MainActor(unsafe) open var title: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) open var titleMargin: CoreGraphics.CGFloat
+  @objc @_Concurrency.MainActor(unsafe) open var titleColor: UIKit.UIColor? {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) public init(size: CoreGraphics.CGSize?, title: Swift.String? = nil, titleColor: UIKit.UIColor? = nil, image: UIKit.UIImage, highlightedImage: UIKit.UIImage?, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
+  @objc @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage, highlightedImage: UIKit.UIImage, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
+  @objc @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String, titleColor: UIKit.UIColor? = nil, image: UIKit.UIImage, highlightedImage: UIKit.UIImage, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
+  @objc @_Concurrency.MainActor(unsafe) convenience public init(size: CoreGraphics.CGSize, image: UIKit.UIImage, highlightedImage: UIKit.UIImage, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
 public struct StateMessageProvider {
   public var scanningText: Swift.String
   public var processingText: Swift.String
@@ -327,6 +344,93 @@ public struct StateMessageProvider {
 @objc @_inheritsConvenienceInitializers open class ChevronDownShapeRenderer : ObjectiveC.NSObject, ODSFoundation.IShapeRenderer {
   @objc open func renderShape(context: CoreGraphics.CGContext, dataSet: ODSFoundation.IScatterChartDataSet, viewPortHandler: ODSFoundation.ViewPortHandler, point: CoreGraphics.CGPoint, color: ODSFoundation.NSUIColor)
   @objc override dynamic public init()
+  @objc deinit
+}
+public struct CustomAnimationOptions : Swift.OptionSet {
+  public let rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let rotate: ODSFoundation.CustomAnimationOptions
+  public static let bound: ODSFoundation.CustomAnimationOptions
+  public static let move: ODSFoundation.CustomAnimationOptions
+  public static let fade: ODSFoundation.CustomAnimationOptions
+  public static let menuButtonRotate: ODSFoundation.CustomAnimationOptions
+  public static let `default`: ODSFoundation.CustomAnimationOptions
+  public static let all: ODSFoundation.CustomAnimationOptions
+  public typealias ArrayLiteralElement = ODSFoundation.CustomAnimationOptions
+  public typealias Element = ODSFoundation.CustomAnimationOptions
+  public typealias RawValue = Swift.Int
+}
+@objc @_Concurrency.MainActor(unsafe) open class ExpandingMenuButton : UIKit.UIView, UIKit.UIGestureRecognizerDelegate {
+  @objc public enum ExpandingDirection : Swift.Int {
+    case top
+    case bottom
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc public enum MenuTitleDirection : Swift.Int {
+    case left
+    case right
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc public enum HapticFeedbackStyle : Swift.Int {
+    case light
+    case medium
+    case heavy
+    case none
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc @_Concurrency.MainActor(unsafe) open var menuItemMargin: CoreGraphics.CGFloat
+  @objc @_Concurrency.MainActor(unsafe) open var menuButtonHapticStyle: ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle
+  @objc @_Concurrency.MainActor(unsafe) open var menuItemsHapticStyle: ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle
+  @objc @_Concurrency.MainActor(unsafe) open var playSound: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) open var expandingSoundPath: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) open var foldSoundPath: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) open var selectedSoundPath: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) open var bottomViewColor: UIKit.UIColor {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) open var bottomViewAlpha: CoreGraphics.CGFloat
+  @objc @_Concurrency.MainActor(unsafe) open var titleTappedActionEnabled: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) open var expandingDirection: ODSFoundation.ExpandingMenuButton.ExpandingDirection
+  @objc @_Concurrency.MainActor(unsafe) open var menuTitleDirection: ODSFoundation.ExpandingMenuButton.MenuTitleDirection
+  @_Concurrency.MainActor(unsafe) open var expandingAnimations: ODSFoundation.CustomAnimationOptions
+  @_Concurrency.MainActor(unsafe) open var foldingAnimations: ODSFoundation.CustomAnimationOptions
+  @objc @_Concurrency.MainActor(unsafe) open var willPresentMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) open var didPresentMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) open var willDismissMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) open var didDismissMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, image: UIKit.UIImage, highlightedImage: UIKit.UIImage? = nil, rotatedImage: UIKit.UIImage, rotatedHighlightedImage: UIKit.UIImage? = nil)
+  @objc @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage, rotatedImage: UIKit.UIImage)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc @_Concurrency.MainActor(unsafe) open func addMenuItems(_ menuItems: [ODSFoundation.ExpandingMenuItem])
+  @objc @_Concurrency.MainActor(unsafe) open func menuItemTapped(_ item: ODSFoundation.ExpandingMenuItem)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func touchesBegan(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc open func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
   @objc deinit
 }
 @_inheritsConvenienceInitializers @objc(ChartDefaultValueFormatter) open class DefaultValueFormatter : ObjectiveC.NSObject, ODSFoundation.IValueFormatter {
@@ -1123,93 +1227,6 @@ extension ODSFoundation.DataApproximator {
   @objc override dynamic public init()
   @objc deinit
 }
-public struct CustomAnimationOptions : Swift.OptionSet {
-  public let rawValue: Swift.Int
-  public init(rawValue: Swift.Int)
-  public static let rotate: ODSFoundation.CustomAnimationOptions
-  public static let bound: ODSFoundation.CustomAnimationOptions
-  public static let move: ODSFoundation.CustomAnimationOptions
-  public static let fade: ODSFoundation.CustomAnimationOptions
-  public static let menuButtonRotate: ODSFoundation.CustomAnimationOptions
-  public static let `default`: ODSFoundation.CustomAnimationOptions
-  public static let all: ODSFoundation.CustomAnimationOptions
-  public typealias ArrayLiteralElement = ODSFoundation.CustomAnimationOptions
-  public typealias Element = ODSFoundation.CustomAnimationOptions
-  public typealias RawValue = Swift.Int
-}
-@objc @_Concurrency.MainActor(unsafe) open class ExpandingMenuButton : UIKit.UIView, UIKit.UIGestureRecognizerDelegate {
-  @objc public enum ExpandingDirection : Swift.Int {
-    case top
-    case bottom
-    public init?(rawValue: Swift.Int)
-    public typealias RawValue = Swift.Int
-    public var rawValue: Swift.Int {
-      get
-    }
-  }
-  @objc public enum MenuTitleDirection : Swift.Int {
-    case left
-    case right
-    public init?(rawValue: Swift.Int)
-    public typealias RawValue = Swift.Int
-    public var rawValue: Swift.Int {
-      get
-    }
-  }
-  @objc public enum HapticFeedbackStyle : Swift.Int {
-    case light
-    case medium
-    case heavy
-    case none
-    public init?(rawValue: Swift.Int)
-    public typealias RawValue = Swift.Int
-    public var rawValue: Swift.Int {
-      get
-    }
-  }
-  @objc @_Concurrency.MainActor(unsafe) open var menuItemMargin: CoreGraphics.CGFloat
-  @objc @_Concurrency.MainActor(unsafe) open var menuButtonHapticStyle: ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle
-  @objc @_Concurrency.MainActor(unsafe) open var menuItemsHapticStyle: ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle
-  @objc @_Concurrency.MainActor(unsafe) open var playSound: Swift.Bool {
-    @objc get
-    @objc set
-  }
-  @objc @_Concurrency.MainActor(unsafe) open var expandingSoundPath: Swift.String? {
-    @objc get
-    @objc set
-  }
-  @objc @_Concurrency.MainActor(unsafe) open var foldSoundPath: Swift.String? {
-    @objc get
-    @objc set
-  }
-  @objc @_Concurrency.MainActor(unsafe) open var selectedSoundPath: Swift.String? {
-    @objc get
-    @objc set
-  }
-  @objc @_Concurrency.MainActor(unsafe) open var bottomViewColor: UIKit.UIColor {
-    @objc get
-    @objc set
-  }
-  @objc @_Concurrency.MainActor(unsafe) open var bottomViewAlpha: CoreGraphics.CGFloat
-  @objc @_Concurrency.MainActor(unsafe) open var titleTappedActionEnabled: Swift.Bool
-  @objc @_Concurrency.MainActor(unsafe) open var expandingDirection: ODSFoundation.ExpandingMenuButton.ExpandingDirection
-  @objc @_Concurrency.MainActor(unsafe) open var menuTitleDirection: ODSFoundation.ExpandingMenuButton.MenuTitleDirection
-  @_Concurrency.MainActor(unsafe) open var expandingAnimations: ODSFoundation.CustomAnimationOptions
-  @_Concurrency.MainActor(unsafe) open var foldingAnimations: ODSFoundation.CustomAnimationOptions
-  @objc @_Concurrency.MainActor(unsafe) open var willPresentMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
-  @objc @_Concurrency.MainActor(unsafe) open var didPresentMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
-  @objc @_Concurrency.MainActor(unsafe) open var willDismissMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
-  @objc @_Concurrency.MainActor(unsafe) open var didDismissMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
-  @objc @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, image: UIKit.UIImage, highlightedImage: UIKit.UIImage? = nil, rotatedImage: UIKit.UIImage, rotatedHighlightedImage: UIKit.UIImage? = nil)
-  @objc @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage, rotatedImage: UIKit.UIImage)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc @_Concurrency.MainActor(unsafe) open func addMenuItems(_ menuItems: [ODSFoundation.ExpandingMenuItem])
-  @objc @_Concurrency.MainActor(unsafe) open func menuItemTapped(_ item: ODSFoundation.ExpandingMenuItem)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func touchesBegan(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
-  @_Concurrency.MainActor(unsafe) @objc open func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
-  @objc deinit
-}
 @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class RSSelectionMenu<T> : UIKit.UIViewController, UIKit.UIPopoverPresentationControllerDelegate, UIKit.UIGestureRecognizerDelegate where T : Swift.Equatable {
   @_Concurrency.MainActor(unsafe) public var tableView: ODSFoundation.RSSelectionTableView<T>?
   @_Concurrency.MainActor(unsafe) public var searchBar: UIKit.UISearchBar? {
@@ -1823,23 +1840,6 @@ extension ODSFoundation.DropDown {
 }
 @objc public protocol CandleChartDataProvider : ODSFoundation.BarLineScatterCandleBubbleChartDataProvider {
   @objc var candleData: ODSFoundation.CandleChartData? { get }
-}
-@objc @_Concurrency.MainActor(unsafe) open class ExpandingMenuItem : UIKit.UIView {
-  @objc @_Concurrency.MainActor(unsafe) open var title: Swift.String? {
-    @objc get
-    @objc set
-  }
-  @objc @_Concurrency.MainActor(unsafe) open var titleMargin: CoreGraphics.CGFloat
-  @objc @_Concurrency.MainActor(unsafe) open var titleColor: UIKit.UIColor? {
-    @objc get
-    @objc set
-  }
-  @_Concurrency.MainActor(unsafe) public init(size: CoreGraphics.CGSize?, title: Swift.String? = nil, titleColor: UIKit.UIColor? = nil, image: UIKit.UIImage, highlightedImage: UIKit.UIImage?, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
-  @objc @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage, highlightedImage: UIKit.UIImage, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
-  @objc @_Concurrency.MainActor(unsafe) convenience public init(title: Swift.String, titleColor: UIKit.UIColor? = nil, image: UIKit.UIImage, highlightedImage: UIKit.UIImage, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
-  @objc @_Concurrency.MainActor(unsafe) convenience public init(size: CoreGraphics.CGSize, image: UIKit.UIImage, highlightedImage: UIKit.UIImage, backgroundImage: UIKit.UIImage?, backgroundHighlightedImage: UIKit.UIImage?, itemTapped: (() -> Swift.Void)?)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc deinit
 }
 public let contentViewController: Swift.String
 public let defaultPlaceHolder: Swift.String
@@ -4237,8 +4237,8 @@ public var errorLogLevel: Swift.Bool
 public var warnLogLevel: Swift.Bool
 public var infoLogLevel: Swift.Bool
 public var printLog: Swift.Bool
-public let appColor: UIKit.UIColor
-public let filledCountColor: UIKit.UIColor
+public var appColor: UIKit.UIColor
+public var filledCountColor: UIKit.UIColor
 public let homeDirectory: Swift.String
 public var storeNameDictArray: [Foundation.NSMutableDictionary]
 @objc(IChartFillFormatter) public protocol IFillFormatter {
@@ -4799,6 +4799,15 @@ extension ODSFoundation.XAxis.LabelPosition : Swift.RawRepresentable {}
 extension ODSFoundation.ChartLimitLine.LabelPosition : Swift.Equatable {}
 extension ODSFoundation.ChartLimitLine.LabelPosition : Swift.Hashable {}
 extension ODSFoundation.ChartLimitLine.LabelPosition : Swift.RawRepresentable {}
+extension ODSFoundation.ExpandingMenuButton.ExpandingDirection : Swift.Equatable {}
+extension ODSFoundation.ExpandingMenuButton.ExpandingDirection : Swift.Hashable {}
+extension ODSFoundation.ExpandingMenuButton.ExpandingDirection : Swift.RawRepresentable {}
+extension ODSFoundation.ExpandingMenuButton.MenuTitleDirection : Swift.Equatable {}
+extension ODSFoundation.ExpandingMenuButton.MenuTitleDirection : Swift.Hashable {}
+extension ODSFoundation.ExpandingMenuButton.MenuTitleDirection : Swift.RawRepresentable {}
+extension ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle : Swift.Equatable {}
+extension ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle : Swift.Hashable {}
+extension ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle : Swift.RawRepresentable {}
 extension ODSFoundation.ActionSheetPopoverStyle : Swift.Equatable {}
 extension ODSFoundation.ActionSheetPopoverStyle : Swift.Hashable {}
 extension ODSFoundation.ActionSheetPopoverStyle : Swift.RawRepresentable {}
@@ -4816,15 +4825,6 @@ extension ODSFoundation.ODSMonth : Swift.Hashable {}
 extension ODSFoundation.ODSMonth : Swift.RawRepresentable {}
 extension ODSFoundation.ChartViewBase.ImageFormat : Swift.Equatable {}
 extension ODSFoundation.ChartViewBase.ImageFormat : Swift.Hashable {}
-extension ODSFoundation.ExpandingMenuButton.ExpandingDirection : Swift.Equatable {}
-extension ODSFoundation.ExpandingMenuButton.ExpandingDirection : Swift.Hashable {}
-extension ODSFoundation.ExpandingMenuButton.ExpandingDirection : Swift.RawRepresentable {}
-extension ODSFoundation.ExpandingMenuButton.MenuTitleDirection : Swift.Equatable {}
-extension ODSFoundation.ExpandingMenuButton.MenuTitleDirection : Swift.Hashable {}
-extension ODSFoundation.ExpandingMenuButton.MenuTitleDirection : Swift.RawRepresentable {}
-extension ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle : Swift.Equatable {}
-extension ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle : Swift.Hashable {}
-extension ODSFoundation.ExpandingMenuButton.HapticFeedbackStyle : Swift.RawRepresentable {}
 extension ODSFoundation.ODSDatePickerStyle : Swift.Equatable {}
 extension ODSFoundation.ODSDatePickerStyle : Swift.Hashable {}
 extension ODSFoundation.ODSDatePickerStyle : Swift.RawRepresentable {}

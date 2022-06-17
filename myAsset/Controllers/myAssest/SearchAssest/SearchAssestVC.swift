@@ -10,7 +10,7 @@ import UIKit
 import ODSFoundation
 import mJCLib
 
-class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelegate,viewModelDelegate {
+class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelegate,viewModelDelegate,SlideMenuControllerSelectDelegate {
     
     @IBOutlet weak var assestIdBgView: UIView!
     @IBOutlet weak var descBgView: UIView!
@@ -39,8 +39,7 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
     @IBOutlet weak var assestIdScanButton: UIButton!
     @IBOutlet weak var funcLocScanButton: UIButton!
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
+    let appDeli = UIApplication.shared.delegate as! AppDelegate
     var assetVM = AssetClassViewModel()
     var assetListArr:[String] = []
     
@@ -115,7 +114,9 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func cancelButtonAction(_ sender: Any) {
-        self.dismiss(animated: false)
+        let dashboard = ScreenManager.getDashBoardScreen()
+        self.appDeli.window?.rootViewController = dashboard
+        self.appDeli.window?.makeKeyAndVisible()
     }
     @IBAction func saveButtonAction(_ sender: Any) {
         if assestIdTxtFld.text == "" &&  descTxtFld.text == "" && assestClassTxtFld.text == "" &&
@@ -159,7 +160,7 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
             searchParams["assetRoom"] = self.roomTxtFld.text
             let searchAssetVc = ScreenManager.getAssetListVCScreen()
             searchAssetVc.searchParam = searchParams
-            self.present(searchAssetVc, animated: false)
+            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(searchAssetVc, animated: false)
         }
     }
     func FuncLocOrEquipSelected(selectedObj: String, EquipObj: EquipmentModel, FuncObj: FunctionalLocationModel) {

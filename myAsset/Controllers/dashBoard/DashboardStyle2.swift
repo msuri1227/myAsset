@@ -1826,7 +1826,19 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
     
     @IBAction func seachAssestTagButtonAction(_ sender: Any) {
         let searchAssetVc = ScreenManager.searchAssestTagScreen()
-        self.present(searchAssetVc, animated: false)
+        myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = ""
+        let dashboard = ScreenManager.getDashBoardScreen()
+        let navVC: UINavigationController = UINavigationController(rootViewController: dashboard)
+        navVC.isNavigationBarHidden = true
+        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = navVC
+        myAssetDataManager.uniqueInstance.navigationController = navVC
+        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
+        myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
+        myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = searchAssetVc as UIViewController as? SlideMenuControllerSelectDelegate
+        myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
+        self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
+        self.appDeli.window?.makeKeyAndVisible()
+        myAssetDataManager.uniqueInstance.navigationController?.pushViewController(searchAssetVc, animated: true)
     }
     @IBAction func refreshButtonAction(_ sender: AnyObject) {
         mJCLogger.log("Starting", Type: "info")

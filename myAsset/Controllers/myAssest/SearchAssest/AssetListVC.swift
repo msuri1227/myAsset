@@ -11,7 +11,7 @@ import ODSFoundation
 import mJCLib
 import PDFKit
 
-class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,barcodeDelegate {
+class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,barcodeDelegate,SlideMenuControllerSelectDelegate{
     
     @IBOutlet weak var assetTableView: UITableView!
     @IBOutlet weak var searchView: UIView!
@@ -145,19 +145,8 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             flocEquipDetails.flocEquipObjType = ""
             flocEquipDetails.flocEquipObjText = self.assetArry[sender.tag].Equipment
             flocEquipDetails.classificationType = "Workorder"
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
-            let assetVC = ScreenManager.getAssetListVCScreen()
-            let navVC: UINavigationController = UINavigationController(rootViewController: assetVC)
-            navVC.isNavigationBarHidden = true
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = navVC
-            myAssetDataManager.uniqueInstance.navigationController = navVC
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = flocEquipDetails as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(flocEquipDetails, animated: true)
+            currentMasterView = "WorkOrder"
+            myAssetDataManager.uniqueInstance.updateSlidemenuDelegates(delegateVC: flocEquipDetails)
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -190,6 +179,11 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         }
         else if type == "RFIDUpdated"{
             DispatchQueue.main.async {
+                var rfidValue = String()
+                if let rfid = object[0] as? String{
+                    rfidValue = rfid
+                }
+                self.appDeli.window?.showSnackbar(message: "RFID :\(rfidValue) updated.)", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
                 self.assetTableView.reloadData()
             }
         }
@@ -218,7 +212,10 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         self.selectedLbl.text = ""
     }
     func leftMenuButtonClicked(_ sender: UIButton?){
-        self.dismiss(animated: false) {}
+        if myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.count > 0 {
+            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.remove(at: myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.count - 1)
+        }
+        myAssetDataManager.uniqueInstance.navigationController?.popViewController(animated: true)
     }
     func backButtonClicked(_ sender: UIButton?){
         self.dismiss(animated: false) {}
@@ -304,7 +301,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                         }
                     }
                     else{
-                        mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select only one object", button: okay)
+                        mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select only one Asset.", button: okay)
                     }
                 }else{
                     mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
