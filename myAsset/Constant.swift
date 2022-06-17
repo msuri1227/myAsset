@@ -173,8 +173,8 @@ var ENABLE_CANCEL_FINAL_CONFIRMATION = false
 //MARK:- APP Colors
 
 let compactButtonBG = UIColor(red: 210.0/255.0, green: 115.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-let appColor = UIColor(red: 87.0/255.0, green: 137.0/255.0, blue: 173.0/255.0, alpha: 1.0)
-let selectionBgColor = UIColor(red: 87.0/255.0, green: 137.0/255.0, blue: 173.0/255.0, alpha: 0.7)
+let appColor = UIColor(red: 77.0/255.0, green: 56.0/255.0, blue: 180.0/255.0, alpha: 1.0)
+let selectionBgColor = UIColor(red: 56.0/255.0, green: 77.0/255.0, blue: 180.0/255.0, alpha: 0.7)
 let filledCountColor = UIColor(red: 240.0/255.0, green: 155.0/255.0, blue: 60.0/255.0, alpha: 1.0)
 let dbfilterBgColor = UIColor.init(red: 212.0/255.0, green: 227.0/255.0, blue: 233.0/255.0, alpha: 1.0)
 let mapMarkerColor = UIColor.init(red:0.0/255.0,  green:255.0/255.0,  blue:255.0/255.0, alpha:1)
