@@ -122,7 +122,7 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
         ODSUIHelper.setBorderToView(view: self.fourthDropDownTxtField, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         ODSUIHelper.setButtonLayout(button: self.addButton, cornerRadius: self.addButton.frame.width/2, bgColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         
-        if applicationFeatureArrayKeys.contains("DASH_ASSET_HIE_TILE"){
+        if !applicationFeatureArrayKeys.contains("DASH_ASSET_HIE_TILE"){
             if let index =  dashBoardArray.firstIndex(of: "DASH_ASSET_HIE_TILE"){
                 dashBoardArray.remove(at: index)
             }
@@ -692,7 +692,11 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
         
     }
     func shareLogs(fwLogs:Bool){
-        myAssetDataManager.uniqueInstance.shareLogFiles(sender: self.threeDotMenu,screen: self,fwLogs: fwLogs,from: "",userId: strUser)
+        if DeviceType == iPad{
+            myAssetDataManager.uniqueInstance.shareLogFiles(sender: self.threeDotMenu,screen: self,fwLogs: fwLogs,from: "",userId: strUser)
+        }else{
+            myAssetDataManager.uniqueInstance.shareLogFiles(sender: self.logoutButton,screen: self,fwLogs: fwLogs,from: "",userId: strUser)
+        }
     }
     func EntityCreated(){
         mJCLogger.log("Starting", Type: "info")

@@ -74,7 +74,11 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
             }
             objmodel.getObjectlist()
         }else if type == "geoLocationUpdated"{
-            self.appDeli.window?.showSnackbar(message: "\(self.selectedAssetListArr.count) Geo location's updated", duration: .SHORT, actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+            var location = String()
+            if let loc = object[0] as? String{
+                location = loc
+            }
+            self.appDeli.window?.showSnackbar(message: "\(self.selectedAssetListArr.count) Asse(s) are updated! Location:(\(location))", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
         }else if type == "AssetMap"{
             DispatchQueue.main.async {
                 let assetLocVc = ScreenManager.getAssetLocationScreen()

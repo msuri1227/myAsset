@@ -102,7 +102,7 @@ class WorkOrderObjectsViewModel {
     }
     func updateGeoLocation(list:[ZEquipmentModel],currentLoc:String,count:Int){
         if count == list.count{
-            self.delegate?.dataFetchCompleted?(type: "geoLocationUpdated", object: [])
+            self.delegate?.dataFetchCompleted?(type: "geoLocationUpdated", object: [currentLoc])
         }else{
             let equipment = list[count]
             (equipment.entity.properties["GEOLocation"] as! SODataProperty).value = "\(currentLoc)" as NSObject

@@ -617,9 +617,8 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     else if item == "Verify".localized(){
                         if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
                             assetDetailsVC?.objmodel.updateVerifyWorkOrder(list: assetDetailsVC!.selectedAssetListArr, status: "I", count: 0)
-                        }
-                        else{
-                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                        }else{
+                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one Asset", button: okay)
                         }
                     }
                     else if item == "Write Off".localized(){
@@ -630,25 +629,22 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                                 self.view.bringSubviewToFront(self.assetDetailsVC!.writeOffBgView)
                             }
                         }else{
-                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one Asset", button: okay)
                         }
                     }
                     else if item == "Update_Geo_Location".localized(){
                         if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
                             assetDetailsVC?.objmodel.getEquipmentListForAssets(list: assetDetailsVC!.selectedAssetListArr, currentLoc: "x:\(self.detailViewModel.Latitude),y:\(self.detailViewModel.Longitude)", from: "")
                         }else{
-                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                            self.appDeli.window?.showSnackbar(message: "Please_select_asset_to_update_geo_Location".localized(),  actionButtonText: "", bgColor: appColor,actionButtonClickHandler:nil)
                         }
                     }
                     else if item == "Assets_Location".localized(){
-                        ASSETMAP_TYPE = "ESRIMAP"
-                        let assetLocVc = ScreenManager.getAssetLocationScreen()
                         if assetDetailsVC!.selectedAssetListArr.count > 0{
                             assetDetailsVC!.objmodel.getEquipmentListForAssets(list: assetDetailsVC!.selectedAssetListArr, currentLoc: "x:\(self.detailViewModel.Latitude),y:\(self.detailViewModel.Longitude)", from: "AssetMap")
                         }else{
-                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                            self.appDeli.window?.showSnackbar(message: "Please_select_asset_to_update_functional_location".localized(),  actionButtonText: "", bgColor: appColor,actionButtonClickHandler:nil)
                         }
-
                     }
                 }else if currentMasterView == "Notification"{
                     if item == "Create_Work_Order".localized(){

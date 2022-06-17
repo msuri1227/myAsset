@@ -171,9 +171,17 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                 self.assetTableView.reloadData()
             }
         }else if type == "FlocUpdated"{
-            
+            var functionalLocation = String()
+            if let floc = object[0] as? String{
+                functionalLocation = floc
+            }
+            self.appDeli.window?.showSnackbar(message: "Functional Location :\(functionalLocation) updated.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
         }else if type == "geoLocationUpdated"{
-            
+            var location = String()
+            if let loc = object[0] as? String{
+                location = loc
+            }
+            self.appDeli.window?.showSnackbar(message: "\(self.selectedArr.count) Asse(s) are updated! Location:(\(location))", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
         }
     }
     @IBAction func scanBtnAction(_ sender: UIButton) {
@@ -247,13 +255,14 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         menudropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             if item == "Update_Geo_Location".localized(){
                 if selectedArr.count == 0{
-                    mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                     self.appDeli.window?.showSnackbar(message: "Please_select_asset_to_update_geo_Location".localized(),  actionButtonText: "", bgColor: appColor,actionButtonClickHandler:nil)
                 }else{
                     self.assetSearchVM.updateGeoLocation(list: selectedArr, currentLoc: "x:\(self.currentlat),y:\(self.currentLong)", count: 0)
                 }
             }else if item == "Update_Functional_Location".localized(){
                 if selectedArr.count == 0{
-                    mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one object", button: okay)
+                    self.appDeli.window?.showSnackbar(message: "Please_select_asset_to_update_functional_location".localized(),  actionButtonText: "", bgColor: appColor,actionButtonClickHandler:nil)
+                    //mJCAlertHelper.showAlert(self, title: alerttitle, message: "Please_select_asset_to_update_functional_location", button: okay)
                 }else{
                     mJCLogger.log("Starting", Type: "info")
                     let functionaLocationListVC = ScreenManager.getFlocEquipHierarchyScreen()

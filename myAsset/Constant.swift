@@ -173,8 +173,8 @@ var ENABLE_CANCEL_FINAL_CONFIRMATION = false
 //MARK:- APP Colors
 
 let compactButtonBG = UIColor(red: 210.0/255.0, green: 115.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-let appColor = UIColor(red: 77.0/255.0, green: 56.0/255.0, blue: 180.0/255.0, alpha: 1.0)
-let selectionBgColor = UIColor(red: 56.0/255.0, green: 77.0/255.0, blue: 180.0/255.0, alpha: 0.7)
+let appColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1.0)
+let selectionBgColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 0.7)
 let filledCountColor = UIColor(red: 240.0/255.0, green: 155.0/255.0, blue: 60.0/255.0, alpha: 1.0)
 let dbfilterBgColor = UIColor.init(red: 212.0/255.0, green: 227.0/255.0, blue: 233.0/255.0, alpha: 1.0)
 let mapMarkerColor = UIColor.init(red:0.0/255.0,  green:255.0/255.0,  blue:255.0/255.0, alpha:1)
@@ -422,8 +422,8 @@ var typeArray = [Filters.AssignedToMe.value,Filters.CreatedByMe.value]
 var CSStatusArry = [Filters.CSApproved.value ,Filters.CSRejected.value,Filters.CSNotReviewed.value ,Filters.CSCorrectionRequired.value]
 var colorArray = ["#f68b1f","#0083ca","#72bf44","#FFCDD2","#ab218e","#b21212","#FFECB3","#004990","#008a3b","#f7bf8d","#52247f","#cb4d2c","#f0ab00","#00a1e4","#808080","#b2b2b2"]
 var dashBoardArray = ["DASHBOARD_REVIWER_TILE","DASH_ASSET_HIE_TILE","ASSET_HIERARCHY","DASH_GENERAL_FORM_TILE","DASH_TIMESHEET_TILE","DASH_ONLINE_SEARCH_TILE"]
-var dashBoardMenuArray = ["Sync_Application".localized(),"Master_Data_Refresh".localized(), "Error_Logs".localized(),"Share_logs".localized(),"Change_Logs".localized(),"Log_Out".localized(),"Log_Out_Clear_Data".localized()]
-var dashBoardMenuimgArray = [#imageLiteral(resourceName: "ic_transmit_black"),#imageLiteral(resourceName: "ic_transmit_black"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "share_logs"),#imageLiteral(resourceName: "what'sNew"),#imageLiteral(resourceName: "LogOutBlack"),#imageLiteral(resourceName: "LogOutBlack")]
+var dashBoardMenuArray = ["Sync_Application".localized(),"Master_Data_Refresh".localized(), "Error_Logs".localized(),"Share_logs".localized(),"Log_Out".localized(),"Log_Out_Clear_Data".localized()]
+var dashBoardMenuimgArray = [#imageLiteral(resourceName: "ic_transmit_black"),#imageLiteral(resourceName: "ic_transmit_black"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "share_logs"),#imageLiteral(resourceName: "LogOutBlack"),#imageLiteral(resourceName: "LogOutBlack")]
 
 var imgExtensions = ["jpeg","jpg","png","image/jpeg","image/png"]
 var docExtensions = ["doc","docm","docx","dotx","html","rtf","txt","xml","ppt"]

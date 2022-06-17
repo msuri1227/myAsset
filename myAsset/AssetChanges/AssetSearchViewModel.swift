@@ -75,7 +75,7 @@ class AssetSearchViewModel: NSObject {
     }
     func updateGeoLocation(list:[ZEquipmentModel],currentLoc:String,count:Int){
         if count == list.count{
-            self.delegate?.dataFetchCompleted?(type: "geoLocationUpdated", object: [])
+            self.delegate?.dataFetchCompleted?(type: "geoLocationUpdated", object: [currentLoc])
         }else{
             let equipment = list[count]
             (equipment.entity.properties["GEOLocation"] as! SODataProperty).value = "\(currentLoc)" as NSObject
@@ -93,7 +93,7 @@ class AssetSearchViewModel: NSObject {
     }
     func updateFunctionalLocation(list:[ZEquipmentModel],FuncLocation:String,count:Int){
         if count == list.count{
-            self.delegate?.dataFetchCompleted?(type: "FlocUpdated", object: [])
+            self.delegate?.dataFetchCompleted?(type: "FlocUpdated", object: [FuncLocation])
         }else{
             let equipment = list[count]
             (equipment.entity.properties["FuncLocation"] as! SODataProperty).value = "\(FuncLocation)" as NSObject
