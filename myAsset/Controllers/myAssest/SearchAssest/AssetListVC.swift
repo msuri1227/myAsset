@@ -170,6 +170,9 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                 functionalLocation = floc
             }
             self.appDeli.window?.showSnackbar(message: "Functional Location :\(functionalLocation) updated.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+            DispatchQueue.main.async {
+                self.assetSearchVM.getAssetList()
+            }
         }else if type == "geoLocationUpdated"{
             var location = String()
             if let loc = object[0] as? String{

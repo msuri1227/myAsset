@@ -85,7 +85,7 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
                 var locListArr = [Dictionary<String,Any>]()
                 for item in self.objmodel.equipmentArr{
                     var dict = Dictionary<String,Any>()
-                    dict["AssetID"] = "\(item.Asset)"
+                    dict["AssetID"] = "\(item.Equipment)"
                     dict["AssetDesc"] = "\(item.EquipDescription)"
                     var location = item.GEOLocation
                     location = location.replacingOccurrences(of: "x:", with: "")
