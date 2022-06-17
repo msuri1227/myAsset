@@ -119,7 +119,7 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         else{
             if indexPath.row == 0{
-                return 1900
+                return 1965
             }
             else if indexPath.row == 1{
                 return 1515
