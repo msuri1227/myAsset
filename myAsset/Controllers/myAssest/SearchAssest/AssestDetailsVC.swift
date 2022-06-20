@@ -152,9 +152,8 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     }
     @IBAction func notesDoneBtnAction(_ sender: UIButton) {
         if notesTextView.text == ""{
-            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Please_enter_notes".localized(), button: okay)
-        }
-        else{
+            self.appDeli.window?.showSnackbar(message: "Please_enter_notes".localized(), actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+        }else{
             self.objmodel.updateWriteOffWorkOder(list: selectedAssetListArr, status: "W", notes: self.notesTextView.text, count: 0)
         }
     }
@@ -229,21 +228,7 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
         return 135
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*let item = self.inspectedArr[indexPath.row]
-        if !selectedAssetListArr.contains(item){
-            selectedAssetListArr.append(item)
-            selectedCountLabelUpdate(count: selectedAssetListArr.count)
-        }else{
-            if let index = self.selectedAssetListArr.index(of: item){
-                selectedAssetListArr.remove(at: index)
-                selectedCountLabelUpdate(count: selectedAssetListArr.count)
-            }
-        }
-        self.assetTableView.reloadData()*/
-    }
-    
-    @objc func checkBoxClicked(sender: UIButton){
-        let item = self.inspectedArr[sender.tag]
+        let item = self.inspectedArr[indexPath.row]
         if !selectedAssetListArr.contains(item){
             selectedAssetListArr.append(item)
             selectedCountLabelUpdate(count: selectedAssetListArr.count)
@@ -254,6 +239,9 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
             }
         }
         self.assetTableView.reloadData()
+    }
+    @objc func checkBoxClicked(sender: UIButton){
+       
     }
     @objc func assetCameraButtonAction(sender: UIButton){
         mJCLogger.log("Starting", Type: "info")
