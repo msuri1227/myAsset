@@ -171,13 +171,13 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
         var sideMenuArrrayImages = [UIImage]()
         sideMenuArrray = ["Home".localized(),"Overview".localized(),"Installed_Equipments".localized(),"Classification".localized(),"Attachments".localized(),"BreakDown_Report".localized()]
         sideMenuArrrayImages = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "OverView"),#imageLiteral(resourceName: "Components"),#imageLiteral(resourceName: "Objects"),#imageLiteral(resourceName: "AttachementsNF"),#imageLiteral(resourceName: "BreakdownReport_Black")]
-        if applicationFeatureArrayKeys.contains("EQUIP_INSTALEQUIP_TAB"){
+        if !applicationFeatureArrayKeys.contains("EQUIP_INSTALEQUIP_TAB"){
             if let index =  sideMenuArrray.firstIndex(of: "Installed_Equipments".localized()){
                 sideMenuArrray.remove(at: index)
                 sideMenuArrrayImages.remove(at: index)
             }
         }
-        if applicationFeatureArrayKeys.contains("EQUIP_CLASSIFICATIONS_TAB"){
+        if !applicationFeatureArrayKeys.contains("EQUIP_CLASSIFICATIONS_TAB"){
             if let index =  sideMenuArrray.firstIndex(of: "Classification".localized()){
                 sideMenuArrray.remove(at: index)
                 sideMenuArrrayImages.remove(at: index)
@@ -189,7 +189,7 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
                 sideMenuArrrayImages.remove(at: index)
             }
         }
-        if applicationFeatureArrayKeys.contains("EQUIP_BREAKDOWN_TAB"){
+        if !applicationFeatureArrayKeys.contains("EQUIP_BREAKDOWN_TAB"){
             if let index =  sideMenuArrray.firstIndex(of: "BreakDown_Report".localized()){
                 sideMenuArrray.remove(at: index)
                 sideMenuArrrayImages.remove(at: index)

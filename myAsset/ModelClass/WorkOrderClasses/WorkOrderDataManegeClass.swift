@@ -435,8 +435,10 @@ class WorkOrderDataManegeClass: NSObject,BarcodeScannerCodeDelegate,BarcodeScann
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let scannerVC = BarcodeScannerViewController()
             scannerVC.codeDelegate = self
+            scannerVC.ocrScanEnable = false
             scannerVC.errorDelegate = self
             scannerVC.dismissalDelegate = self
+            scannerVC.cameraViewController.OCRButton.isHidden = true
             scanObject = scanObjectType
             self.scanDelegate = delegate
             controller.present(scannerVC, animated: true)

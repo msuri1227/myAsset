@@ -217,7 +217,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             if let loc = object[0] as? String{
                 location = loc
             }
-            self.appDeli.window?.showSnackbar(message: "\(self.selectedArr.count) Asse(s) are updated! Location:(\(location))", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+            self.appDeli.window?.showSnackbar(message: "\(self.selectedArr.count) Asset(s) are updated! Location:(\(location))", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
         }
         else if type == "RFIDUpdated"{
             DispatchQueue.main.async {
@@ -226,7 +226,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                     rfidValue = rfid
                 }
                 self.selectedRfid = ""
-                self.appDeli.window?.showSnackbar(message: "RFID :\(rfidValue) updated.)", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+                self.appDeli.window?.showSnackbar(message: "RFID :\(rfidValue) updated.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
                 self.assetTableView.reloadData()
             }
         }

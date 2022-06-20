@@ -88,7 +88,9 @@ class AssetLocationVC: UIViewController,CLLocationManagerDelegate,GMSMapViewDele
                     marker?.map = self.googleMapsView
                 }
             }
-            self.googleMapsView.camera = GMSCameraPosition.camera(withLatitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude, zoom: 0.0)
+            DispatchQueue.main.async {
+                self.googleMapsView.camera = GMSCameraPosition.camera(withLatitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude, zoom: 0.0)
+            }
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -122,7 +124,9 @@ class AssetLocationVC: UIViewController,CLLocationManagerDelegate,GMSMapViewDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.currentLocation = locations[locations.count - 1]
         self.locationManager.stopUpdatingLocation()
-        self.googleMapsView.camera = GMSCameraPosition.camera(withLatitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude, zoom: 0.0)
+        DispatchQueue.main.async {
+            self.googleMapsView.camera = GMSCameraPosition.camera(withLatitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude, zoom: 5)
+        }
         mJCLogger.log("Ended", Type: "info")
     }
     //MARK: - GMSMapView Delegate method
