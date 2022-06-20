@@ -9,6 +9,7 @@
 import UIKit
 import ODSFoundation
 import mJCLib
+import AVFoundation
 
 
 class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSource,viewModelDelegate{
@@ -119,16 +120,30 @@ class FlocEquipOverviewVC:UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         else{
             if indexPath.row == 0{
-                return 1965
+                if DeviceType == iPad{
+                    return 695
+                }
+                else{
+                    return 1965
+                }
             }
             else if indexPath.row == 1{
-                return 1515
+                if DeviceType == iPad{
+                    return 550
+                }
+                else{
+                    return 1515
+                }
             }
             else{
-                return 800
+                if DeviceType == iPad{
+                    return 350
+                }
+                else{
+                    return 800
+                }
             }
         }
-        //        return UITableView.automaticDimension
     }
     //MARK: - Button actions
     @IBAction func installEquipmentButtonAction(_ sender: Any) {

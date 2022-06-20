@@ -57,6 +57,15 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
         ODSUIHelper.setBorderToView(view:self.searchView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         self.assetTableView.allowsMultipleSelection = true
         self.tblViewBottomConst.constant = IS_IPHONE_XS_MAX ? 64 : 0 //default 54
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(objectSelected), name: NSNotification.Name(rawValue: "objectSelected"), object: nil)
+        self.objectSelected()
+    }
+    @objc func objectSelected(){
+        print("Selected cell")
+        objmodel.delegate = self
+        objmodel.getObjectlist()
+        searchField.delegate = self
     }
     func dataFetchCompleted(type: String, object: [Any]) {
         if type == "assetList"{
