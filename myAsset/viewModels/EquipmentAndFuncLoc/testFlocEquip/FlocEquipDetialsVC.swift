@@ -389,38 +389,38 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
         self.tabItemArray.removeAll()
         mJCLogger.log("Starting", Type: "info")
         let OverviewTab  = TabItem(title: "Overview".localized(), image: UIImage(named: "overview"), cellWidth: 130.0)
-        let installedEquipTab  = TabItem(title: "Installed_Equipments".localized(), image: UIImage(named: "components"), cellWidth: 130.0)
-        let classificationTab  = TabItem(title: "Classification".localized(), image: UIImage(named: "items"), cellWidth: 130.0)
-        let breakdownReportTab  = TabItem(title: "Breakdown Report".localized(), image: UIImage(named: "BreakdownReport_Color"), cellWidth: 130.0)
+//        let installedEquipTab  = TabItem(title: "Installed_Equipments".localized(), image: UIImage(named: "components"), cellWidth: 130.0)
+//        let classificationTab  = TabItem(title: "Classification".localized(), image: UIImage(named: "items"), cellWidth: 130.0)
+//        let breakdownReportTab  = TabItem(title: "Breakdown Report".localized(), image: UIImage(named: "BreakdownReport_Color"), cellWidth: 130.0)
         let attachmentsTab  = TabItem(title: "Attachments".localized(), image: UIImage(named: "attachment"), cellWidth: 130.0)
 
         tabItemArray.append(OverviewTab)
         if flocEquipObjType == "floc"{
-            if !applicationFeatureArrayKeys.contains("FLOC_INSTALEQUIP_TAB"){
-                tabItemArray.append(installedEquipTab)
-            }
-            if !applicationFeatureArrayKeys.contains("FLOC_CLASSIFICATIONS_TAB"){
-                tabItemArray.append(classificationTab)
-            }
+//            if !applicationFeatureArrayKeys.contains("FLOC_INSTALEQUIP_TAB"){
+//                tabItemArray.append(installedEquipTab)
+//            }
+//            if !applicationFeatureArrayKeys.contains("FLOC_CLASSIFICATIONS_TAB"){
+//                tabItemArray.append(classificationTab)
+//            }
             if !applicationFeatureArrayKeys.contains("FLOC_ATTACHMENTS_TAB"){
                 tabItemArray.append(attachmentsTab)
             }
-            if !applicationFeatureArrayKeys.contains("FLOC_BREAKDOWN_TAB"){
-                tabItemArray.append(breakdownReportTab)
-            }
+//            if !applicationFeatureArrayKeys.contains("FLOC_BREAKDOWN_TAB"){
+//                tabItemArray.append(breakdownReportTab)
+//            }
         }else{
-            if !applicationFeatureArrayKeys.contains("EQUIP_INSTALEQUIP_TAB"){
-                tabItemArray.append(installedEquipTab)
-            }
-            if !applicationFeatureArrayKeys.contains("EQUIP_CLASSIFICATIONS_TAB"){
-                tabItemArray.append(classificationTab)
-            }
+//            if !applicationFeatureArrayKeys.contains("EQUIP_INSTALEQUIP_TAB"){
+//                tabItemArray.append(installedEquipTab)
+//            }
+//            if !applicationFeatureArrayKeys.contains("EQUIP_CLASSIFICATIONS_TAB"){
+//                tabItemArray.append(classificationTab)
+//            }
             if !applicationFeatureArrayKeys.contains("EQUIP_ATTACHMENTS_TAB"){
                 tabItemArray.append(attachmentsTab)
             }
-            if !applicationFeatureArrayKeys.contains("EQUIP_BREAKDOWN_TAB"){
-                tabItemArray.append(breakdownReportTab)
-            }
+//            if !applicationFeatureArrayKeys.contains("EQUIP_BREAKDOWN_TAB"){
+//                tabItemArray.append(breakdownReportTab)
+//            }
         }
         return tabItemArray
     }
@@ -467,7 +467,7 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
         }else{
             breakDownReportVC.isFromScreen = "EQUIPMENT"
         }
-        tabVCArray = [flocEquipOverviewVC!,installedEquipVC, classificationVC,attachmentVc,breakDownReportVC]
+        tabVCArray = [flocEquipOverviewVC!,attachmentVc]
         return tabVCArray
     }
     private func setPages(_ viewControllers: [UIViewController]) {

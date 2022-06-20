@@ -2168,7 +2168,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         let NoActivityTab  =  TabItem(title: "Activities".localized(), image: UIImage(named: "activities"), cellWidth: 130.0)
         let NoTaskTab      =  TabItem(title: "Tasks".localized(), image: UIImage(named: "tasks"), cellWidth: 130.0)
         let NoAttchmentTab =  TabItem(title: "Attachments".localized(), image: UIImage(named: "attachment"), cellWidth: 130.0)
-        let assetTab =  TabItem(title: "Assets".localized(), image: UIImage(named: "Inspection_Lot"), cellWidth: 130.0)
+        let assetTab =  TabItem(title: "Assets".localized(), image: UIImage(named: "objects"), cellWidth: 130.0)
         if onlineSearch == false {
             if currentMasterView == "WorkOrder"{
                 if WORKORDER_ASSIGNMENT_TYPE == "2" || WORKORDER_ASSIGNMENT_TYPE == "4" || WORKORDER_ASSIGNMENT_TYPE == "5"{
