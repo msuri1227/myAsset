@@ -35,6 +35,7 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var notesCancelBtn: UIButton!
     
+    @IBOutlet var rfidScanButton: UIButton!
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var objmodel = WorkOrderObjectsViewModel()
     var inspectedArr = [WorkorderObjectModel]()
@@ -158,6 +159,36 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
         mJCLogger.log("Starting", Type: "info")
         WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "asset", delegate: self, controller: self)
         mJCLogger.log("Ended", Type: "info")
+    }
+    @IBAction func rfidScanButtonAction(_ sender: Any) {
+        
+        let iprogress: iProgressHUD = iProgressHUD()
+        iprogress.iprogressStyle = .vertical
+        iprogress.indicatorStyle = .ballScaleMultiple
+        iprogress.isShowModal = false
+        iprogress.boxSize = 100
+        iprogress.attachProgress(toViews: self.view)
+        self.view.showProgress()
+        self.view.updateCaption(text: "Searching RFID..")
+        self.view.updateColors(modalColor: .white, boxColor: .white, indicatorColor: .blue, captionColor: .black)
+        let randomDouble = Double.random(in: 1...5)
+        DispatchQueue.main.asyncAfter(deadline: .now() + randomDouble, execute: {
+            self.view.dismissProgress()
+            self.selectedAssetListArr = self.inspectedArr
+            if self.selectedAssetListArr.indices.contains(1){
+                self.selectedAssetListArr.remove(at: 1)
+            }
+            if self.selectedAssetListArr.indices.contains(4){
+                self.selectedAssetListArr.remove(at: 4)
+            }
+            if self.selectedAssetListArr.count == 0{
+                self.appDeli.window?.showSnackbar(message: "Assets not found", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+            }else{
+                self.appDeli.window?.showSnackbar(message: "\(self.selectedAssetListArr.count) Asset(s) selected.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+            }
+            self.selectedCountLabelUpdate(count: self.selectedAssetListArr.count)
+            self.assetTableView.reloadData()
+        })
     }
     @IBAction func notesDoneBtnAction(_ sender: UIButton) {
         if notesTextView.text == ""{
