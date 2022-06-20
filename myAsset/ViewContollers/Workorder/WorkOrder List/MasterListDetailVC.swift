@@ -618,7 +618,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                         if (assetDetailsVC?.selectedAssetListArr.count)! > 0{
                             assetDetailsVC?.objmodel.updateVerifyWorkOrder(list: assetDetailsVC!.selectedAssetListArr, status: "I", count: 0)
                         }else{
-                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one Asset", button: okay)
+                            self.appDeli.window?.showSnackbar(message: "Select at least one Asset.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
                         }
                     }
                     else if item == "Write Off".localized(){
@@ -629,7 +629,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                                 self.view.bringSubviewToFront(self.assetDetailsVC!.writeOffBgView)
                             }
                         }else{
-                            mJCAlertHelper.showAlert(self, title: alerttitle, message: "Select at least one Asset", button: okay)
+                            self.appDeli.window?.showSnackbar(message: "Select at least one Asset.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
                         }
                     }
                     else if item == "Update_Geo_Location".localized(){

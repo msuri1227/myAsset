@@ -42,7 +42,7 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var assetVM = AssetClassViewModel()
     var assetListArr:[String] = []
-    
+    var typeOfScanCode = String()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,10 +97,33 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
         self.present(assetHierarchyVC, animated: false, completion: nil)
     }
     @IBAction func assestIdScanButtonAction(_ sender: Any) {
-        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "Equip", delegate: self,controller: self)
+        typeOfScanCode = "AssetID"
+        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: typeOfScanCode, delegate: self,controller: self)
     }
     @IBAction func funcLocScanButtonAction(_ sender: Any) {
-        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: "Floc", delegate: self,controller: self)
+        typeOfScanCode = "floc"
+        WorkOrderDataManegeClass.uniqueInstance.presentBarCodeScaner(scanObjectType: typeOfScanCode, delegate: self,controller: self)
+    }
+    //MARK: - Barcode Delegate
+    func scanCompleted(type: String, barCode: String, object: Any){
+        if type == "success"{
+            if typeOfScanCode == "AssetID" {
+                self.assestIdTxtFld.text = barCode
+            }else if typeOfScanCode == "floc" {
+                self.funcLocTxtFld.text = barCode
+//                DispatchQueue.main.async {
+//                    if let obj = object as? FunctionalLocationModel,obj.FunctionalLoc != ""{
+//                        self.funcLocTxtFld.text = obj.FunctionalLoc
+//                    }else{
+//                        self.appDeli.window?.showSnackbar(message: "couldn’t_find_functional_location_for_id".localized(), actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+//                    }
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+            }
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     @IBAction func resetButtonAction(_ sender: Any) {
         mJCLogger.log("Starting", Type: "info")
@@ -121,7 +144,7 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
     @IBAction func saveButtonAction(_ sender: Any) {
         if assestIdTxtFld.text == "" &&  descTxtFld.text == "" && assestClassTxtFld.text == "" &&
             funcLocTxtFld.text == "" && costCenterTxtFld.text == "" && locationTxtFld.text == "" && roomTxtFld.text == ""{
-            mJCAlertHelper.showAlert(self, title: alerttitle, message: "please select at least one param", button: okay)
+            self.appDeli.window?.showSnackbar(message: "Please enter at least one field", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
         }else{
             var searchParams = Dictionary<String,Any>()
             searchParams["assetID"] = self.assestIdTxtFld.text ?? ""
