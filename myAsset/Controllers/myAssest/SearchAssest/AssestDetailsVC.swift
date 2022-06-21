@@ -175,11 +175,11 @@ class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIIm
         DispatchQueue.main.asyncAfter(deadline: .now() + randomDouble, execute: {
             self.view.dismissProgress()
             self.selectedAssetListArr = self.inspectedArr
-            if self.selectedAssetListArr.indices.contains(1){
-                self.selectedAssetListArr.remove(at: 1)
-            }
             if self.selectedAssetListArr.indices.contains(4){
                 self.selectedAssetListArr.remove(at: 4)
+            }
+            if self.selectedAssetListArr.indices.contains(1){
+                self.selectedAssetListArr.remove(at: 1)
             }
             if self.selectedAssetListArr.count == 0{
                 self.appDeli.window?.showSnackbar(message: "Assets not found", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
@@ -265,7 +265,7 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        return 130
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = self.inspectedArr[indexPath.row]

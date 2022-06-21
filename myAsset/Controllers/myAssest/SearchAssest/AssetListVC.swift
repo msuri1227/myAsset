@@ -226,7 +226,10 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
                     rfidValue = rfid
                 }
                 self.selectedRfid = ""
-                self.appDeli.window?.showSnackbar(message: "RFID :\(rfidValue) updated.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+                self.RFIDScanView.isHidden = true
+                self.appDeli.window?.showSnackbar(message: "RFID : \(rfidValue) updated.", actionButtonText: "", bgColor: appColor, actionButtonClickHandler: nil)
+                self.assetTableView.isHidden = false
+                self.noDataLabel.isHidden = true
                 self.assetTableView.reloadData()
             }
         }
@@ -256,6 +259,8 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     @IBAction func updateButtonAction(_ sender: Any) {
         if selectedRfid != ""{
             self.assetSearchVM.updateRFIdTagValue(list: self.selectedArr, RFId: "\(selectedRfid)", count: 0)
+        }else{
+            self.appDeli.window?.showSnackbar(message: "Please select RFID to update.",  actionButtonText: "", bgColor: appColor,actionButtonClickHandler:nil)
         }
     }
     @IBAction func cancelButtonAction(_ sender: Any) {
