@@ -31,7 +31,7 @@ class AssetClassViewModel {
     }
     
     func getCostCenterList(){
-        costCenterList = ["--Select--", "SAP-DUMMY", "Office Cost Center"]
+        costCenterList = ["--Select--", "SAP-DUMMY - Office Cost Center",]
     }
     func getLocationList(){
         locationList = ["--Select--", "0001-Meeting Room"]

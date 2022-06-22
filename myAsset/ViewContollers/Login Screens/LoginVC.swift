@@ -266,11 +266,11 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
     override func viewDidDisappear(_ animated: Bool) {
         ODSStoreHelper.ODSStoreFlushDelegate = myAssetDataManager.uniqueInstance
         ODSStoreHelper.ODSStoreRefreshDelegate = myAssetDataManager.uniqueInstance
-        //EventBased_Sync = ""
+        EventBased_Sync = ""
         if EventBased_Sync == "X"{
             mJCStoreHelper.configEventBasedSync(enable: true, syncType: EventBased_Sync_Type)
         }
-       // TimeBased_Sync = ""
+        TimeBased_Sync = ""
         if TimeBased_Sync == "X"{
             //BG_SYNC_TIME_INTERVAL
             mJCStoreHelper.configTimeBasedBackGroundSync(syncType: TimeBased_Sync_Type, timeInterval: "180", retryCount: BG_SYNC_RETRY_COUNT, retryInterval: BG_SYNC_RETRY_INTERVAL )

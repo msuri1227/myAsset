@@ -470,11 +470,7 @@ class ScreenManager: NSObject {
         }
     }
     static func searchAssestDetailsScreen() -> AssetDetailsVC{
-        if DeviceType == iPad{
-            return AssetDetailsVC.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
-        }else{
-            return AssetDetailsVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
-        }
+        return AssetDetailsVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
     }
     static func getAssetLocationScreen() -> AssetLocationVC{
         if DeviceType == iPad{
@@ -482,6 +478,9 @@ class ScreenManager: NSObject {
         }else{
             return AssetLocationVC.instantiate(fromAppStoryboard: .iPhone_FlocEquipSB)
         }
+    }
+    static func getAssetDetailsForiPad() -> AssetDetailsVC_iPad{
+        return AssetDetailsVC_iPad.instantiate(fromAppStoryboard: .iPad_FlocEquipSB)
     }
 
     //MARK: UITableViewCells

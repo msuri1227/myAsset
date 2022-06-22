@@ -68,7 +68,8 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
     var operationsVC_OverView : OperationsVC?
     var workorderNotification = Bool()
     var assetDetailsVC : AssetDetailsVC?
-//    var workOrderObjVM : WorkOrderObjectsViewModel?
+    var assetDetailsiPad : AssetDetailsVC_iPad?
+
     
     // MARK: Page Swipe Inputs
     public var initialIndex: Int = 0
@@ -2218,7 +2219,10 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         let checkSheetListVC = ScreenManager.getCheckSheetListScreen()
         let objectsVC = ScreenManager.getObjectScreen()
         self.assetDetailsVC = ScreenManager.searchAssestDetailsScreen()
-
+        if DeviceType == iPad{
+            self.assetDetailsiPad = ScreenManager.getAssetDetailsForiPad()
+        }
+        
         var itemVC = UIViewController()
         var activitiesVC = UIViewController()
         var tasksVC = UIViewController()
@@ -2244,7 +2248,12 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     tabVCArray.append(operationsVC)
                 }
             }
-            tabVCArray.append(self.assetDetailsVC!)
+            if DeviceType == iPad{
+                tabVCArray.append(self.assetDetailsiPad!)
+            }
+            else{
+                tabVCArray.append(self.assetDetailsVC!)
+            }
             if applicationFeatureArrayKeys.contains("WoAttachments"){
                 tabVCArray.append(self.attachmentsVC!)
                 self.attachmentsVC?.objectNum = selectedworkOrderNumber
