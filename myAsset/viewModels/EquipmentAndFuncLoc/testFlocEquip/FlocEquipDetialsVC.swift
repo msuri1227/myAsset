@@ -13,6 +13,7 @@ import AVFoundation
 
 class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,TabCellDelegate,PageViewParent, viewModelDelegate,CustomNavigationBarDelegate,SlideMenuControllerSelectDelegate {
 
+    @IBOutlet weak var iPhoneHeaderView: UIView!
     @IBOutlet weak var pageView: UIView!
     @IBOutlet weak var menuCollectionView: UICollectionView!
     @IBOutlet weak var selectedBar: UIView!
@@ -120,8 +121,8 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
                 }
             }
         }else{
-            navHeaderView = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: "\(flocEquipObjText)", NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "Menu")
-            self.view.addSubview(navHeaderView)
+            navHeaderView = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: false, leftMenu: true, leftTitle: "\(flocEquipObjText)", NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "Menu")
+            self.iPhoneHeaderView.addSubview(navHeaderView)
             if flushStatus == true{
                 self.navHeaderView.refreshBtn.showSpin()
             }
@@ -139,6 +140,7 @@ class FlocEquipDetialsVC: UIViewController, UIScrollViewDelegate, UICollectionVi
     
     override func viewWillAppear(_ animated: Bool) {
         mJCLogger.log("Starting", Type: "info")
+        super.viewWillAppear(animated)
         myAssetDataManager.uniqueInstance.methodStatusBarColorChange()
         if flushStatus == true {
             if DeviceType == iPad {

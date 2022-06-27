@@ -39,6 +39,7 @@ class MasterListVC: UIViewController, NSFetchedResultsControllerDelegate,UITable
     @IBOutlet var noDataLabel: UILabel!
     @IBOutlet weak var searchTextField: UISearchBar!
     @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var iPhoneView: UIView!
     
     //MARK: - Declared Variables..
     let appDeli = UIApplication.shared.delegate as! AppDelegate
@@ -92,7 +93,7 @@ class MasterListVC: UIViewController, NSFetchedResultsControllerDelegate,UITable
                 }
             }
             let view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: title, NewJobButton: true, refresButton: true, threedotmenu: false, leftMenuType: "")
-            self.view.addSubview(view)
+            self.iPhoneView.addSubview(view)
             if flushStatus == true{
                 view.refreshBtn.showSpin()
             }

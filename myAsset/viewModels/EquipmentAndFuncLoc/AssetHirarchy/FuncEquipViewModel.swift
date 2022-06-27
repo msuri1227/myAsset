@@ -62,7 +62,7 @@ class FuncEquipViewModel {
         dataArr.removeAll()
         for item in self.assetHierarchyArray{
             var hasChild = false
-            if Int(item.NumChilds) ?? 0 > 0{
+            if Int(item.HierLevel) > 0{
                 hasChild = true
             }
             let child =  HierarchyTreeViewData(nodeTitle: item.ObjectId, nodeDescription: item.Description, nodeType: item.Type, nodeChildren: hasChild)

@@ -13,6 +13,7 @@ import PDFKit
 
 class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,CustomNavigationBarDelegate, FuncLocEquipSelectDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,barcodeDelegate,SlideMenuControllerSelectDelegate,iProgressHUDDelegete{
     
+    @IBOutlet weak var iPhoneHeader: UIView!
     @IBOutlet weak var assetTableView: UITableView!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var totalLbl: UILabel!
@@ -72,8 +73,8 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         assetTableView.estimatedRowHeight = UITableView.automaticDimension
         ODSUIHelper.setBorderToView(view:self.searchView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         self.assetTableView.allowsMultipleSelection = true
-        navHeaderView = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: false, leftMenu: true, leftTitle: "Asset List", NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "Back")
-        self.view.addSubview(navHeaderView)
+        navHeaderView = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: "Asset List", NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "Back")
+        self.iPhoneHeader.addSubview(navHeaderView)
         if flushStatus == true{
             self.navHeaderView.refreshBtn.showSpin()
         }

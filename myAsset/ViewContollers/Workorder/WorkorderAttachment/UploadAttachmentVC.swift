@@ -410,7 +410,6 @@ class UploadAttachmentVC: UIViewController,UITextFieldDelegate,UIGestureRecogniz
             self.property.add(prop!)
         }
         else if isFromScreen == "ASSET"{
-            print("isFrom Asset")
             prop = SODataPropertyDefault(name: "Equipment")
             prop!.value = objectNum as NSObject
             self.property.add(prop!)

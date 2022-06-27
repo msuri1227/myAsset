@@ -15,7 +15,6 @@ import ODSFoundation
     @objc optional func refreshButtonClicked(_ sender: UIButton?)
     @objc optional func threedotmenuButtonClicked(_ sender: UIButton?)
     @objc optional func backButtonClicked(_ sender: UIButton?)
-    
 }
 
 class CustomNavHeader_iPhone: UIView {
@@ -32,7 +31,7 @@ class CustomNavHeader_iPhone: UIView {
     @IBOutlet var refreshBtn: UIButton!
     @IBOutlet var dotBtn: UIButton!
     
-
+    
     convenience init(viewcontroller: UIViewController,backButton: Bool = false, leftMenu: Bool,leftTitle:String,NewJobButton:Bool,refresButton:Bool,threedotmenu:Bool,leftMenuType:String) {
         
         self.init()
@@ -41,41 +40,25 @@ class CustomNavHeader_iPhone: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(CustomNavHeader_iPhone.setNavTitle(notification:)), name:NSNotification.Name(rawValue:"setNavTitle"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"HideDotMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CustomNavHeader_iPhone.HideDotMenu(notification:)), name:NSNotification.Name(rawValue:"HideDotMenu"), object: nil)
-        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"ShowDotMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CustomNavHeader_iPhone.ShowDotMenu(notification:)), name:NSNotification.Name(rawValue:"ShowDotMenu"), object: nil)
-        
-       
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"BgSyncStarted"), object: nil)
-       
         NotificationCenter.default.addObserver(self, selector: #selector(CustomNavHeader_iPhone.backGroundSyncStarted(notification:)), name:NSNotification.Name(rawValue:"BgSyncStarted"), object: nil)
-
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"storeFlushAndRefreshDone"), object: nil)
-            
         NotificationCenter.default.addObserver(self, selector: #selector(CustomNavHeader_iPhone.storeFlushAndRefreshDone(notification:)), name: NSNotification.Name(rawValue:"storeFlushAndRefreshDone"), object: nil)
-
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        var height: CGFloat = 60
-        if backButton == true {
+        if backButton == false {
             backBtn.setImage(UIImage(named: "backButton"), for: .normal)
             backBtn.addTarget(self, action: #selector(self.backButtonAction), for: .touchUpInside)
             backBtn.isHidden = false
-        }else{
-            height = 40
         }
-        if UIScreen.main.nativeBounds.height == 2436 {
-            self.frame = CGRect(x: 0, y: statusBarHeight , width: screenWidth, height: height)
-        }else {
-            if #available(iOS 11.0, *) {
-                self.frame = CGRect(x: safeAreaInsets.left, y: statusBarHeight, width: screenWidth, height: height)
-            } else {
-                self.frame = CGRect(x: 0, y: statusBarHeight, width: screenWidth, height: height)
-            }
-        }
+        self.frame.origin.y = safeAreaInsets.top
+        self.frame.origin.x = safeAreaInsets.left
+        self.frame.size.width = screenWidth
+        self.frame.size.height = 50
+        
         self.backgroundColor = appColor
         viewcontroller.navigationController?.navigationBar.barTintColor = appColor
         if leftMenu == true{
-            
             if leftMenuType == "Back"{
                 menuBtn.setImage(UIImage(named: "backButton"), for: .normal)
             }else{
@@ -85,9 +68,7 @@ class CustomNavHeader_iPhone: UIView {
             
             menuBtn.isHidden = false
         }
-        
         if leftTitle != ""{
-            
             titleLbl.text = leftTitle
             titleLbl.textColor = UIColor.white
             titleLbl.textAlignment = .left
@@ -99,70 +80,51 @@ class CustomNavHeader_iPhone: UIView {
             titleLbl.isHidden = false
         }
         if threedotmenu == true{
-            
             if leftMenu ==  false{
-                
                 dotBtn.setImage(UIImage(named: "LogOutWithDarkTheme"), for: .normal)
-                
             }else{
                 dotBtn.setImage(UIImage(named: "dotmenu"), for: .normal)
-                
             }
-            
             dotBtn.addTarget(self, action: #selector(self.threedotButtonButtonAction), for: .touchUpInside)
             dotBtn.isHidden = false
         }
-        
         if refresButton == true{
-            
             refreshBtn.setImage(UIImage(named: "ic_transmit_White"), for: .normal)
-            
             refreshBtn.addTarget(self, action: #selector(self.refButtonButtonAction), for: .touchUpInside)
             refreshBtn.isHidden = false
         }
         if NewJobButton ==  true{
-            
             jobBtn.setImage(UIImage(named: "ic_AddFolder"), for: .normal)
             jobBtn.addTarget(self, action: #selector(self.NewJobButtonButtonAction), for: .touchUpInside)
             jobBtn.isHidden = false
         }
     }
-    
     @objc func backGroundSyncStarted(notification : NSNotification) {
-        
         if DeviceType == iPhone{
             DispatchQueue.main.async {
                 self.refreshBtn.showSpin()
             }
         }
     }
-
     @objc func storeFlushAndRefreshDone(notification : NSNotification) {
-
         if DeviceType == iPhone{
             DispatchQueue.main.async {
                 self.refreshBtn.stopSpin()
             }
         }
-        
     }
-    
-    
     init() {
         super.init(frame: CGRect.zero)
         commonInit()
     }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
     private func commonInit() {
         Bundle.main.loadNibNamed("CustomNavHeader_iPhone", owner: self, options: nil)
         mainView.clipsToBounds = true
@@ -177,18 +139,13 @@ class CustomNavHeader_iPhone: UIView {
         refreshBtn.isHidden = true
         dotBtn.isHidden = true
     }
-    
     @objc func HideDotMenu(notification : NSNotification) {
         dotBtn.isHidden = true
     }
-    
     @objc func ShowDotMenu(notification:NSNotification) {
         dotBtn.isHidden = false
     }
-    
-    
     @objc func setNavTitle(notification : NSNotification) {
-        
         self.titleLbl.text = notification.object as? String
     }
     @objc func backButtonAction(sender : UIButton) {
