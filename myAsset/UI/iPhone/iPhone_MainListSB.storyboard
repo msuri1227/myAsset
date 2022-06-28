@@ -324,8 +324,8 @@
                         <outlet property="WorkorderCompleteTableView" destination="Cp9-HK-9vw" id="gro-oh-xfr"/>
                         <outlet property="borderView" destination="GN3-tj-nqQ" id="jV1-o7-HuV"/>
                         <outlet property="cancelBtn" destination="mng-f0-Jmd" id="Hah-8V-7bS"/>
+                        <outlet property="iPhoneHeaderView" destination="5Zy-BI-ZGC" id="7ZT-6C-GJg"/>
                         <outlet property="menuCollectionView" destination="0Ab-L3-Gbi" id="iPv-U7-naE"/>
-                        <outlet property="navHeader" destination="5Zy-BI-ZGC" id="gqG-EL-eqH"/>
                         <outlet property="pageView" destination="dU8-cU-hy9" id="seo-16-tU4"/>
                         <outlet property="pendingTaskView" destination="uIn-1D-UTT" id="aux-bw-TSg"/>
                         <outlet property="selectedBar" destination="uHe-fs-0UT" id="rkt-CP-icW"/>
@@ -2157,8 +2157,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Si-9e-88c">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2CN-I3-f83"/>
+                                </constraints>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6s9-V5-qGm">
-                                <rect key="frame" x="0.0" y="84" width="414" height="45"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWB-BA-gaF">
                                         <rect key="frame" x="371" y="5" width="35" height="35"/>
@@ -2198,13 +2205,16 @@
                         <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                         <constraints>
                             <constraint firstItem="6s9-V5-qGm" firstAttribute="trailing" secondItem="kXk-Nn-nLc" secondAttribute="trailing" id="5Lf-P0-pgP"/>
+                            <constraint firstItem="3Si-9e-88c" firstAttribute="leading" secondItem="kXk-Nn-nLc" secondAttribute="leading" id="Ge0-6D-noJ"/>
                             <constraint firstItem="cIR-IU-JJ7" firstAttribute="top" secondItem="6s9-V5-qGm" secondAttribute="bottom" constant="1" id="Grd-2p-Nlo"/>
-                            <constraint firstItem="6s9-V5-qGm" firstAttribute="top" secondItem="BsU-H9-8LV" secondAttribute="bottom" constant="40" id="Qkt-or-O2z"/>
+                            <constraint firstItem="6s9-V5-qGm" firstAttribute="top" secondItem="3Si-9e-88c" secondAttribute="bottom" id="Hgw-zU-has"/>
                             <constraint firstItem="cIR-IU-JJ7" firstAttribute="leading" secondItem="kXk-Nn-nLc" secondAttribute="leading" constant="1" id="ROJ-wX-sId"/>
                             <constraint firstAttribute="bottom" secondItem="cIR-IU-JJ7" secondAttribute="bottom" constant="1" id="RZG-Lo-htW"/>
                             <constraint firstItem="6s9-V5-qGm" firstAttribute="leading" secondItem="kXk-Nn-nLc" secondAttribute="leading" id="Rhf-gR-ic3"/>
                             <constraint firstItem="cIR-IU-JJ7" firstAttribute="trailing" secondItem="kXk-Nn-nLc" secondAttribute="trailing" constant="1" id="XNG-HV-LCU"/>
                             <constraint firstItem="cIR-IU-JJ7" firstAttribute="top" secondItem="6s9-V5-qGm" secondAttribute="bottom" constant="1" id="d3r-9Q-UZt"/>
+                            <constraint firstAttribute="trailing" secondItem="3Si-9e-88c" secondAttribute="trailing" id="rGz-cN-Glb"/>
+                            <constraint firstItem="3Si-9e-88c" firstAttribute="top" secondItem="BsU-H9-8LV" secondAttribute="bottom" id="xYK-Yj-527"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -2212,6 +2222,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="iPhoneHeaderView" destination="3Si-9e-88c" id="ObU-ct-qyv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z9M-6t-HiY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -6828,7 +6841,7 @@
                         <outlet property="filterCountLabel" destination="j1b-0P-6WO" id="U2e-M7-Xi5"/>
                         <outlet property="filterview" destination="CKv-R8-YaC" id="EQk-dh-PEG"/>
                         <outlet property="footerView" destination="Ckr-Ne-xuU" id="JqX-Ho-d35"/>
-                        <outlet property="iPhoneView" destination="rr1-bP-LMh" id="HIq-bP-nov"/>
+                        <outlet property="iPhoneHeaderView" destination="rr1-bP-LMh" id="ICB-0D-i8u"/>
                         <outlet property="noDataLabel" destination="vMi-Nt-L9d" id="IOc-Oz-VLW"/>
                         <outlet property="noDataView" destination="0Xj-m6-cb8" id="KoQ-5L-sHz"/>
                         <outlet property="priorityButton" destination="zYv-7o-jN8" id="HT2-4V-aA2"/>

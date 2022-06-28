@@ -20,6 +20,7 @@ class CheckSheetViewerVC: UIViewController,barcodeDelegate,CustomNavigationBarDe
     @IBOutlet var printFormButton: UIButton!
     @IBOutlet var AttachFormButton: UIButton!
     @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var iPhoneHeaderView: UIView!
     
     private var webViewHandler:WebViewHandler?
     let appDeli = UIApplication.shared.delegate as! AppDelegate
@@ -73,7 +74,7 @@ class CheckSheetViewerVC: UIViewController,barcodeDelegate,CustomNavigationBarDe
             formTitle.text = "\(formClass.FormID.replacingOccurrences(of: "_", with: " "))"
         }else{
             headerView = CustomNavHeader_iPhone.init(viewcontroller: self, leftMenu: true, leftTitle: "\(formClass.FormID.replacingOccurrences(of: "_", with: " "))", NewJobButton: true, refresButton: true, threedotmenu: true,leftMenuType:"Back")
-            self.view.addSubview(headerView)
+            self.iPhoneHeaderView.addSubview(headerView)
             if flushStatus == true{
                 headerView.refreshBtn.showSpin()
             }

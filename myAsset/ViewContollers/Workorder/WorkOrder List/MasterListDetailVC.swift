@@ -47,9 +47,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
     @IBOutlet private weak var borderView: UIView!
     @IBOutlet weak var statusViewHeightConstant: NSLayoutConstraint!
     @IBOutlet weak var statusView: UIView!
-    @IBOutlet var statusViewTopConstant: NSLayoutConstraint!
-    @IBOutlet var statusViewBottomConstant: NSLayoutConstraint!
-
+    @IBOutlet weak var iPhoneHeaderView: UIView!
     //MARK:- Declared Variables..
     let appDeli = UIApplication.shared.delegate as! AppDelegate
     var selectedButtonView = UIView()
@@ -68,7 +66,6 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
     var operationsVC_OverView : OperationsVC?
     var workorderNotification = Bool()
     var assetDetailsVC : AssetDetailsVC?
-    var assetDetailsiPad : AssetDetailsVC_iPad?
 
     
     // MARK: Page Swipe Inputs
@@ -162,13 +159,11 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             self.listObjectSelected()
             self.viewWillAppear(true)
         }
-        if DeviceType == iPhone{
-            self.statusViewBottomConstant.constant = IS_IPHONE_XS_MAX ? 34 : 0
-        }
         mJCLogger.log("Ended", Type: "info")
     }
     override func viewWillAppear(_ animated: Bool) {
         mJCLogger.log("Starting", Type: "info")
+        super.viewWillAppear(animated)
         myAssetDataManager.uniqueInstance.methodStatusBarColorChange()
         if flushStatus == true{
             if DeviceType == iPad{
@@ -179,18 +174,9 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             self.updateSlideMenu()
             setUpHeader()
             if onlineSearch == true {
-                self.statusViewTopConstant.constant = 60.0
                 self.statusViewHeightConstant.constant = 0.0
             }else {
                 self.statusViewHeightConstant.constant = 50.0
-            }
-//            if screenHeight > 667{
-//                self.statusViewBottomConstant.constant = 34
-//            }else{
-//                self.statusViewBottomConstant.constant = -34
-//            }
-            if IS_IPHONE_XS_MAX{
-                self.statusViewTopConstant.constant = -34
             }
         }
         pageViewController.setTabItem(tabItems())
@@ -830,14 +816,14 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             }
             title = "Work_Order_No".localized() + ":\(selectedworkOrderNumber)"
         }
-        var view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: title, NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "")
+        var view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: false, leftMenu: true, leftTitle: title, NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "")
         if applicationFeatureArrayKeys.contains("WO_LIST_POST_JOB_OPTION"){
-            view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: title, NewJobButton: false, refresButton: true, threedotmenu: true,leftMenuType:"")
+            view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: false, leftMenu: true, leftTitle: title, NewJobButton: false, refresButton: true, threedotmenu: true,leftMenuType:"")
         }
         if !applicationFeatureArrayKeys.contains("WO_LIST_POST_JOB_OPTION"){
-            view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: title, NewJobButton: false, refresButton: true, threedotmenu: true,leftMenuType:"")
+            view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: false, leftMenu: true, leftTitle: title, NewJobButton: false, refresButton: true, threedotmenu: true,leftMenuType:"")
         }
-        self.view.addSubview(view)
+        self.iPhoneHeaderView.addSubview(view)
         if flushStatus == true{
             view.refreshBtn.showSpin()
         }
@@ -2219,9 +2205,6 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
         let checkSheetListVC = ScreenManager.getCheckSheetListScreen()
         let objectsVC = ScreenManager.getObjectScreen()
         self.assetDetailsVC = ScreenManager.searchAssestDetailsScreen()
-        if DeviceType == iPad{
-            self.assetDetailsiPad = ScreenManager.getAssetDetailsForiPad()
-        }
         
         var itemVC = UIViewController()
         var activitiesVC = UIViewController()
@@ -2248,12 +2231,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
                     tabVCArray.append(operationsVC)
                 }
             }
-            if DeviceType == iPad{
-                tabVCArray.append(self.assetDetailsiPad!)
-            }
-            else{
-                tabVCArray.append(self.assetDetailsVC!)
-            }
+            tabVCArray.append(self.assetDetailsVC!)
             if applicationFeatureArrayKeys.contains("WoAttachments"){
                 tabVCArray.append(self.attachmentsVC!)
                 self.attachmentsVC?.objectNum = selectedworkOrderNumber
@@ -2269,8 +2247,6 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             tabVCArray.append(self.notificationOverViewVC!)
         }
         return tabVCArray
-
-        mJCLogger.log("Ended", Type: "info")
         return []
     }
     private func setupCell() {

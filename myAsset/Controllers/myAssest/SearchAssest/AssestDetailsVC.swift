@@ -8,7 +8,6 @@
 import UIKit
 import ODSFoundation
 import mJCLib
-import AVFoundation
 
 class AssetDetailsVC: UIViewController, viewModelDelegate, barcodeDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UISearchBarDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
@@ -572,17 +571,19 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if DeviceType == iPhone{
-            let item = self.inspectedArr[indexPath.row]
-            if !selectedAssetListArr.contains(item){
-                selectedAssetListArr.append(item)
-                selectedCountLabelUpdate(count: selectedAssetListArr.count)
-            }else{
-                if let index = self.selectedAssetListArr.index(of: item){
-                    selectedAssetListArr.remove(at: index)
+            if self.assestSegment.selectedSegmentIndex != 1{
+                let item = self.inspectedArr[indexPath.row]
+                if !selectedAssetListArr.contains(item){
+                    selectedAssetListArr.append(item)
                     selectedCountLabelUpdate(count: selectedAssetListArr.count)
+                }else{
+                    if let index = self.selectedAssetListArr.index(of: item){
+                        selectedAssetListArr.remove(at: index)
+                        selectedCountLabelUpdate(count: selectedAssetListArr.count)
+                    }
                 }
+                self.assetTableView.reloadData()
             }
-            self.assetTableView.reloadData()
         }
         else{
             switch tableView {
