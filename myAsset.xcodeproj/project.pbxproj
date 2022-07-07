@@ -1596,7 +1596,6 @@
 				18D1E51A25AC0BBD007839E3 /* Controllers */,
 				0173740822B693E200DC90C4 /* UI */,
 				4CD92B181E1E1B600091FC47 /* ViewContollers */,
-				4CD92AF21E1E1AD80091FC47 /* ModelClass */,
 				4CD92B0A1E1E1B220091FC47 /* Utility */,
 				4CFDAFB31EBCAE1B006F62F3 /* myAsset.entitlements */,
 				4CD926001E1E0CC00091FC47 /* Assets.xcassets */,
@@ -1609,12 +1608,12 @@
 		4CD92AF21E1E1AD80091FC47 /* ModelClass */ = {
 			isa = PBXGroup;
 			children = (
-				E044C2E0286C3F71001A0911 /* ExtraModelClass */,
 				4CD92AF91E1E1AD80091FC47 /* myAssetDataManager.swift */,
 				4C3ABF7C1EAA3B8F00AA0F74 /* ManageDeleteEntityClass.swift */,
 				4CD92AF51E1E1AD80091FC47 /* DefineRequestModelClass.swift */,
 				01A41FAE1F25B8DA003A1493 /* ReadAndWriteModelclass.swift */,
 				4C3C267A1ED8331A00B33D3F /* DateFormatterModelClass.swift */,
+				E044C2E1286C3F71001A0911 /* DataModel.swift */,
 			);
 			path = ModelClass;
 			sourceTree = "<group>";
@@ -1622,7 +1621,6 @@
 		4CD92B0A1E1E1B220091FC47 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				011F7D8D2860492600466ED7 /* Progress */,
 				18B7D0EF244427700040E7B1 /* PageSwipe */,
 				0137C4FD218C77700078E937 /* LocalCheckSheet.xml */,
 				016C47412089BEA7000315F2 /* Fonts */,
@@ -2037,14 +2035,6 @@
 			path = AssestCustomCells;
 			sourceTree = "<group>";
 		};
-		E044C2E0286C3F71001A0911 /* ExtraModelClass */ = {
-			isa = PBXGroup;
-			children = (
-				E044C2E1286C3F71001A0911 /* DataModel.swift */,
-			);
-			path = ExtraModelClass;
-			sourceTree = "<group>";
-		};
 		E044C2E3286C55A2001A0911 /* WorkOrderCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2066,6 +2056,7 @@
 		E0C7B14D286AE79C00545166 /* myAsset */ = {
 			isa = PBXGroup;
 			children = (
+				E0D0B4E22876BCB0006797D5 /* Helpers */,
 				0173742222B6A04100DC90C4 /* Splash Screen */,
 				E0C7B151286AE80B00545166 /* CustomCells */,
 				E0C7B150286AE7DE00545166 /* ViewModels */,
@@ -2099,6 +2090,7 @@
 		E0C7B150286AE7DE00545166 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				4CD92AF21E1E1AD80091FC47 /* ModelClass */,
 				188A9A772594AA6900875376 /* ZModel */,
 				E011C93A2853182A00D613CB /* AssetClassModel.swift */,
 				01E7483C2856FE67009C6D6D /* AssetSearchViewModel.swift */,
@@ -2113,6 +2105,14 @@
 				E011C9192850AB7B00D613CB /* AssestCustomCells */,
 			);
 			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		E0D0B4E22876BCB0006797D5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				011F7D8D2860492600466ED7 /* Progress */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		F723DB212484CF1C00C42D0D /* AssetHierarchy Cell */ = {
