@@ -13,9 +13,6 @@ import mJCLib
 class ZworkorderList : WoHeaderModel {
  // @objc public var PostalCode = String()
 }
-class ZNotifitem : NotificationItemsModel{
-    @objc public var Version = String()
-}
 class ZEquipmentModel: EquipmentModel{
     @objc public var AssetClass = String()
     @objc public var AssetDesc = String()

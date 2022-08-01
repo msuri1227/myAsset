@@ -23,6 +23,7 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
     @IBOutlet var mainView: UIView!
     @IBOutlet var mainScrollView: UIScrollView!
     @IBOutlet var scrollViewContainerView: UIView!
+    @IBOutlet weak var scrollViewContainerViewHeightConstraint: NSLayoutConstraint!
     
     //TaskTypeView Outlets..
     @IBOutlet var taskTypeView: UIView!
@@ -434,9 +435,9 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
         }
         
         //Mainwork center
-        self.mainWorkCenterTextField.didSelect { selectedText, index, id in
-            self.mainWorkCenterTextField.text = selectedText
-        }
+//        self.mainWorkCenterTextField.didSelect { selectedText, index, id in
+//            self.mainWorkCenterTextField.text = selectedText
+//        }
     }
     open override var shouldAutorotate: Bool {
         return false
@@ -585,21 +586,13 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
     }
 
     @IBAction func functionalLocationSelectButtonAction(sender: AnyObject) {
-        mJCLogger.log("Starting", Type: "info")
-        let functionaLocationListVC = ScreenManager.getFlocEquipHierarchyScreen()
-        functionaLocationListVC.isSelect = "FunctionalLocation"
-        let arr = self.mainWorkCenterTextField.text!.components(separatedBy: " - ")
-        if arr.count > 0{
-            functionaLocationListVC.workCenter = arr[0]
+        var workCenterStr : String? = ""
+        var planningPlantStr : String? = ""
+        if self.mainWorkCenterTextField.text != "" || self.plantTextField.text != nil {
+            workCenterStr = self.mainWorkCenterTextField.text
+            planningPlantStr = self.plantTextField.text
         }
-        let arr1 = self.plantTextField.text!.components(separatedBy: " - ")
-        if arr1.count > 0{
-            functionaLocationListVC.planningPlant = arr1[0]
-        }
-        functionaLocationListVC.modalPresentationStyle = .fullScreen
-        functionaLocationListVC.delegate = self
-        self.present(functionaLocationListVC, animated: false) {}
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentFlocEquipHierarchyScreen(vc: self, select: "FunctionalLocation", delegateVC: self, workCenter: workCenterStr, planningPlant: planningPlantStr)
     }
     @IBAction func functionalLocationScanButtonAction(sender: AnyObject) {
         mJCLogger.log("Starting", Type: "info")
@@ -608,23 +601,13 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func equipmentSelectButtonAction(sender: AnyObject) {
-        mJCLogger.log("Starting", Type: "info")
-        let functionaLocationListVC = ScreenManager.getFlocEquipHierarchyScreen()
-        functionaLocationListVC.selectedFunLoc = functionalLocationTextField.text!
-        functionaLocationListVC.isSelect = "Equipement"
-        let arr = self.mainWorkCenterTextField.text!.components(separatedBy: " - ")
-        if arr.count > 0{
-            functionaLocationListVC.workCenter = arr[0]
+        var workCenterStr : String? = ""
+        var planningPlantStr : String? = ""
+        if self.mainWorkCenterTextField.text != "" || self.plantTextField.text != nil {
+            workCenterStr = self.mainWorkCenterTextField.text
+            planningPlantStr = self.plantTextField.text
         }
-        let arr1 = self.plantTextField.text!.components(separatedBy: " - ")
-        if arr1.count > 0{
-            functionaLocationListVC.planningPlant = arr1[0]
-        }
-        functionaLocationListVC.selectedFunLoc = self.functionalLocationTextField.text ?? ""
-        functionaLocationListVC.modalPresentationStyle = .fullScreen
-        functionaLocationListVC.delegate = self
-        self.present(functionaLocationListVC, animated: false) {}
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentFlocEquipHierarchyScreen(vc: self, select: "Equipement", delegateVC: self, workCenter: workCenterStr, planningPlant: planningPlantStr, selectedFuncLoc: functionalLocationTextField.text)
     }
     @IBAction func equipmentScanButtonAction(sender: AnyObject) {
         mJCLogger.log("Starting", Type: "info")
@@ -650,10 +633,12 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
             breakDownSwitchState = true
             self.malfunctionStartDateView.isHidden = false
             self.malfunctionEndDateView.isHidden = false
+            self.scrollViewContainerViewHeightConstraint.constant = 1300
         }else {
             breakDownSwitchState = false
             self.malfunctionStartDateView.isHidden = true
             self.malfunctionEndDateView.isHidden = true
+            self.scrollViewContainerViewHeightConstraint.constant = 1200
         }
         self.allTextFieldResign()
         mJCLogger.log("Ended", Type: "info")
@@ -768,22 +753,10 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func plannerButtonAction(sender: AnyObject) {
-        mJCLogger.log("Starting", Type: "info")
-        let personRespVC = ScreenManager.getPersonResponsibleListScreen()
-        personRespVC.modalPresentationStyle = .fullScreen
-        personRespVC.delegate = self
-        personRespVC.isFrom = "planner"
-        self.present(personRespVC, animated: false)
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentPersonResponsibleListScreen(vc: self, isFrm: "planner", delegateVC: self)
     }
     @IBAction func reportedyButtonAction(sender: AnyObject) {
-        mJCLogger.log("Starting", Type: "info")
-        let personRespVC = ScreenManager.getPersonResponsibleListScreen()
-        personRespVC.modalPresentationStyle = .fullScreen
-        personRespVC.delegate = self
-        personRespVC.isFrom = "reportedBy"
-        self.present(personRespVC, animated: false)
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentPersonResponsibleListScreen(vc: self, isFrm: "reportedBy", delegateVC: self)
     }
 
     @IBAction func checkOnlineNotificationsList(_ sender: Any) {
@@ -1060,10 +1033,10 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
                 }
             }
             
-            if self.workCentersArray.count > 0{
-                self.mainWorkCenterTextField.optionArray = self.workCentersListArray
-                self.mainWorkCenterTextField.checkMarkEnabled = false
-            }
+//            if self.workCentersArray.count > 0{
+//                self.mainWorkCenterTextField.optionArray = self.workCentersListArray
+//                self.mainWorkCenterTextField.checkMarkEnabled = false
+//            }
             var workCenterStr = String()
             if self.isFromEdit == true {
                 workCenterStr = singleNotification.WorkCenter
@@ -1173,7 +1146,22 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
         mJCLogger.log("Ended", Type: "info")
     }
     func showOnlineSearchPopUp(searchType:String){
+        DispatchQueue.main.async{
+            let lotPopUp = Bundle.main.loadNibNamed("OnlineWorkOrderAndNotification", owner: self, options: nil)?.last as! OnlineWorkOrderAndNotification
+            lotPopUp.onlineSearchNotificationTableView.isHidden = true
+            let windows = UIApplication.shared.windows
+            let firstWindow = windows.first
+            UserDefaults.standard.removeObject(forKey: "ListFilter")
+            lotPopUp.searchType = searchType
+            lotPopUp.plantText = self.plantTextField.text!
+            lotPopUp.mainWorkCenterText = self.mainWorkCenterTextField.text!
+            lotPopUp.functionalLocationText = self.functionalLocationTextField.text!
+            lotPopUp.equipmentText = self.equipmentTextField.text!
+            lotPopUp.frame = UIScreen.main.bounds
+            lotPopUp.loadNibView()
+            firstWindow?.addSubview(lotPopUp)
 
+        }
     }
     func updatedImgData(imgData:NSData,FileName:String,Description:String) {
         mJCLogger.log("Starting", Type: "info")
@@ -1596,10 +1584,8 @@ class CreateJobVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIGes
             ODSUIHelper.setBorderToView(view:self.plantTextFieldView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         }
         ODSUIHelper.setBorderToView(view:self.reportedByTextFieldView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
-        self.attachImageCameraButton.layer.cornerRadius = 15.5
-        self.attachImageCameraButton.layer.masksToBounds = true
-        self.attachImageGallaryButton.layer.cornerRadius = 15.5
-        self.attachImageGallaryButton.layer.masksToBounds = true
+        ODSUIHelper.setButtonCornerRadius(button: self.attachImageCameraButton, cornerRadius: 15.5)
+        ODSUIHelper.setButtonCornerRadius(button: self.attachImageGallaryButton, cornerRadius: 15.5)
 
         self.equipmentWarrantyView.isHidden = true
         self.malfunctionStartDateView.isHidden = true

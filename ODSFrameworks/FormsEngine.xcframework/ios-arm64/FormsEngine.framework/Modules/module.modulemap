@@ -1,0 +1,11 @@
+framework module FormsEngine {
+  umbrella header "FormsEngine.h"
+
+  export *
+  module * { export * }
+}
+
+module FormsEngine.Swift {
+    header "FormsEngine-Swift.h"
+    requires objc
+}

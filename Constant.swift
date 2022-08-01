@@ -7,11 +7,7 @@ import ODSFoundation
 import FormsEngine
 import mJCLib
 
-public let SCREEN_MAX_LENGTH   = Int( max(screenWidth, screenHeight) )
-public let SCREEN_MIN_LENGTH   = Int( min(screenWidth, screenHeight) )
-public let IS_IPHONE_XS_MAX    = ((DeviceType == iPhone) && SCREEN_MAX_LENGTH == 812) || ((DeviceType == iPhone) && SCREEN_MAX_LENGTH == 896)
 // app constants
-
 var serverIP = String()
 var portNumber : Int = 0443
 var ApplicationID = String()
@@ -29,7 +25,6 @@ let GoogleAPIKey = "AIzaSyC4h3YkzNzpQ2Zo1dziVsSJtxOsQvD79Qs"
 var demoModeEnabled = false
 
 // Global Array values
-
 var globalPlanningPlantArray = Array<MaintencePlantModel>()
 var globalPriorityArray = Array<PriorityListModel>()
 var globalWorkCtrArray = Array<WorkCenterModel>()
@@ -62,7 +57,6 @@ var woOperationsArray = [WoOperationModel]()
 var woWorkOrder = String()
 
 // background sync variables
-
 var EventBased_Sync = String()
 var TimeBased_Sync = String()
 var EventBased_Sync_Type = String()
@@ -78,7 +72,6 @@ var MasterData_BG_Refresh_Enable = Bool()
 var flushStatus = Bool()
 
 // App Config constants
-
 var WO_NOTES_POST_IN_OP = Bool();
 var AUTO_NOTES_ON_STATUS = Bool();
 var AUTO_NOTES_TEXT_LINE1 = String();
@@ -169,9 +162,7 @@ var KILL_APP_ON_LOGOUT = false
 var SHOW_CREATEJOB_ON_CREATENOTIF_IN_LIST_SCREEN = false
 var ENABLE_CANCEL_FINAL_CONFIRMATION = false
 
-
 //MARK:- APP Colors
-
 let compactButtonBG = UIColor(red: 210.0/255.0, green: 115.0/255.0, blue: 55.0/255.0, alpha: 1.0)
 let appColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1.0)
 let selectionBgColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 0.7)
@@ -180,7 +171,6 @@ let dbfilterBgColor = UIColor.init(red: 212.0/255.0, green: 227.0/255.0, blue: 2
 let mapMarkerColor = UIColor.init(red:0.0/255.0,  green:255.0/255.0,  blue:255.0/255.0, alpha:1)
 
 //MARK:- userDetails..
-
 var userSystemID = String()
 var userDisplayName = String()
 var userPersonnelNo = String()
@@ -196,9 +186,7 @@ var User_ID_MinLength = 5;
 var User_PSWD_MinLength = 5;
 var userLocation_LatLong = String()
 
-
 //MARK:-  global Variable
-
 var sideSelectedMenu = String()
 var isMasterHidden = Bool()
 var currentMasterView = String()
@@ -272,6 +260,7 @@ var dashboardFilterDic = [String:Any]()
 var fileManager = FileManager.default
 var documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
 var libraryPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as String
+
 //MARK:- Create entity Variables
 let CreateEntityBase_App        = "ODS_SAP_WM_AP_DLITE_SRV."
 let createEntityBase_TxS        = "ODS_SAP_WM_DLITE_SRV."
@@ -313,7 +302,6 @@ let formApprovalSetEntity = "\(createEntityBase_FrmS)FormApprover"
 var inspectionResultEntity = "\(createEntityBase_QM)InspectionResultsGet"
 
 //MARK:- Assignment types
-
 var OperationLevel = "OPERATIONLEVEL"
 var WorkcenterHeadeLevel = "WORKCENTERHEADERLEVEL"
 var WorkcenterOperationLevel = "WORKCENTEROPERATIONLEVEL"
@@ -324,7 +312,6 @@ var NotificationWorkcenterLevel = "NOTIFICATIONWORKCENTERLEVEL"
 var NotificationTaskLevel = "NOTIFICATIONTASKLEVEL"
 
 //MARK:- workorder count varialbles
-
 var OprCount = String()
 var OprColor : UIColor? = UIColor.red
 var cmpCount = String()
@@ -346,7 +333,6 @@ var yetToBeCheckSheetCount = String()
 var yetToBeCheckSheetColor : UIColor? = appColor
 
 //MARK:- Notification count varialbles
-
 var ItemCount = String()
 var ItemColor : UIColor? = appColor
 var ItemTaskCount = String()
@@ -366,7 +352,6 @@ var noAttchmentCount = String()
 var noAttchmentColor : UIColor? = appColor
 
 //MARK:- Localization strings
-
 let inactiveWorkorderAlertMessage = "You_are_not_actively_working_on_the_selected_Work_Order_hence_this_action_is_not_allowed".localized()
 let inactiveOperationAlertMessage = "You_are_not_actively_working_on_the_selected_Operation_hence_this_action_is_not_allowed".localized()
 let inactiveNotificationAlertMessage = "You_are_not_actively_working_on_the_selected_Notification_hence_this_action_is_not_allowed".localized()
@@ -415,9 +400,7 @@ let loginOtherUserAlert = "was_logged_in_earlier_Any_pending_changes_will_be_los
 // DashBoard static Array
 var dateDropArray = [Filters.PlannedForToday.value, Filters.PlannedForTomorrow.value,Filters.PlannedforNextWeek.value,Filters.OverdueForLastTwodays.value,Filters.OverdueForAWeek.value,Filters.AllOverdue.value,Filters.CreatedInLast30Days.value,Filters.SchedulingComplaint.value,Filters.SchedulingNonComplaint.value]
 var WoFilterArray = [selectStr,Filters.Priority.value,Filters.Status.value,Filters.UserStatus.value,Filters.WorkCenter.value,Filters.MantActivityType.value,Filters.InspectionLot.value,Filters.FunctionalLocation.value,Filters.Equipment.value,Filters.Date.value,Filters.TechID.value]
-//Filters.SystemStatus.value, Filters.Location.value,Filters.CSStatus.value,Filters.TechID.value,
 var NoFilterArray = [selectStr,Filters.Priority.value,Filters.Status.value,Filters.UserStatus.value,Filters.WorkCenter.value,Filters.WorkorderConversion.value,Filters.FunctionalLocation.value,Filters.Equipment.value,Filters.Date.value,Filters.TechID.value]
-//Filters.SystemStatus.value,Filters.Location.value,Filters.TechID.value
 var typeArray = [Filters.AssignedToMe.value,Filters.CreatedByMe.value]
 var CSStatusArry = [Filters.CSApproved.value ,Filters.CSRejected.value,Filters.CSNotReviewed.value ,Filters.CSCorrectionRequired.value]
 var colorArray = ["#f68b1f","#0083ca","#72bf44","#FFCDD2","#ab218e","#b21212","#FFECB3","#004990","#008a3b","#f7bf8d","#52247f","#cb4d2c","#f0ab00","#00a1e4","#808080","#b2b2b2"]
@@ -434,7 +417,6 @@ var defaultImageType = "jpg"
 var filteredWorkorders = [WoHeaderModel]()
 var filteredOperations = [WoOperationModel]()
 var filteredNotifications = [NotificationModel]()
-
 
 var supervisorWoSideMenuArr = ["Home".localized(),"Job_Location".localized(), "Notifications".localized(), "Time_Sheet".localized(),"Supervisor_View".localized(),"Team".localized(), "Master_Data_Refresh".localized(), "Asset_Map".localized(),"Settings".localized(),"Error_Logs".localized(),"Log_Out".localized()]
 var supervisorWoSideMenuImgArr = [#imageLiteral(resourceName: "HomeSM"),#imageLiteral(resourceName: "Joblocation"),#imageLiteral(resourceName: "Notifi"),#imageLiteral(resourceName: "TimeSheetSM"),#imageLiteral(resourceName: "SupervisorView"),#imageLiteral(resourceName: "TeamSupView"),#imageLiteral(resourceName: "MasterDataRefreshSM"),#imageLiteral(resourceName: "AssetMapSM"),#imageLiteral(resourceName: "SettingsSupView"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "LogOutWithDarkTheme")]

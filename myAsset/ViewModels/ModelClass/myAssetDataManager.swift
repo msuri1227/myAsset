@@ -536,7 +536,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
     }
     //MARK: - Global Appstore Details
     func getWOStatusSet(){
-        WorkOrderStatusModel.getworkOrderValidStatusList(){ (response, error)  in
+        WorkOrderStatusHelper.getworkOrderValidStatusList(formate:true){ (response, error)  in
             if error == nil{
                 if let arr = response["data"] as? [WorkOrderStatusModel]{
                     globalStatusArray = arr
@@ -554,7 +554,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
         }
     }
     func getStatusCategoryData(){
-        StatusCategoryModel.getStatusCategoryList(){ (response, error) in
+        StatusCategoryHelper.getStatusCategoryList(formate:true){ (response, error) in
             if error == nil{
                 if let arr = response["data"] as? [StatusCategoryModel]{
                     statusCategoryArr = arr
@@ -572,7 +572,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
         }
     }
     func getApplicationFeatureSet(){
-        AppFeaturesModel.getAppFeaturesList(){ (response, error)  in
+        AppFeaturesHelper.getAppFeaturesList(formate:true){ (response, error)  in
             if error == nil{
                 applicationFeatureArrayKeys.removeAll()
                 if let arr = response["data"] as? [AppFeaturesModel]{
@@ -1298,19 +1298,19 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
                         let resourcePath = key as! String
                         if resourcePath == woAttachmentSet {
                             let dictval = responseDic.value(forKey: resourcePath) as! [String:Any]
-                            let arr = formateHelperClass.getAttachmentlist(dictionary: dictval)
+                            let arr = mJCHelperClass.getAttachmentlist(dictionary: dictval)
                             woAttchArr.append(contentsOf: arr)
                         }else if resourcePath == uploadWOAttachmentContentSet{
                             let dictval = responseDic.value(forKey: resourcePath) as! [String:Any]
-                            let arr = formateHelperClass.getAttachmentlist(dictionary: dictval)
+                            let arr = mJCHelperClass.getAttachmentlist(dictionary: dictval)
                             woAttchArr.append(contentsOf: arr)
                         }else if resourcePath == "NOAttachmentSet"{
                             let dictval = responseDic.value(forKey: resourcePath) as! [String:Any]
-                            let arr = formateHelperClass.getAttachmentlist(dictionary: dictval)
+                            let arr = mJCHelperClass.getAttachmentlist(dictionary: dictval)
                             noAttchArr.append(contentsOf: arr)
                         }else if resourcePath == uploadNOAttachmentContentSet{
                             let dictval = responseDic.value(forKey: resourcePath) as! [String:Any]
-                            let arr = formateHelperClass.getAttachmentlist(dictionary: dictval)
+                            let arr = mJCHelperClass.getAttachmentlist(dictionary: dictval)
                             noAttchArr.append(contentsOf: arr)
                         }
                     }
@@ -2041,7 +2041,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
             mJCOfflineHelper.getODataEntriesfromOffline(queryRequest: defineQuery, storeName: store.AppStoreName, completionHandler: { (response, error)  in
                 if(error == nil) {
                     if type == "Notification"{
-                        let totaldic =  formateHelperClass.getListInFormte(dictionary: NSMutableDictionary(dictionary: response), entityModelClassType: NotificationModel.self)
+                        let totaldic =  ODSHelperClass.getListInFormte(dictionary: NSMutableDictionary(dictionary: response), entityModelClassType: NotificationModel.self)
                         let  activeNoArray = totaldic["data"] as! [NotificationModel]
                         if activeNoArray.count > 0{
                             var Nodict : [String: Any] = [:]
@@ -2055,7 +2055,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
                         }
                     }else{
                         if WORKORDER_ASSIGNMENT_TYPE == "2" || WORKORDER_ASSIGNMENT_TYPE == "4" || WORKORDER_ASSIGNMENT_TYPE == "5"{
-                            let totaldic = formateHelperClass.getListInFormte(dictionary: NSMutableDictionary(dictionary: response), entityModelClassType: WoOperationModel.self)
+                            let totaldic = ODSHelperClass.getListInFormte(dictionary: NSMutableDictionary(dictionary: response), entityModelClassType: WoOperationModel.self)
                             let  activeOprArray = totaldic["data"] as! [WoOperationModel]
                             if activeOprArray.count > 0{
                                 var opdict : [String: Any] = [:]
@@ -2070,7 +2070,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
                                 UserDefaults.standard.removeObject(forKey: "active_details")
                             }
                         }else{
-                            let totaldic = formateHelperClass.getListInFormte(dictionary: NSMutableDictionary(dictionary: response), entityModelClassType: WoHeaderModel.self)
+                            let totaldic = ODSHelperClass.getListInFormte(dictionary: NSMutableDictionary(dictionary: response), entityModelClassType: WoHeaderModel.self)
                             let  activeWoArray = totaldic["data"] as! [WoHeaderModel]
                             if activeWoArray.count > 0{
                                 var Wodict : [String: Any] = [:]
@@ -2543,156 +2543,6 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
     // end
 }
 //...END...//
-//MARK: Extensions
-public extension Array where Element: Hashable {
-    func uniqued() -> [Element] {
-        var seen = Set<Element>()
-        return filter{ seen.insert($0).inserted }
-    }
-}
-extension UIColor {
-    static var random: UIColor {
-        return UIColor(red: .random(in: 0...1),
-                       green: .random(in: 0...1),
-                       blue: .random(in: 0...1),
-                       alpha: 1.0)
-    }
-}
-extension Array {
-    func unique<T:Hashable>(map: ((Element) -> (T))) -> [Element] {
-        mJCLogger.log("Starting", Type: "info")
-        var set = Set<T>() //the unique list kept in a Set for fast retrieval
-        var arrayOrdered = [Element]() //keeping the unique list of elements but ordered
-        for value in self {
-            if !set.contains(map(value)) {
-                set.insert(map(value))
-                arrayOrdered.append(value)
-            }
-        }
-        mJCLogger.log("Ended", Type: "info")
-        return arrayOrdered
-    }
-    func uniqueValues<T:Hashable>(map: ((Element) -> (T))) -> [String] {
-        mJCLogger.log("Starting", Type: "info")
-        var set = [String]() //the unique list kept in a Set for fast retrieval
-        for value in self {
-            if let str = map(value) as? String{
-                if !set.contains(str){
-                    set.append(str)
-                }
-            }
-        }
-        mJCLogger.log("Ended", Type: "info")
-        return set
-    }
-}
-extension Array where Element: Equatable {
-    mutating func removeElementInArray(object: Element) {
-        guard let index = firstIndex(of: object) else {return}
-        remove(at: index)
-    }
-}
-extension Comparable {
-    func clamped(lowerBound: Self, upperBound: Self) -> Self {
-        return min(max(self, lowerBound), upperBound)
-    }
-}
-extension LAContext {
-    enum BiometricType: String {
-        case none
-        case touchID
-        case faceID
-    }
-    var biometricType: BiometricType {
-        var error: NSError?
-        guard self.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
-            // Capture these recoverable error thru Crashlytics
-            return .none
-        }
-        if #available(iOS 11.0, *) {
-            switch self.biometryType {
-            case .none:
-                return .none
-            case .touchID:
-                return .touchID
-            case .faceID:
-                return .faceID
-            }
-        } else {
-            return  self.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touchID : .none
-        }
-    }
-}
-extension UIImage {
-    convenience init?(barcode: String) {
-        let data = barcode.data(using: .ascii)
-        guard let filter = CIFilter(name: "CICode128BarcodeGenerator") else {
-            return nil
-        }
-        filter.setValue(data, forKey: "inputMessage")
-        guard let ciImage = filter.outputImage else {
-            return nil
-        }
-        self.init(ciImage: ciImage)
-    }
-    convenience init?(qrCode: String) {
-        let data = qrCode.data(using: .ascii)
-        guard let filter = CIFilter(name: "CIQRCodeGenerator") else {
-            return nil
-        }
-        filter.setValue(data, forKey: "inputMessage")
-        guard let ciImage = filter.outputImage else {
-            return nil
-        }
-        self.init(ciImage: ciImage)
-    }
-}
-extension UIPrintPageRenderer {
-    func generatePdfData() -> NSMutableData {
-        let pdfData = NSMutableData()
-        UIGraphicsBeginPDFContextToData(pdfData, self.paperRect, nil)
-        self.prepare(forDrawingPages: NSMakeRange(0, self.numberOfPages))
-        let printRect = UIGraphicsGetPDFContextBounds()
-        for pdfPage in 0...self.numberOfPages {
-            UIGraphicsBeginPDFPage()
-            self.drawPage(at: pdfPage, in: printRect)
-        }
-        UIGraphicsEndPDFContext();
-        return pdfData
-    }
-}
-extension Data {
-    init?(fromHexEncodedString string: String) {
-        // Convert 0 ... 9, a ... f, A ...F to their decimal value,
-        // return nil for all other input characters
-        func decodeNibble(u: UInt16) -> UInt8? {
-            switch(u) {
-            case 0x30 ... 0x39:
-                return UInt8(u - 0x30)
-            case 0x41 ... 0x46:
-                return UInt8(u - 0x41 + 10)
-            case 0x61 ... 0x66:
-                return UInt8(u - 0x61 + 10)
-            default:
-                return nil
-            }
-        }
-        self.init(capacity: string.utf16.count/2)
-        var even = true
-        var byte: UInt8 = 0
-        for c in string.utf16 {
-            guard let val = decodeNibble(u: c) else { return nil }
-            if even {
-                byte = val << 4
-            } else {
-                byte += val
-                self.append(byte)
-            }
-            even = !even
-        }
-        guard even else { return nil }
-    }
-}
 public extension UISearchBar {
     var compatibleSearchTextField: UITextField {
         guard #available(iOS 13.0, *) else { return legacySearchField }

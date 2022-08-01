@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="OnlineWorkOrderAndNotification" customModule="myJobCard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaT-9j-aPa">
+                    <rect key="frame" x="183" y="162" width="1000" height="700"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Notifications : " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUt-pw-y7f">
+                            <rect key="frame" x="0.0" y="0.0" width="1000" height="50"/>
+                            <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="osj-SC-XK1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z3U-dt-nPo">
+                            <rect key="frame" x="30" y="101" width="940" height="574"/>
+                            <color key="backgroundColor" name="mjcSubViewColor"/>
+                            <connections>
+                                <outlet property="dataSource" destination="SaT-9j-aPa" id="JqP-0P-6y6"/>
+                                <outlet property="delegate" destination="SaT-9j-aPa" id="DMO-1S-4Zh"/>
+                            </connections>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fjm-fO-D5s">
+                            <rect key="frame" x="950" y="0.0" width="50" height="50"/>
+                            <color key="backgroundColor" name="mjcViewUIBorderColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="ij7-k2-fcr"/>
+                                <constraint firstAttribute="height" constant="50" id="tOe-Tl-H4a"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <state key="normal" image="cancel">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="closeButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="GHW-84-3rn"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H53-4w-n0m">
+                            <rect key="frame" x="30" y="325" width="940" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GHg-W7-nRw">
+                                    <rect key="frame" x="0.0" y="3" width="940" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" name="mjcSubViewColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="RJB-ZT-WsB"/>
+                            </constraints>
+                        </view>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Eht-7i-6z6">
+                            <rect key="frame" x="30" y="60" width="940" height="32"/>
+                            <segments>
+                                <segment title="Order"/>
+                                <segment title="Notification"/>
+                            </segments>
+                            <connections>
+                                <action selector="workorderNotifiSearchSegment:" destination="iN0-l3-epB" eventType="valueChanged" id="VHD-Nt-SbE"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" name="mjcSubViewColor"/>
+                    <constraints>
+                        <constraint firstItem="Eht-7i-6z6" firstAttribute="top" secondItem="uUt-pw-y7f" secondAttribute="bottom" constant="10" id="1xh-iH-1kJ"/>
+                        <constraint firstAttribute="trailing" secondItem="Fjm-fO-D5s" secondAttribute="trailing" id="3Oh-t8-3d4"/>
+                        <constraint firstItem="Fjm-fO-D5s" firstAttribute="top" secondItem="SaT-9j-aPa" secondAttribute="top" id="5Mu-6u-Smb"/>
+                        <constraint firstItem="z3U-dt-nPo" firstAttribute="leading" secondItem="SaT-9j-aPa" secondAttribute="leading" constant="30" id="7Vd-iz-Rr3"/>
+                        <constraint firstAttribute="height" constant="700" id="FQc-AN-kwV"/>
+                        <constraint firstItem="z3U-dt-nPo" firstAttribute="top" secondItem="Eht-7i-6z6" secondAttribute="bottom" constant="10" id="HKV-rK-ty7"/>
+                        <constraint firstItem="uUt-pw-y7f" firstAttribute="top" secondItem="SaT-9j-aPa" secondAttribute="top" id="JmU-sg-v7n"/>
+                        <constraint firstItem="H53-4w-n0m" firstAttribute="centerY" secondItem="SaT-9j-aPa" secondAttribute="centerY" id="MlL-bl-7jv"/>
+                        <constraint firstAttribute="bottom" secondItem="z3U-dt-nPo" secondAttribute="bottom" constant="25" id="RcW-F4-w8O"/>
+                        <constraint firstItem="H53-4w-n0m" firstAttribute="centerX" secondItem="SaT-9j-aPa" secondAttribute="centerX" id="YLJ-VO-ZjF"/>
+                        <constraint firstAttribute="trailing" secondItem="Eht-7i-6z6" secondAttribute="trailing" constant="30" id="fnv-Ri-tx9"/>
+                        <constraint firstAttribute="width" constant="1000" id="foE-SQ-v3O"/>
+                        <constraint firstItem="Eht-7i-6z6" firstAttribute="leading" secondItem="SaT-9j-aPa" secondAttribute="leading" constant="30" id="g8T-1R-gIB"/>
+                        <constraint firstItem="H53-4w-n0m" firstAttribute="leading" secondItem="SaT-9j-aPa" secondAttribute="leading" constant="30" id="nwi-Qb-cxA"/>
+                        <constraint firstAttribute="trailing" secondItem="z3U-dt-nPo" secondAttribute="trailing" constant="30" id="qlb-CL-XAf"/>
+                        <constraint firstItem="uUt-pw-y7f" firstAttribute="leading" secondItem="SaT-9j-aPa" secondAttribute="leading" id="rxN-5Z-MPV"/>
+                        <constraint firstAttribute="trailing" secondItem="uUt-pw-y7f" secondAttribute="trailing" id="uCX-5m-U57"/>
+                        <constraint firstAttribute="trailing" secondItem="H53-4w-n0m" secondAttribute="trailing" constant="30" id="uSu-9M-rfA"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.1019607843" green="0.10980392160000001" blue="0.1137254902" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="SaT-9j-aPa" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5S5-hA-S5l"/>
+                <constraint firstItem="SaT-9j-aPa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nZz-O8-6VL"/>
+            </constraints>
+            <connections>
+                <outlet property="closeButton" destination="Fjm-fO-D5s" id="zfp-PF-RYl"/>
+                <outlet property="noDataLabel" destination="GHg-W7-nRw" id="R48-Bh-yeS"/>
+                <outlet property="noDataView" destination="H53-4w-n0m" id="YEr-qn-WKS"/>
+                <outlet property="notificationsCountLabel" destination="uUt-pw-y7f" id="l4A-Q7-qrU"/>
+                <outlet property="onlineSearchNotificationTableView" destination="z3U-dt-nPo" id="FX0-fe-n8i"/>
+                <outlet property="popViewWidthConstraint" destination="foE-SQ-v3O" id="Uyn-zQ-zTy"/>
+                <outlet property="popviewHieghtconstraint" destination="FQc-AN-kwV" id="AIA-pm-oUj"/>
+                <outlet property="workOrderNotifSegmentBar" destination="Eht-7i-6z6" id="HMx-B0-CUD"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="84"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cancel" width="256" height="256"/>
+        <namedColor name="mjcSubViewColor">
+            <color red="0.92941176470588238" green="0.93333333333333335" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="mjcViewUIBorderColor">
+            <color red="0.3843137254901961" green="0.53725490196078429" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

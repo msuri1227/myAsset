@@ -376,17 +376,17 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
                                 switch buttonIndex {
                                 case 0:
                                     mJCLogger.log("Functional_Location_is_not_available_for_this_Equipment".localized(), Type: "Debug")
-                                    //self.showOnlineSearchPopUp(searchType:"Notifications")
+                                    self.showOnlineSearchPopUp(searchType:"Notifications")
                                     
                                 default: break
                                 }
                             }
                         }
                     }else{
-                        //self.showOnlineSearchPopUp(searchType:"Notifications")
+                        self.showOnlineSearchPopUp(searchType:"Notifications")
                     }
                 }else if self.functionalLocationTextField.text != "" {
-                    //self.showOnlineSearchPopUp(searchType:"Notifications")
+                    self.showOnlineSearchPopUp(searchType:"Notifications")
                 }
             }
         }
@@ -422,34 +422,13 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
     
     //MARK:- Notificatio Field Button Action..
     @IBAction func functionalLocationButtonAction(sender: AnyObject) {
-        
-        mJCLogger.log("Starting", Type: "info")
-        let functionaLocationListVC = ScreenManager.getFlocEquipHierarchyScreen()
-        functionaLocationListVC.isSelect = "FunctionalLocation"
-        let mainWrkArr = self.mainWorkCenterTextField.text!.components(separatedBy: " - ")
-        if mainWrkArr.count > 0 {
-            mJCLogger.log("Response:\(mainWrkArr[0])", Type: "Debug")
-            functionaLocationListVC.workCenter = mainWrkArr[0]
-        }else{
-            mJCLogger.log("Data not found", Type: "Debug")
+        var workCenterStr : String? = ""
+        var planningPlantStr : String? = ""
+        if self.mainWorkCenterTextField.text != "" || self.maintenancePlantTextField.text != nil {
+            workCenterStr = self.mainWorkCenterTextField.text
+            planningPlantStr = self.maintenancePlantTextField.text
         }
-        let arr = self.maintenancePlantTextField.text!.components(separatedBy: " - ")
-        if arr.count > 0{
-            let plantFilteredArray = self.maintPlantArray.filter({$0.Plant == arr[0] && $0.Name1 == arr[1]})
-            if plantFilteredArray.count > 0{
-                mJCLogger.log("Response:\(plantFilteredArray[0])", Type: "Debug")
-                let plantClass = plantFilteredArray[0]
-                functionaLocationListVC.planningPlant = plantClass.PlanningPlant
-            }else{
-                mJCLogger.log("Data not found", Type: "Debug")
-            }
-        }else{
-            mJCLogger.log("Data not found", Type: "Debug")
-        }
-        functionaLocationListVC.modalPresentationStyle = .fullScreen
-        functionaLocationListVC.delegate = self
-        self.present(functionaLocationListVC, animated: false) {}
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentFlocEquipHierarchyScreen(vc: self, select: "FunctionalLocation", delegateVC: self, workCenter: workCenterStr, maintenancePlant: planningPlantStr)
     }
     
     @IBAction func functionalLocationScanQRButtonAction(sender: UIButton) {
@@ -465,35 +444,13 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func equipmentButtonAction(sender: AnyObject) {
-
-        mJCLogger.log("Starting", Type: "info")
-        let functionaLocationListVC = ScreenManager.getFlocEquipHierarchyScreen()
-        functionaLocationListVC.selectedFunLoc = functionalLocationTextField.text!
-        functionaLocationListVC.isSelect = "Equipement"
-        let mainWrkArr = self.mainWorkCenterTextField.text!.components(separatedBy: " - ")
-        if mainWrkArr.count > 0 {
-            mJCLogger.log("Response:\(mainWrkArr[0])", Type: "Debug")
-            functionaLocationListVC.workCenter = mainWrkArr[0]
-        }else{
-            mJCLogger.log("Data not found", Type: "Debug")
+        var workCenterStr : String? = ""
+        var planningPlantStr : String? = ""
+        if self.mainWorkCenterTextField.text != "" || self.maintenancePlantTextField.text != nil {
+            workCenterStr = self.mainWorkCenterTextField.text
+            planningPlantStr = self.maintenancePlantTextField.text
         }
-        let arr = self.maintenancePlantTextField.text!.components(separatedBy: " - ")
-        if arr.count > 0{
-            mJCLogger.log("Response:\(arr.count)", Type: "Debug")
-            let plantFilteredArray = self.maintPlantArray.filter({$0.Plant == arr[0] && $0.Name1 == arr[1]})
-            if plantFilteredArray.count > 0{
-                mJCLogger.log("Response:\(plantFilteredArray[0])", Type: "Debug")
-                let plantClass = plantFilteredArray[0]
-                functionaLocationListVC.planningPlant = plantClass.PlanningPlant
-            }else{
-                mJCLogger.log("Data not found", Type: "Debug")
-            }
-        }
-        functionaLocationListVC.selectedFunLoc = self.functionalLocationTextField.text ?? ""
-        functionaLocationListVC.modalPresentationStyle = .fullScreen
-        functionaLocationListVC.delegate = self
-        self.present(functionaLocationListVC, animated: false) {}
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentFlocEquipHierarchyScreen(vc: self, select: "Equipement", delegateVC: self, workCenter: workCenterStr, selectedFuncLoc: functionalLocationTextField.text, maintenancePlant: planningPlantStr)
     }
     @IBAction func notificationTimeButtonAction(sender: UIButton) {
         mJCLogger.log("Starting", Type: "info")
@@ -656,23 +613,11 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func personalResponsibleButtonAction(_ sender: Any) {
-        mJCLogger.log("Starting", Type: "info")
         allTextFieldResign()
-        let personRespVC = ScreenManager.getPersonResponsibleListScreen()
-        personRespVC.modalPresentationStyle = .fullScreen
-        personRespVC.delegate = self
-        personRespVC.isFrom = "planner"
-        self.present(personRespVC, animated: false) { }
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentPersonResponsibleListScreen(vc: self, isFrm: "planner", delegateVC: self)
     }
     @IBAction func reportedyButtonAction(sender: AnyObject) {
-        mJCLogger.log("Starting", Type: "info")
-        let personRespVC = ScreenManager.getPersonResponsibleListScreen()
-        personRespVC.modalPresentationStyle = .fullScreen
-        personRespVC.delegate = self
-        personRespVC.isFrom = "reportedBy"
-        self.present(personRespVC, animated: false)
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentPersonResponsibleListScreen(vc: self, isFrm: "reportedBy", delegateVC: self)
     }
     func didSelectPersonRespData(_ result: String,_ objcet: AnyObject,_ respType: String?) {
         mJCLogger.log("Starting", Type: "info")
@@ -1081,10 +1026,11 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
     //Set CurrentDate And Time..
     func setCurrentDateAndTime() {
         mJCLogger.log("Starting", Type: "info")
+        let today = Date()
         notificationDateTextField.text = ODSDateHelper.getCurrentDate()
         notificationDateTextField.isEnabled = false
         notificationDateTextField.textColor = UIColor.darkGray
-        notificationTimeTextField.text = ODSDateHelper.getCurrentTime()
+        self.notificationTimeTextField.text = today.toString(format: .custom("HH:mm"))
         notificationTimeTextField.isEnabled = false
         notificationTimeTextField.textColor = UIColor.darkGray
         mJCLogger.log("Ended", Type: "info")
@@ -1165,11 +1111,10 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
         self.property.add(prop!)
         
         prop = SODataPropertyDefault(name: "NotifTime")
-        
         let notifTime = SODataDuration()
-        let notifArray = notificationTimeTextField.text?.components(separatedBy: ":")
-        notifTime.hours = Int(notifArray![0]) as NSNumber?
-        notifTime.minutes = Int(notifArray![1]) as NSNumber?
+        let notifTimeArray = self.notificationTimeTextField.text?.components(separatedBy:":")
+        notifTime.hours = Int(notifTimeArray![0])! as NSNumber
+        notifTime.minutes = Int(notifTimeArray![1])! as NSNumber
         notifTime.seconds = 0
         prop!.value = notifTime
         self.property.add(prop!)
@@ -1686,7 +1631,9 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
         }
     }
     @IBAction func checkNotificationsListButtonAction(_ sender: Any) {
-
+        mJCLogger.log("Starting", Type: "info")
+        self.showOnlineSearchPopUp(searchType:"Notifications")
+        mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func malfunctionStartDateButtonAction(_ sender: Any) {
         mJCLogger.log("Starting", Type: "info")
@@ -1799,6 +1746,24 @@ class CreateNotificationVC: UIViewController,UITextViewDelegate,UITextFieldDeleg
         }
         mJCLogger.log("Ended", Type: "info")
     }
+    func showOnlineSearchPopUp(searchType:String){
+        DispatchQueue.main.async{
+            let lotPopUp = Bundle.main.loadNibNamed("OnlineWorkOrderAndNotification", owner: self, options: nil)?.last as! OnlineWorkOrderAndNotification
+            lotPopUp.onlineSearchNotificationTableView.isHidden = true
+            let windows = UIApplication.shared.windows
+            let firstWindow = windows.first
+            UserDefaults.standard.removeObject(forKey: "ListFilter")
+            lotPopUp.searchType = searchType
+            lotPopUp.plantText = self.maintenancePlantTextField.text!
+            lotPopUp.mainWorkCenterText = self.mainWorkCenterTextField.text!
+            lotPopUp.functionalLocationText = self.functionalLocationTextField.text!
+            lotPopUp.equipmentText = self.equipmentTextField.text!
+            lotPopUp.frame = UIScreen.main.bounds
+            lotPopUp.loadNibView()
+            firstWindow?.addSubview(lotPopUp)
+        }
+    }
+    
     //MARK: - Not Using Methods
     @IBAction func standardTextButtonAction(_ sender: Any) {
         mJCLogger.log("Starting", Type: "info")

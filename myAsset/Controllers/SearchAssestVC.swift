@@ -129,11 +129,14 @@ class SearchAssestVC: UIViewController,FuncLocEquipSelectDelegate, barcodeDelega
         mJCLogger.log("Starting", Type: "info")
         self.assestIdTxtFld.text = ""
         self.descTxtFld.text = ""
-        self.assestClassTxtFld.text = self.assetListArr[0]
         self.funcLocTxtFld.text = ""
-        self.costCenterTxtFld.text = self.assetVM.costCenterList[0]
-        self.locationTxtFld.text = self.assetVM.locationList[0]
-        self.roomTxtFld .text = ""
+        self.roomTxtFld.text = ""
+        self.assestClassTxtFld.text = ""
+        self.costCenterTxtFld.text = ""
+        self.locationTxtFld.text = ""
+        self.assestClassTxtFld.placeholder = selectStr
+        self.costCenterTxtFld.placeholder = selectStr
+        self.locationTxtFld.placeholder = selectStr
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func cancelButtonAction(_ sender: Any) {

@@ -45,8 +45,6 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
     var statusArray = NSMutableArray()
     var allowedStatusArray = NSMutableArray()
     var attachmentArray = [AttachmentModel]()
-    let menudropDown = DropDown()
-    var dropDownString = String()
     let remainsTaskTextArray = NSMutableArray()
     var validateCond: Bool = false
     var status = String()
@@ -93,7 +91,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         }
         singleNoViewModel.vc = self
         initialIndex = 0
-        selectedIndex = 0
+        tabSelectedIndex = 0
         pageViewController.parentVC = self
         setupCell()
         if DeviceType == iPhone{
@@ -110,10 +108,8 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         self.attachmentImageVIew.isHidden = true
         self.attachmentWidthConst.constant = 0.0
         workOrderNumberLabel.text = "Notification_No".localized() + ". \(selectedNotificationNumber)"
-        alertImage.layer.cornerRadius =  alertImage.frame.size.height / 2
-        alertImage.layer.masksToBounds = true
-        attachmentImageVIew.layer.cornerRadius =  alertImage.frame.size.height / 2
-        attachmentImageVIew.layer.masksToBounds = true
+        ODSUIHelper.setCornerRadiusToImgView(imageView: alertImage, cornerRadius: alertImage.frame.size.height / 2)
+        ODSUIHelper.setCornerRadiusToImgView(imageView: attachmentImageVIew, cornerRadius: alertImage.frame.size.height / 2)
         self.selecteHeaderButton = "OverView"
         let tap = UITapGestureRecognizer(target: self, action: #selector(SingleNotificationVC.handleTap(sender:)))
         tap.delegate = self
@@ -138,66 +134,18 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         NotificationCenter.default.addObserver(self, selector: #selector(SingleNotificationVC.StatusUpdated(notification:)), name:NSNotification.Name(rawValue:"StatusUpdated"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"BgSyncStarted"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SingleNotificationVC.backGroundSyncStarted(notification:)), name:NSNotification.Name(rawValue:"BgSyncStarted"), object: nil)
-        menudropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            if self.dropDownString == "Menu" {
-                if item == "Work_Orders".localized() {
-                    DispatchQueue.main.async {
-                        selectedworkOrderNumber = ""
-                        selectedNotificationNumber = ""
-                        currentMasterView = "WorkOrder"
-                        UserDefaults.standard.removeObject(forKey: "ListFilter")
-                        let splitVC = ScreenManager.getListSplitScreen()
-                        self.appDeli.window?.rootViewController = splitVC
-                        self.appDeli.window?.makeKeyAndVisible()
-                    }
-                }else if item == "Notifications".localized() {
-                    DispatchQueue.main.async {
-                        selectedworkOrderNumber = ""
-                        selectedNotificationNumber = ""
-                        currentMasterView = "Notification"
-                        UserDefaults.standard.removeObject(forKey: "ListFilter")
-                        let splitVC = ScreenManager.getListSplitScreen()
-                        self.appDeli.window?.rootViewController = splitVC
-                        self.appDeli.window?.makeKeyAndVisible()
-                    }
-                }else if item == "Master_Data_Refresh".localized() {
-                    DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.5) {
-                            self.SingleNOCompleteTableView.isHidden = true
-                            mJCLoader.startAnimating(status: "Uploading".localized())
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                myAssetDataManager.uniqueInstance.flushAndRefreshStores(masterDataRefresh: true)
-                            })
-                        }
-                    }
-                }else if item == "Asset_Map".localized() {
-                    ASSETMAP_TYPE = "ESRIMAP"
-                   assetmapVC.openmappage(id: "")
-                }else if item == "Settings"{
-                    let settingsVC = ScreenManager.getSettingsScreen()
-                    settingsVC.modalPresentationStyle = .fullScreen
-                    self.present(settingsVC, animated: false, completion: nil)
-                }else if item == "Log_Out".localized() {
-                    myAssetDataManager.uniqueInstance.logOutApp()
-                }else if item == "Error_Logs".localized() {
-                    myAssetDataManager.uniqueInstance.getFlushErrors(isFromBtn: true, count: 0)
-                }
-            }
-        }
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"Reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "Reload"), object: nil)
         self.SingleNOCompleteTableView.delegate = self
         self.SingleNOCompleteTableView.dataSource = self
-        self.SingleNOCompleteTableView.layer.borderColor = UIColor.darkGray.cgColor
-        self.SingleNOCompleteTableView.layer.borderWidth = 2
-        self.SingleNOCompleteTableView.layer.cornerRadius = 15
-        self.SingleNOCompleteTableView.layer.masksToBounds = true
         self.SingleNOCompleteTableView.isHidden = true
+        ODSUIHelper.setCornerRadiusTableView(tblView: self.SingleNOCompleteTableView, cornerRadius: 15.0, borderColor: .lightGray, borderWidth: 2.0)
         self.setSingleNOCompleteTableViewLayout()
         mJCLogger.log("Ended", Type: "info")
     }
     override func viewWillAppear(_ animated: Bool) {
         mJCLogger.log("Starting", Type: "info")
+        super.viewWillAppear(animated)
         myAssetDataManager.uniqueInstance.methodStatusBarColorChange()
         if flushStatus == true{
             if DeviceType == iPad{
@@ -226,8 +174,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         
         self.SingleNOCompleteTableView.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
         self.SingleNOCompleteTableView.bounces = false
-        self.SingleNOCompleteTableView.layer.cornerRadius = 2.0
-        self.SingleNOCompleteTableView.layer.masksToBounds = true
+        ODSUIHelper.setCornerRadiusTableView(tblView: self.SingleNOCompleteTableView, cornerRadius: 2.0, borderColor: .clear, borderWidth: 0.0)
         self.SingleNOCompleteTableView.estimatedRowHeight = 50
         mJCLogger.log("Ended", Type: "info")
     }
@@ -276,8 +223,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         tableView.separatorStyle = .none
         mJCLogger.log("Response:\(self.remainsTaskTextArray.count)", Type: "Debug")
         completeWOStatusCell.remainsStatusLabel?.text = self.remainsTaskTextArray[indexPath.row] as? String
-        completeWOStatusCell.alertLabel.layer.cornerRadius = completeWOStatusCell.alertLabel.frame.height / 2
-        completeWOStatusCell.alertLabel.layer.masksToBounds = true
+        ODSUIHelper.setRoundLabel(label: completeWOStatusCell.alertLabel)
         mJCLogger.log("Ended", Type: "info")
         return completeWOStatusCell
     }
@@ -317,7 +263,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
             tabCell.titleLabel.font = .systemFont(ofSize: 16)
             tabCell.selectedView.tag = indexPath.row
             tabCell.isUserInteractionEnabled = true
-            if selectedIndex == indexPath.row{
+            if tabSelectedIndex == indexPath.row{
                 tabCell.selectedView.backgroundColor = appColor
             }else{
                 tabCell.selectedView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -416,8 +362,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
     //MARK:- Set Label Layout..
     func setLabelLayout(label : UILabel) {
         mJCLogger.log("Starting", Type: "info")
-        label.layer.cornerRadius = label.frame.width/2
-        label.layer.masksToBounds = true
+        ODSUIHelper.setRoundLabel(label: label)
         label.backgroundColor = UIColor.red
         mJCLogger.log("Ended", Type: "info")
     }
@@ -442,12 +387,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         if workFlowObj == "Screen" {
             if screenKey == "key_NO_SC_REJC"{
                 DispatchQueue.main.async {
-                    let rejectVC = ScreenManager.getWorkOrderTransferScreen()
-                    rejectVC.rejectString = "Reject"
-                    rejectVC.screenfrom = "Notification"
-                    rejectVC.statusCategoryCls = validClass
-                    rejectVC.modalPresentationStyle = .fullScreen
-                    self.present(rejectVC, animated: false) {}
+                    menuDataModel.uniqueInstance.presentWorkOrderTransferScreen(vc: self, screenFrom: "Notification", rejectStr: "Reject", statusCategoryCls: validClass)
                 }
             }else if screenKey == "key_NO_SC_COMP"{
                 if validClass.PreCheck == 1 {
@@ -463,12 +403,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
                         }
                     }else{
                         DispatchQueue.main.async {
-                            let transferVC = ScreenManager.getWorkOrderTransferScreen()
-                            transferVC.rejectString = "Complete"
-                            transferVC.screenfrom = "Notification"
-                            transferVC.statusCategoryCls = validClass
-                            transferVC.modalPresentationStyle = .fullScreen
-                            self.present(transferVC, animated: false) {}
+                            menuDataModel.uniqueInstance.presentWorkOrderTransferScreen(vc: self, screenFrom: "Notification", rejectStr: "Complete", statusCategoryCls: validClass)
                         }
                     }
                 }
@@ -546,15 +481,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
                 imgArray.remove(at: index)
             }
         }
-        menudropDown.dataSource = menuarr
-        self.customizeDropDown(imgArry: imgArray)
-        menudropDown.anchorView = sender as! UIButton
-        menudropDown.cellHeight = 40.0
-        menudropDown.width = 200.0
-        menudropDown.backgroundColor = UIColor.white
-        menudropDown.textColor = appColor
-        self.dropDownString = "Menu"
-        menudropDown.show()
+        menuDataModel.uniqueInstance.presentMenu(menuArr: menuarr, imgArr: imgArray, sender: sender, vc: self)
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func refreshButtonButton(sender: AnyObject) {
@@ -567,17 +494,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func locationButtonAction(sender: AnyObject) {
-        
-        mJCLogger.log("Starting", Type: "info")
-        currentMasterView = "MapSplitViewController"
-        selectedworkOrderNumber = ""
-        singleNotification =  NotificationModel()
-        selectedNotificationNumber = ""
-        ASSETMAP_TYPE = ""
-        let mapSplitVC = ScreenManager.getMapSplitScreen()
-        self.appDeli.window?.rootViewController = mapSplitVC
-        self.appDeli.window?.makeKeyAndVisible()
-        mJCLogger.log("Ended", Type: "info")
+        menuDataModel.uniqueInstance.presentMapSplitScreen()
     }
     @IBAction func addNewJobButtonAction(sender: AnyObject) {
         
@@ -586,11 +503,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         let workFlowResp = myAssetDataManager.uniqueInstance.getWorkFlowForAction(event: "CRTD_NEW_JOB", orderType: "X",from:"WorkOrder")
         if let workFlowObj = workFlowResp as? LtWorkFlowModel {
             if workFlowObj.ActionType == "Screen" {
-                let createNewJobVC = ScreenManager.getCreateJobScreen()
-                createNewJobVC.isFromEdit = false
-                createNewJobVC.isScreen = "WorkOrder"
-                createNewJobVC.modalPresentationStyle = .fullScreen
-                self.present(createNewJobVC, animated: false) {}
+                menuDataModel.presentCreateJobScreen(vc: self)
             }else{
                 mJCLogger.log("Data not found", Type: "Debug")
             }
@@ -601,38 +514,19 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
     }
     
     @IBAction func HomeButtonAction(_ sender: Any) {
-        
-        mJCLogger.log("Starting", Type: "info")
-        singleWorkOrder = WoHeaderModel()
-        selectedworkOrderNumber = ""
-        selectedNotificationNumber = ""
-        currentMasterView = "Dashboard"
-        let dashboard = ScreenManager.getDashBoardScreen()
-        self.appDeli.window?.rootViewController = dashboard
-        self.appDeli.window?.makeKeyAndVisible()
-        mJCLogger.log("Ended", Type: "info")
-        
+        menuDataModel.uniqueInstance.presentDashboardScreen()
     }
     //MARK:- More button View Actions..
     @IBAction func notificationsButtonAction(sender: UIButton) {
-        
         mJCLogger.log("Starting", Type: "info")
         singleNotification =  NotificationModel()
-        selectedNotificationNumber = ""
         if currentMasterView == "Notification" {
             DispatchQueue.main.async {
-                currentMasterView = "WorkOrder"
-                let splitVC = ScreenManager.getListSplitScreen()
-                self.appDeli.window?.rootViewController = splitVC
-                self.appDeli.window?.makeKeyAndVisible()
+                menuDataModel.uniqueInstance.presentListSplitScreen(type: "Notification")
             }
         }else if currentMasterView == "WorkOrder" {
             DispatchQueue.main.async {
-                currentMasterView = "Notification"
-                UserDefaults.standard.removeObject(forKey: "ListFilter")
-                let splitVC = ScreenManager.getListSplitScreen()
-                self.appDeli.window?.rootViewController = splitVC
-                self.appDeli.window?.makeKeyAndVisible()
+                menuDataModel.uniqueInstance.presentListSplitScreen(type: "WorkOrder")
             }
         }
         mJCLogger.log("Ended", Type: "info")
@@ -644,9 +538,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         DispatchQueue.main.async {
             singleNotification =  NotificationModel()
             selectedNotificationNumber = ""
-            let timeSheetVC = ScreenManager.getTimeSheetScreen()
-            self.appDeli.window?.rootViewController = timeSheetVC
-            self.appDeli.window?.makeKeyAndVisible()
+            menuDataModel.uniqueInstance.presentTimeSheetScreen()
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -737,11 +629,49 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         
         mJCLogger.log("Starting", Type: "info")
         let notificationOverViewVC = ScreenManager.getNotificationOverViewScreen()
-        var array = [notificationOverViewVC]
+        let notificationItemVC = ScreenManager.getNotificationItemScreen()
+        notificationItemVC.notificationFrom = "FromWorkorder"
+        let notificationActivityVC = ScreenManager.getNotificationActivityScreen()
+        notificationActivityVC.notificationFrom = "FromWorkorder"
+        let notificationTaskVC = ScreenManager.getNotificationTaskScreen()
+        notificationTaskVC.notificationFrom = "FromWorkorder"
+        let noAttachmentVC = ScreenManager.getNotificationAttachmentScreen()
+        noAttachmentVC.objectNum = selectedNotificationNumber
+        noAttachmentVC.fromScreen = "NOTIFICATION"
+        noAttachmentVC.notificationFrom = "FromWorkorder"
+        let notificationHistoryAndPendingVC = ScreenManager.getNotificationHistoryAndPendingScreen()
+        notificationHistoryAndPendingVC.notificationFrom = "FromWorkorder"
+        var array = [notificationOverViewVC, notificationItemVC, notificationActivityVC, notificationTaskVC, noAttachmentVC, notificationHistoryAndPendingVC]
+        if !applicationFeatureArrayKeys.contains("WoNoItems"){
+            if let index =  array.firstIndex(of: notificationItemVC){
+                array.remove(at: index)
+            }
+        }
+        if !applicationFeatureArrayKeys.contains("WoNoTasks"){
+            if let index =  array.firstIndex(of: notificationTaskVC){
+                array.remove(at: index)
+            }
+        }
+        if !applicationFeatureArrayKeys.contains("WoNoActivities"){
+            if let index =  array.firstIndex(of: notificationActivityVC){
+                array.remove(at: index)
+            }
+        }
+        if !applicationFeatureArrayKeys.contains("WoNoAttachments"){
+            if let index =  array.firstIndex(of: noAttachmentVC){
+                array.remove(at: index)
+            }
+        }
+        if !applicationFeatureArrayKeys.contains("WoNoHistPend"){
+            if let index =  array.firstIndex(of: notificationHistoryAndPendingVC) {
+                array.remove(at: index)
+            }
+        }
         mJCLogger.log("Ended", Type: "info")
         return array
     }
     private func setupCell() {
+        
         mJCLogger.log("Starting", Type: "info")
         ScreenManager.registerTabCell(collectionView: menuCollectionView)
         let layout = UICollectionViewFlowLayout()
@@ -941,7 +871,7 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
     }
     public func moveTo(index: Int) {
         mJCLogger.log("Starting", Type: "info")
-        selectedIndex = index
+        tabSelectedIndex = index
         pageViewController.moveTo(index: index)
         self.menuCollectionView.reloadData()
         mJCLogger.log("Ended", Type: "info")
@@ -956,15 +886,6 @@ class SingleNotificationVC: UIViewController,UIGestureRecognizerDelegate,UIScrol
         label.sizeToFit()
         mJCLogger.log("Ended", Type: "info")
         return label.frame.width
-    }
-    func customizeDropDown(imgArry: [UIImage]) {
-        mJCLogger.log("Starting", Type: "info")
-        menudropDown.showImage = true
-        menudropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
-            guard let cell = cell as? DropDownWithImageCell else { return }
-            cell.logoImageView.image = imgArry[index]
-        }
-        mJCLogger.log("Ended", Type: "info")
     }
 }
 
