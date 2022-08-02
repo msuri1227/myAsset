@@ -12,7 +12,7 @@ import ODSFoundation
 import FormsEngine
 import mJCLib
 
-class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,XMLParserDelegate,UsernamePasswordProviderProtocol,ODSStoreDelegate, ODSStoreStatusDelegate,globalDataFetchCompleteDelegate,barcodeDelegate{
+class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,XMLParserDelegate,UsernamePasswordProviderProtocol,StoreDelegate,globalDataFetchCompleteDelegate,barcodeDelegate{
 
     //MARK:- Outlet..
     @IBOutlet weak var fingerPrintView: UIView!
@@ -156,21 +156,21 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                             fingerPrintView.isHidden = true
                             if authType == "SAML"{
                                 mJCLoader.startAnimating(status: loginSuccessAlert)
-                                self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                                mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: ConnectionId)
                             }
                         }
                     }else{
                         fingerPrintView.isHidden = true
                         if authType == "SAML"{
                             mJCLoader.startAnimating(status: loginSuccessAlert)
-                            self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                            mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: ConnectionId)
                         }
                     }
                 }else{
                     fingerPrintView.isHidden = true
                     if authType == "SAML" && fromLogOut == false{
                         mJCLoader.startAnimating(status: loginSuccessAlert)
-                        self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                        mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: ConnectionId)
                     }
                 }
             }
@@ -242,22 +242,20 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         dict["serverPort"] = portNumber
         dict["serverURL"] = serverURL
         dict["applicationID"] = ApplicationID
-        dict["loginDelegate"] = self
-        dict["storeDelegate"] = self
-        dict["ODSstoreDelegate"] = self
-        dict["storeStatusDelegate"] = self
-        dict["flushDelegate"] = myAssetDataManager.uniqueInstance
-        dict["refreshDelegate"] = myAssetDataManager.uniqueInstance
+        dict["authType"] = authType
         dict["Https"] = isHttps
         dict["DemoMode"] = demoModeEnabled
-        AppDetailsClass.setAppBasicDetails(details: dict)
+        dict["storeDelegate"] = self
+        dict["credentialDelegate"] = myAssetDataManager.uniqueInstance
+        dict["flushRefreshDelegate"] = myAssetDataManager.uniqueInstance
+        mJCLib.AppDetailsClass.setAppBasicDetails(details: dict)
         var dict1 = Dictionary<String,Any>()
         dict1["Debug"] = false
         dict1["Error"] = false
         dict1["Warn"] = false
         dict1["Info"] = false
         dict1["printLog"] = false
-        AppDetailsClass.setFwLogLevel(levelDict: dict1)
+        mJCLib.AppDetailsClass.setFwLogLevel(levelDict: dict1)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -265,15 +263,11 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         NotificationCenter.default.removeObserver(self)
     }
     override func viewDidDisappear(_ animated: Bool) {
-        ODSStoreHelper.ODSStoreFlushDelegate = myAssetDataManager.uniqueInstance
-        ODSStoreHelper.ODSStoreRefreshDelegate = myAssetDataManager.uniqueInstance
-        EventBased_Sync = ""
+        ODSStoreHelper.storeFlushRefreshDelegate = myAssetDataManager.uniqueInstance
         if EventBased_Sync == "X"{
             mJCStoreHelper.configEventBasedSync(enable: true, syncType: EventBased_Sync_Type)
         }
-        TimeBased_Sync = ""
         if TimeBased_Sync == "X"{
-            //BG_SYNC_TIME_INTERVAL
             mJCStoreHelper.configTimeBasedBackGroundSync(syncType: TimeBased_Sync_Type, timeInterval: "180", retryCount: BG_SYNC_RETRY_COUNT, retryInterval: BG_SYNC_RETRY_INTERVAL )
         }
         if MasterData_BG_Refresh_Enable == true{
@@ -308,7 +302,6 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
     //MARK:- Demo Mode Password
     
     func getDemoModePassword() -> String{
-        
         var passStr = String()
         let date = Date()
         let calendar = Calendar.current
@@ -334,7 +327,6 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
     }
     //MARK:- Button Action..
     @IBAction func loginbuttonAction(sender: AnyObject){
-
         print("Loging Button Tapped --\(Date().localDate())")
         if demoModeEnabled == true{
             if((UserDefaults.standard.value(forKey:"login_Details")) != nil) {
@@ -346,7 +338,7 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                     mJCAlertHelper.showAlert(self, title: WarningAlert, message: loginPasswordBlankAlert, button: okay)
                 }else if(self.getDemoModePassword() == passWordTextField.text){
                     mJCLoader.startAnimating(status: loginSuccessAlert)
-                    self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                    mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: "ConnectionId")
                     if let serverDetails = UserDefaults.standard.value(forKey:"login_Details") as? NSDictionary{
                         let serverIP = serverDetails.value(forKey :"serverIP") as? String ?? ""
                         let portNumber = serverDetails.value(forKey :"portNumber") as? Int ?? 443
@@ -399,7 +391,7 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                 }else{
                     if authType == "SAML"{
                         mJCLoader.startAnimating(status: loginSuccessAlert)
-                        self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                        mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: ConnectionId)
                     }else{
                         if username == userNameTextField.text {
                             let password = userDetails.value(forKey :"password") as! String
@@ -409,7 +401,7 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                                 mJCAlertHelper.showAlert(self, title: WarningAlert, message: loginPasswordShortAlert, button: okay)
                             }else if(password == passWordTextField.text) && authType == "Basic"{
                                 mJCLoader.startAnimating(status: loginSuccessAlert)
-                                self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                                mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: ConnectionId)
                             }else {
                                 self.passWordTextField.text = ""
                                 mJCAlertHelper.showAlert(self, title: errorTitle, message: loginPasswordNotMatchAlert, button: okay)
@@ -802,6 +794,7 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                 dict.setValue(false, forKey: "DemoMode")
                 dict.setValue(authTypeStr, forKey: "authType")
                 UserDefaults.standard.setValue(dict, forKey: "login_Details")
+                self.setBasicDetails()
                 if authTypeStr == "SAML"{
                     self.userNamePwdView.isHidden = true
                     self.registerUsertoSmpWithDetails()
@@ -918,7 +911,6 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
     
     //MARK:- Registration With OData..
     func registerUsertoSmpWithDetails() {
-        
         print("Registring user.. ")
         mJCLogger.log("Registring user..", Type: "")
         let httpConvMan = HttpConversationManager.init()
@@ -960,73 +952,14 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                                 dict.setValue(userName, forKey: "userName")
                             }
                         }else{
-                            dict.setValue(self.userNameTextField.text ?? "", forKey: "userName")
-                            dict.setValue(self.passWordTextField.text ?? "", forKey: "password")
+                            dict.setValue(self.userNameTextField.text!, forKey: "userName")
+                            dict.setValue(self.passWordTextField.text!, forKey: "password")
                         }
-
                         dict.setValue(false, forKey: "DemoMode")
                         dict.setValue(appConnid["text"] as? String ?? "", forKey: "ApplicationConnectionId")
                         dict.setValue(authType, forKey: "authType")
                         UserDefaults.standard.setValue(dict, forKey: "login_Details")
-                        let arr = NSMutableArray()
-                        arr.add("EntitySetKeysSet")
-                        arr.add("AppStoreSet")
-                        arr.add("WorkOrderStatusSet")
-                        arr.add("ApplicationConfigSet")
-                        arr.add("ApplicationFeatureSet")
-                        arr.add("ScreenMappingSet")
-                        arr.add("ServiceConfigSet")
-                        arr.add("StatusCategorySet")
-                        UserDefaults.standard.set(arr , forKey: "AppSettingDefineReq")
-                        UserDefaults.standard.removeObject(forKey: "AppSettingDefineReq")
-                        if UserDefaults.standard.value(forKey: "AppSettingDefineReq") != nil{
-                            self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
-                        }else{
-                            let httpConvMan1 = HttpConversationManager.init()
-                            let commonfig1 = CommonAuthenticationConfigurator.init()
-                            if authType == "Basic"{
-                                commonfig1.addUsernamePasswordProvider(self)
-                            }else if authType == "SAML"{
-                                commonfig1.addSAML2ConfigProvider(myAssetDataManager.uniqueInstance)
-                            }
-                            commonfig1.configureManager(httpConvMan1)
-                            let configSetResponse = ServiceConfigModel.getOnlineServcieConfigList(httpConvManager: httpConvMan1!)
-                            if let status = configSetResponse["Status"] as? Int{
-                                if status == 200{
-                                    if let dict = configSetResponse["Response"] as? NSMutableDictionary{
-                                        let formatedDict = ODSHelperClass.getListInFormte(dictionary: dict, entityModelClassType: ServiceConfigModel.self)
-                                        if let data = formatedDict["data"] as? [ServiceConfigModel]{
-                                            let definereq = data.filter{$0.AppStoreName == "APLLICATIONSTORE"}
-                                            if definereq.count > 0{
-                                                if definereq.count > 0{
-                                                    let arr = NSMutableArray()
-                                                    for req in definereq{
-                                                        var serviceUrl = req.ServiceURL
-                                                        if serviceUrl != "" && !serviceUrl.contains(find: "ChangePasswordSet"){
-                                                            if serviceUrl.contains(find: "\" + strUser + \""){
-                                                                serviceUrl = serviceUrl.replacingOccurrences(of: "\" + strUser + \"", with: strUser)
-                                                            }
-                                                            arr.add(serviceUrl)
-                                                        }
-                                                    }
-                                                    UserDefaults.standard.set(arr , forKey: "AppSettingDefineReq")
-                                                    self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
-                                                }
-                                            }else{
-                                                mJCLoader.stopAnimating()
-                                                mJCAlertHelper.showAlert(self, title: alerttitle, message: somethingwrongalert, button: okay)
-                                            }
-                                        }
-                                    }
-                                }else{
-                                    mJCLoader.stopAnimating()
-                                    mJCAlertHelper.showAlert(self, title: alerttitle, message: somethingwrongalert, button: okay)
-                                }
-                            }else{
-                                mJCLoader.stopAnimating()
-                                mJCAlertHelper.showAlert(self, title: alerttitle, message: somethingwrongalert, button: okay)
-                            }
-                        }
+                        mJCLoginHelper.uniqueInstance.openIntialStore()
                     }
                 }
             }else{
@@ -1145,7 +1078,6 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         demoModeEnabled = true
     }
     func gotoLandingpage(pagetitle : String){
-
         mJCLoader.stopAnimating()
         if pagetitle == "Dashboard"{
         }else if pagetitle == "WorkOrder"{
@@ -1209,7 +1141,6 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
             DispatchQueue.main.async{
                 self.userNameTextField.text = ""
                 self.passWordTextField.text = ""
-
                 if autoConfig == true{
                     if serverPopupRequired == true{
                         self.blankView.isHidden = false
@@ -1241,10 +1172,8 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
             self.loginDisplayAlert = loginAlert
             self.registerUsertoSmpWithDetails()
         }
-
     }
     func registerforPushnotification(){
-        
         mJCLogger.log("Push Subscription ## Start".localized(), Type: "")
         let defineReq  = PushNotificationSubscription
         mJCLogger.log("\(defineReq)", Type: "")
@@ -1401,22 +1330,22 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         }
     }
     func fingerPrintLoginHandler(){
-        
         if((UserDefaults.standard.value(forKey:"login_Details")) != nil) {
             let userDetails = UserDefaults.standard.value(forKey:"login_Details") as! NSDictionary
             let username = userDetails.value(forKey :"userName") as! String
+            let ConnectionId = userDetails.value(forKey :"ApplicationConnectionId") as? String ?? ""
             if username != "" {
                 if authType == "SAML"{
                     DispatchQueue.main.async {
                         mJCLoader.startAnimating(status: loginSuccessAlert)
-                        self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                        mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: ConnectionId)
                     }
                 }else{
                     let password = userDetails.value(forKey :"password") as! String
                     if(password != "") {
                         DispatchQueue.main.async {
                             mJCLoader.startAnimating(status: loginSuccessAlert)
-                            self.openOfflineStore(storeName: ApplicationID, serviceName: ApplicationID)
+                            mJCLoginHelper.uniqueInstance.openIntialStore(connectionID: ConnectionId)
                         }
                     }else {
                         mJCAlertHelper.showAlert(self, title: errorTitle, message: loginPasswordNotMatchAlert, button: okay)
@@ -1454,64 +1383,20 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         }
     }
     //MARK: - Offline store Opening Methods
-    func openOfflineStore(storeName:String,serviceName:String) {
-        print("\(storeName) open Started --\(Date().localDate())")
-        mJCLogger.log("\(storeName) open Started --\(Date().localDate())", Type: "")
-        let httpConvMan = HttpConversationManager.init()
-        let commonfig = CommonAuthenticationConfigurator.init()
-        if authType == "Basic"{
-            commonfig.addUsernamePasswordProvider(self)
-        }else if authType == "SAML"{
-            commonfig.addSAML2ConfigProvider(myAssetDataManager.uniqueInstance)
+    //MARK: intial Store Methods()
+    func appDetailsStoreDownloaded(error: NSError?) {
+        if error == nil{
+            print("Intial Store Openned")
+            self.getApplicationConfigurations()
         }
-        commonfig.configureManager(httpConvMan)
-        var optionDict = Dictionary<String,Any>()
-        optionDict["Host"] = serverIP
-        optionDict["port"] = portNumber
-        optionDict["https"] = isHttps
-        optionDict["httpManager"] = httpConvMan
-        if demoModeEnabled == true{
-            optionDict["demoMode"] = true
-        }else{
-            optionDict["demoMode"] = false
-        }
-        let defineRequestArray = self.getStoreDefineRequsts(storeName: storeName)
-        mJCLogger.log("\(storeName) DefineReq -- \n \(defineRequestArray)", Type: "")
-        optionDict["defineReq"] = defineRequestArray
-        ODSStoreHelper.uniqueInstance.OpenOfflineStore(storeName: storeName, serviceName: serviceName, options: optionDict)
     }
-    func offlineStoreOpenFailed(storeName: String, error: Error!) {
-        print("\(storeName) open faild -- \(error)")
-        mJCLogger.log("\(storeName) open faild --\(Date().localDate()) \n Error: \(error)", Type: "")
-    }
-    func ODSStoreStatus(storeStatus: String) {
-        print(storeStatus)
-    }
-    func offlineStoreOpenFinished(storeName: String) {
-        print("\(storeName) open finished --\(Date().localDate())")
-        mJCLogger.log("\(storeName) open finished --\(Date().localDate())", Type: "")
-        if storeName == ApplicationID{
-            self.getAppstoreSetDetails()
-        }else{
-            storeCount =  storeCount + 1
-            if storeCount != offlinestoreListArray.count {
-                let storeDetail = offlinestoreListArray[storeCount]
-                var service = storeDetail.AppStoreName
-                if service ==  "USERSTORE"{
-                    service = ApplicationID
-                }else{
-                    service = storeDetail.ServiceName
-                }
-                self.openOfflineStore(storeName: storeDetail.AppStoreName, serviceName: service)
-            }else if storeCount == offlinestoreListArray.count{
-                mJCLoader.stopAnimating()
-                self.pushSubscrption()
-                myAssetDataManager.uniqueInstance.dataFetchCompleteDelegate = self
-                myAssetDataManager.uniqueInstance.getGlobalData()
-                UserDefaults.standard.removeObject(forKey: "ListFilter")
-                UserDefaults.standard.removeObject(forKey: "DashFilter")
-            }
-        }
+    func storesDownloaded(error: NSError?) {
+        mJCLoader.stopAnimating()
+        self.pushSubscrption()
+        myAssetDataManager.uniqueInstance.dataFetchCompleteDelegate = self
+        myAssetDataManager.uniqueInstance.getGlobalData()
+        UserDefaults.standard.removeObject(forKey: "ListFilter")
+        UserDefaults.standard.removeObject(forKey: "DashFilter")
     }
     func pushSubscrption(){
         if UserDefaults.standard.object(forKey: "pushsubscribe") == nil{
@@ -1522,46 +1407,8 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         UserDefaults.standard.setValue(Date().localDate(), forKey: "lastSyncDate")
         UserDefaults.standard.setValue(Date().localDate(), forKey: "lastSyncDate_Master")
     }
-    func getAppstoreSetDetails(){
-        let query = "$filter=(Active eq 'X')&$orderby=SyncSeq"
-        AppStoreHelper.getAppStoreList(filterQuery: query, formate: true){ (response,error) in
-            if error == nil{
-                if let responseArr = response["data"] as? [AppStoreModel]{
-                    offlinestoreListArray = responseArr
-                    mJCLib.storeListArray = responseArr
-                    var storeNameArr = [String]()
-                    for item in offlinestoreListArray{
-                        storeNameArr.append(item.AppStoreName)
-                    }
-                    UserDefaults.standard.setValue(storeNameArr, forKey: "StoreNames")
-                    offlinestoreListArray.sort {$0.SyncSeq < $1.SyncSeq }
-                    self.getServiceConfigSetDetails()
-                }
-            }else{
-                mJCLogger.log("\(String(describing: error?.localizedDescription))", Type: "Error")
-            }
-        }
-    }
-    func getServiceConfigSetDetails() {
-        serviceConfigHelper.getServcieConfigList(formate:true){ (response,error) in
-            if(error == nil) {
-                offlinestoreDefineReqArray = response["data"] as! [ServiceConfigModel]
-                mJCLib.storeDefineReqArray = offlinestoreDefineReqArray
-                let storeArr = offlinestoreDefineReqArray.filter{$0.EntitySet == "\(formAssingmentSet)"}
-                if storeArr.count > 0{
-                    let store = storeArr[0]
-                    FormsEngine.formStoreName = "\(store.AppStoreName)"
-                }
-                self.storeCount =  self.storeCount + 1
-                self.getApplicationConfigurations()
-            }else {
-                mJCLogger.log("\(String(describing: error?.localizedDescription))", Type: "Error")
-            }
-        }
-    }
     func getApplicationConfigurations(){
-        
-        ApplicationConfigModel.getapplicationConfigList(){ (response,error) in
+        mJCLib.ApplicationConfigModel.getapplicationConfigList(){ (response,error) in
             if(error == nil) {
                 let formatedDict = ODSHelperClass.getApplicationConfigurationsInformate(dictionary: response, from: "")
                 //set Auto Notes On Status flags
@@ -1625,6 +1472,7 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                     strUser = ""
                 }
                 strUser = strUser.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? strUser
+                mJCLib.AppDetailsClass.setLoggedInUser(userID: strUser)
                 if let valuedict = formatedDict.value(forKey: "ENABLE_POST_DEVICE_LOCATION_NOTES") as? NSMutableDictionary{
                     if let value = valuedict.value(forKey: "Value") as? String{
                         if value  == "TRUE"{
@@ -2101,19 +1949,7 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
                 }else{
                     CATALOGCODE_SYMPTOM = "D"
                 }
-                if self.storeCount < offlinestoreListArray.count{
-                    let storeDetail = offlinestoreListArray[self.storeCount]
-                    var service = storeDetail.AppStoreName
-                    if service ==  "USERSTORE"{
-                        service = ApplicationID
-                    }else{
-                        service = storeDetail.ServiceName
-                    }
-                    self.openOfflineStore(storeName: storeDetail.AppStoreName, serviceName: service)
-                }else{
-                    mJCLoader.stopAnimating()
-                    mJCLogger.log("Something went wrong", Type: "Debug")
-                }
+                mJCLoginHelper.uniqueInstance.openAllStores()
             }
             else {
                 mJCLogger.log("\(String(describing: error?.localizedDescription))", Type: "Error")
@@ -2165,7 +2001,6 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         }
     }
     func globalDataFetchCompleteCompleted() {
-
         if UserDefaults.standard.value(forKey: "touchIDEnable") == nil{
             authenticationType = LAContext().biometricType.rawValue
             if authenticationType != "none"{

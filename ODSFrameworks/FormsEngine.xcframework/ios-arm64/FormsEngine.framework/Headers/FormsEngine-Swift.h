@@ -195,6 +195,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import ODSFoundation;
 @import ObjectiveC;
 @import WebKit;
 #endif
@@ -214,7 +215,36 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC11FormsEngine15AppDetailsClass")
+@interface AppDetailsClass : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine17AppFeaturesHelper")
+@interface AppFeaturesHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine14AppStoreHelper")
+@interface AppStoreHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSString;
+
+SWIFT_CLASS("_TtC11FormsEngine22ApplicationConfigModel")
+@interface ApplicationConfigModel : NSObject
+@property (nonatomic, copy) NSString * _Nonnull RecordNum;
+@property (nonatomic, copy) NSString * _Nonnull Key;
+@property (nonatomic, copy) NSString * _Nonnull Value;
+@property (nonatomic, copy) NSString * _Nonnull Category;
+@property (nonatomic, copy) NSString * _Nonnull Active;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class SODataEntityDefault;
 @class SODataV4_EntityValue;
 
@@ -239,6 +269,12 @@ SWIFT_CLASS("_TtC11FormsEngine23ApproverMasterDataModel")
 @end
 
 
+SWIFT_CLASS("_TtC11FormsEngine19ChangePasswordModel")
+@interface ChangePasswordModel : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC11FormsEngine19DeptMasterDataModel")
 @interface DeptMasterDataModel : NSObject
 @property (nonatomic, copy) NSString * _Nonnull DepartmentID;
@@ -251,8 +287,50 @@ SWIFT_CLASS("_TtC11FormsEngine19DeptMasterDataModel")
 @end
 
 
+SWIFT_CLASS("_TtC11FormsEngine13FEAlertHelper")
+@interface FEAlertHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine8FELoader")
+@interface FELoader : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSURLAuthenticationChallenge;
+
+SWIFT_CLASS("_TtC11FormsEngine13FELoginHelper")
+@interface FELoginHelper : NSObject <StoreDelegate, UsernamePasswordProviderProtocol>
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)provideUsernamePasswordForAuthChallenge:(NSURLAuthenticationChallenge * _Null_unspecified)authChallenge completionBlock:(username_password_provider_completion_t _Null_unspecified)completionBlock;
+- (void)offlineStoreStatusWithStoreStatus:(NSString * _Nonnull)storeStatus;
+- (void)offlineStoreOpenFailedWithStoreName:(NSString * _Nonnull)storeName error:(NSError * _Null_unspecified)error;
+- (void)offlineStoreOpenFinishedWithStoreName:(NSString * _Nonnull)storeName;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine15FENetWorkHelper")
+@interface FENetWorkHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC11FormsEngine15FEOfflineHelper")
 @interface FEOfflineHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine14FEOnlineHelper")
+@interface FEOnlineHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine13FEStoreHelper")
+@interface FEStoreHelper : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -284,6 +362,7 @@ SWIFT_CLASS("_TtC11FormsEngine19FormAssignDataModel")
 @property (nonatomic, copy) NSDate * _Nullable ModifiedOn;
 @property (nonatomic, copy) NSString * _Nonnull ModifiedBy;
 @property (nonatomic) NSInteger filledFormCount;
+@property (nonatomic) BOOL isExpand;
 @property (nonatomic, copy) NSString * _Nonnull FormAssignmentType;
 @property (nonatomic, copy) NSString * _Nonnull WorkOrderNum;
 @property (nonatomic, copy) NSString * _Nonnull OprNum;
@@ -325,6 +404,30 @@ SWIFT_CLASS("_TtC11FormsEngine19FormAttachmentModel")
 @property (nonatomic, copy) NSString * _Nonnull CreatedBy;
 @property (nonatomic, copy) NSDate * _Nullable ModifiedOn;
 @property (nonatomic, copy) NSString * _Nonnull ModifiedBy;
+@property (nonatomic, strong) SODataEntityDefault * _Nonnull entity;
+@property (nonatomic, strong) SODataV4_EntityValue * _Nonnull entityValue;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine18FormCatMasterModel")
+@interface FormCatMasterModel : NSObject
+@property (nonatomic, copy) NSString * _Nonnull Catid;
+@property (nonatomic, copy) NSString * _Nonnull DepartmentName;
+@property (nonatomic, strong) SODataEntityDefault * _Nonnull entity;
+@property (nonatomic, strong) SODataV4_EntityValue * _Nonnull entityValue;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine19FormLinkMasterModel")
+@interface FormLinkMasterModel : NSObject
+@property (nonatomic, copy) NSString * _Nonnull Funareaid;
+@property (nonatomic, copy) NSString * _Nonnull Funcareadesc;
+@property (nonatomic, copy) NSString * _Nonnull Subareaid;
+@property (nonatomic, copy) NSString * _Nonnull Subareadesc;
+@property (nonatomic, copy) NSString * _Nonnull Catid;
+@property (nonatomic, copy) NSString * _Nonnull Catdesc;
 @property (nonatomic, strong) SODataEntityDefault * _Nonnull entity;
 @property (nonatomic, strong) SODataV4_EntityValue * _Nonnull entityValue;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -510,14 +613,69 @@ SWIFT_CLASS("_TtC11FormsEngine22FormsBatchRequestModel")
 @end
 
 
-SWIFT_CLASS("_TtC11FormsEngine23FormsFormateHelperClass")
-@interface FormsFormateHelperClass : NSObject
+SWIFT_CLASS("_TtC11FormsEngine18FunAreaMasterModel")
+@interface FunAreaMasterModel : NSObject
+@property (nonatomic, copy) NSString * _Nonnull Funareaid;
+@property (nonatomic, copy) NSString * _Nonnull Procname;
+@property (nonatomic, strong) SODataEntityDefault * _Nonnull entity;
+@property (nonatomic, strong) SODataV4_EntityValue * _Nonnull entityValue;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 SWIFT_CLASS("_TtC11FormsEngine10HtmlHelper")
 @interface HtmlHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine20StatusCategoryHelper")
+@interface StatusCategoryHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine18SubAreaMasterModel")
+@interface SubAreaMasterModel : NSObject
+@property (nonatomic, copy) NSString * _Nonnull Subareaid;
+@property (nonatomic, copy) NSString * _Nonnull Procname;
+@property (nonatomic, strong) SODataEntityDefault * _Nonnull entity;
+@property (nonatomic, strong) SODataV4_EntityValue * _Nonnull entityValue;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine16UserDetailsModel")
+@interface UserDetailsModel : NSObject
+@property (nonatomic, copy) NSString * _Nonnull LastName;
+@property (nonatomic, copy) NSString * _Nonnull FirstName;
+@property (nonatomic, copy) NSString * _Nonnull Userdisplayname;
+@property (nonatomic, copy) NSString * _Nonnull PersonnelNo;
+@property (nonatomic, copy) NSString * _Nonnull Comp_code;
+@property (nonatomic, copy) NSString * _Nonnull CostCenter;
+@property (nonatomic, copy) NSString * _Nonnull BusinessArea;
+@property (nonatomic, copy) NSString * _Nonnull Org_unit;
+@property (nonatomic, copy) NSString * _Nonnull Position;
+@property (nonatomic, copy) NSString * _Nonnull Job;
+@property (nonatomic, copy) NSString * _Nonnull COArea;
+@property (nonatomic, copy) NSString * _Nonnull Pers_Subarea;
+@property (nonatomic, copy) NSString * _Nonnull PersonnelArea;
+@property (nonatomic, copy) NSString * _Nonnull Emp_group;
+@property (nonatomic, copy) NSString * _Nonnull Emp_SubGroup;
+@property (nonatomic, copy) NSString * _Nonnull Supervisor;
+@property (nonatomic) BOOL technician;
+@property (nonatomic, copy) NSString * _Nonnull Role_ID;
+@property (nonatomic, copy) NSString * _Nonnull Dashboard_ID;
+@property (nonatomic, copy) NSString * _Nonnull Assignment_Type;
+@property (nonatomic, copy) NSString * _Nonnull OpWorkCentter;
+@property (nonatomic, copy) NSString * _Nonnull userStorageLocation;
+@property (nonatomic, copy) NSString * _Nonnull WORKORDER_ASSIGNMENT_TYPE;
+@property (nonatomic, copy) NSString * _Nonnull ADD_ASSIGNMENT_TYPE;
+@property (nonatomic, copy) NSString * _Nonnull NOTIFICATION_ASSIGNMENT_TYPE;
+@property (nonatomic, copy) NSString * _Nonnull WorkCenter;
+@property (nonatomic, copy) NSString * _Nonnull Plant;
+@property (nonatomic, strong) SODataEntityDefault * _Nonnull entity;
+@property (nonatomic, strong) SODataV4_EntityValue * _Nonnull entityValue;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -546,6 +704,31 @@ SWIFT_CLASS("_TtC11FormsEngine14WebViewHandler")
 - (void)webView:(WKWebView * _Nonnull)webView decidePolicyForNavigationAction:(WKNavigationAction * _Nonnull)navigationAction decisionHandler:(void (^ _Nonnull)(WKNavigationActionPolicy))decisionHandler;
 @end
 
+
+
+SWIFT_CLASS("_TtC11FormsEngine21WorkOrderStatusHelper")
+@interface WorkOrderStatusHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine17appUserTableModel")
+@interface appUserTableModel : NSObject
+@property (nonatomic) int32_t RecordId;
+@property (nonatomic, copy) NSString * _Nonnull SettingGrp;
+@property (nonatomic, copy) NSString * _Nonnull SettingName;
+@property (nonatomic, copy) NSString * _Nonnull SettingValue;
+@property (nonatomic, copy) NSString * _Nonnull EnteredBy;
+@property (nonatomic, strong) SODataEntityDefault * _Nonnull entity;
+@property (nonatomic, strong) SODataV4_EntityValue * _Nonnull entityValue;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11FormsEngine19serviceConfigHelper")
+@interface serviceConfigHelper : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

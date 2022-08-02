@@ -26,7 +26,7 @@ public class AssetClassModel : NSObject,Initable1{
     
     public static func getAssetClassList(filterQuery:String? = "",modelClass : AssetClassModel.Type? = AssetClassModel.self,completionHandler: @escaping ([String : Any], NSError?) -> ()){
         let handler = completionHandler
-        let storeArray =  mJCLib.storeDefineReqArray.filter{$0.EntitySet == "AssetClassSet"}
+        let storeArray =  mJCLib.offlineStoreDefineRequests.filter{$0.EntitySet == "AssetClassSet"}
         if storeArray.count > 0{
             let store = storeArray[0]
             var query = String()

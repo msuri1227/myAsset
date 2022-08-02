@@ -37891,8 +37891,15 @@ module.exports = {
         if ( this.$formLanguages.find( 'option' ).length < 2 ) {
             return;
         }
+     
+      if (window.userLang !== undefined && userLang != '') {
+        var languagePresent = this.$formLanguages.find('option[value="' + userLang + '"]');
+        if (languagePresent.val() !== undefined) {
+            that.setAll(userLang);
+        }
+     }
 
-        $langSelector.removeClass( 'hide' );
+       // $langSelector.removeClass( 'hide' );
 
         this.$formLanguages.change( function( event ) {
             event.preventDefault();

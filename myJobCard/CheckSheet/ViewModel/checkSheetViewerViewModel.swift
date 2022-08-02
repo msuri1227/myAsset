@@ -853,7 +853,7 @@ class checkSheetViewerViewModel {
             print("........................")
         }
         
-        UploadedAttachmentsModel.uploadWoAttachmentEntity(entity: entity!, collectionPath: uploadWOAttachmentContentSet,flushDelegate: myAssetDataManager.uniqueInstance, refreshDelegate: myAssetDataManager.uniqueInstance, flushRequired: true,options: nil, completionHandler: { (response, error) in
+        UploadedAttachmentsModel.uploadWoAttachmentEntity(entity: entity!, collectionPath: uploadWOAttachmentContentSet, flushRequired: true,options: nil, completionHandler: { (response, error) in
             if(error == nil) {
                 self.delegate?.dataFetchCompleted?(type: "EquipAttachAdded", object: [docData])
             }else {
@@ -924,7 +924,7 @@ class checkSheetViewerViewModel {
             }
             print("........................")
         }
-        UploadedAttachmentsModel.uploadWoAttachmentEntity(entity: entity!, collectionPath: uploadWOAttachmentContentSet,flushDelegate: myAssetDataManager.uniqueInstance, refreshDelegate: myAssetDataManager.uniqueInstance, flushRequired: true,options: nil, completionHandler: { (response, error) in
+        UploadedAttachmentsModel.uploadWoAttachmentEntity(entity: entity!, collectionPath: uploadWOAttachmentContentSet, flushRequired: true,options: nil, completionHandler: { (response, error) in
             if(error == nil) {
                 self.delegate?.dataFetchCompleted?(type: "FlocAttachAdded", object: [docData])
             }else {

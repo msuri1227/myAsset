@@ -15,7 +15,7 @@ import MessageUI
 import LocalAuthentication
 
 
-class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegate,MFMailComposeViewControllerDelegate,UsernamePasswordProviderProtocol,SAML2ConfigProviderProtocol,ODSStoreDelegate,ODSStoreStatusDelegate, pushDeleteDelegate{
+class myAssetDataManager: NSObject,MFMailComposeViewControllerDelegate,UsernamePasswordProviderProtocol,SAML2ConfigProviderProtocol, PushDeleteDelegate, StoreFlushRefreshDelegate{
 
     var FandRStoreName = String()
     var isMasterRefresh = Bool()
@@ -536,7 +536,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
     }
     //MARK: - Global Appstore Details
     func getWOStatusSet(){
-        WorkOrderStatusHelper.getworkOrderValidStatusList(formate:true){ (response, error)  in
+        mJCLib.WorkOrderStatusHelper.getworkOrderValidStatusList(formate:true){ (response, error)  in
             if error == nil{
                 if let arr = response["data"] as? [WorkOrderStatusModel]{
                     globalStatusArray = arr
@@ -554,7 +554,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
         }
     }
     func getStatusCategoryData(){
-        StatusCategoryHelper.getStatusCategoryList(formate:true){ (response, error) in
+        mJCLib.StatusCategoryHelper.getStatusCategoryList(formate:true){ (response, error) in
             if error == nil{
                 if let arr = response["data"] as? [StatusCategoryModel]{
                     statusCategoryArr = arr
@@ -572,7 +572,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
         }
     }
     func getApplicationFeatureSet(){
-        AppFeaturesHelper.getAppFeaturesList(formate:true){ (response, error)  in
+        mJCLib.AppFeaturesHelper.getAppFeaturesList(formate:true){ (response, error)  in
             if error == nil{
                 applicationFeatureArrayKeys.removeAll()
                 if let arr = response["data"] as? [AppFeaturesModel]{
@@ -1364,9 +1364,9 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
     }
     func getcurrentuserdetails(){
 
-        appUserTableModel.getUserDetailsList(){ (response, error) in
+        mJCLib.appUserTableModel.getUserDetailsList(){ (response, error) in
             if error == nil{
-                if let arr = response["data"] as? [appUserTableModel]{
+                if let arr = response["data"] as? [mJCLib.appUserTableModel]{
                      let detailsArr = self.getLoggedInUserDetailsInFormate(detailArr: arr)
                     self.setPersonRespronsible(detailArr: detailsArr, from: true)
                 }
@@ -1382,10 +1382,10 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
         }
     }
     //MARK: - get logged in user details formate
-    func getLoggedInUserDetailsInFormate(detailArr : [appUserTableModel]) -> [UserDetailsModel] {
+    func getLoggedInUserDetailsInFormate(detailArr : [mJCLib.appUserTableModel]) -> [mJCLib.UserDetailsModel] {
 
-        var userDetailsArr = [UserDetailsModel]()
-        let userDetailsCls = UserDetailsModel()
+        var userDetailsArr = [mJCLib.UserDetailsModel]()
+        let userDetailsCls = mJCLib.UserDetailsModel()
         for item in detailArr{
             if item.SettingName == "RFPNR" && item.SettingValue != ""{
                 userDetailsCls.Supervisor = item.SettingValue
@@ -1478,7 +1478,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
     func offlineStoreFlushSucceeded(storeName: String, syncType: String) {
         print("\(storeName) FlushFinished \(Date().localDate())")
     }
-    func offlineStoreFlushFailed(storeName: String, error: Error!) {
+    func offlineStoreFlushFailed(storeName: String, syncType synctype: String, error: Error!) {
         flushStatus = false
         print("\(storeName)FlushFailed == >\(String(describing: error?.localizedDescription))")
         mJCLogger.log("\(storeName)FlushFailed == >\(String(describing: error?.localizedDescription))", Type: "Error")
@@ -1505,16 +1505,20 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
         self.refreshFailedArr.append(FandRStoreName)
     }
     //MARK: - Flush & refresh status
-    func StoreFlushCompleted(syncType: String) {
+    func offlineStoreFlushCompleted(syncType: String) {
         flushStatus = false
         mJCLoader.stopAnimating()
         print("flush Completed")
+    }
+    func offlineStoreflushStatus(storeName: String, message: String) {
+        flushStatus = false
+        self.showtoastmsg(actionTitle: "", msg: "\(message)".localized())
     }
     func backgroundSyncflushStatus(storeName: String, message: String) {
         flushStatus = false
         self.showtoastmsg(actionTitle: "", msg: "\(message)".localized())
     }
-    func storeRefreshCompleted(syncType: String) {
+    func offlineStoreRefreshCompleted(syncType: String) {
         flushStatus = false
         mJCLoader.stopAnimating()
         print("All Stores refresh completed\(Date().localDate())")
@@ -1542,7 +1546,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
                 if masterDataRefresh == true{
                     mJCLoader.startAnimating(status: "Downloading".localized())
                 }
-                mJCStoreHelper.flushAndRefreshStores(masterDataRefresh: masterDataRefresh, flushDelegate: self, refreshDelegate: self)
+                mJCStoreHelper.flushAndRefreshStores(masterDataRefresh: masterDataRefresh, flushRefreshDelegate: self)
             }else{
                 mJCLoader.stopAnimating()
                 self.showtoastmsg(actionTitle: "", msg: "Application_Syncng".localized())
@@ -1582,7 +1586,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
             NotificationCenter.default.post(name: Notification.Name(rawValue:"storeFlushAndRefreshDone"), object: "")
         }
     }
-    func backgroundSyncRefreshStatus(storeName: String, message: String) {}
+    func offlineStoreRefreshStatus(storeName: String, message: String) {}
     //MARK: - Form task type Query
     public static func getAssignementType2Query() -> String{
         let oprArray = allOperationsArray.filter{$0.WorkOrderNum == "\(selectedworkOrderNumber)"}
@@ -1834,7 +1838,7 @@ class myAssetDataManager: NSObject,ODSStoreFlushDelegate, ODSStoreRefreshDelegat
         }
         return FinalNumber
     }
-    func setPersonRespronsible(detailArr:Array<UserDetailsModel>,from:Bool) {
+    func setPersonRespronsible(detailArr:Array<mJCLib.UserDetailsModel>,from:Bool) {
         let user = detailArr[0]
         if from == true{
             let userArr = globalPersonRespArray.filter{$0.PersonnelNo == user.PersonnelNo}

@@ -52,7 +52,7 @@ var funcLocationArray = [FunctionalLocationModel]()
 var funcLocationListArray = [String]()
 var totalEquipmentArray = [EquipmentModel]()
 var totalEquipmentListArray = [String]()
-var currentuserdetails = Array<UserDetailsModel>()
+var currentuserdetails = Array<mJCLib.UserDetailsModel>()
 var woOperationsArray = [WoOperationModel]()
 var woWorkOrder = String()
 

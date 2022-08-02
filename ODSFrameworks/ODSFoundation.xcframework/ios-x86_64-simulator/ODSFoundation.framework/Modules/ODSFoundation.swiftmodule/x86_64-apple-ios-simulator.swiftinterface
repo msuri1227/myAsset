@@ -176,7 +176,7 @@ public protocol ODSDatePickerViewControllerDelegate : AnyObject {
 @objc @_inheritsConvenienceInitializers open class ODSPushHelper : ObjectiveC.NSObject {
   public static func registerForPushSubscription(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, storeName: Swift.String, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   public static func getPushSubscriptionEntity(queryRequest: Swift.String, StoreName: Swift.String, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deletePushSubscriptionEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, options: [Swift.AnyHashable : Any]!, pushDeletedelegate: ODSFoundation.pushDeleteDelegate, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deletePushSubscriptionEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, options: [Swift.AnyHashable : Any]!, pushDeletedelegate: ODSFoundation.PushDeleteDelegate, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   @objc override dynamic public init()
   @objc deinit
 }
@@ -474,7 +474,7 @@ public struct CustomAnimationOptions : Swift.OptionSet {
   @objc @_Concurrency.MainActor(unsafe) open var didPresentMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
   @objc @_Concurrency.MainActor(unsafe) open var willDismissMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
   @objc @_Concurrency.MainActor(unsafe) open var didDismissMenuItems: ((ODSFoundation.ExpandingMenuButton) -> Swift.Void)?
-  @objc @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, image: UIKit.UIImage, highlightedImage: UIKit.UIImage? = nil, rotatedImage: UIKit.UIImage, rotatedHighlightedImage: UIKit.UIImage? = nil)
+  @objc @_Concurrency.MainActor(unsafe) public init(frame: CoreGraphics.CGRect, image: UIKit.UIImage? = nil, highlightedImage: UIKit.UIImage? = nil, rotatedImage: UIKit.UIImage? = nil, rotatedHighlightedImage: UIKit.UIImage? = nil)
   @objc @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage, rotatedImage: UIKit.UIImage)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc @_Concurrency.MainActor(unsafe) open func addMenuItems(_ menuItems: [ODSFoundation.ExpandingMenuItem])
@@ -2117,29 +2117,30 @@ extension UIKit.UISearchBar : ODSFoundation.UISearchBarXIBLocalizable {
 @objc extension UIKit.UIViewController {
   @objc @_Concurrency.MainActor(unsafe) dynamic public func parentIQContainerViewController() -> UIKit.UIViewController?
 }
-public protocol ODSStoreDelegate {
-  func offlineStoreOpenFailed(storeName: Swift.String, error: Swift.Error!)
-  func offlineStoreOpenFinished(storeName: Swift.String)
+@objc public protocol StoreDelegate {
+  @objc optional func appDetailsStoreDownloaded(error: Foundation.NSError?)
+  @objc optional func storesDownloaded(error: Foundation.NSError?)
+  @objc optional func offlineStoreOpenFailed(storeName: Swift.String, error: Swift.Error!)
+  @objc optional func offlineStoreOpenFinished(storeName: Swift.String)
+  @objc optional func offlineStoreStatus(storeStatus: Swift.String)
 }
-public protocol pushDeleteDelegate {
+public protocol PushDeleteDelegate {
   func pushSubscriptionDeleted()
 }
-public protocol ODSStoreStatusDelegate {
-  func ODSStoreStatus(storeStatus: Swift.String)
-}
-public protocol ODSStoreFlushDelegate {
+public protocol StoreFlushRefreshDelegate {
   func offlineStoreFlushStarted(storeName: Swift.String, syncType: Swift.String)
   func offlineStoreFlushSucceeded(storeName: Swift.String, syncType: Swift.String)
-  func offlineStoreFlushFailed(storeName: Swift.String, error: Swift.Error!)
-  func backgroundSyncflushStatus(storeName: Swift.String, message: Swift.String)
-  func StoreFlushCompleted(syncType: Swift.String)
+  func offlineStoreFlushFailed(storeName: Swift.String, syncType: Swift.String, error: Swift.Error!)
+  func offlineStoreflushStatus(storeName: Swift.String, message: Swift.String)
+  func offlineStoreFlushCompleted(syncType: Swift.String)
+  func offlineStoreRefreshStarted(storeName: Swift.String, syncType: Swift.String)
+  func offlineStoreRefreshSucceeded(storeName: Swift.String, syncType: Swift.String)
+  func offlineStoreRefreshFailed(storeName: Swift.String, error: Swift.Error!)
+  func offlineStoreRefreshStatus(storeName: Swift.String, message: Swift.String)
+  func offlineStoreRefreshCompleted(syncType: Swift.String)
 }
 public protocol UserCredentialDelegate {
   func ProvideUsernamePassword() -> Foundation.URLCredential
-}
-public protocol intialStoreDelegate {
-  func IntialStoreOpened()
-  func StoreOpenFinished()
 }
 public protocol Initable {
   init()
@@ -2473,13 +2474,14 @@ extension UIKit.UIView {
   @objc open func isDrawingValuesAllowed(dataProvider: ODSFoundation.ChartDataProvider?) -> Swift.Bool
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class ODSLoginHelper : ObjectiveC.NSObject, ODSFoundation.UsernamePasswordProviderProtocol {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class ODSLoginHelper : ObjectiveC.NSObject, ODSFoundation.UsernamePasswordProviderProtocol, ODSFoundation.SAML2ConfigProviderProtocol {
   public class var uniqueInstance: ODSFoundation.ODSLoginHelper {
     get
   }
   @objc public func provideUsernamePassword(forAuthChallenge authChallenge: Foundation.URLAuthenticationChallenge!, completionBlock: ODSFoundation.username_password_provider_completion_t!)
+  @objc public func provideSAML2Configuration(for url: Foundation.URL!, completionBlock: ODSFoundation.saml2_config_provider_completion_t!)
   public static func registerUser(with manager: ODSFoundation.HttpConversationManager?, toServer rawServerUrl: Swift.String?, andAppId appId: Swift.String?, completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?) -> Swift.Void)
-  public func registerUser1(toServer rawServerUrl: Swift.String?, andAppId appId: Swift.String?, completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?) -> Swift.Void)
+  public func registerNewUser(toServer rawServerUrl: Swift.String?, andAppId appId: Swift.String?, completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?) -> Swift.Void)
   public static func deleteUserRegistration(_ applicationConnectionId: Swift.String?, with manager: ODSFoundation.HttpConversationManager?, fromServer rawServerUrl: Swift.String?, withAppId appId: Swift.String?, completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?, _ success: Swift.Bool) -> Swift.Void)
   @objc deinit
 }
@@ -3713,6 +3715,7 @@ extension UIKit.UIImage {
   }
   public func jpeg(quality: UIKit.UIImage.JPEGQuality) -> Foundation.NSData?
   convenience public init?(barcode: Swift.String)
+  convenience public init?(qrCode: Swift.String)
 }
 extension UIKit.UIFontDescriptor.AttributeName {
   public static let nsctFontUIUsage: UIKit.UIFontDescriptor.AttributeName
@@ -3783,6 +3786,14 @@ extension LocalAuthentication.LAContext {
 extension Foundation.Data {
   public init?(fromHexEncodedString string: Swift.String)
 }
+extension UIKit.UISearchBar {
+  @_Concurrency.MainActor(unsafe) public var compatibleSearchTextField: UIKit.UITextField {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var legacySearchField: UIKit.UITextField {
+    get
+  }
+}
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) final public class HeaderViewController : UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) final public var navigationBar: UIKit.UINavigationBar {
     get
@@ -3801,15 +3812,7 @@ extension Foundation.Data {
 extension ODSFoundation.HeaderViewController : UIKit.UINavigationBarDelegate {
   @_Concurrency.MainActor(unsafe) @objc final public func position(for bar: UIKit.UIBarPositioning) -> UIKit.UIBarPosition
 }
-public protocol ODSStoreRefreshDelegate {
-  func offlineStoreRefreshStarted(storeName: Swift.String, syncType: Swift.String)
-  func offlineStoreRefreshSucceeded(storeName: Swift.String, syncType: Swift.String)
-  func offlineStoreRefreshFailed(storeName: Swift.String, error: Swift.Error!)
-  func backgroundSyncRefreshStatus(storeName: Swift.String, message: Swift.String)
-  func storeRefreshCompleted(syncType: Swift.String)
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class ODSStoreHelper : ObjectiveC.NSObject, ODSFoundation.SODataOfflineStoreRequestErrorDelegate, ODSFoundation.SODataOfflineStoreDelegate, ODSFoundation.SODataOfflineStoreFlushDelegate, ODSFoundation.SODataOfflineStoreRefreshDelegate, ODSFoundation.UsernamePasswordProviderProtocol {
-  @objc public func provideUsernamePassword(forAuthChallenge authChallenge: Foundation.URLAuthenticationChallenge!, completionBlock: ODSFoundation.username_password_provider_completion_t!)
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class ODSStoreHelper : ObjectiveC.NSObject, ODSFoundation.SODataOfflineStoreRequestErrorDelegate, ODSFoundation.SODataOfflineStoreDelegate, ODSFoundation.SODataOfflineStoreFlushDelegate, ODSFoundation.SODataOfflineStoreRefreshDelegate, ODSFoundation.UsernamePasswordProviderProtocol, ODSFoundation.SAML2ConfigProviderProtocol {
   public class var uniqueInstance: ODSFoundation.ODSStoreHelper {
     get
   }
@@ -3818,11 +3821,11 @@ public protocol ODSStoreRefreshDelegate {
   public static var storeListArray: [ODSFoundation.AppStoreModel]
   public static var pushDelete: Swift.Bool
   public static var pushRegister: Swift.Bool
-  public static var ODSStoredelegate: ODSFoundation.ODSStoreDelegate?
-  public static var ODSStoreStatusdelegate: ODSFoundation.ODSStoreStatusDelegate?
-  public static var ODSStoreFlushDelegate: ODSFoundation.ODSStoreFlushDelegate?
-  public static var ODSStoreRefreshDelegate: ODSFoundation.ODSStoreRefreshDelegate?
-  public static var pushDelegate: ODSFoundation.pushDeleteDelegate?
+  public static var storeDelegate: ODSFoundation.StoreDelegate?
+  public static var storeFlushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate?
+  public static var pushDelegate: ODSFoundation.PushDeleteDelegate?
+  @objc public func provideSAML2Configuration(for url: Foundation.URL!, completionBlock: ODSFoundation.saml2_config_provider_completion_t!)
+  @objc public func provideUsernamePassword(forAuthChallenge authChallenge: Foundation.URLAuthenticationChallenge!, completionBlock: ODSFoundation.username_password_provider_completion_t!)
   public func configTimeBasedBackGroundSync(syncType: Swift.String, timeInterval: Swift.String, retryCount: Swift.String, retryInterval: Swift.String)
   public func configMasterDataBackGroundSync(refreshUnitHour: Swift.Bool, timeInterval: Swift.String, retryCount: Swift.String, retryInterval: Swift.String)
   public static func configEventBasedSync(syncType: Swift.String, enable: Swift.Bool)
@@ -3847,7 +3850,7 @@ public protocol ODSStoreRefreshDelegate {
   @objc public func offlineStoreRefresh(_ store: ODSFoundation.SODataOfflineStore!, progressStatus: ODSFoundation.SODataOfflineProgressStatus)
   @objc public func offlineStoreRefreshFinished(_ store: ODSFoundation.SODataOfflineStore!)
   public func OpenOfflineStore(storeName: Swift.String, serviceName: Swift.String, options: Swift.Dictionary<Swift.String, Any>)
-  public func OpenOfflineStore1(storeName: Swift.String, serviceName: Swift.String, defineReq: [Swift.String])
+  public func OpenNewOfflineStore(storeName: Swift.String, serviceName: Swift.String, defineReq: [Swift.String])
   public static func removeOfflineStores(storeNameArr: [Swift.String]) -> Swift.Bool
   public static func checkForUnflushedData(storeNameArr: [Swift.String] = []) -> Swift.Bool
   public static func closeOfflineStores(storeNameArr: [Swift.String] = []) -> Swift.Bool
@@ -3860,9 +3863,9 @@ public protocol ODSStoreRefreshDelegate {
   public static func SODataRequestToNSMutableDictionary(SODataRequest: ODSFoundation.SODataRequestExecution) -> Foundation.NSMutableDictionary
   public static func SODataRequestToNSMutableDictionary(SODataRequest: ODSFoundation.SODataRequestExecution, NavProperty: Swift.Bool, NavPropertyValue: Swift.String) -> Foundation.NSMutableDictionary
   public func SODataRequestToDictionary(SODataRequest: ODSFoundation.SODataRequestExecution) -> Swift.Dictionary<Swift.String, Any>
-  public static func createOfflineEntitys(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, storeName: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deleteOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createOfflineEntitys(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, storeName: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deleteOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   @objc override dynamic public init()
   @objc deinit
 }
@@ -4488,12 +4491,14 @@ public var ODSServerIP: Swift.String
 public var ODSPortNo: Swift.Int
 public var https: Swift.Bool
 public var demoMode: Swift.Bool
+public var demoStoresPath: Swift.String
+public var storesPath: Swift.String
+public var authType: Swift.String
 public var loggedInUser: Swift.String
 public var tabSelectedIndex: Swift.Int
 public var tabScrollingIndex: Swift.Int
 public var userCredentialDelegate: ODSFoundation.UserCredentialDelegate?
-public var flushDelegate: ODSFoundation.ODSStoreFlushDelegate?
-public var refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate?
+public var flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate?
 public var debugLogLevel: Swift.Bool
 public var errorLogLevel: Swift.Bool
 public var warnLogLevel: Swift.Bool

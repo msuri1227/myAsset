@@ -2208,10 +2208,13 @@ SWIFT_CLASS("_TtC6mJCLib9mJCLoader")
 @class NSURLAuthenticationChallenge;
 
 SWIFT_CLASS("_TtC6mJCLib14mJCLoginHelper")
-@interface mJCLoginHelper : NSObject <UsernamePasswordProviderProtocol>
-- (void)provideUsernamePasswordForAuthChallenge:(NSURLAuthenticationChallenge * _Null_unspecified)authChallenge completionBlock:(username_password_provider_completion_t _Null_unspecified)completionBlock;
+@interface mJCLoginHelper : NSObject <StoreDelegate, UsernamePasswordProviderProtocol>
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)provideUsernamePasswordForAuthChallenge:(NSURLAuthenticationChallenge * _Null_unspecified)authChallenge completionBlock:(username_password_provider_completion_t _Null_unspecified)completionBlock;
+- (void)offlineStoreStatusWithStoreStatus:(NSString * _Nonnull)storeStatus;
+- (void)offlineStoreOpenFailedWithStoreName:(NSString * _Nonnull)storeName error:(NSError * _Null_unspecified)error;
+- (void)offlineStoreOpenFinishedWithStoreName:(NSString * _Nonnull)storeName;
 @end
 
 

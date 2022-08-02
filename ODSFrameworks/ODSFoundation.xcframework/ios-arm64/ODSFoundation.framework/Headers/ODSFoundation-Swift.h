@@ -3157,10 +3157,10 @@ SWIFT_CLASS("_TtC13ODSFoundation8DropDown")
 
 
 
-
 @interface DropDown (SWIFT_EXTENSION(ODSFoundation))
 - (UIView * _Nullable)hitTest:(CGPoint)point withEvent:(UIEvent * _Nullable)event SWIFT_WARN_UNUSED_RESULT;
 @end
+
 
 
 @interface DropDown (SWIFT_EXTENSION(ODSFoundation))
@@ -3254,7 +3254,7 @@ SWIFT_CLASS("_TtC13ODSFoundation19ExpandingMenuButton")
 @property (nonatomic, copy) void (^ _Nullable didPresentMenuItems)(ExpandingMenuButton * _Nonnull);
 @property (nonatomic, copy) void (^ _Nullable willDismissMenuItems)(ExpandingMenuButton * _Nonnull);
 @property (nonatomic, copy) void (^ _Nullable didDismissMenuItems)(ExpandingMenuButton * _Nonnull);
-- (nonnull instancetype)initWithFrame:(CGRect)frame image:(UIImage * _Nonnull)image highlightedImage:(UIImage * _Nullable)highlightedImage rotatedImage:(UIImage * _Nonnull)rotatedImage rotatedHighlightedImage:(UIImage * _Nullable)rotatedHighlightedImage OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFrame:(CGRect)frame image:(UIImage * _Nullable)image highlightedImage:(UIImage * _Nullable)highlightedImage rotatedImage:(UIImage * _Nullable)rotatedImage rotatedHighlightedImage:(UIImage * _Nullable)rotatedHighlightedImage OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithImage:(UIImage * _Nonnull)image rotatedImage:(UIImage * _Nonnull)rotatedImage;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)addMenuItems:(NSArray<ExpandingMenuItem *> * _Nonnull)menuItems;
@@ -4433,10 +4433,11 @@ SWIFT_CLASS("_TtC13ODSFoundation11ODSLoaderVC")
 @class NSURLAuthenticationChallenge;
 
 SWIFT_CLASS("_TtC13ODSFoundation14ODSLoginHelper")
-@interface ODSLoginHelper : NSObject <UsernamePasswordProviderProtocol>
+@interface ODSLoginHelper : NSObject <SAML2ConfigProviderProtocol, UsernamePasswordProviderProtocol>
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)provideUsernamePasswordForAuthChallenge:(NSURLAuthenticationChallenge * _Null_unspecified)authChallenge completionBlock:(username_password_provider_completion_t _Null_unspecified)completionBlock;
+- (void)provideSAML2ConfigurationForURL:(NSURL * _Null_unspecified)url completionBlock:(saml2_config_provider_completion_t _Null_unspecified)completionBlock;
 @end
 
 
@@ -4540,10 +4541,11 @@ SWIFT_CLASS("_TtC13ODSFoundation13ODSPushHelper")
 @protocol SODataRequestExecution;
 
 SWIFT_CLASS("_TtC13ODSFoundation14ODSStoreHelper")
-@interface ODSStoreHelper : NSObject <SODataOfflineStoreDelegate, SODataOfflineStoreFlushDelegate, SODataOfflineStoreRefreshDelegate, SODataOfflineStoreRequestErrorDelegate, UsernamePasswordProviderProtocol>
-- (void)provideUsernamePasswordForAuthChallenge:(NSURLAuthenticationChallenge * _Null_unspecified)authChallenge completionBlock:(username_password_provider_completion_t _Null_unspecified)completionBlock;
+@interface ODSStoreHelper : NSObject <SAML2ConfigProviderProtocol, SODataOfflineStoreDelegate, SODataOfflineStoreFlushDelegate, SODataOfflineStoreRefreshDelegate, SODataOfflineStoreRequestErrorDelegate, UsernamePasswordProviderProtocol>
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)provideSAML2ConfigurationForURL:(NSURL * _Null_unspecified)url completionBlock:(saml2_config_provider_completion_t _Null_unspecified)completionBlock;
+- (void)provideUsernamePasswordForAuthChallenge:(NSURLAuthenticationChallenge * _Null_unspecified)authChallenge completionBlock:(username_password_provider_completion_t _Null_unspecified)completionBlock;
 - (void)offlineStoreStateChanged:(SODataOfflineStore * _Null_unspecified)store state:(SODataOfflineStoreState)newState;
 - (void)offlineStoreOpenFailed:(SODataOfflineStore * _Null_unspecified)store error:(NSError * _Null_unspecified)error;
 - (void)offlineStoreOpenFinished:(SODataOfflineStore * _Null_unspecified)store;
@@ -5220,6 +5222,18 @@ SWIFT_CLASS("_TtC13ODSFoundation19StatusCategoryModel")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSError;
+
+SWIFT_PROTOCOL("_TtP13ODSFoundation13StoreDelegate_")
+@protocol StoreDelegate
+@optional
+- (void)appDetailsStoreDownloadedWithError:(NSError * _Nullable)error;
+- (void)storesDownloadedWithError:(NSError * _Nullable)error;
+- (void)offlineStoreOpenFailedWithStoreName:(NSString * _Nonnull)storeName error:(NSError * _Null_unspecified)error;
+- (void)offlineStoreOpenFinishedWithStoreName:(NSString * _Nonnull)storeName;
+- (void)offlineStoreStatusWithStoreStatus:(NSString * _Nonnull)storeStatus;
+@end
+
 
 SWIFT_CLASS("_TtC13ODSFoundation7TabCell")
 @interface TabCell : UICollectionViewCell
@@ -5315,7 +5329,6 @@ SWIFT_CLASS("_TtC13ODSFoundation21TriangleShapeRenderer")
 @end
 
 
-
 @interface UIImage (SWIFT_EXTENSION(ODSFoundation))
 + (UIImage * _Nullable)keyboardPreviousiOS9Image SWIFT_WARN_UNUSED_RESULT;
 + (UIImage * _Nullable)keyboardNextiOS9Image SWIFT_WARN_UNUSED_RESULT;
@@ -5324,6 +5337,7 @@ SWIFT_CLASS("_TtC13ODSFoundation21TriangleShapeRenderer")
 + (UIImage * _Nullable)keyboardPreviousImage SWIFT_WARN_UNUSED_RESULT;
 + (UIImage * _Nullable)keyboardNextImage SWIFT_WARN_UNUSED_RESULT;
 @end
+
 
 
 
@@ -5355,6 +5369,7 @@ SWIFT_CLASS("_TtC13ODSFoundation21TriangleShapeRenderer")
 @interface UISearchBar (SWIFT_EXTENSION(ODSFoundation))
 @property (nonatomic, copy) IBInspectable NSString * _Nullable xibPlaceholderLocKey;
 @end
+
 
 
 @interface UISegmentedControl (SWIFT_EXTENSION(ODSFoundation))
@@ -5447,11 +5462,11 @@ SWIFT_CLASS("_TtC13ODSFoundation21TriangleShapeRenderer")
 @end
 
 
-
-
 @interface UIViewController (SWIFT_EXTENSION(ODSFoundation))
 - (UIViewController * _Nullable)parentIQContainerViewController SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 @class NSLayoutConstraint;
 

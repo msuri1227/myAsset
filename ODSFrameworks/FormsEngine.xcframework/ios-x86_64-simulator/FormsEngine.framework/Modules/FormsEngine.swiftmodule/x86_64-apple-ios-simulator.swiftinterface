@@ -40,6 +40,47 @@ import _Concurrency
   @objc override dynamic public init()
   @objc deinit
 }
+@objc @_inheritsConvenienceInitializers open class FunAreaMasterModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc public var Funareaid: Swift.String
+  @objc public var Procname: Swift.String
+  @objc public var entity: ODSFoundation.SODataEntityDefault
+  @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
+  @objc required override dynamic public init()
+  public static func getFunAreaMasterData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FunAreaMasterModel.Type? = FunAreaMasterModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class StatusCategoryHelper : ObjectiveC.NSObject {
+  public static func getStatusCategoryList(modelClass: ODSFoundation.StatusCategoryModel.Type? = StatusCategoryModel.self, filterQuery: Swift.String? = "", formate: Swift.Bool? = false, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class FormCatMasterModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc public var Catid: Swift.String
+  @objc public var DepartmentName: Swift.String
+  @objc public var entity: ODSFoundation.SODataEntityDefault
+  @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
+  @objc required override dynamic public init()
+  public static func getFormCatMasterData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormCatMasterModel.Type? = FormCatMasterModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class AppDetailsClass : ObjectiveC.NSObject {
+  public static func setAppBasicDetails(details: Swift.Dictionary<Swift.String, Any>)
+  public static func setFwLogLevel(levelDict: Swift.Dictionary<Swift.String, Any>)
+  public static func setLoggedInUser(userID: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class FENetWorkHelper : ObjectiveC.NSObject {
+  public static func checkInternetConnectionwithServerDetails(serverURL: Swift.String) -> Swift.String
+  public static func checkInternetConnection() -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class AppFeaturesHelper : ObjectiveC.NSObject {
+  public static func getAppFeaturesList(modelClass: ODSFoundation.AppFeaturesModel.Type? = AppFeaturesModel.self, filterQuery: Swift.String? = "", formate: Swift.Bool? = false, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc override dynamic public init()
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers open class FormAttachmentModel : ObjectiveC.NSObject, FormsEngine.Initable {
   @objc public var InstanceId: Swift.String
   @objc public var FormId: Swift.String
@@ -62,13 +103,14 @@ import _Concurrency
   @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
   @objc required override dynamic public init()
   public static func getFilleFormAttachments(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormAttachmentModel.Type? = FormAttachmentModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
-  public static func createFormAttachment(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateFormAttachment(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deleteFormAttachment(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createFormAttachment(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateFormAttachment(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deleteFormAttachment(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers open class FEFormateHelperClass : ObjectiveC.NSObject {
-  public static func getListInFormte<T>(dictionary: Foundation.NSMutableDictionary, entityModelClassType: T.Type) -> Swift.Dictionary<Swift.String, Any> where T : ObjectiveC.NSObject
+@objc @_inheritsConvenienceInitializers open class FEAlertHelper : ObjectiveC.NSObject {
+  public static func showAlert(_ parent: UIKit.UIViewController? = nil, title: Swift.String?, message: Swift.String?, button: Swift.String)
+  public static func showAlertWithHandler(_ parent: UIKit.UIViewController? = nil, parameters: ODSFoundation.Parameters, handler: @escaping (Swift.Int) -> ())
   @objc override dynamic public init()
   @objc deinit
 }
@@ -90,6 +132,13 @@ import _Concurrency
   @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
   @objc required override dynamic public init()
   public static func getApproverMasterDataData(filterQuery: Swift.String? = "", modelClass: FormsEngine.ApproverMasterDataModel.Type? = ApproverMasterDataModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class FELoader : ObjectiveC.NSObject {
+  public static func startAnimating(status: Swift.String)
+  public static func stopAnimating()
+  public static func resumeAnimating()
+  @objc override dynamic public init()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class FormResponseCaptureModel : ObjectiveC.NSObject, FormsEngine.Initable {
@@ -118,9 +167,9 @@ import _Concurrency
   @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
   @objc required override dynamic public init()
   public static func getFormResponseCaptureData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormResponseCaptureModel.Type? = FormResponseCaptureModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
-  public static func createResponseCaptureEntry(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateResponseCaptureEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deleteResponseCaptureEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createResponseCaptureEntry(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateResponseCaptureEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deleteResponseCaptureEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class FormMasterMetaDataModel : ObjectiveC.NSObject, FormsEngine.Initable {
@@ -151,9 +200,9 @@ public protocol Initable {
   public static func getODataEntriesfromOffline(queryRequest: Swift.String, storeName: Swift.String, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   public static func SODataRequestToNSMutableDictionary(SODataRequest: ODSFoundation.SODataRequestExecution) -> Foundation.NSMutableDictionary
   public static func getBatchEntries(batchRequest: ODSFoundation.SODataRequestParamBatchDefault, storeName: Swift.String, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func createOfflineEntity(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, storeName: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deleteOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createOfflineEntity(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, storeName: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deleteOfflineEntity(entity: ODSFoundation.SODataEntity, storeName: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   @objc override dynamic public init()
   @objc deinit
 }
@@ -182,21 +231,33 @@ public protocol Initable {
   public static func getFormMasterData(formId: Swift.String? = "", formVersion: Swift.String? = "", filterQuery: Swift.String? = "", modelClass: FormsEngine.FormMasterModel.Type? = FormMasterModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class FELoginHelper : ObjectiveC.NSObject, ODSFoundation.UserCredentialDelegate, ODSFoundation.ODSStoreDelegate, ODSFoundation.ODSStoreStatusDelegate, ODSFoundation.UsernamePasswordProviderProtocol {
-  @objc public func provideUsernamePassword(forAuthChallenge authChallenge: Foundation.URLAuthenticationChallenge!, completionBlock: ODSFoundation.username_password_provider_completion_t!)
-  public func ProvideUsernamePassword() -> Foundation.URLCredential
+@objc @_inheritsConvenienceInitializers open class FormLinkMasterModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc public var Funareaid: Swift.String
+  @objc public var Funcareadesc: Swift.String
+  @objc public var Subareaid: Swift.String
+  @objc public var Subareadesc: Swift.String
+  @objc public var Catid: Swift.String
+  @objc public var Catdesc: Swift.String
+  @objc public var entity: ODSFoundation.SODataEntityDefault
+  @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
+  @objc required override dynamic public init()
+  public static func getFormLinkMasterData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormLinkMasterModel.Type? = FormLinkMasterModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class FELoginHelper : ObjectiveC.NSObject, ODSFoundation.UserCredentialDelegate, ODSFoundation.UsernamePasswordProviderProtocol, ODSFoundation.StoreDelegate {
   public class var uniqueInstance: FormsEngine.FELoginHelper {
     get
   }
   public static func registerUser(with manager: ODSFoundation.HttpConversationManager?, toServer rawServerUrl: Swift.String?, andAppId appId: Swift.String?, completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?) -> Swift.Void)
   public static func deleteUserRegistration(_ applicationConnectionId: Swift.String?, with manager: ODSFoundation.HttpConversationManager?, fromServer rawServerUrl: Swift.String?, withAppId appId: Swift.String?, completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?, _ success: Swift.Bool) -> Swift.Void)
-  public func registerUser1(completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?) -> Swift.Void)
-  public static func setLoggedInUser(userID: Swift.String)
-  public func openIntialStore()
+  public func registerNewUser(completion completionBlock: @escaping (_ connectiondata: Foundation.Data?, _ urlresponse: Foundation.URLResponse?, _ error: Foundation.NSError?) -> Swift.Void)
+  public func openIntialStore(connectionID: Swift.String? = "")
   public func openAllStores()
-  public func offlineStoreOpenFailed(storeName: Swift.String, error: Swift.Error!)
-  public func ODSStoreStatus(storeStatus: Swift.String)
-  public func offlineStoreOpenFinished(storeName: Swift.String)
+  @objc public func provideUsernamePassword(forAuthChallenge authChallenge: Foundation.URLAuthenticationChallenge!, completionBlock: ODSFoundation.username_password_provider_completion_t!)
+  public func ProvideUsernamePassword() -> Foundation.URLCredential
+  @objc public func offlineStoreStatus(storeStatus: Swift.String)
+  @objc public func offlineStoreOpenFailed(storeName: Swift.String, error: Swift.Error!)
+  @objc public func offlineStoreOpenFinished(storeName: Swift.String)
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class DeptMasterDataModel : ObjectiveC.NSObject, FormsEngine.Initable {
@@ -210,8 +271,28 @@ public protocol Initable {
   public static func getDeptMasterData(filterQuery: Swift.String? = "", modelClass: FormsEngine.DeptMasterDataModel.Type? = DeptMasterDataModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
   @objc deinit
 }
+@objc @_inheritsConvenienceInitializers open class ApplicationConfigModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc public var RecordNum: Swift.String
+  @objc public var Key: Swift.String
+  @objc public var Value: Swift.String
+  @objc public var Category: Swift.String
+  @objc public var Active: Swift.String
+  @objc required override dynamic public init()
+  public static func getapplicationConfigList(filterQuery: Swift.String? = "", completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class WorkOrderStatusHelper : ObjectiveC.NSObject {
+  public static func getworkOrderValidStatusList(modelClass: ODSFoundation.WorkOrderStatusModel.Type? = WorkOrderStatusModel.self, filterQuery: Swift.String? = "", formate: Swift.Bool? = false, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class serviceConfigHelper : ObjectiveC.NSObject {
+  public static func getServcieConfigList(modelClass: ODSFoundation.ServiceConfigModel.Type? = ServiceConfigModel.self, filterQuery: Swift.String? = "", formate: Swift.Bool? = false, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  public static func getOnlineServcieConfigList(httpConvManager: ODSFoundation.HttpConversationManager, filterQuery: Swift.String? = "") -> Foundation.NSMutableDictionary
+  @objc override dynamic public init()
+  @objc deinit
+}
 public var OnlineDateTimeFormate: Swift.String
-public var formStoreName: Swift.String
 public let formMasterSet: Swift.String
 public let formAssingmentSet: Swift.String
 public let responseCaptureSet: Swift.String
@@ -226,19 +307,51 @@ public let deptMasterDataSet: Swift.String
 public let formResponseApprovalStatusSet: Swift.String
 public let formImageSet: Swift.String
 public let ReviewerFormResponseSet: Swift.String
-public var credentialDelegate: ODSFoundation.UserCredentialDelegate?
-public var offlineStoreDelegate: ODSFoundation.intialStoreDelegate?
+public let formCatMasterSet: Swift.String
+public let formLinkMasterSet: Swift.String
+public let funAreaMasterSet: Swift.String
+public let subAreaMasterSet: Swift.String
+public var userCredentialDelegate: ODSFoundation.UserCredentialDelegate?
+public var offlineStoreDelegate: ODSFoundation.StoreDelegate?
 public var applicationID: Swift.String
 public var serverUrl: Swift.String
 public var serverIp: Swift.String
 public var serverPortNo: Swift.Int
 public var https: Swift.Bool
 public var demoMode: Swift.Bool
+public var demoStoresPath: Swift.String
+public var storesPath: Swift.String
 public var loggedInUser: Swift.String
-public var offlinestoreListArray: [ODSFoundation.AppStoreModel]
-public var offlinestoreDefineReqArray: [ODSFoundation.ServiceConfigModel]
-public var storeDefineReqArray: [ODSFoundation.ServiceConfigModel]
-public var storeListArray: [ODSFoundation.AppStoreModel]
+public var authType: Swift.String
+public var offlineStoreList: [ODSFoundation.AppStoreModel]
+public var offlineStoreDefineRequests: [ODSFoundation.ServiceConfigModel]
+@objc @_inheritsConvenienceInitializers open class SubAreaMasterModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc public var Subareaid: Swift.String
+  @objc public var Procname: Swift.String
+  @objc public var entity: ODSFoundation.SODataEntityDefault
+  @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
+  @objc required override dynamic public init()
+  public static func getSubAreaMasterData(filterQuery: Swift.String? = "", modelClass: FormsEngine.SubAreaMasterModel.Type? = SubAreaMasterModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc deinit
+}
+public enum logEventType : Swift.Int {
+  case info
+  case dedug
+  case warning
+  case error
+  case serverError
+  case verbose
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers open class FELogger {
+  public static var appLogLevel: Swift.Int?
+  public class func log(_ object: Any, Type: Swift.String, filename: Swift.String = #file, line: Swift.Int = #line, column: Swift.Int = #column, funcName: Swift.String = #function)
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers open class FormAssignDataModel : ObjectiveC.NSObject, FormsEngine.Initable {
   @objc public var FormID: Swift.String
   @objc public var Version: Swift.String
@@ -263,6 +376,7 @@ public var storeListArray: [ODSFoundation.AppStoreModel]
   @objc public var ModifiedOn: Foundation.Date?
   @objc public var ModifiedBy: Swift.String
   @objc public var filledFormCount: Swift.Int
+  @objc public var isExpand: Swift.Bool
   @objc public var FormAssignmentType: Swift.String
   @objc public var WorkOrderNum: Swift.String
   @objc public var OprNum: Swift.String
@@ -284,13 +398,30 @@ public var storeListArray: [ODSFoundation.AppStoreModel]
   @objc required override dynamic public init()
   public static func getAssgnedFormData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormAssignDataModel.Type? = FormAssignDataModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
   public static func getFormManualAssignmentData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormAssignDataModel.Type? = FormAssignDataModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
-  public static func createFormManualAssignmentEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateFormManualAssignmentEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deleteFormManualAssignmentEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createFormManualAssignmentEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateFormManualAssignmentEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deleteFormManualAssignmentEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   public static func getFormApproverData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormAssignDataModel.Type? = FormAssignDataModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
-  public static func createFormApprovalEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateFormApprovalEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deleteFormApprovalEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createFormApprovalEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateFormApprovalEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deleteFormApprovalEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class FEStoreHelper : ObjectiveC.NSObject {
+  public static func OpenOfflineStore(storeName: Swift.String, serviceName: Swift.String, options: Swift.Dictionary<Swift.String, Any>, storeDelegate: ODSFoundation.StoreDelegate)
+  public static func OpenOfflineNewStore(storeName: Swift.String, serviceName: Swift.String, defineReq: [Swift.String], storeDelegate: ODSFoundation.StoreDelegate)
+  public static func flushAndRefreshStores(masterDataRefresh: Swift.Bool, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate)
+  public static func removeOfflineStores(storeNameArr: [Swift.String]) -> Swift.Bool
+  public static func checkForUnflushedData(storeNameArr: [Swift.String] = []) -> Swift.Bool
+  public static func closeOfflineStores(storeNameArr: [Swift.String] = []) -> Swift.Bool
+  public static func configTimeBasedBackGroundSync(syncType: Swift.String, timeInterval: Swift.String, retryCount: Swift.String, retryInterval: Swift.String)
+  public static func configMasterDataBackGroundSync(refreshUnitHour: Swift.Bool, timeInterval: Swift.String, retryCount: Swift.String, retryInterval: Swift.String)
+  public static func configEventBasedSync(enable: Swift.Bool, syncType: Swift.String)
+  public static func checkStoreStatus(StoreName: Swift.String) -> Swift.Bool
+  public static func removeEventBasedSync()
+  public static func removeMasterDataBackGroundSync()
+  public static func removeTimeBasedBackGroundSync()
+  @objc override dynamic public init()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class HtmlHelper : ObjectiveC.NSObject {
@@ -332,9 +463,9 @@ public var storeListArray: [ODSFoundation.AppStoreModel]
   @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
   @objc required override dynamic public init()
   public static func getFormResponseApprovalStatusData(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormResponseApprovalStatusModel.Type? = FormResponseApprovalStatusModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
-  public static func createFormResponseApprovalStatusEntry(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateFormResponseApprovalStatusEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func deleteFormResponseApprovalStatusEntry(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createFormResponseApprovalStatusEntry(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateFormResponseApprovalStatusEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func deleteFormResponseApprovalStatusEntry(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class FormQuestionImageModel : ObjectiveC.NSObject, FormsEngine.Initable {
@@ -348,6 +479,63 @@ public var storeListArray: [ODSFoundation.AppStoreModel]
   @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
   @objc required override dynamic public init()
   public static func getFormQuestionImageList(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormQuestionImageModel.Type? = FormQuestionImageModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class AppStoreHelper : ObjectiveC.NSObject {
+  public static func getAppStoreList(modelClass: ODSFoundation.AppStoreModel.Type? = AppStoreModel.self, filterQuery: Swift.String? = "", formate: Swift.Bool? = false, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  public static func getOnlineAppStoreList(httpConvManager: ODSFoundation.HttpConversationManager, filterQuery: Swift.String? = "\(appStoreSet)") -> Foundation.NSMutableDictionary
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class ChangePasswordModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc required override dynamic public init()
+  public static func getEntitySetDetails(httpcon: ODSFoundation.HttpConversationManager) -> Foundation.NSMutableDictionary
+  public static func updatePasswordEntity(httpcon: ODSFoundation.HttpConversationManager, entityValue: ODSFoundation.SODataV4_EntityValue) -> Foundation.NSMutableDictionary
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class appUserTableModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc public var RecordId: Swift.Int32
+  @objc public var SettingGrp: Swift.String
+  @objc public var SettingName: Swift.String
+  @objc public var SettingValue: Swift.String
+  @objc public var EnteredBy: Swift.String
+  @objc public var entity: ODSFoundation.SODataEntityDefault
+  @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
+  @objc required override dynamic public init()
+  public static func getUserDetailsList(modelClass: FormsEngine.appUserTableModel.Type? = appUserTableModel.self, filterQuery: Swift.String? = "", completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class UserDetailsModel : ObjectiveC.NSObject, FormsEngine.Initable {
+  @objc public var LastName: Swift.String
+  @objc public var FirstName: Swift.String
+  @objc public var Userdisplayname: Swift.String
+  @objc public var PersonnelNo: Swift.String
+  @objc public var Comp_code: Swift.String
+  @objc public var CostCenter: Swift.String
+  @objc public var BusinessArea: Swift.String
+  @objc public var Org_unit: Swift.String
+  @objc public var Position: Swift.String
+  @objc public var Job: Swift.String
+  @objc public var COArea: Swift.String
+  @objc public var Pers_Subarea: Swift.String
+  @objc public var PersonnelArea: Swift.String
+  @objc public var Emp_group: Swift.String
+  @objc public var Emp_SubGroup: Swift.String
+  @objc public var Supervisor: Swift.String
+  @objc public var technician: Swift.Bool
+  @objc public var Role_ID: Swift.String
+  @objc public var Dashboard_ID: Swift.String
+  @objc public var Assignment_Type: Swift.String
+  @objc public var OpWorkCentter: Swift.String
+  @objc public var userStorageLocation: Swift.String
+  @objc public var WORKORDER_ASSIGNMENT_TYPE: Swift.String
+  @objc public var ADD_ASSIGNMENT_TYPE: Swift.String
+  @objc public var NOTIFICATION_ASSIGNMENT_TYPE: Swift.String
+  @objc public var WorkCenter: Swift.String
+  @objc public var Plant: Swift.String
+  @objc public var entity: ODSFoundation.SODataEntityDefault
+  @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
+  @objc required override dynamic public init()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class FormReviewerResponseModel : ObjectiveC.NSObject, FormsEngine.Initable {
@@ -375,8 +563,8 @@ public var storeListArray: [ODSFoundation.AppStoreModel]
   @objc public var entityValue: ODSFoundation.SODataV4_EntityValue
   @objc required override dynamic public init()
   public static func getFormReviewerResponseList(filterQuery: Swift.String? = "", modelClass: FormsEngine.FormReviewerResponseModel.Type? = FormReviewerResponseModel.self, completionHandler: @escaping ([Swift.String : Any], Foundation.NSError?) -> ())
-  public static func createFormReviewerResponseEntity(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
-  public static func updateFormReviewerResponseEntity(entity: ODSFoundation.SODataEntity, flushDelegate: ODSFoundation.ODSStoreFlushDelegate? = nil, refreshDelegate: ODSFoundation.ODSStoreRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func createFormReviewerResponseEntity(entity: ODSFoundation.SODataEntity, collectionPath: Swift.String, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
+  public static func updateFormReviewerResponseEntity(entity: ODSFoundation.SODataEntity, flushRefreshDelegate: ODSFoundation.StoreFlushRefreshDelegate? = nil, flushRequired: Swift.Bool? = false, options: [Swift.AnyHashable : Any]!, completionHandler: @escaping (Foundation.NSMutableDictionary, Foundation.NSError?) -> ())
   @objc deinit
 }
 public typealias JavascriptCallback = (Swift.Bool, Any?) -> Swift.Void
@@ -401,3 +589,6 @@ extension FormsEngine.WebViewHandler : WebKit.WKNavigationDelegate {
 extension FormsEngine.WebViewHandler : WebKit.WKScriptMessageHandler {
   @objc dynamic public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)
 }
+extension FormsEngine.logEventType : Swift.Equatable {}
+extension FormsEngine.logEventType : Swift.Hashable {}
+extension FormsEngine.logEventType : Swift.RawRepresentable {}
