@@ -386,17 +386,8 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
                 singleWorkOrder = self.currentWorkOrder
             }
             selectedworkOrderNumber = singleWorkOrder.WorkOrderNum
-            
             let mainViewController = ScreenManager.getMasterListDetailScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -415,16 +406,12 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
             bottomView.isHidden = false
         }
         mJCLogger.log("Ended", Type: "info")
-
     }
     
     //MARK:- Notification Methods..
     @objc func selectWorkOrder(notification : NSNotification){
-        
         mJCLogger.log("Starting", Type: "info")
-
         if notification.object as! String == "selectWorkOrder" {
-            
             workOrderNumberLabel.text = "\(selectedworkOrderNumber)"
                 self.setDataToBottomView()
                 self.googleMapsView.isHidden = false
@@ -437,15 +424,11 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     //MARK:- Header Button Actions..
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         mJCLogger.log("Starting", Type: "info")
-
         if searchBar.text != "" {
             if DeviceType == iPad {
-                
                // NotificationCenter.default.post(name: Notification.Name(rawValue: "FilterWorkOrder"), object: searchTextField.text)
-                
             }
             else {
-                
 //                self.mapDetailViewModel.map_searchTextFieldEditingChanged(searchText: searchTextField.text!)
             }
         }
@@ -454,9 +437,7 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         mJCLogger.log("Starting", Type: "info")
-
         if DeviceType == iPad {
-            
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FilterWorkOrder"), object: searchTextField.text)
         }
         else {
@@ -467,9 +448,7 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     
     //MARK:- Button Actions
     @IBAction func searchButtonAction(sender: AnyObject) {
-        
         mJCLogger.log("Starting", Type: "info")
-
         if searchTextField.text != "" {
             searchTextField.resignFirstResponder()
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FilterWorkOrder"), object: searchTextField.text)
@@ -477,9 +456,7 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     }
     
     @IBAction func addFolderButtonAction(sender: AnyObject) {
-        
         mJCLogger.log("Starting", Type: "info")
-
         let workFlowResp = myAssetDataManager.uniqueInstance.getWorkFlowForAction(event: "CRTD_NEW_JOB", orderType: "X",from:"WorkOrder")
             if let workFlowObj = workFlowResp as? LtWorkFlowModel {
                 if workFlowObj.ActionType == "Screen" {
@@ -498,7 +475,6 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     }
     
     @IBAction func refreshDataButtonAction(sender: AnyObject) {
-        
         mJCLogger.log("Starting", Type: "info")
         mJCLoader.startAnimating(status: "Uploading".localized())
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
@@ -507,10 +483,7 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     }
     
     @IBAction func menuButtonAction(sender: AnyObject) {
-        
         mJCLogger.log("Starting", Type: "info")
-
-        
         if UIDevice.current.userInterfaceIdiom ==  UIUserInterfaceIdiom.phone {
             self.navigationController?.popViewController(animated: true)
         }
@@ -528,14 +501,10 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     }
     
     @IBAction func dotMenuButtonAction(sender: AnyObject){
-        
         mJCLogger.log("Starting", Type: "info")
-        
         var menuarr = [String]()
         var imgArray = [UIImage]()
-        
         if isSupervisor == "X"{
-            
             if ASSETMAP_TYPE == "ESRIMAP"{
                 menuarr = ["Supervisor_View".localized(),"Team".localized(),"Work_Orders".localized(),"Notifications".localized(), "Time_Sheet".localized(), "Master_Data_Refresh".localized(),"Error_Logs".localized(),"Settings".localized(), "Log_Out".localized()]
                 imgArray = [#imageLiteral(resourceName: "SupervisorView"),#imageLiteral(resourceName: "TeamSupView"),#imageLiteral(resourceName: "WorkNotSM1"),#imageLiteral(resourceName: "ic_notification"),#imageLiteral(resourceName: "timesht-1"),#imageLiteral(resourceName: "ic_transmit_black"),#imageLiteral(resourceName: "PendingNF"),#imageLiteral(resourceName: "SettingsSupView1"),#imageLiteral(resourceName: "LogOutBlack")]
@@ -572,7 +541,6 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
         mJCLogger.log("Ended", Type: "info")
     }
     
-    
     @IBAction func HomeButtonAction(_ sender: Any) {
         menuDataModel.uniqueInstance.presentDashboardScreen()
     }
@@ -586,46 +554,36 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     func setDataToBottomView() {
         mJCLogger.log("Starting", Type: "info")
         if selectedworkOrderNumber != "" {
-            
             DispatchQueue.main.async{
-                
                 self.workOrderNumberLabel.text = singleWorkOrder.WorkOrderNum
                 self.PriorityIamgeView.image = myAssetDataManager.getPriorityImage(priority: singleWorkOrder.Priority)
                 self.locationImageView.image = UIImage(named: "location_white")
-            
                 let statuArray = myAssetDataManager.uniqueInstance.getStatuses(statusVisible: "X", StatuscCategory: WORKORDER_ASSIGNMENT_TYPE, ObjectType: "X")
-                 
-                 let arr = statuArray.filter{$0.StatusCode == singleWorkOrder.UserStatus}
-                 var imgName = String()
-                     if arr.count > 0{
-                         imgName = arr[0].ImageResKey
-                     }
-                     if imgName == "" || imgName == "TBC"{
-                         imgName = "MOBI"
-                     }
-                
+                let arr = statuArray.filter{$0.StatusCode == singleWorkOrder.UserStatus}
+                var imgName = String()
+                if arr.count > 0{
+                    imgName = arr[0].ImageResKey
+                }
+                if imgName == "" || imgName == "TBC"{
+                    imgName = "MOBI"
+                }
                 self.workOrderStatusImageView.image = UIImage(named: imgName)
                 self.workOrderTypeImageView.image = UIImage(named: "workorderDes")
                 self.workOrderdescriptionLabel.text = singleWorkOrder.ShortText
                 self.LocationAddressLabel.text = singleWorkOrder.Address
                 if DeviceType == iPad {
-                    
                     self.timeImageView.image = UIImage(named: "Time")
-                    
                     if singleWorkOrder.BasicFnshDate != nil{
                         self.timeLabel.text = singleWorkOrder.BasicFnshDate!.toString(format: .custom(localDateFormate), timeZone: .utc, locale: .current)
                     }else{
                         self.timeLabel.text = ""
                     }
-                    
                     self.settingImageView.image = UIImage(named: "Settings")
                     self.equipementLabel.text = "Eqp".localized() + "#: \(singleWorkOrder.EquipNum)"
                     self.funLocationLabel.text = "Func_Loc".localized() + "#: \(singleWorkOrder.FuncLocation)"
                     self.notificationImageView.image = UIImage(named: "Footer_notification")
                     self.notificationLabel.text = singleWorkOrder.NotificationNum
-                    
                 }
-                
             }
         }
         mJCLogger.log("Ended", Type: "info")
@@ -634,46 +592,27 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         mJCLogger.log("Starting", Type: "info")
         if (status == CLAuthorizationStatus.denied) {
-            
             print("The user denied authorization")
-            
             mJCLogger.log("The user denied authorization".localized(), Type: "")
-
-            
         }
         else if (status == CLAuthorizationStatus.notDetermined) {
-            
             locationManager.requestWhenInUseAuthorization()
             print("NotDetermined Location")
             mJCLogger.log("NotDeterminedLocation".localized(), Type: "Error")
-
-            
         }
         else if (status == CLAuthorizationStatus.restricted) {
-            
             print("Restricted to use Location")
-            
             mJCLogger.log("Restricted to use Location".localized(), Type: "Error")
-
-            
-            
         }
         else if (status == CLAuthorizationStatus.authorizedWhenInUse) {
-            
             locationManager.startUpdatingLocation()
             print("AuthorizedWhenInUse")
-            
             mJCLogger.log("AuthorizedWhenInUse".localized(), Type: "")
-
-            
         }
         else if (status == CLAuthorizationStatus.authorizedAlways) {
-            
             locationManager.startUpdatingLocation()
             print("AuthorizedAlways")
             mJCLogger.log("AuthorizedAlways".localized(), Type: "")
-
-            
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -683,39 +622,25 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
         let lastLocation: CLLocation = locations[locations.count - 1]
         currentlat = lastLocation.coordinate.latitude
         currentLong = lastLocation.coordinate.longitude
-      
         self.locationManager.stopUpdatingLocation()
         mJCLogger.log("Ended", Type: "info")
     }
     
     //MARK:- GMSMapView Delegate method
     func mapView(_ mapView: GMSMapView!, didTap marker: GMSMarker!) -> Bool {
-        
         mJCLogger.log("Starting", Type: "info")
         NotificationCenter.default.post(name: Notification.Name(rawValue:"reloadTableView"), object: "reloadTableView")
-
         if self.mapDetailViewModel.coOrdinateArr.count != 0 {
             mJCLogger.log("Response:\(self.mapDetailViewModel.coOrdinateArr.count)", Type: "Debug")
-
             for i in 0..<self.mapDetailViewModel.coOrdinateArr.count {
-                
                 let workDic = self.mapDetailViewModel.coOrdinateArr[i] as! NSDictionary
-                
                 let latitudeDob = workDic["Latitude"]
                 let longitudeDob = workDic["Longitude"]
                 let indexVal = workDic["Index"] as! Int
-
-//                if indexVal == selectedWOIndex {
-//                    
-//                    self.mapDetailViewModel.createRoute(sourcelat: self.currentlat, sourcelong: self.currentLong, destlat: latitudeDob as! Double, destlong: longitudeDob as! Double)
-//                    
-//                }
-
             }
         }
         mJCLogger.log("Ended", Type: "info")
         return false
-        
     }
     
     func mapView(_ mapView: GMSMapView!, didTapAt coordinate: CLLocationCoordinate2D) {
@@ -741,7 +666,6 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
                 }else{
                         myAssetDataManager.uniqueInstance.showtoastmsg(actionTitle: alerttitle, msg: "WorkFlowError".localized())
                     mJCLogger.log("WorkFlowError".localized() , Type: "Debug")
-
                 }
              }else{
                 mJCLogger.log("Data not found", Type: "Debug")
@@ -752,74 +676,29 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
         mJCLogger.log("Starting", Type: "info")
         self.refreshDataButtonAction(sender: UIButton())
         mJCLogger.log("Ended", Type: "info")
-
     }
     
     func SlideMenuSelected(index: Int, title: String,menuType menutype:String){
         mJCLogger.log("Starting", Type: "info")
         if title == "Work_Orders".localized() {
-            
             currentMasterView = "WorkOrder"
             let mainViewController = ScreenManager.getMasterListScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
-            
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Notifications".localized() {
-            
-            
             currentMasterView = "Notification"
             let mainViewController = ScreenManager.getMasterListScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Time_Sheet".localized() {
-            
             currentMasterView = "TimeSheet"
-            
             let mainViewController = ScreenManager.getTimeSheetScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
-            
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Supervisor_View".localized() {
-            
             let mainViewController = ScreenManager.getSupervisorMasterListScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Team".localized() {
-            
             currentMasterView = "Team"
             let mainViewController = ScreenManager.getTeamMasterScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Asset_Map".localized() {
             if DeviceType == iPad{
                assetmapVC.openmappage(id: "")
@@ -830,7 +709,6 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
                 let assetMapDeatilsVC = ScreenManager.getAssetMapDeatilsScreen()
                 assetMapDeatilsVC.modalPresentationStyle = .fullScreen
                 self.present(assetMapDeatilsVC, animated: true, completion: nil)
-                
             }
             
         }else if title == "Settings".localized() {
@@ -841,17 +719,12 @@ class MapDeatilsVC: UIViewController,UIGestureRecognizerDelegate,CLLocationManag
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                 myAssetDataManager.uniqueInstance.flushAndRefreshStores(masterDataRefresh: true)
             })
-            
-            
         }else if title == "Log_Out".localized() {
-            
             myAssetDataManager.uniqueInstance.logOutApp()
         }
-        
         mJCLogger.log("Ended", Type: "info")
     }
     func backButtonClicked(_ sender: UIButton?){
         
     }
-
 }

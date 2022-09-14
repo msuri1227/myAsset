@@ -198,17 +198,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
         case "Time_Sheet".localized():
             currentMasterView = "TimeSheet"
-            
             let mainViewController = ScreenManager.getTimeSheetScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         case "Asset_Map".localized() :
             currentMasterView = "MapSplitViewController"
             self.slideMenuController()?.changeMainViewController(self.mainViewController,                     close: true, index: index, title: title, menuType: "")

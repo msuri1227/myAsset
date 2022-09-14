@@ -253,11 +253,7 @@ class NotificationItemList: UIViewController,UITableViewDelegate,UITableViewData
             myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "NotificationItems"
             myAssetDataManager.uniqueInstance.leftViewController.sideMenuListArr = ["Overview".localized(),"Activities".localized(), "Tasks".localized(), "Causes".localized()]
             myAssetDataManager.uniqueInstance.leftViewController.sideMenuImgArr = [#imageLiteral(resourceName: "OverView"),#imageLiteral(resourceName: "RecordPonits"),#imageLiteral(resourceName: "TasksNF"),#imageLiteral(resourceName: "ic_waterBlack")]
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.addViewControllerToSelectionDelegate(mainController: mainViewController)
         }else if isfrom == "Activities" || isfrom == "ItemActivities"{
             let cell = tableView.cellForRow(at: indexPath) as! NotificationActivityCell
             let notificationActivityVC = ScreenManager.getNotificationActivityScreen()
@@ -275,10 +271,7 @@ class NotificationItemList: UIViewController,UITableViewDelegate,UITableViewData
             let NotificationMainTaskVC = ScreenManager.getNotificationMainTaskScreen()
             myAssetDataManager.uniqueInstance.leftViewController.sideMenuListArr = ["Overview".localized(),"Attachments".localized()]
             myAssetDataManager.uniqueInstance.leftViewController.sideMenuImgArr = [#imageLiteral(resourceName: "OverView"),#imageLiteral(resourceName: "AttachementsNF")]
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = NotificationMainTaskVC as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
+            myAssetDataManager.uniqueInstance.addViewControllerToSelectionDelegate(mainController: NotificationMainTaskVC)
             let cell = tableView.cellForRow(at: indexPath) as! NotificationActivityCell
             if let taskNum = cell.notificationActivityNumberLabel.text{
                 NotificationMainTaskVC.selectedTaskNum = taskNum

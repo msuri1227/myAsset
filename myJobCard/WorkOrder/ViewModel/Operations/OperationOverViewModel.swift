@@ -341,14 +341,7 @@ class OperationOverViewModel {
             equipmentVC.flocEquipObjType = "equip"
             equipmentVC.flocEquipObjText = titleText
             equipmentVC.classificationType = "Workorder"
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = equipmentVC as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.operationsVC.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.operationsVC.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(equipmentVC, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: equipmentVC, menuType: "Equipment")
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -362,14 +355,7 @@ class OperationOverViewModel {
             flocEquipDetails.flocEquipObjType = "floc"
             flocEquipDetails.flocEquipObjText = titleText
             flocEquipDetails.classificationType = "Workorder"
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = flocEquipDetails as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.operationsVC.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.operationsVC.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(flocEquipDetails, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: flocEquipDetails, menuType: "Equipment")
         }
         mJCLogger.log("Ended", Type: "info")
     }

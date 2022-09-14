@@ -2534,31 +2534,54 @@ class myAssetDataManager: NSObject,MFMailComposeViewControllerDelegate,UsernameP
         self.logOut()
     }
     func updateSlidemenuDelegates(delegateVC: UIViewController,menu:String? = ""){
-
         myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = menu ?? ""
         myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
         myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
         myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = delegateVC as UIViewController as? SlideMenuControllerSelectDelegate
         myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
         self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-        self.appDeli.window?.makeKeyAndVisible()
-        myAssetDataManager.uniqueInstance.navigationController?.pushViewController(delegateVC, animated: true)
+        self.navigationController?.pushViewController(delegateVC, animated: true)
+    }
+    func addingViewControllerAsChildToNavigationController(mainController: UIViewController ,rootController: UIViewController, menuType: String) {
+        self.leftViewController.slideMenuType = menuType
+        let nvc: UINavigationController = UINavigationController(rootViewController: rootController)
+        nvc.isNavigationBarHidden = true
+        self.leftViewController.mainViewController = nvc
+        self.navigationController = nvc
+        self.navigationController?.addChild(mainController)
+        self.slideMenuController = ExSlideMenuController(mainViewController: self.navigationController!, leftMenuViewController: self.leftViewController)
+        self.slideMenuController?.Selectiondelegate = mainController as UIViewController as? SlideMenuControllerSelectDelegate
+        self.slideMenuControllerSelectionDelegateStack.append(self.slideMenuController!.Selectiondelegate!)
+        self.appDeli.window?.rootViewController = self.slideMenuController
+    }
+    func appendViewControllerToSideMenuStack(mainController: UIViewController, menuType: String){
+        self.leftViewController.slideMenuType = menuType
+        self.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
+        self.slideMenuController = ExSlideMenuController(mainViewController: self.navigationController!, leftMenuViewController: self.leftViewController)
+        self.slideMenuController!.Selectiondelegate = mainController as UIViewController as? SlideMenuControllerSelectDelegate
+        self.slideMenuControllerSelectionDelegateStack.append(self.slideMenuController!.Selectiondelegate!)
+        self.appDeli.window?.rootViewController = self.slideMenuController
+        self.navigationController?.pushViewController(mainController, animated: true)
+    }
+    func pushViewControllerToNavigation(mainController: UIViewController, rootController: UIViewController, menuType: String){
+        self.leftViewController.slideMenuType = menuType
+        let nvc: UINavigationController = UINavigationController(rootViewController: rootController)
+        nvc.isNavigationBarHidden = true
+        self.leftViewController.mainViewController = nvc
+        self.navigationController = nvc
+        self.leftViewController.mainViewController = self.navigationController
+        self.slideMenuController = ExSlideMenuController(mainViewController: self.navigationController!, leftMenuViewController: self.leftViewController)
+        self.slideMenuController?.Selectiondelegate = mainController as UIViewController as? SlideMenuControllerSelectDelegate
+        self.slideMenuControllerSelectionDelegateStack.append(self.slideMenuController!.Selectiondelegate!)
+        self.appDeli.window?.rootViewController = self.slideMenuController
+        self.navigationController?.pushViewController(mainController, animated: true)
+    }
+    func addViewControllerToSelectionDelegate(mainController: UIViewController){
+        self.slideMenuController!.Selectiondelegate = mainController as UIViewController as? SlideMenuControllerSelectDelegate
+        self.slideMenuControllerSelectionDelegateStack.append(self.slideMenuController!.Selectiondelegate!)
+        self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
+        self.navigationController?.pushViewController(mainController, animated: true)
     }
     // end
 }
 //...END...//
-public extension UISearchBar {
-    var compatibleSearchTextField: UITextField {
-        guard #available(iOS 13.0, *) else { return legacySearchField }
-        return self.searchTextField
-    }
-    private var legacySearchField: UITextField {
-        if let textField = self.subviews.first?.subviews.last as? UITextField {
-            return textField
-        } else if let textField = self.value(forKey: "searchField") as? UITextField {
-            return textField
-        } else {
-            return UITextField()
-        }
-    }
-}

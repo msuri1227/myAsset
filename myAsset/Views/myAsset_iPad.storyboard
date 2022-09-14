@@ -23,6 +23,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="1080" height="810"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPt-sa-kaV">
+                                <rect key="frame" x="0.0" y="26" width="55" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="4Ia-aM-iJm"/>
+                                    <constraint firstAttribute="height" constant="40" id="Eap-C0-4vO"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="backButton"/>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="0gT-Ed-LhZ" eventType="touchUpInside" id="JG4-ae-stj"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hI-QS-OI0" userLabel="totalView">
                                 <rect key="frame" x="0.0" y="74" width="1080" height="80"/>
                                 <subviews>
@@ -176,10 +188,12 @@
                         <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                         <constraints>
                             <constraint firstItem="WsT-0T-r5O" firstAttribute="leading" secondItem="96t-Da-SyW" secondAttribute="leading" id="2Ak-bT-0UW"/>
+                            <constraint firstItem="5hI-QS-OI0" firstAttribute="top" secondItem="mPt-sa-kaV" secondAttribute="bottom" constant="8" symbolic="YES" id="5to-ea-Fbj"/>
                             <constraint firstItem="96t-Da-SyW" firstAttribute="bottom" secondItem="WsT-0T-r5O" secondAttribute="bottom" id="5wp-sc-hs1"/>
                             <constraint firstItem="5hI-QS-OI0" firstAttribute="leading" secondItem="96t-Da-SyW" secondAttribute="leading" id="6Vm-K0-YEB"/>
                             <constraint firstItem="b5g-VX-iPl" firstAttribute="top" secondItem="5hI-QS-OI0" secondAttribute="bottom" id="9K8-9k-3g2"/>
                             <constraint firstItem="b5g-VX-iPl" firstAttribute="leading" secondItem="96t-Da-SyW" secondAttribute="leading" id="C75-7d-3od"/>
+                            <constraint firstItem="mPt-sa-kaV" firstAttribute="leading" secondItem="96t-Da-SyW" secondAttribute="leading" id="CSo-tc-5n5"/>
                             <constraint firstItem="96t-Da-SyW" firstAttribute="trailing" secondItem="WsT-0T-r5O" secondAttribute="trailing" id="ET0-lW-hef"/>
                             <constraint firstItem="b5g-VX-iPl" firstAttribute="trailing" secondItem="96t-Da-SyW" secondAttribute="trailing" id="ORI-Mi-EpS"/>
                             <constraint firstItem="WsT-0T-r5O" firstAttribute="leading" secondItem="96t-Da-SyW" secondAttribute="leading" id="Q4X-G5-Wob"/>

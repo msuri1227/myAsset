@@ -4408,10 +4408,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nc2-3h-DOY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
+                                <rect key="frame" x="0.0" y="52" width="414" height="52"/>
                                 <color key="backgroundColor" name="mjcSubViewColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="104" id="Ywr-p6-Lle"/>
+                                    <constraint firstAttribute="height" constant="52" id="Ywr-p6-Lle"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uG7-ta-iLz">
@@ -4568,7 +4568,7 @@
                         <constraints>
                             <constraint firstItem="TOg-9k-DKi" firstAttribute="bottom" secondItem="s4F-KX-eIP" secondAttribute="top" id="3J1-Xd-c9G"/>
                             <constraint firstItem="TOg-9k-DKi" firstAttribute="trailing" secondItem="ftt-sx-645" secondAttribute="trailing" id="4Fm-xg-wii"/>
-                            <constraint firstItem="nc2-3h-DOY" firstAttribute="top" secondItem="ftt-sx-645" secondAttribute="top" id="Aae-Na-BUc"/>
+                            <constraint firstItem="nc2-3h-DOY" firstAttribute="top" secondItem="ftt-sx-645" secondAttribute="top" constant="52" id="Aae-Na-BUc"/>
                             <constraint firstItem="Rvl-3A-bqP" firstAttribute="top" secondItem="nc2-3h-DOY" secondAttribute="bottom" id="JqY-K5-gzN"/>
                             <constraint firstItem="TOg-9k-DKi" firstAttribute="leading" secondItem="ftt-sx-645" secondAttribute="leading" id="RSy-rm-P4o"/>
                             <constraint firstItem="nam-jF-nDN" firstAttribute="trailing" secondItem="ftt-sx-645" secondAttribute="trailing" id="Tnw-2h-7eV"/>
@@ -4593,6 +4593,7 @@
                         <outlet property="calendarMenuView" destination="h7u-xP-5gF" id="lXr-tu-RO0"/>
                         <outlet property="calenderHolderView" destination="uG7-ta-iLz" id="GNo-EG-rzd"/>
                         <outlet property="dateLabel" destination="TKD-0n-muX" id="WYF-ZP-FCS"/>
+                        <outlet property="iPhoneHeader" destination="nc2-3h-DOY" id="GSt-xq-GVB"/>
                         <outlet property="timeSheetTableView" destination="TOg-9k-DKi" id="lZ5-V9-ZM6"/>
                         <outlet property="totalEntriesLabel" destination="M8h-W3-pkl" id="F8a-wC-Pmv"/>
                         <outlet property="totalHoursLabel" destination="MXG-Hm-b9f" id="PNT-H8-fZ7"/>
@@ -4600,7 +4601,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mtn-v7-slW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4459" y="17506"/>
+            <point key="canvasLocation" x="-4459.420289855073" y="17505.803571428569"/>
         </scene>
         <!--Notification History And PendingVC-->
         <scene sceneID="dzy-FK-XxN">
@@ -4791,11 +4792,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCf-ge-DJu">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9HY-4d-5sW"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCG-AD-3dd">
-                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="778"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RSO-NW-yoE">
-                                        <rect key="frame" x="8" y="5" width="398" height="36"/>
+                                        <rect key="frame" x="8" y="10" width="398" height="36"/>
                                         <color key="backgroundColor" name="mjcSubViewColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="WLo-Cs-KK7"/>
@@ -4813,17 +4821,17 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yvi-Mh-Gjv">
-                                        <rect key="frame" x="0.0" y="49" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="54" width="414" height="1"/>
                                         <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="L8f-nB-V2K"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmZ-Pk-5Q2">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="718"/>
+                                        <rect key="frame" x="0.0" y="55" width="414" height="723"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OOI-Mg-1pg">
-                                                <rect key="frame" x="0.0" y="50" width="414" height="668"/>
+                                                <rect key="frame" x="0.0" y="50" width="414" height="673"/>
                                                 <color key="backgroundColor" name="mjcViewBgColor"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="Ovq-qQ-mIt" id="oHV-Ld-CGl"/>
@@ -4831,7 +4839,7 @@
                                                 </connections>
                                             </tableView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Templates Not Available!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9uP-Iq-Rn6">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" name="mjcLabelColor"/>
                                                 <nil key="highlightedColor"/>
@@ -4912,10 +4920,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OqD-bk-S8x">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="718"/>
+                                        <rect key="frame" x="0.0" y="55" width="414" height="723"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="126" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="E7U-GD-cO1">
-                                                <rect key="frame" x="0.0" y="50" width="414" height="668"/>
+                                                <rect key="frame" x="0.0" y="50" width="414" height="673"/>
                                                 <color key="backgroundColor" name="mjcViewBgColor"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="Ovq-qQ-mIt" id="fFt-XT-aGB"/>
@@ -4923,7 +4931,7 @@
                                                 </connections>
                                             </tableView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submitted CheckLists Not Available!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="JY1-ue-mBQ">
-                                                <rect key="frame" x="0.0" y="695" width="414" height="23"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="723"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" name="mjcLabelColor"/>
                                                 <nil key="highlightedColor"/>
@@ -4993,6 +5001,7 @@
                                             <constraint firstItem="E7U-GD-cO1" firstAttribute="top" secondItem="e6K-mx-waP" secondAttribute="bottom" constant="5" id="6G6-jD-WQJ"/>
                                             <constraint firstAttribute="trailing" secondItem="e6K-mx-waP" secondAttribute="trailing" constant="5" id="6Kf-pV-uKw"/>
                                             <constraint firstItem="E7U-GD-cO1" firstAttribute="leading" secondItem="OqD-bk-S8x" secondAttribute="leading" id="BFL-iN-4Df"/>
+                                            <constraint firstItem="JY1-ue-mBQ" firstAttribute="top" secondItem="OqD-bk-S8x" secondAttribute="top" id="D0E-ph-0eF"/>
                                             <constraint firstAttribute="bottom" secondItem="E7U-GD-cO1" secondAttribute="bottom" id="FhI-EO-wdG"/>
                                             <constraint firstItem="E7U-GD-cO1" firstAttribute="top" secondItem="e6K-mx-waP" secondAttribute="bottom" constant="5" id="Mg2-qY-vfG"/>
                                             <constraint firstAttribute="trailing" secondItem="JY1-ue-mBQ" secondAttribute="trailing" id="Xd1-KL-BKL"/>
@@ -5009,7 +5018,7 @@
                                     <constraint firstItem="OqD-bk-S8x" firstAttribute="top" secondItem="RSO-NW-yoE" secondAttribute="bottom" constant="10" id="3Sq-Re-ooF"/>
                                     <constraint firstAttribute="trailing" secondItem="RSO-NW-yoE" secondAttribute="trailing" constant="8" id="4ZC-FU-8Uh"/>
                                     <constraint firstItem="RSO-NW-yoE" firstAttribute="leading" secondItem="zCG-AD-3dd" secondAttribute="leading" constant="8" id="4ZY-L5-KvJ"/>
-                                    <constraint firstItem="RSO-NW-yoE" firstAttribute="top" secondItem="zCG-AD-3dd" secondAttribute="top" constant="5" id="7V2-wt-adz"/>
+                                    <constraint firstItem="RSO-NW-yoE" firstAttribute="top" secondItem="zCG-AD-3dd" secondAttribute="top" constant="10" id="7V2-wt-adz"/>
                                     <constraint firstItem="jmZ-Pk-5Q2" firstAttribute="leading" secondItem="zCG-AD-3dd" secondAttribute="leading" id="BCc-1e-D81"/>
                                     <constraint firstAttribute="trailing" secondItem="Yvi-Mh-Gjv" secondAttribute="trailing" id="Bgt-kq-8aC"/>
                                     <constraint firstItem="jmZ-Pk-5Q2" firstAttribute="top" secondItem="RSO-NW-yoE" secondAttribute="bottom" constant="10" id="HE4-Ze-fkP"/>
@@ -5017,17 +5026,20 @@
                                     <constraint firstAttribute="trailing" secondItem="OqD-bk-S8x" secondAttribute="trailing" id="VND-h2-dDj"/>
                                     <constraint firstItem="jmZ-Pk-5Q2" firstAttribute="top" secondItem="Yvi-Mh-Gjv" secondAttribute="bottom" id="hms-Mu-d0Y"/>
                                     <constraint firstAttribute="trailing" secondItem="jmZ-Pk-5Q2" secondAttribute="trailing" id="juP-7e-cWv"/>
-                                    <constraint firstAttribute="bottom" secondItem="OqD-bk-S8x" secondAttribute="bottom" constant="-10" id="o5b-Ux-4c8"/>
-                                    <constraint firstAttribute="bottom" secondItem="jmZ-Pk-5Q2" secondAttribute="bottom" constant="-10" id="wXg-Cn-RCv"/>
+                                    <constraint firstAttribute="bottom" secondItem="OqD-bk-S8x" secondAttribute="bottom" id="o5b-Ux-4c8"/>
+                                    <constraint firstAttribute="bottom" secondItem="jmZ-Pk-5Q2" secondAttribute="bottom" id="wXg-Cn-RCv"/>
                                     <constraint firstItem="Yvi-Mh-Gjv" firstAttribute="leading" secondItem="zCG-AD-3dd" secondAttribute="leading" id="xGE-YJ-3rM"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" name="mjcViewUIBorderColor"/>
                         <constraints>
+                            <constraint firstItem="LCf-ge-DJu" firstAttribute="leading" secondItem="G5R-qT-ULe" secondAttribute="leading" id="Bf0-Eh-As9"/>
+                            <constraint firstAttribute="trailing" secondItem="LCf-ge-DJu" secondAttribute="trailing" id="PuN-tM-a3C"/>
                             <constraint firstAttribute="trailing" secondItem="zCG-AD-3dd" secondAttribute="trailing" id="VeF-1j-fZz"/>
-                            <constraint firstItem="zCG-AD-3dd" firstAttribute="top" secondItem="BzD-Cs-JDJ" secondAttribute="bottom" constant="60" id="gqY-BP-Y0m"/>
-                            <constraint firstItem="8zn-jZ-l9d" firstAttribute="top" secondItem="zCG-AD-3dd" secondAttribute="bottom" id="yQy-ZT-APY"/>
+                            <constraint firstItem="LCf-ge-DJu" firstAttribute="top" secondItem="BzD-Cs-JDJ" secondAttribute="bottom" id="ewx-Yg-pyi"/>
+                            <constraint firstItem="zCG-AD-3dd" firstAttribute="top" secondItem="LCf-ge-DJu" secondAttribute="bottom" id="fER-Ac-xCy"/>
+                            <constraint firstItem="8zn-jZ-l9d" firstAttribute="top" secondItem="zCG-AD-3dd" secondAttribute="bottom" constant="-10" id="yQy-ZT-APY"/>
                             <constraint firstItem="zCG-AD-3dd" firstAttribute="leading" secondItem="G5R-qT-ULe" secondAttribute="leading" id="zsE-hX-fKA"/>
                         </constraints>
                     </view>
@@ -5037,6 +5049,7 @@
                         <outlet property="filledFormsView" destination="OqD-bk-S8x" id="5My-Rl-UVW"/>
                         <outlet property="formTemplateTableView" destination="OOI-Mg-1pg" id="dgv-h6-7DY"/>
                         <outlet property="formTemplateView" destination="jmZ-Pk-5Q2" id="tIc-aR-XfW"/>
+                        <outlet property="iPhoneHeader" destination="LCf-ge-DJu" id="O6l-Re-Zsg"/>
                         <outlet property="noDataFilledForms" destination="JY1-ue-mBQ" id="3Zf-EW-oCw"/>
                         <outlet property="noDataFormTemplate" destination="9uP-Iq-Rn6" id="vOH-lm-Szf"/>
                         <outlet property="submittedCheckSheetSearchButton" destination="frZ-4q-aLN" id="b3s-5R-eBN"/>

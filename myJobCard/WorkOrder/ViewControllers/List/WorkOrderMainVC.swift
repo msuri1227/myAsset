@@ -51,14 +51,7 @@ class WorkOrderMainVC: UIViewController,CustomNavigationBarDelegate,SlideMenuCon
         if title == "Work_Orders".localized() {
             currentMasterView = "WorkOrder"
             let mainViewController = ScreenManager.getMasterListScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Overview".localized() {
             
             seletectedMenu = "Overview".localized()

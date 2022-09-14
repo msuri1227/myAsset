@@ -190,18 +190,8 @@ class OnlineSearchVC: UIViewController,barcodeDelegate, UITextFieldDelegate,Func
                     }
                 }else {
                     let mainViewController = ScreenManager.getMasterListScreen()
-                    myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
                     let dashboard = ScreenManager.getOnlineSearchScreen()
-                    let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                    nvc.isNavigationBarHidden = true
-                    myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                    myAssetDataManager.uniqueInstance.navigationController = nvc
-                    myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                    myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                    myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                    self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                    self.appDeli.window?.makeKeyAndVisible()
-                    myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+                    myAssetDataManager.uniqueInstance.pushViewControllerToNavigation(mainController: mainViewController, rootController: dashboard, menuType: "Main")
                 }
                 mJCLoader.stopAnimating()
             }

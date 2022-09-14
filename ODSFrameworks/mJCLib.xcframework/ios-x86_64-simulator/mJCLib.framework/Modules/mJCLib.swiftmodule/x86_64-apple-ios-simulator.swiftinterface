@@ -1,11 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.123.8 clang-1400.0.29.50)
 // swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name mJCLib
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import Foundation
 import ODSFoundation
 import Swift
 import UIKit
 import _Concurrency
+import _StringProcessing
 @_exported import mJCLib
 @objc @_inheritsConvenienceInitializers open class mJCOfflineHelper : ObjectiveC.NSObject {
   public static func getODataEntriesfromOffline<T>(queryRequest: Swift.String, storeName: Swift.String, entitySetClassType: T.Type, completionHandler: @escaping (Swift.Dictionary<Swift.String, Any>, Foundation.NSError?) -> ()) where T : ObjectiveC.NSObject
@@ -821,6 +823,7 @@ import _Concurrency
   @objc public func offlineStoreStatus(storeStatus: Swift.String)
   @objc public func offlineStoreOpenFailed(storeName: Swift.String, error: Swift.Error!)
   @objc public func offlineStoreOpenFinished(storeName: Swift.String)
+  public func getLoggedInUserDetailsInFormate(detailArr: [mJCLib.appUserTableModel])
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers open class EquipmentModel : ObjectiveC.NSObject, ODSFoundation.Initable {

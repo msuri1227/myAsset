@@ -148,14 +148,12 @@ class CustomNavHeader_iPhone: UIView {
             myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.remove(at: myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.count - 1)
         }
         myAssetDataManager.uniqueInstance.navigationController?.popViewController(animated: true)
-        
     }
     @objc func leftMenuButtonAction(sender : UIButton) {
         delegate?.leftMenuButtonClicked!(sender)
     }
     @objc func threedotButtonButtonAction(sender : UIButton) {
         delegate?.threedotmenuButtonClicked!(sender)
-        
     }
     @objc func refButtonButtonAction(sender : UIButton) {
         delegate?.refreshButtonClicked!(sender)

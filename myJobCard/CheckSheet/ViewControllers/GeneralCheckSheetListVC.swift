@@ -46,8 +46,7 @@ class GeneralCheckSheetListVC: UIViewController,UITableViewDelegate,UITableViewD
         templateCheckSheetSearchField.barTintColor = UIColor(named: "mjcViewBgColor")
         submittedCheckSheetSearchField.barTintColor = UIColor(named: "mjcViewBgColor")
         if DeviceType == iPhone{
-            let view = CustomNavHeader_iPhone.init(viewcontroller: self, leftMenu: false, leftTitle: "General_Checklist".localized() , NewJobButton: false, refresButton: true, threedotmenu: false,leftMenuType:"Back")
-            view.titleLbl.textAlignment = .center
+            let view = CustomNavHeader_iPhone.init(viewcontroller: self, leftMenu: true, leftTitle: "General_Checklist".localized() , NewJobButton: false, refresButton: true, threedotmenu: false,leftMenuType:"Back")
             FromssegmentControl.setTitle("Template".localized(), forSegmentAt: 0)
             FromssegmentControl.setTitle("Submitted".localized(), forSegmentAt: 1)
             self.iPhoneHeader.addSubview(view)

@@ -1002,31 +1002,6 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
             }
             self.thirdDropDownTxtField.touchAction()
         }
-        
-        /*multiDropDown.showCheckBox = true
-        multiDropDown.anchorView = sender as? UIButton
-        multiDropDown.cellHeight = 40.0
-        multiDropDown.width = 220.0
-        multiDropDown.backgroundColor = UIColor.white
-        multiDropDown.textColor = appColor
-        if firstDropDownTxtField.text != selectStr{
-            if FilterDict["Third"] != nil{
-                let string = FilterDict["Third"]
-                var newArray = string?.components(separatedBy: ";")
-                var indeces = Set<Index>()
-                if newArray?.last == ""{
-                    newArray?.removeLast()
-                }
-                newArray?.sort()
-                for i in 0..<multiDropDown.dataSource.count{
-                    if newArray?.contains(multiDropDown.dataSource[i]) == true{
-                        indeces.insert(i+1)
-                    }
-                }
-                multiDropDown.selectedRowIndices = indeces
-            }
-            multiDropDown.show()
-        }*/
         mJCLogger.log("Ended", Type: "info")
     }
     @IBAction func fourthDropDownButtonAction(_ sender: Any) {
@@ -1139,28 +1114,6 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.fourthDropDownTxtField.rowHeight = 45
             self.fourthDropDownTxtField.touchAction()
         }
-       /* multiDropDown.showCheckBox = true
-        multiDropDown.anchorView = sender as? UIButton
-        multiDropDown.cellHeight = 40.0
-        multiDropDown.width = 220.0
-        multiDropDown.backgroundColor = UIColor.white
-        multiDropDown.textColor = appColor
-        if secondDropDownTxtField.text != selectStr{
-            if FilterDict["Fourth"] != nil{
-                let string = FilterDict["Fourth"]
-                var newArray = string?.components(separatedBy: ";")
-                var indeces = Set<Index>()
-                newArray?.removeLast()
-                newArray?.sort()
-                for i in 0..<multiDropDown.dataSource.count{
-                    if newArray?.contains(multiDropDown.dataSource[i]) == true{
-                        indeces.insert(i+1)
-                    }
-                }
-                multiDropDown.selectedRowIndices = indeces
-            }
-            multiDropDown.show()
-        }*/
         mJCLogger.log("Ended", Type: "info")
     }
     func ApplyDashBoardFilter(){
@@ -1517,7 +1470,6 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-
         mJCLogger.log("Starting", Type: "info")
         var cell = DashboardCollectionViewCell()
         if collectionView == collectionView1{
@@ -1568,7 +1520,6 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
             }
         }else{
             if dashBoardArray[indexPath.row] == "DASH_ONLINE_SEARCH_TILE"{
-
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OnlineSearchCell", for: indexPath as IndexPath) as! DashboardCollectionViewCell
                 cell.TitleLabel.text = "OnlineSearch".localized()
                 cell.centerImage.image = UIImage(named: "search_icon.png")
@@ -1588,10 +1539,8 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                 }
                 return cell
             }else{
-
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NormalCell", for: indexPath as IndexPath) as! DashboardCollectionViewCell
                 cell.workOrderSearchBtn.isHidden = true
-
                 cell.layer.cornerRadius = 4
                 if DeviceType == iPad{
                     cell.AddImage.layer.cornerRadius = 15
@@ -1669,19 +1618,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                     if DeviceType == iPad {
                         menuDataModel.uniqueInstance.presentTimeSheetScreen()
                     }else {
+                        let rootController = ScreenManager.getDashBoardScreen()
                         let mainViewController = ScreenManager.getTimeSheetScreen()
-                        myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                        let dashboard = ScreenManager.getDashBoardScreen()
-                        let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                        nvc.isNavigationBarHidden = true
-                        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                        myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                        self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                        self.appDeli.window?.makeKeyAndVisible()
+                        myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                     }
                 }else{
                     mJCLogger.log("Data not found", Type: "Debug")
@@ -1776,20 +1715,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     //MARK: - Button Actions..
     @IBAction func seachAssestTagButtonAction(_ sender: Any) {
-        let searchAssetVc = ScreenManager.searchAssestTagScreen()
-        myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = ""
-        let dashboard = ScreenManager.getDashBoardScreen()
-        let navVC: UINavigationController = UINavigationController(rootViewController: dashboard)
-        navVC.isNavigationBarHidden = true
-        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = navVC
-        myAssetDataManager.uniqueInstance.navigationController = navVC
-        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-        myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-        myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = searchAssetVc as UIViewController as? SlideMenuControllerSelectDelegate
-        myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-        self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-        self.appDeli.window?.makeKeyAndVisible()
-        myAssetDataManager.uniqueInstance.navigationController?.pushViewController(searchAssetVc, animated: true)
+        let searchAssetVC = ScreenManager.searchAssestTagScreen()
+        let rootController = ScreenManager.getDashBoardScreen()
+        myAssetDataManager.uniqueInstance.pushViewControllerToNavigation(mainController: searchAssetVC, rootController: rootController, menuType: "")
     }
     @IBAction func refreshButtonAction(_ sender: AnyObject) {
         mJCLogger.log("Starting", Type: "info")
@@ -1976,37 +1904,17 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
             if DeviceType == iPad{
                 menuDataModel.uniqueInstance.presentListSplitScreen(type: "WorkOrder")
             }else{
+                let rootController = ScreenManager.getDashBoardScreen()
                 let mainViewController = ScreenManager.getMasterListScreen()
-                myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                let dashboard = ScreenManager.getDashBoardScreen()
-                let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                nvc.isNavigationBarHidden = true
-                myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                myAssetDataManager.uniqueInstance.navigationController = nvc
-                myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                self.appDeli.window?.makeKeyAndVisible()
+                myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
             }
         }else if sender.tag == 1001{
             if DeviceType == iPad{
                 menuDataModel.uniqueInstance.presentListSplitScreen(type: "Notification")
             }else{
+                let rootController = ScreenManager.getDashBoardScreen()
                 let mainViewController = ScreenManager.getMasterListScreen()
-                myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                let dashboard = ScreenManager.getDashBoardScreen()
-                let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                nvc.isNavigationBarHidden = true
-                myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                myAssetDataManager.uniqueInstance.navigationController = nvc
-                myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                self.appDeli.window?.makeKeyAndVisible()
+                myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
             }
         }else if sender.tag == 1002{
             if isSupervisor == "X"{
@@ -2017,19 +1925,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                 if DeviceType == iPad{
                     menuDataModel.uniqueInstance.presentSupervisorSplitScreen()
                 }else{
+                    let rootController = ScreenManager.getDashBoardScreen()
                     let mainViewController = ScreenManager.getSupervisorMasterListScreen()
-                    myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                    let dashboard = ScreenManager.getDashBoardScreen()
-                    let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                    nvc.isNavigationBarHidden = true
-                    myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                    myAssetDataManager.uniqueInstance.navigationController = nvc
-                    myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                    myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                    myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                    myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                    self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                    self.appDeli.window?.makeKeyAndVisible()
+                    myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                 }
             }else{
                 mJCLogger.log("User_is_not_Supervisor".localized(), Type: "Debug")
@@ -2046,19 +1944,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                 if DeviceType == iPad {
                     menuDataModel.uniqueInstance.presentTimeSheetScreen()
                 }else {
+                    let rootController = ScreenManager.getDashBoardScreen()
                     let mainViewController = ScreenManager.getTimeSheetScreen()
-                    myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                    let dashboard = ScreenManager.getDashBoardScreen()
-                    let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                    nvc.isNavigationBarHidden = true
-                    myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                    myAssetDataManager.uniqueInstance.navigationController = nvc
-                    myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                    myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                    myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                    myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                    self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                    self.appDeli.window?.makeKeyAndVisible()
+                    myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                 }
             }else{
                 mJCLogger.log("Data not found", Type: "Debug")
@@ -2099,20 +1987,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                     }else{
                         onlineSearch = false
                         currentMasterView = "WorkOrder"
+                        let rootController = ScreenManager.getDashBoardScreen()
                         let mainViewController = ScreenManager.getMasterListScreen()
-                        myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                        onlineSearch = false
-                        let dashboard = ScreenManager.getDashBoardScreen()
-                        let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                        nvc.isNavigationBarHidden = true
-                        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                        myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                        self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                        self.appDeli.window?.makeKeyAndVisible()
+                        myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                     }
                 }else{
                     mJCLogger.log("Work_Orders_not_found".localized(), Type: "Debug")
@@ -2125,20 +2002,10 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                         menuDataModel.uniqueInstance.presentListSplitScreen(type: "WorkOrder")
                     }else{
                         currentMasterView = "WorkOrder"
-                        let mainViewController = ScreenManager.getMasterListScreen()
-                        myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
                         onlineSearch = false
-                        let dashboard = ScreenManager.getDashBoardScreen()
-                        let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                        nvc.isNavigationBarHidden = true
-                        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                        myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                        self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                        self.appDeli.window?.makeKeyAndVisible()
+                        let rootController = ScreenManager.getDashBoardScreen()
+                        let mainViewController = ScreenManager.getMasterListScreen()
+                        myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                     }
                 }else{
                     mJCLogger.log("Work_Orders_not_found".localized(), Type: "Debug")
@@ -2152,19 +2019,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                     }else{
                         onlineSearch = false
                         currentMasterView = "Notification"
+                        let rootController = ScreenManager.getDashBoardScreen()
                         let mainViewController = ScreenManager.getMasterListScreen()
-                        myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                        let dashboard = ScreenManager.getDashBoardScreen()
-                        let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                        nvc.isNavigationBarHidden = true
-                        myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController = nvc
-                        myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                        myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                        myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                        self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                        self.appDeli.window?.makeKeyAndVisible()
+                        myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                     }
                 }else{
                     mJCLogger.log("Notifications_Not_Found".localized(), Type: "Debug")
@@ -2267,21 +2124,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                         }else{
                             onlineSearch = false
                             currentMasterView = "WorkOrder"
+                            let rootController = ScreenManager.getDashBoardScreen()
                             let mainViewController = ScreenManager.getMasterListScreen()
-                            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                            onlineSearch = false
-                            let dashboard = ScreenManager.getDashBoardScreen()
-                            let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                            nvc.isNavigationBarHidden = true
-                            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                            myAssetDataManager.uniqueInstance.navigationController = nvc
-                            myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                            myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                            
-                            self.appDeli.window?.makeKeyAndVisible()
+                            myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                         }
                     }else{
                         mJCLogger.log("Work_Orders_not_found".localized(), Type: "Debug")
@@ -2295,19 +2140,9 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
                         }else{
                             onlineSearch = false
                             currentMasterView = "Notification"
+                            let rootController = ScreenManager.getDashBoardScreen()
                             let mainViewController = ScreenManager.getMasterListScreen()
-                            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-                            let dashboard = ScreenManager.getDashBoardScreen()
-                            let nvc: UINavigationController = UINavigationController(rootViewController: dashboard)
-                            nvc.isNavigationBarHidden = true
-                            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = nvc
-                            myAssetDataManager.uniqueInstance.navigationController = nvc
-                            myAssetDataManager.uniqueInstance.navigationController?.addChild(mainViewController)
-                            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                            myAssetDataManager.uniqueInstance.slideMenuController?.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                            self.appDeli.window?.makeKeyAndVisible()
+                            myAssetDataManager.uniqueInstance.addingViewControllerAsChildToNavigationController(mainController: mainViewController, rootController: rootController, menuType: "Main")
                         }
                     }else{
                         mJCLogger.log("Notifications_Not_Found".localized(), Type: "Debug")

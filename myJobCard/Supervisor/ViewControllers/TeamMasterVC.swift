@@ -117,18 +117,11 @@ class TeamMasterVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
         if DeviceType == iPad{
             self.performSegue(withIdentifier: "showDetail", sender: WorkOrderCell.self)
         }else{
-            let mainViewController = ScreenManager.getTeamDetailsScreen()
             currentMasterView = "Team"
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Workorder"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
+            let mainViewController = ScreenManager.getTeamDetailsScreen()
             mainViewController.technname = techname
             mainViewController.techid =  techid
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Workorder")
         }
         mJCLogger.log("Ended", Type: "info")
     }
@@ -195,50 +188,22 @@ class TeamMasterVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
         mJCLogger.log("Starting", Type: "info")
         if title == "Supervisor_View".localized() {
             let mainViewController = ScreenManager.getSupervisorMasterListScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Word_Orders".localized() {
             currentMasterView = "WorkOrder"
             let mainViewController = ScreenManager.getMasterListScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Notifications".localized() {
             currentMasterView = "Notification"
             let mainViewController = ScreenManager.getMasterListScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Job_Location".localized() {
             ASSETMAP_TYPE = ""
             currentMasterView = "MapSplitViewController"
             selectedworkOrderNumber = ""
             selectedNotificationNumber = ""
             let mainViewController = ScreenManager.getMapDeatilsScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Asset_Map".localized() {
             ASSETMAP_TYPE = "ESRIMAP"
             if DeviceType == iPad{
@@ -254,14 +219,7 @@ class TeamMasterVC: UIViewController,UITableViewDelegate,UITableViewDataSource,C
         }else if title == "Time_Sheet".localized() {
             currentMasterView = "TimeSheet"
             let mainViewController = ScreenManager.getTimeSheetScreen()
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Main"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "Main")
         }else if title == "Settings".localized() {
             menuDataModel.uniqueInstance.presentSettingsScreen(vc: self)
         }else if title == "Error_Logs".localized() {

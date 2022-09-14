@@ -73,12 +73,14 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
         assetTableView.estimatedRowHeight = UITableView.automaticDimension
         ODSUIHelper.setBorderToView(view:self.searchView, borderColor: UIColor(named: "mjcViewUIBorderColor") ?? UIColor.blue)
         self.assetTableView.allowsMultipleSelection = true
-        navHeaderView = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: "Asset List", NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "Back")
-        self.iPhoneHeader.addSubview(navHeaderView)
-        if flushStatus == true{
-            self.navHeaderView.refreshBtn.showSpin()
+        if DeviceType == iPhone{
+            navHeaderView = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: "Asset List", NewJobButton: true, refresButton: true, threedotmenu: true, leftMenuType: "Back")
+            self.iPhoneHeader.addSubview(navHeaderView)
+            if flushStatus == true{
+                self.navHeaderView.refreshBtn.showSpin()
+            }
+            self.navHeaderView.delegate = self
         }
-        self.navHeaderView.delegate = self
         self.viewWillAppear(true)
     }
     
@@ -246,7 +248,7 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             self.printTagButton.isHidden = false
             self.selectedLbl.text = "\(self.selectedArr.count)"
         }else{
-            self.selectedStackView.isHidden = true
+            self.selectedStackView.isHidden = false
             self.printTagButton.isHidden = true
         }
     }
@@ -279,6 +281,9 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
     }
     func backButtonClicked(_ sender: UIButton?){
         self.dismiss(animated: false) {}
+    }
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: false)
     }
     func NewJobButtonClicked(_ sender: UIButton?){
         mJCLogger.log("Starting", Type: "info")

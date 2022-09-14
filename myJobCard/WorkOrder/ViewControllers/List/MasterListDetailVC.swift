@@ -821,7 +821,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: false, leftMenu: true, leftTitle: title, NewJobButton: false, refresButton: true, threedotmenu: true,leftMenuType:"")
         }
         if !applicationFeatureArrayKeys.contains("WO_LIST_POST_JOB_OPTION"){
-            view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: false, leftMenu: true, leftTitle: title, NewJobButton: false, refresButton: true, threedotmenu: true,leftMenuType:"")
+            view = CustomNavHeader_iPhone.init(viewcontroller: self, backButton: true, leftMenu: true, leftTitle: title, NewJobButton: false, refresButton: true, threedotmenu: true,leftMenuType:"")
         }
         self.iPhoneHeaderView.addSubview(view)
         if flushStatus == true{

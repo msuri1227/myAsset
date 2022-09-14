@@ -639,14 +639,7 @@ extension AssetDetailsVC:UITableViewDelegate,UITableViewDataSource{
             flocEquipDetails.flocEquipObjType = ""
             flocEquipDetails.flocEquipObjText = euipmentNo
             flocEquipDetails.classificationType = "Workorder"
-            myAssetDataManager.uniqueInstance.leftViewController.slideMenuType = "Equipment"
-            myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-            myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-            myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = flocEquipDetails as UIViewController as? SlideMenuControllerSelectDelegate
-            myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-            self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-            self.appDeli.window?.makeKeyAndVisible()
-            myAssetDataManager.uniqueInstance.navigationController?.pushViewController(flocEquipDetails, animated: true)
+            myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: flocEquipDetails, menuType: "Equipment")
         }
         mJCLogger.log("Ended", Type: "info")
     }

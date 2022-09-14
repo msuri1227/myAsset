@@ -140,13 +140,7 @@ class ObjectsVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
                                     isSingleNotifFromOperation = true
                                     let mainViewController = ScreenManager.getMasterListDetailScreen()
                                     mainViewController.workorderNotification = true
-                                    myAssetDataManager.uniqueInstance.leftViewController.mainViewController = myAssetDataManager.uniqueInstance.navigationController
-                                    myAssetDataManager.uniqueInstance.slideMenuController = ExSlideMenuController(mainViewController: myAssetDataManager.uniqueInstance.navigationController!, leftMenuViewController: myAssetDataManager.uniqueInstance.leftViewController)
-                                    myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate = mainViewController as UIViewController as? SlideMenuControllerSelectDelegate
-                                    myAssetDataManager.uniqueInstance.slideMenuControllerSelectionDelegateStack.append(myAssetDataManager.uniqueInstance.slideMenuController!.Selectiondelegate!)
-                                    self.appDeli.window?.rootViewController = myAssetDataManager.uniqueInstance.slideMenuController
-                                    self.appDeli.window?.makeKeyAndVisible()
-                                    myAssetDataManager.uniqueInstance.navigationController?.pushViewController(mainViewController, animated: true)
+                                    myAssetDataManager.uniqueInstance.appendViewControllerToSideMenuStack(mainController: mainViewController, menuType: "")
                                 }
                             }else{
                                 mJCLogger.log("Data not found", Type: "Debug")
