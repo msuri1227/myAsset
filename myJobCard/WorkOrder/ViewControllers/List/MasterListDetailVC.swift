@@ -2113,7 +2113,7 @@ class MasterListDetailVC: UIViewController,UIGestureRecognizerDelegate,UITableVi
             }
             else if currentsubView == "Asset"{
                 menuarr = ["Verify".localized(), "Write Off".localized(), "Update_Geo_Location".localized(), "Assets_Location".localized()]
-                imgArray = [#imageLiteral(resourceName: "addnotificaBlack"),#imageLiteral(resourceName: "editIcon"),#imageLiteral(resourceName: "followOnBlack"),#imageLiteral(resourceName: "Capacity_Data_Black")]
+                imgArray = [#imageLiteral(resourceName: "addnotificaBlack"),#imageLiteral(resourceName: "editIcon"),#imageLiteral(resourceName: "geolocation_black"),#imageLiteral(resourceName: "Joblocation")]
             }
         }
         if menuarr.count == 0{

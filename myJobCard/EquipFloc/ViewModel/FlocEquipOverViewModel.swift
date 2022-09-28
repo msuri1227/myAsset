@@ -40,21 +40,21 @@ class FlocEquipOverViewModel {
         }
     }
     func getEquipmentDetails(){
-        EquipmentModel.getEquipmentDetails(equipNum: flocEquipObjText){(response, error) in
+        EquipmentModel.getEquipmentDetails(equipNum: flocEquipObjText,modelClass: ZEquipmentModel.self){(response, error) in
             if error == nil{
-                if let responseArr = response["data"] as? [EquipmentModel]{
+                if let responseArr = response["data"] as? [ZEquipmentModel]{
                     if responseArr.count > 0 {
                         self.delegate?.dataFetchCompleted?(type: "equip", object: [responseArr[0]])
                     }else {
-                        self.delegate?.dataFetchCompleted?(type: "equip", object: [EquipmentModel()])
+                        self.delegate?.dataFetchCompleted?(type: "equip", object: [ZEquipmentModel()])
                     }
                 }else {
                     mJCLoader.stopAnimating()
-                    self.delegate?.dataFetchCompleted?(type: "equip", object: [EquipmentModel()])
+                    self.delegate?.dataFetchCompleted?(type: "equip", object: [ZEquipmentModel()])
                 }
             }else{
                 mJCLoader.stopAnimating()
-                self.delegate?.dataFetchCompleted?(type: "equip", object: [EquipmentModel()])
+                self.delegate?.dataFetchCompleted?(type: "equip", object: [ZEquipmentModel()])
             }
         }
     }

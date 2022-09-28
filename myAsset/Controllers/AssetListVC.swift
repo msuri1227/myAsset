@@ -248,7 +248,8 @@ class AssetListVC: UIViewController,viewModelDelegate,CLLocationManagerDelegate,
             self.printTagButton.isHidden = false
             self.selectedLbl.text = "\(self.selectedArr.count)"
         }else{
-            self.selectedStackView.isHidden = false
+            self.selectedLbl.text = "\(self.selectedArr.count)"
+            self.selectedStackView.isHidden = true
             self.printTagButton.isHidden = true
         }
     }
