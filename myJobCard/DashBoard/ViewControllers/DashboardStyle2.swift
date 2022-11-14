@@ -258,7 +258,12 @@ class DashboardStyle2: UIViewController,UICollectionViewDelegate,UICollectionVie
         onlineSearchArray.removeAll()
         fromSupervisorWorkOrder = false
         detailsTableView.estimatedRowHeight = 90.0
-        self.userTitlelabel.text = userDisplayName + " (\(Role_ID)) "
+//        self.userTitlelabel.text = userDisplayName + " (\(Role_ID)) "
+        if Role_ID == ""{
+            self.userTitlelabel.text = userDisplayName
+        }else{
+            self.userTitlelabel.text = userDisplayName + " (\(Role_ID)) "
+        }
         workOrderFilterButton.addTarget(self, action: #selector(self.orderTypeSelectionButton(btn:)), for: .touchUpInside)
         notificationFilterButton.addTarget(self, action: #selector(self.orderTypeSelectionButton(btn:)), for: .touchUpInside)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"storeFlushAndRefreshDone"), object: nil)

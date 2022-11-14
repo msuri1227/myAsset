@@ -233,6 +233,9 @@ class LoginVC: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate,
         let tap = UITapGestureRecognizer(target: self, action: #selector(LoginVC.handleTap(sender:)))
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
+        
+//        self.userNameTextField.text = "MYASSET1"
+//        self.passWordTextField.text = "Sap@1234"
     }
     func setBasicDetails(){
         var dict = Dictionary<String,Any>()
